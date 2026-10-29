@@ -45,16 +45,19 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
 - ✅ Phase 3: rendered HTML/CSS homepage prototype in `/prototype` (navy, Fraunces+Inter).
 - ✅ Phase 4: WordPress stood up locally via Docker (`docker-compose.yml`, `bin/provision.sh`,
   `docs/DEV.md`). Kadence + ACF + Rank Math installed; `walid-child` active. Verified booting.
-- 🔄 Phase 5 (in progress): `walid-child` scaffolded + navy `theme.json` + Kadence palette set to
-  brand (palette1 #232B8F navy, 2 #1E8E66 green, 3 #C9A227 gold). Fraunces/Inter loaded.
-  NEXT in Phase 5: CPT plugin `walid-cpts` (Branch/Service/Doctor/Review) + ACF fields.
-- ⬜ Phase 6: homepage + Branch/Service/Doctor templates from the prototype.
-- ⬜ Phase 7: content load, SEO (branch pages = local search), launch.
+- ✅ Phase 5: `walid-child` + navy `theme.json` + Kadence palette (navy/green/gold). CPT plugin
+  `walid-cpts` (Branch/Service/Doctor/Review) + Region/Pillar taxonomies + ACF local-JSON fields.
+- ✅ Phase 6: `front-page.php` (all 11 homepage sections, CPT-driven with draft fallback) +
+  `single-branch/service/doctor.php`. Floating WhatsApp (context-routed) + brand footer.
+- 🔄 Phase 7: SEO/schema (MedicalClinic per branch, Org aggregateRating), a11y (skip link, focus,
+  one h1, alt text), perf (non-render-blocking fonts) all DONE in code. Remaining = owner content
+  (10 branch records, doctor bios/photos, review permissions) + launch to a host.
 
 ## Build workflow (Kiro IDE)
-- Local WP runs via Docker. Spec drives the build: `.kiro/specs/wordpress-build/`
-  (requirements → design → tasks). Tasks 1–4 done; 5 in progress.
+- Local WP runs via Docker (`docs/DEV.md`). Spec drives the build:
+  `.kiro/specs/wordpress-build/` (requirements → design → tasks). ALL 10 tasks done + verified.
 - `.kiro/steering/build-conventions.md` loads when editing code (PHP/CSS/JSON).
+- To see it: `docker compose up -d` then open http://localhost:8080.
 
 ## Ground truth / gotchas
 - The `/prototype` is the visual + build SPEC. CSS variables map 1:1 to the Kadence Global Palette.

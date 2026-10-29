@@ -56,12 +56,13 @@ to a single WhatsApp tap.
 | 2. Homepage wireframe + copy | ✅ | `docs/12`, approved by owner |
 | 3. Rendered prototype | ✅ | `/prototype/index.html` + `styles.css`, navy, branded logo |
 | 4. Stand up WordPress | ✅ | Docker (`docker-compose.yml`); Kadence + ACF + Rank Math; verified |
-| 5. Child theme + CPTs | 🔄 | theme + navy `theme.json` + Kadence palette done; CPTs/ACF next |
-| 6. Templates | ⬜ | homepage + branch/service/doctor from the prototype |
-| 7. Content, SEO, launch | ⬜ | load 10 branches, reviews, GBP; Rank Math; perf |
+| 5. Child theme + CPTs | ✅ | theme + navy palette; `walid-cpts` + ACF fields (acf-json/) |
+| 6. Templates | ✅ | `front-page.php` + Branch/Service/Doctor singles; WA + footer |
+| 7. Content, SEO, launch | 🔄 | schema/a11y/perf DONE in code; awaiting owner content + host |
 
 **Local dev:** WordPress runs via Docker — see `docs/DEV.md`. The spec at
-`.kiro/specs/wordpress-build/` (requirements → design → tasks) drives the build; tasks 1–4 done.
+`.kiro/specs/wordpress-build/` (requirements → design → tasks) drove the build; all 10 tasks done
+and verified. Remaining before launch is owner-supplied content, not code (see §7 open items).
 
 ## 5. Repository map
 

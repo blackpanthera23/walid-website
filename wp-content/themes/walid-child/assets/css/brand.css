@@ -113,3 +113,8 @@ button:focus-visible,
 @media (max-width: 880px) {
   .walid-footer-grid { grid-template-columns: 1fr; }
 }
+
+/* Accessibility: skip link (visible on focus). */
+.walid-skip-link { position: absolute; left: -9999px; top: 0; z-index: 9999; background: var(--brand-900); color: #fff; padding: 10px 16px; border-radius: 0 0 8px 0; }
+.walid-skip-link:focus { left: 0; outline: 3px solid var(--gold-500); }
+.screen-reader-text:not(:focus) { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }

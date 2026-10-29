@@ -22,6 +22,9 @@ define( 'WALID_WA_MINOR_SURGERY', '60175497593' ); // 017-549 7593
 // Theme helpers (WhatsApp links, social config, CPT queries).
 require_once get_stylesheet_directory() . '/inc/helpers.php';
 
+// SEO + schema (branch MedicalClinic, org aggregate rating, skip link).
+require_once get_stylesheet_directory() . '/inc/seo.php';
+
 /**
  * Enqueue parent styles, child brand tokens, and web fonts.
  */

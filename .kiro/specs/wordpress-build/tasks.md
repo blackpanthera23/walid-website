@@ -67,7 +67,7 @@
   - Verify: button appears site-wide and routes correctly; every social icon links.
   - _Requirements: 5.3, 5.5, 6.2_
 
-- [ ] 10. SEO, performance, accessibility pass
+- [x] 10. SEO, performance, accessibility pass
   - JSON-LD schema for branches (LocalBusiness/MedicalClinic); clean slugs; Rank Math titles/meta/sitemap.
   - Lazy-load social embeds (facade). Accessibility: landmarks, focus states, alt text,
     contrast check on navy/gold/green.
