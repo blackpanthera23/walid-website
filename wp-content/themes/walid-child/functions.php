@@ -84,6 +84,54 @@ function walid_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'walid_enqueue_assets' );
 
 /**
+ * Site-wide brand footer: group blurb, social links (real hrefs), explore links, contact,
+ * and the compliance line. Rendered before the floating button.
+ */
+function walid_brand_footer() {
+	$socials = walid_social_links();
+	?>
+	<footer class="walid-footer" role="contentinfo">
+		<div class="container">
+			<div class="walid-footer-grid">
+				<div>
+					<div class="walid-footer-brand">
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo.svg' ); ?>" alt="<?php esc_attr_e( 'Poliklinik Walid', 'walid' ); ?>" width="40" height="40" />
+						<span><?php esc_html_e( 'Poliklinik Walid', 'walid' ); ?></span>
+					</div>
+					<p><?php esc_html_e( 'Surgeon-led day-care minor surgery, aesthetics and women\'s health, with general practice across our branch network.', 'walid' ); ?></p>
+					<div class="walid-socials">
+						<?php foreach ( $socials as $s ) : ?>
+							<a href="<?php echo esc_url( $s['url'] ); ?>" title="<?php echo esc_attr( $s['label'] ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $s['short'] ); ?></a>
+						<?php endforeach; ?>
+					</div>
+				</div>
+				<div>
+					<h4><?php esc_html_e( 'Explore', 'walid' ); ?></h4>
+					<ul>
+						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'service' ) ); ?>"><?php esc_html_e( 'Services', 'walid' ); ?></a></li>
+						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'branch' ) ); ?>"><?php esc_html_e( 'Branches', 'walid' ); ?></a></li>
+						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'doctor' ) ); ?>"><?php esc_html_e( 'Doctors', 'walid' ); ?></a></li>
+					</ul>
+				</div>
+				<div>
+					<h4><?php esc_html_e( 'Contact', 'walid' ); ?></h4>
+					<ul>
+						<li><a href="<?php echo walid_whatsapp_url( 'general' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp (general): 014-252 1684', 'walid' ); ?></a></li>
+						<li><a href="<?php echo walid_whatsapp_url( 'minor_surgery' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp (surgery): 017-549 7593', 'walid' ); ?></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="walid-legal">
+				<?php esc_html_e( 'MMC-registered doctors. Patient records kept confidential under the PDPA 2010.', 'walid' ); ?><br />
+				<?php esc_html_e( 'Walid Healthcare Group Sdn. Bhd. (1466692-A).', 'walid' ); ?>
+			</div>
+		</div>
+	</footer>
+	<?php
+}
+add_action( 'wp_footer', 'walid_brand_footer', 5 );
+
+/**
  * Site-wide floating WhatsApp button. Minor-surgery singulars route to the surgery line.
  */
 function walid_floating_whatsapp() {

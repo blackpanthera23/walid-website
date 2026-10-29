@@ -60,7 +60,7 @@
   - Verify: a sample post of each type renders correctly via its template.
   - _Requirements: 5.2_
 
-- [ ] 9. WhatsApp conversion + social footer
+- [x] 9. WhatsApp conversion + social footer
   - Floating WhatsApp button on every page; context routing (minor-surgery vs general line)
     from a single config, not scattered literals.
   - Footer with real social hrefs (TikTok, FB, IG, YouTube, Google). No empty links.

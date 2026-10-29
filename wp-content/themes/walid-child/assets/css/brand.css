@@ -92,3 +92,24 @@ button:focus-visible,
 @media (prefers-reduced-motion: reduce) {
 	* { transition: none !important; animation: none !important; }
 }
+
+/* Brand footer (site-wide) — ported from the prototype footer. */
+.walid-footer { background: var(--brand-900); color: #c7cbee; padding: 56px 0 30px; }
+.walid-footer .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.walid-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+.walid-footer a { color: #c7cbee; text-decoration: none; }
+.walid-footer a:hover { color: #fff; }
+.walid-footer h4 { color: #fff; font-family: var(--sans); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+.walid-footer ul { list-style: none; padding: 0; margin: 0; }
+.walid-footer li { margin-bottom: 8px; font-size: .95rem; }
+.walid-footer p { color: #c7cbee; }
+.walid-footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.walid-footer-brand img { background: #fff; border-radius: 50%; padding: 2px; }
+.walid-footer-brand span { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: #fff; }
+.walid-socials { display: flex; gap: 14px; margin-top: 12px; }
+.walid-socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; font-size: .85rem; font-weight: 600; }
+.walid-legal { border-top: 1px solid rgba(255,255,255,.14); padding-top: 20px; font-size: .82rem; color: #9aa0d0; }
+
+@media (max-width: 880px) {
+  .walid-footer-grid { grid-template-columns: 1fr; }
+}
