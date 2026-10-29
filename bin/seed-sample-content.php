@@ -116,13 +116,33 @@ wp_set_object_terms( $antenatal, array( $pillar_antenatal->term_id ), 'pillar' )
 // Back-link doctor -> service.
 update_field( 'doctor_lead_for', array( $antenatal ), $dr_anis );
 
-// --- Review (permitted so it renders) ----------------------------------------
-$review = $mk( 'review', 'Sample Google review', 'sample-review-1' );
-update_field( 'review_quote', 'Amazing service with friendly doctors and staff. Highly professional and recommended. [sample]', $review );
-update_field( 'review_author', 'A. Patient [sample]', $review );
-update_field( 'review_rating', 5, $review );
-update_field( 'review_source', 'Google review', $review );
-update_field( 'review_permission', 1, $review );
-update_field( 'review_branch', $ampang, $review );
+// --- Reviews (real quotes from the Wix site, translated; permission pending) --
+// Sourced from websitewalid.wixsite.com/poliklinikwalid (Malay originals, translated to
+// English for the English-first site). Names are public on Wix but still require consent:
+// the permission toggle is ON here only so they render in LOCAL preview. Do NOT publish
+// until the owner confirms consent and supplies source URLs. [permission pending]
+$r1 = $mk( 'review', 'Google review — Nur Namira', 'review-namira' );
+update_field( 'review_quote', 'Brought my baby girl in for circumcision. The staff were so friendly and gentle, my daughter was even smiling. The doctor and staff were lovely. First time here and we will come again. [permission pending]', $r1 );
+update_field( 'review_author', 'Nur Namira Mohamad Rosli', $r1 );
+update_field( 'review_rating', 5, $r1 );
+update_field( 'review_source', 'Google review', $r1 );
+update_field( 'review_permission', 1, $r1 );
+update_field( 'review_branch', $ampang, $r1 );
 
-WP_CLI::success( 'Seeded sample content: 5 branches, 1 doctor, 2 services, 1 review. Run with --purge to remove.' );
+$r2 = $mk( 'review', 'Google review — Sara', 'review-sara' );
+update_field( 'review_quote', 'My usual clinic near home was closed, so I came to Poliklinik Walid. The service and treatment were good and courteous. Thank you for the care. [permission pending]', $r2 );
+update_field( 'review_author', 'Sara Sofea', $r2 );
+update_field( 'review_rating', 5, $r2 );
+update_field( 'review_source', 'Google review', $r2 );
+update_field( 'review_permission', 1, $r2 );
+update_field( 'review_branch', $ampang, $r2 );
+
+$r3 = $mk( 'review', 'Google review — sample', 'review-sample-3' );
+update_field( 'review_quote', 'Clean clinic, friendly nurses and a caring doctor. [sample placeholder]', $r3 );
+update_field( 'review_author', 'A. Patient [sample]', $r3 );
+update_field( 'review_rating', 5, $r3 );
+update_field( 'review_source', 'Google review', $r3 );
+update_field( 'review_permission', 1, $r3 );
+update_field( 'review_branch', $ampang, $r3 );
+
+WP_CLI::success( 'Seeded sample content: 5 branches, 1 doctor, 2 services, 3 reviews. Run with --purge to remove.' );

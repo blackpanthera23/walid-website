@@ -76,6 +76,20 @@ Walid is widening beyond minor surgery into a **hero + rising pillars** model:
 ## Reviews
 - 4.9 / 5 from 1,098 Google reviews (Ampang) — checked 28 Sep 2026. `[CONFIRM permission + source URL]`
 - Decision: show **stat + a few curated quotes** (brief §7) — needs named-review permission.
+- Two real quotes surfaced on the Wix site (Malay originals; English translation for the
+  English-first site). Reviewer names appear publicly on Wix but still require permission:
+  - *Nur Namira Mohamad Rosli* — brought her baby girl in for circumcision; praised how friendly
+    and gentle the staff were; will return for check-ups. `[permission pending]`
+  - *sara sofea* — her usual clinic was closed; came to Walid and was treated well and
+    courteously; thankful for the care. `[permission pending]`
+  - These are seeded (translated) as sample reviews behind the permission gate; do NOT publish
+    until the owner confirms consent + provides source URLs.
+
+## Wix site cross-check (websitewalid.wixsite.com/poliklinikwalid)
+Confirmed the facts already recorded above: 10 branches, 18 trained doctors, 20+ registered
+panels; minor surgery (lipoma, cysts and others); pregnancy scan from 7 weeks. The Wix site is
+Malay and marked `noindex`; nothing new beyond the two review quotes. No content copied verbatim;
+Malay source summarised/translated for the English-first build.
 
 ## Domains (current state)
 - `poliklinikdrwalid.com` — current placeholder/live site (official per consultant)
