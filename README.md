@@ -73,6 +73,18 @@ then open `https://blackpanthera23.github.io/walid-website/prototype/`.
 
 ---
 
+## 🤝 Context for other agents / tools (read these first)
+
+| File | For |
+|---|---|
+| `project-context.md` | Full handoff: goal, stack, decisions, progress. Any agent/tool. |
+| `.kiro/steering/project-context.md` | Auto-loads in every Kiro session (IDE + Web). |
+| `HANDOFF-OMP.md` | Step-by-step WordPress build task list for OMP. |
+
+> **Switching to Kiro IDE for the build phase is recommended** (real editor, terminal, run
+> WordPress locally). The steering file loads automatically when the repo opens, so no context
+> is lost in the switch.
+
 ## 🛠 Build approach (Option C — hybrid)
 
 Lightweight theme (Kadence) + native block editor for pages + a **child theme** for the custom
