@@ -17,18 +17,26 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 |---|---|
 | 1. Strategy & planning docs | ✅ Done |
 | 2. Homepage wireframe + copy | ✅ Done (approved) |
-| 3. Visual direction (HTML/CSS prototype) | 🔄 Doing next |
+| 3. Visual direction (HTML/CSS prototype) | ✅ Done (`/prototype`) |
 | 4. Stand up WordPress (local/hosting) | ⬜ Not started |
 | 5. Child theme + CPTs (code) | ⬜ Not started |
 | 6. Homepage + templates | ⬜ Not started |
 | 7. Content, SEO, launch | ⬜ Not started |
 
-**Last updated:** 2026-10-29 · homepage wireframe approved; building the rendered prototype next.
+**Last updated:** 2026-10-29 · rendered homepage prototype added in `/prototype`; palette
+re-anchored to the real navy logo. Next: stand up WordPress + child theme.
+
+### View the prototype
+`/prototype/index.html` is a self-contained homepage (open in any browser).
+To publish it as a live link: repo **Settings → Pages → Source: Deploy from branch → `main` / root**,
+then open `https://blackpanthera23.github.io/walid-website/prototype/`.
 
 ---
 
 ## 🧭 Core decisions (summary)
 
+- **Brand color:** deep royal **navy** `#232B8F` (from the real logo), gold accent, green for CTAs.
+- **Fonts:** Fraunces (serif headings) + Inter (body).
 - **Positioning:** smart-value / premium-accessible. Surgeon-led day-care surgery. Hospital-grade
   care at clinic speed and price. "The smart choice."
 - **Pillars:** hero = **Minor Surgery**; rising = **Aesthetics**, **Antenatal (Dr Anis)**,
