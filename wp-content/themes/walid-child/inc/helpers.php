@@ -86,6 +86,39 @@ function walid_branches_in_region( $region_name ) {
 }
 
 /**
+ * Proof-wall videos for the homepage social wall.
+ * Each item: platform, url (to the post/profile), label. Owner replaces the URLs with real
+ * video links; until then they point at the profiles. Filterable so a future options page can
+ * supply them without template edits.
+ *
+ * @return array<int,array{platform:string,url:string,label:string}>
+ */
+function walid_proof_videos() {
+	$defaults = array(
+		array(
+			'platform' => 'tiktok',
+			'url'      => 'https://www.tiktok.com/@drwalidutagha',
+			'label'    => __( 'Procedure clip', 'walid' ),
+		),
+		array(
+			'platform' => 'tiktok',
+			'url'      => 'https://www.tiktok.com/@drwalidutagha',
+			'label'    => __( 'Patient story', 'walid' ),
+		),
+		array(
+			'platform' => 'instagram',
+			'url'      => 'https://www.instagram.com/drwalidutagha/',
+			'label'    => __( 'Day-care explainer', 'walid' ),
+		),
+	);
+	/**
+	 * Filter the proof-wall videos. Return an array of {platform,url,label}.
+	 * [confirm] real video URLs before launch.
+	 */
+	return apply_filters( 'walid_proof_videos', $defaults );
+}
+
+/**
  * Published reviews that have permission to be shown.
  *
  * @param int $limit Max reviews.

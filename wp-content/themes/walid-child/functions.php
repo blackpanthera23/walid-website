@@ -83,6 +83,16 @@ function walid_enqueue_assets() {
 			$version
 		);
 	}
+
+	// Archive (listing) template styles.
+	if ( is_post_type_archive( array( 'branch', 'service', 'doctor' ) ) || is_page_template( 'page-international.php' ) ) {
+		wp_enqueue_style(
+			'walid-archive',
+			get_stylesheet_directory_uri() . '/assets/css/archive.css',
+			array( 'walid-brand' ),
+			$version
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'walid_enqueue_assets' );
 

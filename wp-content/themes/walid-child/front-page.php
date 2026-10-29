@@ -163,9 +163,12 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 			<h2><?php esc_html_e( 'The care hundreds of thousands follow.', 'walid' ); ?></h2>
 			<p style="max-width:52ch;margin-bottom:28px;"><?php esc_html_e( 'Real procedures and patient stories from the clinic. The content that earned our community of 561K on TikTok and 119K on Facebook.', 'walid' ); ?></p>
 			<div class="tiktok-grid">
-				<div class="tiktok-card"><div class="play">&#9654;</div><span class="lbl"><?php esc_html_e( 'Procedure clip (embed)', 'walid' ); ?></span></div>
-				<div class="tiktok-card"><div class="play">&#9654;</div><span class="lbl"><?php esc_html_e( 'Patient story (embed)', 'walid' ); ?></span></div>
-				<div class="tiktok-card"><div class="play">&#9654;</div><span class="lbl"><?php esc_html_e( 'Day-care explainer (embed)', 'walid' ); ?></span></div>
+				<?php foreach ( walid_proof_videos() as $v ) : ?>
+					<a class="tiktok-card" href="<?php echo esc_url( $v['url'] ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $v['label'] ); ?>">
+						<div class="play">&#9654;</div>
+						<span class="lbl"><?php echo esc_html( $v['label'] ); ?> &middot; <?php echo esc_html( ucfirst( $v['platform'] ) ); ?></span>
+					</a>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>

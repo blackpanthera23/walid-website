@@ -1,0 +1,40 @@
+/* Poliklinik Walid — archive (listing) templates: Services, Branches, Doctors.
+   Loaded on those archives. Tokens from brand.css (:root). */
+
+.walid-archive { padding: 56px 0; }
+.walid-archive .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.walid-archive .archive-head { border-bottom: 1px solid var(--rule); padding-bottom: 24px; margin-bottom: 36px; }
+.walid-archive .eyebrow { font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .5em; }
+.walid-archive .lede { font-size: 1.15rem; color: var(--muted); max-width: 62ch; }
+
+.walid-archive .group { margin-bottom: 44px; }
+.walid-archive .group-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.walid-archive .group-head h2 { margin: 0; }
+.walid-archive .pin { background: var(--gold-100); color: var(--gold-500); border-radius: 8px; padding: 2px 10px; font-size: .75rem; font-weight: 700; letter-spacing: .05em; }
+.walid-archive .pin-hero { background: var(--brand-050); color: var(--brand-700); }
+
+.walid-archive .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.walid-archive .card-grid.two { grid-template-columns: repeat(2, 1fr); }
+.walid-archive .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; }
+.walid-archive .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.walid-archive .card.hero-card { border-color: var(--brand-500); border-width: 2px; }
+.walid-archive .card h3 { margin: 0 0 .3em; }
+.walid-archive .card h3 a { color: var(--brand-900); text-decoration: none; }
+.walid-archive .card p { color: var(--muted); font-size: .96rem; margin: 0 0 14px; flex: 1; }
+.walid-archive .card .meta { font-size: .85rem; color: var(--muted); margin-bottom: 10px; }
+.walid-archive .card .surgery-badge { display: inline-block; background: var(--accent-600); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 6px; margin-left: 6px; }
+.walid-archive .card-foot { margin-top: auto; }
+
+.walid-archive .doctor-card { text-align: center; }
+.walid-archive .doctor-card .avatar { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 14px; overflow: hidden; background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); font-size: .8rem; }
+.walid-archive .doctor-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+.walid-archive .doctor-card .role { color: var(--gold-500); font-weight: 700; font-size: .9rem; }
+
+.walid-archive .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; padding: 11px 20px; border-radius: 999px; border: 2px solid transparent; text-decoration: none; }
+.walid-archive .btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
+.walid-archive .btn-ghost:hover { background: var(--brand-050); }
+.walid-archive .btn-wa { background: var(--wa); color: #06351b; }
+
+@media (max-width: 880px) {
+  .walid-archive .card-grid, .walid-archive .card-grid.two { grid-template-columns: 1fr; }
+}
