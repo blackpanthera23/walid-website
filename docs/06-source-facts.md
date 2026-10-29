@@ -39,15 +39,31 @@ health · fertility (O&G doctor) · outpatient care · occupational health · me
 
 > **Branch availability rule:** do NOT imply every service is at every branch. Must be confirmed per branch.
 
-## Branch truth (IMPORTANT — validates the "specialist hub" positioning)
-Minor surgery is **concentrated**, not uniform:
-- **Ampang** — HQ, largest sales (~RM120k–170k/mo), primary minor-surgery center
-- **Tasek Gelugor** — supporting (~RM10k–28k/mo)
-- **Jalan Baru** — supporting (has minor-surgery appointments)
-- Other branches (Sungai Petani, Simpang Ampat, Kuala Kangsar, Parit Buntar, + others to 10):
-  general practice / family health; minor-surgery availability `[CONFIRM per branch]`
+## Branch truth (IMPORTANT — two-hub surgical model)
+Minor surgery is **concentrated in two regional clusters**, not uniform across all 10 branches.
+(See `11-pillars-and-specialists.md` for full detail.)
 
-→ Hero positioning = **"group with reach + specialist hub for minor surgery."** (See brief §7.)
+**Central (Klang Valley):**
+- **Ampang** — flagship HQ, largest sales (~RM120k–170k/mo), primary surgical hub.
+
+**North (Penang / Kedah):**
+- **Jalan Baru** (Seberang Perai, Penang) — northern surgical branch (has minor-surgery appts).
+- **Tasek Gelugor** — northern surgical branch (~RM10k–28k/mo).
+- **Sungai Petani** — northern surgical branch.
+
+**Other branches** (Simpang Ampat, Kuala Kangsar, Parit Buntar, + others to 10): general
+practice focus; minor-surgery availability `[CONFIRM per branch]`.
+
+→ Positioning = **"minor surgery at our Central and Northern surgical centres, with general
+practice across the full network."**
+
+## Service pillars (expanding — see `11-pillars-and-specialists.md`)
+Walid is widening beyond minor surgery into a **hero + rising pillars** model:
+- **Minor Surgery** (HERO — earned the audience)
+- **Aesthetic procedures** (rising)
+- **Antenatal / Women's Health** (rising; specialist **Dr Anis** `[confirm credential]`)
+- **Pillar 4** `[TBD — owner to confirm]`
+- General practice = network-wide base layer.
 
 ## Contact channels
 - General WhatsApp: **014-252 1684** — `https://www.wasap.my/60142521684`

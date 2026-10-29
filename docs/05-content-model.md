@@ -29,10 +29,12 @@ The capability catalogue.
 | Field | Type | Notes |
 |---|---|---|
 | Service name | text | e.g. "Minor Surgery" |
-| Pillar | select | General Medicine / Minor Surgery / Women's & Family Health |
+| Pillar | select | Minor Surgery (hero) / Aesthetics / Antenatal & Women's Health / Pillar 4 (TBD) / General Medicine |
+| Pillar weight | select | Hero / Rising / Network-base — drives homepage prominence (see `11-pillars-and-specialists.md`) |
 | Short description | textarea | For overview cards |
 | Detail content | WYSIWYG | Selling copy — later phase |
 | Icon / image | media | |
+| Lead specialist | relationship → Doctor | Powers the expertise-first specialist block (e.g. Antenatal → Dr Anis) |
 | Offered at branches | relationship → Branch | Mirrors Branch field |
 | WhatsApp routing | select | General vs Minor-surgery line |
 
@@ -47,6 +49,7 @@ The people / credibility layer.
 | Photo | media | |
 | Branch(es) | relationship → Branch | |
 | Bio | textarea | Short, corporate |
+| Lead specialist for | relationship → Service | e.g. Dr Anis → Antenatal (expertise-first pattern) |
 | Is leadership? | toggle | For "leadership only" display option |
 
 ### 4. Review  (`review`)  *(optional — depends on reviews decision)*
@@ -64,8 +67,11 @@ Curated Google reviews, if we show quotes as well as the headline stat.
 
 ## Taxonomies
 
-- **Region** (for Branches): Northern Malaysia · Klang Valley / KL — powers branch filtering.
-- **Pillar** (for Services): General Medicine · Minor Surgery · Women's & Family Health.
+- **Region** (for Branches): Central (Klang Valley) · North (Penang/Kedah) · Other — powers
+  branch filtering and the two-hub minor-surgery model.
+- **Provides minor surgery** (toggle on Branch): makes the two-hub model data-driven.
+- **Pillar** (for Services): Minor Surgery · Aesthetics · Antenatal & Women's Health ·
+  Pillar 4 (TBD) · General Medicine.
 
 ---
 

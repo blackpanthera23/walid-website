@@ -78,6 +78,7 @@ Sourced from the current placeholder site — **to be confirmed by the consultan
 | `08-owner-decisions.md` | Client confirmation checklist |
 | `09-value-proposition.md` | The "why Walid" layer: positioning, distinction, value language, medical tourism |
 | `10-proof-and-content.md` | How TikTok/FB/IG/Google proof powers the site |
+| `11-pillars-and-specialists.md` | Hero + rising pillars, two-hub surgical geography, specialist display pattern |
 
 *(Selling / service detail pages and wireframes come later, once this foundation is signed off.)*
 

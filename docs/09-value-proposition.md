@@ -35,7 +35,7 @@ assets**, which is why the brand and the website must lead with them:
 |---|---|---|
 | **Scaled following** (TikTok 561K · FB 119K · IG 30.8K) | Years of organic trust; competitors start from zero | Hero proof rail, proof wall, footer |
 | **Review depth** (4.9 from 1,098 Google) | Volume + rating together signal *consistency*, not luck | Reviews block (stat + quotes) |
-| **Surgeon-led specialist hub** (Ampang + 2 support branches) | Real operational concentration of expertise | Hero, Minor Surgery, Branches |
+| **Surgeon-led surgical centres** (Central: Ampang · North: Jalan Baru, Tasek Gelugor, Sungai Petani) | Real two-hub concentration of expertise (see `11-pillars-and-specialists.md`) | Hero, Minor Surgery, Branches |
 | **Day-care efficiency at clinic price** | A genuine operating model, not a slogan | Value section, Minor Surgery |
 
 **Rule for every touchpoint:** lead with what cannot be copied. Structure (triangle, pages) is
