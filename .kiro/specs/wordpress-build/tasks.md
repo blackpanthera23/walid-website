@@ -54,7 +54,7 @@
   - Verify: homepage visually matches `/prototype`; dynamic sections render sample CPT data.
   - _Requirements: 5.1, 5.4_
 
-- [ ] 8. Singular templates: Branch / Service / Doctor
+- [x] 8. Singular templates: Branch / Service / Doctor
   - `single-branch.php`, `single-service.php`, `single-doctor.php` rendering CPT fields,
     styled to match the prototype.
   - Verify: a sample post of each type renders correctly via its template.
