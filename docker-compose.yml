@@ -1,0 +1,68 @@
+# Reproducible local WordPress for the Poliklinik Walid build.
+# Start:  docker compose up -d
+# Site:   http://localhost:${WP_PORT:-8080}
+# WP-CLI: docker compose run --rm wpcli wp <command>
+#
+# Only our code is version-controlled (walid-child theme + walid-cpts plugin, bind-mounted).
+# WordPress core, uploads, and the DB live in named volumes and are NOT committed.
+
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-walid}
+      MARIADB_USER: ${DB_USER:-walid}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-walid}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootwalid}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-walid}
+      WORDPRESS_DB_USER: ${DB_USER:-walid}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-walid}
+      WORDPRESS_DEBUG: ${WP_DEBUG:-1}
+    volumes:
+      - wp_core:/var/www/html
+      # Our code only — live-mounted from the repo:
+      - ./wp-content/themes/walid-child:/var/www/html/wp-content/themes/walid-child
+      - ./wp-content/plugins/walid-cpts:/var/www/html/wp-content/plugins/walid-cpts
+
+  wpcli:
+    image: wordpress:cli-php8.2
+    depends_on:
+      db:
+        condition: service_healthy
+      wordpress:
+        condition: service_started
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${DB_NAME:-walid}
+      WORDPRESS_DB_USER: ${DB_USER:-walid}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD:-walid}
+    volumes:
+      - wp_core:/var/www/html
+      - ./wp-content/themes/walid-child:/var/www/html/wp-content/themes/walid-child
+      - ./wp-content/plugins/walid-cpts:/var/www/html/wp-content/plugins/walid-cpts
+      - ./bin:/scripts
+    # Keep the one-shot container idle; invoke with `docker compose run --rm wpcli wp ...`
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+volumes:
+  wp_core:
+  db_data:

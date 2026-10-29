@@ -1,0 +1,12 @@
+/*
+Theme Name:   Walid Child
+Theme URI:    https://github.com/blackpanthera23/walid-website
+Description:  Child theme for Poliklinik Walid on Kadence. Holds the navy brand tokens, custom
+              templates, and block patterns. Content model lives in the walid-cpts plugin.
+Author:       Poliklinik Walid build
+Template:     kadence
+Version:      0.1.0
+Text Domain:  walid
+*/
+
+/* Brand tokens and styles are enqueued separately (see assets/). This file is the theme header. */

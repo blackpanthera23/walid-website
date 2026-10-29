@@ -19,3 +19,15 @@ build/
 # Temp
 _salvage/
 *.tmp
+
+# WordPress — keep ONLY our code (walid-child theme + walid-cpts plugin).
+# Core, other themes/plugins, and uploads live in Docker volumes, not git.
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/themes/*
+!wp-content/themes/walid-child/
+wp-content/plugins/*
+!wp-content/plugins/walid-cpts/
+# ACF local JSON IS tracked (field definitions are source):
+!wp-content/themes/walid-child/acf-json/
