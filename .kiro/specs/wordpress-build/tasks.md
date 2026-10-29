@@ -46,7 +46,7 @@
   - Verify: fields appear on each CPT; a sample Service can link a lead Doctor.
   - _Requirements: 4.4, 4.5_
 
-- [ ] 7. Homepage rebuild from the prototype
+- [x] 7. Homepage rebuild from the prototype
   - Recreate the `/prototype` sections (per `docs/12`) as block patterns / template parts.
   - Minor surgery visually dominant; aesthetics/antenatal as rising pillars; specialist block
     expertise-first; proof rail + reviews + branch network + international strip.

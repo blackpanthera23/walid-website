@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'WALID_WA_GENERAL', '60142521684' );       // 014-252 1684
 define( 'WALID_WA_MINOR_SURGERY', '60175497593' ); // 017-549 7593
 
+// Theme helpers (WhatsApp links, social config, CPT queries).
+require_once get_stylesheet_directory() . '/inc/helpers.php';
+
 /**
  * Enqueue parent styles, child brand tokens, and web fonts.
  */
@@ -57,8 +60,48 @@ function walid_enqueue_assets() {
 		array( 'walid-brand' ),
 		$version
 	);
+
+	// Homepage-only styles (ported from the prototype).
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'walid-homepage',
+			get_stylesheet_directory_uri() . '/assets/css/homepage.css',
+			array( 'walid-brand' ),
+			$version
+		);
+	}
+
+	// Singular CPT template styles.
+	if ( is_singular( array( 'branch', 'service', 'doctor' ) ) ) {
+		wp_enqueue_style(
+			'walid-single',
+			get_stylesheet_directory_uri() . '/assets/css/single.css',
+			array( 'walid-brand' ),
+			$version
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'walid_enqueue_assets' );
+
+/**
+ * Site-wide floating WhatsApp button. Minor-surgery singulars route to the surgery line.
+ */
+function walid_floating_whatsapp() {
+	$context = 'general';
+	if ( is_singular( 'service' ) && 'minor_surgery' === get_field( 'service_wa_routing' ) ) {
+		$context = 'minor_surgery';
+	}
+	if ( is_singular( 'branch' ) && get_field( 'branch_provides_minor_surgery' ) ) {
+		$context = 'minor_surgery';
+	}
+	printf(
+		'<a class="walid-fab" href="%s" target="_blank" rel="noopener">%s %s</a>',
+		walid_whatsapp_url( $context, __( 'Hi Poliklinik Walid, I have a question.', 'walid' ) ),
+		'&#128172;',
+		esc_html__( 'WhatsApp us', 'walid' )
+	);
+}
+add_action( 'wp_footer', 'walid_floating_whatsapp' );
 
 /**
  * Preconnect to Google Fonts so font loading is non-render-blocking.
