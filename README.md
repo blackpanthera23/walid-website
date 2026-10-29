@@ -32,6 +32,14 @@ schema, and an accessibility pass. Remaining work is owner-supplied content (see
 See `docs/DEV.md`. In short: `docker compose up -d` then
 `docker compose run --rm wpcli bash /scripts/provision.sh`; site at `http://localhost:8080`.
 
+### Preview with sample content (local only)
+`docker compose run --rm wpcli wp eval-file /scripts/seed-sample-content.php` seeds placeholder
+branches/doctor/services/review so the homepage renders fully populated. Remove with the same
+command plus `-- --purge`. Never seed on production.
+
+### Deploying to a host
+See `docs/DEPLOY.md` (fresh-install path recommended; DB-migration path documented too).
+
 ### View the prototype
 `/prototype/index.html` is a self-contained homepage (open in any browser).
 To publish it as a live link: repo **Settings → Pages → Source: Deploy from branch → `main` / root**,
