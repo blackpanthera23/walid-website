@@ -2,7 +2,8 @@
 /**
  * Walid Child theme bootstrap.
  *
- * Minimal for now (Task 3 scaffolds it fully). Enqueues the parent + child styles.
+ * Child theme on Kadence. Loads brand tokens (ported from the prototype) + Fraunces/Inter,
+ * registers the WhatsApp config, and wires custom templates/patterns (added in later tasks).
  *
  * @package walid
  */
@@ -12,18 +13,75 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Enqueue parent and child stylesheets.
+ * WhatsApp numbers, in one place (used by the floating button + CTAs).
+ * Minor-surgery pages route to the minor-surgery line; everything else to general.
  */
-function walid_enqueue_styles() {
-	wp_enqueue_style( 'kadence-parent', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->parent()->get( 'Version' ) );
-	wp_enqueue_style( 'walid-child', get_stylesheet_uri(), array( 'kadence-parent' ), wp_get_theme()->get( 'Version' ) );
-}
-add_action( 'wp_enqueue_scripts', 'walid_enqueue_styles' );
+define( 'WALID_WA_GENERAL', '60142521684' );       // 014-252 1684
+define( 'WALID_WA_MINOR_SURGERY', '60175497593' ); // 017-549 7593
 
 /**
- * Load the theme text domain (translatable later, English-only now).
+ * Enqueue parent styles, child brand tokens, and web fonts.
+ */
+function walid_enqueue_assets() {
+	$theme   = wp_get_theme();
+	$version = $theme->get( 'Version' );
+
+	// Parent (Kadence) stylesheet.
+	wp_enqueue_style(
+		'kadence-parent',
+		get_template_directory_uri() . '/style.css',
+		array(),
+		$theme->parent() ? $theme->parent()->get( 'Version' ) : $version
+	);
+
+	// Web fonts: Fraunces (headings) + Inter (body), display=swap, preconnected (see below).
+	wp_enqueue_style(
+		'walid-fonts',
+		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap',
+		array(),
+		null
+	);
+
+	// Child brand tokens (ported 1:1 from the prototype :root).
+	wp_enqueue_style(
+		'walid-brand',
+		get_stylesheet_directory_uri() . '/assets/css/brand.css',
+		array( 'kadence-parent', 'walid-fonts' ),
+		$version
+	);
+
+	// The theme header file (style.css) so WP registers the active child stylesheet.
+	wp_enqueue_style(
+		'walid-child',
+		get_stylesheet_uri(),
+		array( 'walid-brand' ),
+		$version
+	);
+}
+add_action( 'wp_enqueue_scripts', 'walid_enqueue_assets' );
+
+/**
+ * Preconnect to Google Fonts so font loading is non-render-blocking.
+ */
+function walid_font_preconnect( $urls, $relation_type ) {
+	if ( 'preconnect' === $relation_type ) {
+		$urls[] = array( 'href' => 'https://fonts.googleapis.com' );
+		$urls[] = array(
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		);
+	}
+	return $urls;
+}
+add_filter( 'wp_resource_hints', 'walid_font_preconnect', 10, 2 );
+
+/**
+ * Theme setup: text domain (translatable later, English-only now) + supports.
  */
 function walid_setup() {
 	load_child_theme_textdomain( 'walid', get_stylesheet_directory() . '/languages' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'html5', array( 'style', 'script', 'navigation-widgets' ) );
 }
 add_action( 'after_setup_theme', 'walid_setup' );

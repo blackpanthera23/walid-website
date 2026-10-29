@@ -3,7 +3,7 @@
 > Execute in order. Each task maps to acceptance criteria in `requirements.md`. Check a box when
 > done, commit, and update the status trackers (README / project-context / steering "Where we are").
 
-- [ ] 1. Reproducible local WordPress environment (Docker)
+- [x] 1. Reproducible local WordPress environment (Docker)
   - Create `docker-compose.yml` (wordpress php 8.2+, mariadb, wp-cli service).
   - Bind-mount `wp-content/themes/walid-child` and the CPT plugin from the repo.
   - Add `.env.example`; git-ignore `.env`, WordPress core, uploads, and the DB volume.
@@ -11,20 +11,20 @@
   - Verify: `docker compose up` boots, homepage returns 200, `wp core version` works.
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
-- [ ] 2. Provision base theme + plugins (scripted)
+- [x] 2. Provision base theme + plugins (scripted)
   - Add `bin/provision.sh` using WP-CLI: core install, `kadence` install+activate, activate
     `walid-child`, install+activate ACF, install+activate Rank Math.
   - Explicitly skip page builders and multilingual plugins.
   - Verify: `wp theme list` shows kadence + walid-child; `wp plugin list` shows ACF + Rank Math.
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-- [ ] 3. Scaffold `walid-child` child theme
+- [x] 3. Scaffold `walid-child` child theme
   - Create `style.css` header (Template: kadence), `functions.php`, `theme.json`, `screenshot`.
   - Enqueue child stylesheet; set up text domain `walid`.
   - Verify: theme activates with no errors; a test page renders.
   - _Requirements: 2.1, 3.3_
 
-- [ ] 4. Brand tokens: palette + fonts (match prototype 1:1)
+- [x] 4. Brand tokens: palette + fonts (match prototype 1:1)
   - Port `prototype/styles.css :root` variables into the child theme CSS.
   - Mirror palette in `theme.json` (navy #232B8F, gold #C9A227, green #1E8E66, WhatsApp #25D366).
   - Load Fraunces (headings) + Inter (body), non-render-blocking, with system fallbacks.

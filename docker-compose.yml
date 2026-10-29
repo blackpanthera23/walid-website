@@ -60,8 +60,9 @@ services:
       - ./wp-content/themes/walid-child:/var/www/html/wp-content/themes/walid-child
       - ./wp-content/plugins/walid-cpts:/var/www/html/wp-content/plugins/walid-cpts
       - ./bin:/scripts
-    # Keep the one-shot container idle; invoke with `docker compose run --rm wpcli wp ...`
-    entrypoint: ["tail", "-f", "/dev/null"]
+    user: "33:33"
+    # One-shot runner. Invoke commands with:  docker compose run --rm wpcli wp <command>
+    # (the image's default entrypoint is `wp`, so no custom command is needed).
 
 volumes:
   wp_core:

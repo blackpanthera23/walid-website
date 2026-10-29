@@ -18,13 +18,18 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 | 1. Strategy & planning docs | ✅ Done |
 | 2. Homepage wireframe + copy | ✅ Done (approved) |
 | 3. Visual direction (HTML/CSS prototype) | ✅ Done (`/prototype`) |
-| 4. Stand up WordPress (local/hosting) | ⬜ Not started |
-| 5. Child theme + CPTs (code) | ⬜ Not started |
+| 4. Stand up WordPress (local, Docker) | ✅ Done (verified booting) |
+| 5. Child theme + CPTs (code) | 🔄 In progress (theme + navy tokens done; CPTs next) |
 | 6. Homepage + templates | ⬜ Not started |
 | 7. Content, SEO, launch | ⬜ Not started |
 
-**Last updated:** 2026-10-29 · rendered homepage prototype added in `/prototype`; palette
-re-anchored to the real navy logo. Next: stand up WordPress + child theme.
+**Last updated:** 2026-10-29 · moved to Kiro IDE; added `.kiro/specs/wordpress-build` spec and a
+Docker local WordPress. Kadence + ACF + Rank Math installed, `walid-child` active with the navy
+palette + Fraunces/Inter. Next: register the Branch/Service/Doctor/Review CPTs.
+
+### Run it locally
+See `docs/DEV.md`. In short: `docker compose up -d` then
+`docker compose run --rm wpcli bash /scripts/provision.sh`; site at `http://localhost:8080`.
 
 ### View the prototype
 `/prototype/index.html` is a self-contained homepage (open in any browser).

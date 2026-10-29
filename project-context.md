@@ -55,10 +55,13 @@ to a single WhatsApp tap.
 | 1. Strategy docs | ✅ | `docs/00`–`docs/11` |
 | 2. Homepage wireframe + copy | ✅ | `docs/12`, approved by owner |
 | 3. Rendered prototype | ✅ | `/prototype/index.html` + `styles.css`, navy, branded logo |
-| 4. Stand up WordPress | 📍 NEXT | local (LocalWP) or hosting; install Kadence + child theme |
-| 5. Child theme + CPTs | ⬜ | Branch/Service/Doctor/Review + ACF + theme.json navy palette |
+| 4. Stand up WordPress | ✅ | Docker (`docker-compose.yml`); Kadence + ACF + Rank Math; verified |
+| 5. Child theme + CPTs | 🔄 | theme + navy `theme.json` + Kadence palette done; CPTs/ACF next |
 | 6. Templates | ⬜ | homepage + branch/service/doctor from the prototype |
 | 7. Content, SEO, launch | ⬜ | load 10 branches, reviews, GBP; Rank Math; perf |
+
+**Local dev:** WordPress runs via Docker — see `docs/DEV.md`. The spec at
+`.kiro/specs/wordpress-build/` (requirements → design → tasks) drives the build; tasks 1–4 done.
 
 ## 5. Repository map
 

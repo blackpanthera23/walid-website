@@ -1,0 +1,94 @@
+/* Poliklinik Walid — brand tokens for WordPress.
+   Ported 1:1 from prototype/styles.css :root so the theme matches the prototype.
+   theme.json carries the same values for the block editor; this file is the source for
+   custom templates and patterns. */
+
+:root {
+	/* Brand (navy) */
+	--brand-700: #232B8F;
+	--brand-900: #161B5E;
+	--brand-500: #3A43B0;
+	--brand-050: #EEF0FB;
+	/* Gold accent */
+	--gold-500: #C9A227;
+	--gold-100: #F6EFD6;
+	/* Action / WhatsApp */
+	--accent-600: #1E8E66;
+	--accent-700: #176F50;
+	--wa: #25D366;
+	--wa-dark: #1EBE5A;
+	/* Neutrals */
+	--bg: #F8F9FC;
+	--surface: #FFFFFF;
+	--ink: #1A1D2E;
+	--muted: #5B607A;
+	--rule: #DDE0EC;
+	/* Type */
+	--serif: "Fraunces", Georgia, "Times New Roman", serif;
+	--sans: "Inter", system-ui, Arial, sans-serif;
+	/* Layout */
+	--maxw: 1140px;
+	--radius: 14px;
+	--shadow: 0 10px 30px rgba(22, 27, 94, 0.08);
+}
+
+/* Base typographic alignment with the prototype. Kadence handles layout chrome; these keep the
+   brand voice consistent across custom templates/patterns. */
+body {
+	font-family: var(--sans);
+	color: var(--ink);
+	background: var(--bg);
+	line-height: 1.6;
+}
+
+h1, h2, h3 {
+	font-family: var(--serif);
+	font-weight: 600;
+	line-height: 1.15;
+	color: var(--brand-900);
+}
+
+/* Shared helpers reused by templates/patterns (match the prototype). */
+.walid-eyebrow {
+	font-family: var(--sans);
+	font-size: .8rem;
+	font-weight: 700;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--gold-500);
+	margin: 0 0 .75em;
+}
+
+.walid-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: .5rem;
+	font-family: var(--sans);
+	font-weight: 600;
+	font-size: 1rem;
+	padding: 14px 24px;
+	border-radius: 999px;
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: all .18s ease;
+	min-height: 48px;
+	text-decoration: none;
+}
+.walid-btn--wa { background: var(--wa); color: #06351b; }
+.walid-btn--wa:hover { background: var(--wa-dark); }
+.walid-btn--primary { background: var(--accent-600); color: #fff; }
+.walid-btn--primary:hover { background: var(--accent-700); }
+.walid-btn--ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
+.walid-btn--ghost:hover { background: var(--brand-050); }
+
+/* Accessibility: always-visible focus. */
+a:focus-visible,
+button:focus-visible,
+.walid-btn:focus-visible {
+	outline: 3px solid var(--gold-500);
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; animation: none !important; }
+}

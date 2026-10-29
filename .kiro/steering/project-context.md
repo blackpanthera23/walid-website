@@ -43,10 +43,18 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
 ## Where we are (update this as work progresses)
 - ✅ Phase 1–2: strategy docs `docs/00`–`docs/12` + homepage wireframe (approved).
 - ✅ Phase 3: rendered HTML/CSS homepage prototype in `/prototype` (navy, Fraunces+Inter).
-- 📍 Phase 4 NEXT: stand up WordPress (local via LocalWP or on hosting) + Kadence + child theme.
-- ⬜ Phase 5: child theme + CPT registration + ACF + navy palette in theme.json.
+- ✅ Phase 4: WordPress stood up locally via Docker (`docker-compose.yml`, `bin/provision.sh`,
+  `docs/DEV.md`). Kadence + ACF + Rank Math installed; `walid-child` active. Verified booting.
+- 🔄 Phase 5 (in progress): `walid-child` scaffolded + navy `theme.json` + Kadence palette set to
+  brand (palette1 #232B8F navy, 2 #1E8E66 green, 3 #C9A227 gold). Fraunces/Inter loaded.
+  NEXT in Phase 5: CPT plugin `walid-cpts` (Branch/Service/Doctor/Review) + ACF fields.
 - ⬜ Phase 6: homepage + Branch/Service/Doctor templates from the prototype.
 - ⬜ Phase 7: content load, SEO (branch pages = local search), launch.
+
+## Build workflow (Kiro IDE)
+- Local WP runs via Docker. Spec drives the build: `.kiro/specs/wordpress-build/`
+  (requirements → design → tasks). Tasks 1–4 done; 5 in progress.
+- `.kiro/steering/build-conventions.md` loads when editing code (PHP/CSS/JSON).
 
 ## Ground truth / gotchas
 - The `/prototype` is the visual + build SPEC. CSS variables map 1:1 to the Kadence Global Palette.
