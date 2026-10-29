@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node / build (for future theme tooling)
+node_modules/
+dist/
+build/
+*.log
+
+# Env / secrets
+.env
+.env.*
+*.local
+
+# Temp
+_salvage/
+*.tmp
