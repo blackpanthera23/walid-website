@@ -21,12 +21,13 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 | 4. Stand up WordPress (local, Docker) | ✅ Done (verified booting) |
 | 5. Child theme + CPTs (code) | ✅ Done (theme, navy tokens, CPTs, ACF fields) |
 | 6. Homepage + templates | ✅ Done (front-page + Branch/Service/Doctor singles) |
-| 7. Content, SEO, launch | 🔄 Code done (schema/a11y/perf); awaiting owner content |
+| 7. Content, SEO, launch | 🔄 Code done (full site + schema/a11y/perf); awaiting owner content |
 
-**Last updated:** 2026-10-29 · full WordPress build complete locally via the
-`.kiro/specs/wordpress-build` spec (all 10 tasks). Theme `walid-child` renders the navy homepage
-+ CPT-driven Branch/Service/Doctor pages, WhatsApp routing, real social footer, MedicalClinic/Org
-schema, and an accessibility pass. Remaining work is owner-supplied content (see open items).
+**Last updated:** 2026-10-30 · full WordPress build complete locally. Theme `walid-child` renders
+the navy homepage, Service/Branch/Doctor archives + singulars, About/Governance, International
+Patients, and Contact pages, primary nav, data-driven proof wall, WhatsApp routing, real social
+footer, MedicalClinic/Org schema, block patterns, and an accessibility pass. Deployment guide in
+`docs/DEPLOY.md`; local preview seeder in `bin/`. Remaining work is owner-supplied content + host.
 
 ### Run it locally
 See `docs/DEV.md`. In short: `docker compose up -d` then

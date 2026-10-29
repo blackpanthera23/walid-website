@@ -75,6 +75,16 @@
   - Verify: Lighthouse/aXe spot check; schema validates; flagged content hidden.
   - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
+## Post-spec additions (also done + verified)
+- Archives: `archive-service.php` (pillar groups, hero badge), `archive-branch.php` (region
+  groups, surgery badges), `archive-doctor.php` (team index).
+- Pages: `page-international.php`, `page-governance.php` (About, compliance home),
+  `page-contact.php` (WhatsApp-only).
+- Primary nav menu built + assigned; proof wall data-driven (`walid_proof_videos` filter);
+  2 editor block patterns (`inc/patterns.php`); local sample seeder (`bin/seed-sample-content.php`);
+  deployment guide (`docs/DEPLOY.md`).
+
 ## Owner-blocked (cannot complete until supplied — track in docs/08)
 Official logo file + exact hex · Dr Anis credential · 4th pillar · aesthetics launch scope ·
-named-review permissions + source URLs · full 10-branch dataset · confirm current social counts.
+named-review permissions + source URLs · full 10-branch dataset · confirm current social counts ·
+real TikTok/IG proof-wall video URLs.

@@ -25,6 +25,9 @@ require_once get_stylesheet_directory() . '/inc/helpers.php';
 // SEO + schema (branch MedicalClinic, org aggregate rating, skip link).
 require_once get_stylesheet_directory() . '/inc/seo.php';
 
+// Editor block patterns (reusable branded sections for staff).
+require_once get_stylesheet_directory() . '/inc/patterns.php';
+
 /**
  * Enqueue parent styles, child brand tokens, and web fonts.
  */

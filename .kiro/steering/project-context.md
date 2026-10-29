@@ -49,9 +49,12 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   `walid-cpts` (Branch/Service/Doctor/Review) + Region/Pillar taxonomies + ACF local-JSON fields.
 - ✅ Phase 6: `front-page.php` (all 11 homepage sections, CPT-driven with draft fallback) +
   `single-branch/service/doctor.php`. Floating WhatsApp (context-routed) + brand footer.
-- 🔄 Phase 7: SEO/schema (MedicalClinic per branch, Org aggregateRating), a11y (skip link, focus,
-  one h1, alt text), perf (non-render-blocking fonts) all DONE in code. Remaining = owner content
-  (10 branch records, doctor bios/photos, review permissions) + launch to a host.
+- ✅ Phase 7 (code): SEO/schema (MedicalClinic per branch, Org aggregateRating), a11y (skip link,
+  focus, one h1, alt text), perf (non-render-blocking fonts). PLUS full site: Service/Branch/
+  Doctor archives + singulars, About/Governance, International Patients, Contact pages, primary
+  nav, data-driven proof wall, block patterns, sample seeder (`bin/`), deploy guide (`docs/DEPLOY.md`).
+- 🔄 Remaining (owner, not code): 10 branch records, doctor bios/photos, review permissions,
+  official logo, Dr Anis credential, 4th pillar, real proof-wall video URLs, then launch to a host.
 
 ## Build workflow (Kiro IDE)
 - Local WP runs via Docker (`docs/DEV.md`). Spec drives the build:
