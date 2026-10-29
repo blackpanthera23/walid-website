@@ -69,10 +69,15 @@ Sourced from the current placeholder site — **to be confirmed by the consultan
 |---|---|
 | `00-project-brief.md` | This file — the locked decisions |
 | `01-references.md` | Benchmark sites + the design north-star |
-| `02-customer-journey.md` | How a visitor moves from arrive → contact (emotional + behavioural) |
+| `02-customer-journey.md` | Cross-touchpoint journey (TikTok→review→web→WhatsApp→clinic) + on-site arc |
 | `03-patient-flow.md` | The behavioural flow map + WhatsApp routing |
 | `04-sitemap.md` | Page hierarchy + navigation |
 | `05-content-model.md` | WordPress CMS structure (custom post types + fields) |
+| `06-source-facts.md` | Verified facts, ops data, branch truth |
+| `07-design-system.md` | Palette (elevated from the teal logo), type, tokens |
+| `08-owner-decisions.md` | Client confirmation checklist |
+| `09-value-proposition.md` | The "why Walid" layer: positioning, distinction, value language, medical tourism |
+| `10-proof-and-content.md` | How TikTok/FB/IG/Google proof powers the site |
 
 *(Selling / service detail pages and wireframes come later, once this foundation is signed off.)*
 
@@ -96,6 +101,19 @@ Sourced from the current placeholder site — **to be confirmed by the consultan
    - **Qualified doctors** (MMC-registered, trained team)
    - **Efficiency** (day-care, assess-and-treat, run like an organised group)
    - **Strong reviews** (the 4.9 / 1,098 social proof as proof of consistency)
+
+4. **Positioning tier = smart-value / premium-accessible** (see `09-value-proposition.md`).
+   High quality made accessible. Never "budget" / "cheap".
+   - Approved value language: "hospital-grade care", "day-care surgery", "the smart choice",
+     "care that respects your time and money".
+   - **Copy rules (site-wide):** no em-dashes; avoid the "not a..., not a..." construction.
+
+5. **Earned proof is the lead differentiator** (see `10-proof-and-content.md`):
+   TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 (1,098). These are
+   owner-confirmed; the site pulls in this content, it does not ignore it.
+
+6. **Medical tourism = staged pillar.** Architect/brand now (International Patients page),
+   launch the full offer later (like i18n).
 
 ## 8. Internationalization (i18n)
 

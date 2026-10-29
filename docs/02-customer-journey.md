@@ -1,7 +1,33 @@
 # Poliklinik Walid — Customer Journey
 
 > Corporate framing. English-first. WhatsApp-only. See `00-project-brief.md` for locked rules.
-> This describes the **emotional + behavioural** journey from arrival to contact.
+> Value prop + proof power this journey: see `09-value-proposition.md` and `10-proof-and-content.md`.
+> Copy rules: no em-dashes; avoid "not a..., not a...".
+
+---
+
+## 0. The full cross-touchpoint journey (this is the real experience)
+
+The website is one surface in a longer journey. Most patients meet Walid on **TikTok first**,
+not the homepage. Maximum experience means **one consistent brand across every surface**, with
+no drop in quality from the viral video to the clinic chair.
+
+```
+DISCOVER          VERIFY            EVALUATE          ACT               DELIVER
+TikTok / FB / IG  Google reviews    Website           WhatsApp          Clinic visit
+561K / 119K /     4.9 · 1,098       (this project)    (general or       (day-care
+30.8K             reviews                             minor-surgery)     surgery)
+  │                 │                 │                 │                 │
+  └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
+        SAME THREE SIGNALS CARRIED AT EVERY STAGE, NO DROP IN QUALITY:
+        1. Surgeon-led   2. Day-care, worth it (hospital-grade, smart choice)   3. Loved at scale
+```
+
+**Consistency rule:** whatever a visitor felt on TikTok must be reinforced on the site, in the
+WhatsApp reply, and at the clinic. If the website feels more generic than the TikTok that
+brought them in, trust drops and the journey breaks. Perception is managed by *consistency*.
+
+The sections below detail the **website** portion (Arrive to Contact) inside this larger arc.
 
 ---
 
