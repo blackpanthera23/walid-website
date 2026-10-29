@@ -31,4 +31,12 @@
 
 @media (max-width: 880px) {
   .walid-single .meta-grid, .walid-single .doctor-hero { grid-template-columns: 1fr; }
+  .walid-single .doctor-photo { max-width: 320px; }
+}
+@media (max-width: 680px) {
+  .walid-single { padding: 44px 0; }
+  .walid-single .container { padding: 0 18px; }
+}
+@media (max-width: 420px) {
+  .walid-single .container { padding: 0 14px; }
 }

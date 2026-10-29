@@ -35,6 +35,26 @@
 .walid-archive .btn-ghost:hover { background: var(--brand-050); }
 .walid-archive .btn-wa { background: var(--wa); color: #06351b; }
 
-@media (max-width: 880px) {
+/* Responsive: 3-col > 2-col (tablet) > 1-col (mobile). */
+@media (max-width: 980px) {
+  .walid-archive .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+  .walid-archive { padding: 44px 0; }
+  .walid-archive .container { padding: 0 18px; }
   .walid-archive .card-grid, .walid-archive .card-grid.two { grid-template-columns: 1fr; }
 }
+@media (max-width: 420px) {
+  .walid-archive .container { padding: 0 14px; }
+  .walid-archive .card { padding: 20px; }
+}
+
+/* Narrow content column, centered (About / long-form pages). */
+.walid-archive .narrow { max-width: 70ch; margin-left: auto; margin-right: auto; }
+.walid-archive .entry.narrow > * { margin-left: auto; margin-right: auto; }
+
+/* Make sure the custom-template wrapper always centers regardless of Kadence context. */
+.walid-archive, .walid-single, .walid-home { width: 100%; }
+.walid-archive > .container,
+.walid-single > .container,
+.walid-home > section > .container { margin-left: auto; margin-right: auto; }

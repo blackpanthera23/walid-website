@@ -87,7 +87,14 @@ $gp_branch = $mk( 'branch', 'Poliklinik Walid (GP branch)', 'gp-branch-sample' )
 update_field( 'branch_provides_minor_surgery', 0, $gp_branch );
 wp_set_object_terms( $gp_branch, array( $region_other->term_id ), 'region' );
 
-// --- Doctor ------------------------------------------------------------------
+// --- Doctors -----------------------------------------------------------------
+$dr_walid = $mk( 'doctor', 'Dr Walid Utagha', 'dr-walid' );
+update_field( 'doctor_role', 'Minor Surgery Specialist [confirm credential]', $dr_walid );
+update_field( 'doctor_qualifications', 'MMC-registered [confirm]', $dr_walid );
+update_field( 'doctor_is_leadership', 1, $dr_walid );
+update_field( 'doctor_bio', 'Principal doctor at Poliklinik Walid, leading the group\'s surgeon-led day-care minor surgery. [confirm bio]', $dr_walid );
+update_field( 'doctor_branches', array( $ampang ), $dr_walid );
+
 $dr_anis = $mk( 'doctor', 'Dr Anis', 'dr-anis' );
 update_field( 'doctor_role', 'O&G Doctor [confirm credential]', $dr_anis );
 update_field( 'doctor_qualifications', 'MMC-registered [confirm]', $dr_anis );
@@ -98,12 +105,28 @@ update_field( 'doctor_branches', array( $ampang ), $dr_anis );
 $pillar_minor     = get_term_by( 'name', 'Minor Surgery', 'pillar' );
 $pillar_antenatal = get_term_by( 'name', "Antenatal & Women's Health", 'pillar' );
 
-$minor = $mk( 'service', 'Minor Surgery', 'minor-surgery', 'Lipoma, cysts, moles, skin tags, warts and more, assessed and treated in a day. [confirm scope]' );
+$minor_body = implode(
+	"\n\n",
+	array(
+		'<!-- wp:paragraph --><p>Poliklinik Walid is a specialist minor surgery provider. Our surgeon-led team removes common lumps and skin lesions as day-care procedures, which means you are assessed and treated in a single visit and home the same day. Care is delivered to a hospital-grade standard at clinic speed and price, the smart choice for patients who want their time and money respected. [confirm scope]</p><!-- /wp:paragraph -->',
+		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Procedures we perform</h2><!-- /wp:heading -->',
+		'<!-- wp:list --><ul><li>Lipoma removal (fatty lumps)</li><li>Sebaceous cyst and ganglion cyst removal</li><li>Mole and skin tag removal</li><li>Wart removal</li><li>Keloid treatment</li><li>Abscess drainage</li><li>Removal of excess skin</li><li>Xanthelasma removal</li><li>Circumcision (children aged 2 and above, and adults)</li><li>Selected orthopaedic procedures such as bursitis [confirm per branch]</li></ul><!-- /wp:list -->',
+		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">How day-care surgery works</h2><!-- /wp:heading -->',
+		'<!-- wp:paragraph --><p>A doctor assesses the area first and explains your options clearly before anything is done. Many minor procedures are completed under local anaesthetic within the same appointment, so there is no hospital stay and no long wait.</p><!-- /wp:paragraph -->',
+		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Where we perform minor surgery</h2><!-- /wp:heading -->',
+		'<!-- wp:paragraph --><p>Minor surgery is performed at our surgical centres: Ampang in the Klang Valley (our flagship hub) and our Northern centres in Seberang Perai, Tasek Gelugor and Sungai Petani. General practice is available across the full branch network. Message us to confirm availability at the branch nearest you before you travel.</p><!-- /wp:paragraph -->',
+		'<!-- wp:paragraph --><p>Pricing is confirmed after assessment, since it depends on the procedure. [confirm public pricing]</p><!-- /wp:paragraph -->',
+	)
+);
+$minor = $mk( 'service', 'Minor Surgery', 'minor-surgery', $minor_body );
 update_field( 'service_pillar_weight', 'hero', $minor );
 update_field( 'service_wa_routing', 'minor_surgery', $minor );
 update_field( 'service_short_desc', 'Surgeon-led day-care minor surgery at our Central and Northern centres.', $minor );
 update_field( 'service_branches', array( $ampang, $jalanbaru, $tasek, $sgpetani ), $minor );
+update_field( 'service_lead_doctor', $dr_walid, $minor );
 wp_set_object_terms( $minor, array( $pillar_minor->term_id ), 'pillar' );
+// Back-link Dr Walid -> Minor Surgery (expertise-first).
+update_field( 'doctor_lead_for', array( $minor ), $dr_walid );
 
 $antenatal = $mk( 'service', 'Antenatal Care', 'antenatal', 'Pregnancy scans from 7 weeks onward, with mother-and-child health and family planning. [confirm]' );
 update_field( 'service_pillar_weight', 'rising', $antenatal );

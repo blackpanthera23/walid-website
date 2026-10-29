@@ -20,9 +20,9 @@ the_post();
 		</div>
 
 		<?php if ( trim( get_the_content() ) ) : ?>
-			<div class="entry"><?php the_content(); ?></div>
+			<div class="entry narrow"><?php the_content(); ?></div>
 		<?php else : ?>
-			<section class="group" style="max-width:70ch;">
+			<section class="group narrow">
 				<h2><?php esc_html_e( 'Who we are', 'walid' ); ?></h2>
 				<p><?php esc_html_e( 'Poliklinik Walid is a Malaysian healthcare group: surgeon-led day-care minor surgery, aesthetics and women\'s health, with general practice across our branch network. [confirm corporate story]', 'walid' ); ?></p>
 
