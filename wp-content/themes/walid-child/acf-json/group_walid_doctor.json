@@ -1,0 +1,72 @@
+{
+	"key": "group_walid_doctor",
+	"title": "Doctor details",
+	"fields": [
+		{
+			"key": "field_doctor_role",
+			"label": "Role / title",
+			"name": "doctor_role",
+			"type": "text",
+			"instructions": "e.g. O&G Doctor. [confirm exact credential per docs/08]",
+			"wrapper": { "width": "60" }
+		},
+		{
+			"key": "field_doctor_is_leadership",
+			"label": "Leadership?",
+			"name": "doctor_is_leadership",
+			"type": "true_false",
+			"instructions": "For a leadership-only display option.",
+			"ui": 1,
+			"wrapper": { "width": "40" }
+		},
+		{
+			"key": "field_doctor_qualifications",
+			"label": "Qualifications",
+			"name": "doctor_qualifications",
+			"type": "text",
+			"instructions": "MMC registration etc."
+		},
+		{
+			"key": "field_doctor_photo",
+			"label": "Photo",
+			"name": "doctor_photo",
+			"type": "image",
+			"return_format": "id",
+			"preview_size": "medium",
+			"instructions": "Consented photo only. [permission pending]"
+		},
+		{
+			"key": "field_doctor_bio",
+			"label": "Bio",
+			"name": "doctor_bio",
+			"type": "textarea",
+			"instructions": "Short, corporate. No em-dashes.",
+			"rows": 4
+		},
+		{
+			"key": "field_doctor_branches",
+			"label": "Branch(es)",
+			"name": "doctor_branches",
+			"type": "relationship",
+			"post_type": ["branch"],
+			"filters": ["search"],
+			"return_format": "id"
+		},
+		{
+			"key": "field_doctor_lead_for",
+			"label": "Lead specialist for",
+			"name": "doctor_lead_for",
+			"type": "relationship",
+			"instructions": "e.g. Dr Anis -> Antenatal (expertise-first pattern).",
+			"post_type": ["service"],
+			"filters": ["search"],
+			"return_format": "id"
+		}
+	],
+	"location": [[{ "param": "post_type", "operator": "==", "value": "doctor" }]],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"active": true,
+	"description": "Doctor CPT fields — see docs/05 + docs/11"
+}

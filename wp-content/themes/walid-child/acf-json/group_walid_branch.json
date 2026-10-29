@@ -1,0 +1,105 @@
+{
+	"key": "group_walid_branch",
+	"title": "Branch details",
+	"fields": [
+		{
+			"key": "field_branch_full_name",
+			"label": "Full branch name",
+			"name": "branch_full_name",
+			"type": "text",
+			"instructions": "e.g. Poliklinik Walid Ampang",
+			"wrapper": { "width": "60" }
+		},
+		{
+			"key": "field_branch_is_flagship",
+			"label": "Flagship branch?",
+			"name": "branch_is_flagship",
+			"type": "true_false",
+			"instructions": "Highlights the branch (e.g. Ampang HQ).",
+			"ui": 1,
+			"wrapper": { "width": "40" }
+		},
+		{
+			"key": "field_branch_provides_minor_surgery",
+			"label": "Provides minor surgery?",
+			"name": "branch_provides_minor_surgery",
+			"type": "true_false",
+			"instructions": "Makes the two-hub model data-driven. ON for Ampang, Jalan Baru (Seberang Perai), Tasek Gelugor, Sungai Petani.",
+			"ui": 1
+		},
+		{
+			"key": "field_branch_address",
+			"label": "Address",
+			"name": "branch_address",
+			"type": "textarea",
+			"instructions": "Full postal address. [confirm with owner per docs/08]",
+			"rows": 3
+		},
+		{
+			"key": "field_branch_hours",
+			"label": "Opening hours",
+			"name": "branch_hours",
+			"type": "repeater",
+			"instructions": "One row per day or day-range.",
+			"layout": "table",
+			"button_label": "Add hours row",
+			"sub_fields": [
+				{ "key": "field_branch_hours_day", "label": "Day(s)", "name": "day", "type": "text", "wrapper": { "width": "40" } },
+				{ "key": "field_branch_hours_time", "label": "Hours", "name": "time", "type": "text", "wrapper": { "width": "60" } }
+			]
+		},
+		{
+			"key": "field_branch_phone",
+			"label": "Phone",
+			"name": "branch_phone",
+			"type": "text",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_branch_whatsapp",
+			"label": "WhatsApp number (digits only, e.g. 60142521684)",
+			"name": "branch_whatsapp",
+			"type": "text",
+			"instructions": "Falls back to the group lines if empty.",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_branch_map_embed",
+			"label": "Google Maps embed / link",
+			"name": "branch_map_embed",
+			"type": "textarea",
+			"rows": 2
+		},
+		{
+			"key": "field_branch_photos",
+			"label": "Photos",
+			"name": "branch_photos",
+			"type": "gallery",
+			"instructions": "Real branch photography only. [permission pending]"
+		},
+		{
+			"key": "field_branch_services",
+			"label": "Services offered here",
+			"name": "branch_services",
+			"type": "relationship",
+			"post_type": ["service"],
+			"filters": ["search"],
+			"return_format": "id"
+		},
+		{
+			"key": "field_branch_doctors",
+			"label": "Doctors at this branch",
+			"name": "branch_doctors",
+			"type": "relationship",
+			"post_type": ["doctor"],
+			"filters": ["search"],
+			"return_format": "id"
+		}
+	],
+	"location": [[{ "param": "post_type", "operator": "==", "value": "branch" }]],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"active": true,
+	"description": "Branch CPT fields — see docs/05-content-model.md"
+}

@@ -1,0 +1,69 @@
+{
+	"key": "group_walid_review",
+	"title": "Review details",
+	"fields": [
+		{
+			"key": "field_review_quote",
+			"label": "Quote",
+			"name": "review_quote",
+			"type": "textarea",
+			"instructions": "Curated Google review. [permission pending] before publishing.",
+			"rows": 4
+		},
+		{
+			"key": "field_review_author",
+			"label": "Reviewer name",
+			"name": "review_author",
+			"type": "text",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_review_rating",
+			"label": "Rating",
+			"name": "review_rating",
+			"type": "number",
+			"default_value": 5,
+			"min": 1,
+			"max": 5,
+			"wrapper": { "width": "25" }
+		},
+		{
+			"key": "field_review_source",
+			"label": "Source",
+			"name": "review_source",
+			"type": "text",
+			"default_value": "Google review",
+			"wrapper": { "width": "25" }
+		},
+		{
+			"key": "field_review_source_url",
+			"label": "Source URL",
+			"name": "review_source_url",
+			"type": "url",
+			"instructions": "Link to the original review if available."
+		},
+		{
+			"key": "field_review_permission",
+			"label": "Permission to publish?",
+			"name": "review_permission",
+			"type": "true_false",
+			"instructions": "Templates must not render a review unless this is ON.",
+			"ui": 1
+		},
+		{
+			"key": "field_review_branch",
+			"label": "Branch",
+			"name": "review_branch",
+			"type": "post_object",
+			"post_type": ["branch"],
+			"return_format": "id",
+			"allow_null": 1
+		}
+	],
+	"location": [[{ "param": "post_type", "operator": "==", "value": "review" }]],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"active": true,
+	"description": "Review CPT fields — see docs/05"
+}

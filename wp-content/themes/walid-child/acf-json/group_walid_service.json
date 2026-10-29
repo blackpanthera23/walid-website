@@ -1,0 +1,69 @@
+{
+	"key": "group_walid_service",
+	"title": "Service details",
+	"fields": [
+		{
+			"key": "field_service_pillar_weight",
+			"label": "Pillar weight",
+			"name": "service_pillar_weight",
+			"type": "select",
+			"instructions": "Drives homepage prominence (see docs/11). Minor Surgery = Hero.",
+			"choices": { "hero": "Hero", "rising": "Rising", "base": "Network base" },
+			"default_value": "rising",
+			"return_format": "value",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_service_wa_routing",
+			"label": "WhatsApp routing",
+			"name": "service_wa_routing",
+			"type": "select",
+			"instructions": "Which line this service routes to.",
+			"choices": { "general": "General line", "minor_surgery": "Minor-surgery line" },
+			"default_value": "general",
+			"return_format": "value",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_service_short_desc",
+			"label": "Short description",
+			"name": "service_short_desc",
+			"type": "textarea",
+			"instructions": "For overview cards. No em-dashes.",
+			"rows": 3
+		},
+		{
+			"key": "field_service_icon",
+			"label": "Icon / image",
+			"name": "service_icon",
+			"type": "image",
+			"return_format": "id",
+			"preview_size": "medium"
+		},
+		{
+			"key": "field_service_lead_doctor",
+			"label": "Lead specialist",
+			"name": "service_lead_doctor",
+			"type": "post_object",
+			"instructions": "Powers the expertise-first specialist block (e.g. Antenatal -> Dr Anis).",
+			"post_type": ["doctor"],
+			"return_format": "id",
+			"allow_null": 1
+		},
+		{
+			"key": "field_service_branches",
+			"label": "Offered at branches",
+			"name": "service_branches",
+			"type": "relationship",
+			"post_type": ["branch"],
+			"filters": ["search"],
+			"return_format": "id"
+		}
+	],
+	"location": [[{ "param": "post_type", "operator": "==", "value": "service" }]],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"active": true,
+	"description": "Service CPT fields — see docs/05 + docs/11"
+}

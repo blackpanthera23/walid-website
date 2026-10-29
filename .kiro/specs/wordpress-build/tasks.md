@@ -31,7 +31,7 @@
   - Verify: a page shows correct navy/gold/green + Fraunces/Inter matching `/prototype`.
   - _Requirements: 3.1, 3.2, 3.3_
 
-- [ ] 5. CPT plugin `walid-cpts` (register types + taxonomies)
+- [x] 5. CPT plugin `walid-cpts` (register types + taxonomies)
   - Register Branch, Service, Doctor, Review CPTs (in a committed plugin, not the theme).
   - Register Region taxonomy (Central/North/Other) + Pillar taxonomy
     (Minor Surgery/Aesthetics/Antenatal/Pillar-4-TBD/General).
@@ -39,7 +39,7 @@
   - Verify: `wp post-type list` and `wp taxonomy list` show the new types.
   - _Requirements: 4.1, 4.2, 4.3_
 
-- [ ] 6. ACF fields + relationships (version-controlled)
+- [x] 6. ACF fields + relationships (version-controlled)
   - Create ACF field groups for each CPT per `design.md` table; store as local JSON in
     `walid-child/acf-json/`.
   - Wire relationships: Service ↔ lead Doctor, Service ↔ Branches, Doctor ↔ Branches.

@@ -85,3 +85,18 @@ function walid_setup() {
 	add_theme_support( 'html5', array( 'style', 'script', 'navigation-widgets' ) );
 }
 add_action( 'after_setup_theme', 'walid_setup' );
+
+/**
+ * Point ACF local JSON at the child theme so field groups are version-controlled and auto-sync
+ * on any install (no manual admin setup needed).
+ */
+function walid_acf_json_save_point( $path ) {
+	return get_stylesheet_directory() . '/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'walid_acf_json_save_point' );
+
+function walid_acf_json_load_point( $paths ) {
+	$paths[] = get_stylesheet_directory() . '/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'walid_acf_json_load_point' );
