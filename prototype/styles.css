@@ -1,0 +1,182 @@
+/* Poliklinik Walid — homepage prototype
+   Design system: navy-anchored (see docs/07-design-system.md)
+   CSS variables map 1:1 to Kadence Global Palette for the WordPress build. */
+
+:root {
+  /* Brand (navy) */
+  --brand-700: #232B8F;
+  --brand-900: #161B5E;
+  --brand-500: #3A43B0;
+  --brand-050: #EEF0FB;
+  /* Gold accent */
+  --gold-500: #C9A227;
+  --gold-100: #F6EFD6;
+  /* Action / WhatsApp */
+  --accent-600: #1E8E66;
+  --accent-700: #176F50;
+  --wa: #25D366;
+  --wa-dark: #1EBE5A;
+  /* Neutrals */
+  --bg: #F8F9FC;
+  --surface: #FFFFFF;
+  --ink: #1A1D2E;
+  --muted: #5B607A;
+  --rule: #DDE0EC;
+  /* Type */
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, Arial, sans-serif;
+  /* Layout */
+  --maxw: 1140px;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(22, 27, 94, 0.08);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 17px;
+}
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; color: var(--brand-900); margin: 0 0 .5em; }
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.3rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0 0 1em; color: var(--ink); }
+a { color: var(--brand-500); text-decoration: none; }
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.eyebrow { font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .75em; }
+.muted { color: var(--muted); }
+section { padding: 72px 0; }
+.section-alt { background: var(--surface); }
+.section-navy { background: var(--brand-900); color: #fff; }
+.section-navy h2, .section-navy h3 { color: #fff; }
+.section-navy p { color: #d7daf2; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; font-size: 1rem; padding: 14px 24px; border-radius: 999px; border: 2px solid transparent; cursor: pointer; transition: all .18s ease; min-height: 48px; }
+.btn-wa { background: var(--wa); color: #06351b; }
+.btn-wa:hover { background: var(--wa-dark); }
+.btn-primary { background: var(--accent-600); color: #fff; }
+.btn-primary:hover { background: var(--accent-700); }
+.btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
+.btn-ghost:hover { background: var(--brand-050); }
+.btn-ghost-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.btn-ghost-light:hover { background: rgba(255,255,255,.1); }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-700); color: #fff; display: grid; place-items: center; font-family: var(--serif); font-weight: 700; font-size: 1.1rem; }
+.brand-name { font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--brand-900); }
+.nav { display: flex; align-items: center; gap: 26px; }
+.nav a { color: var(--ink); font-weight: 500; font-size: .98rem; }
+.nav a:hover { color: var(--brand-700); }
+.nav .btn { padding: 9px 18px; min-height: 0; }
+.nav-links { display: flex; gap: 26px; align-items: center; }
+
+/* Hero */
+.hero { padding: 84px 0 64px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+.hero h1 { margin-bottom: .4em; }
+.hero .lead { font-size: 1.2rem; color: var(--muted); max-width: 34ch; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 28px 0 30px; }
+.proof-rail { display: flex; gap: 22px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--rule); }
+.proof-rail .stat { font-size: .95rem; color: var(--muted); }
+.proof-rail .stat b { display: block; font-family: var(--serif); font-size: 1.35rem; color: var(--brand-700); }
+.hero-art { aspect-ratio: 4/5; border-radius: 20px; background:
+    radial-gradient(120% 90% at 80% 10%, var(--gold-100) 0%, transparent 45%),
+    linear-gradient(160deg, var(--brand-700), var(--brand-900));
+  position: relative; box-shadow: var(--shadow); overflow: hidden; display: grid; place-items: center; }
+.hero-art .emblem { width: 160px; height: 160px; border-radius: 50%; border: 3px solid rgba(255,255,255,.85); display: grid; place-items: center; color: #fff; font-family: var(--serif); font-size: 2.4rem; }
+.hero-art .cap { position: absolute; bottom: 18px; left: 18px; right: 18px; color: rgba(255,255,255,.8); font-size: .8rem; }
+
+/* Value strip */
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.value-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px; }
+.value-card .ico { width: 42px; height: 42px; border-radius: 10px; background: var(--brand-050); color: var(--brand-700); display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 14px; }
+.value-card h3 { margin-bottom: .25em; }
+.value-card p { margin: 0; color: var(--muted); font-size: .97rem; }
+
+/* Hero pillar */
+.pillar-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+.pillar-hero .art { aspect-ratio: 16/11; border-radius: var(--radius); background: linear-gradient(150deg, var(--brand-050), #fff); border: 1px solid var(--rule); display: grid; place-items: center; color: var(--brand-500); font-family: var(--serif); }
+.tag-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 22px; }
+.tag { background: var(--brand-050); color: var(--brand-700); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 600; }
+
+/* Rising pillars */
+.rising-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.rise-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 28px; transition: box-shadow .18s, transform .18s; }
+.rise-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+.rise-card .ico { font-size: 1.6rem; margin-bottom: 10px; }
+.rise-card h3 { color: var(--brand-800, var(--brand-900)); }
+.rise-card.tbd { border-style: dashed; opacity: .8; }
+
+/* Specialist */
+.spec { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+.spec .photo { aspect-ratio: 1/1; border-radius: var(--radius); background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); box-shadow: var(--shadow); }
+.spec .gold-line { color: var(--gold-500); font-weight: 700; margin-bottom: .3em; }
+
+/* Proof wall */
+.tiktok-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.tiktok-card { aspect-ratio: 9/16; border-radius: var(--radius); background: #0d0d14; color: #fff; display: grid; place-items: center; position: relative; overflow: hidden; }
+.tiktok-card .play { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 1.3rem; }
+.tiktok-card .lbl { position: absolute; bottom: 12px; left: 12px; font-size: .8rem; color: rgba(255,255,255,.75); }
+
+/* Branches */
+.branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.branch-col { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 28px; }
+.branch-col h3 { display: flex; align-items: center; gap: 10px; }
+.pin { background: var(--gold-100); color: var(--gold-500); border-radius: 8px; padding: 2px 10px; font-size: .75rem; font-weight: 700; letter-spacing: .05em; }
+.branch-col ul { margin: 12px 0 0; padding-left: 18px; }
+.branch-col li { margin-bottom: 6px; }
+
+/* Reviews */
+.rev-head { text-align: center; margin-bottom: 36px; }
+.rev-stat { font-family: var(--serif); font-size: 3rem; color: var(--gold-500); line-height: 1; }
+.rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.rev-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px; }
+.rev-card .stars { color: var(--gold-500); margin-bottom: 8px; }
+.rev-card .who { font-weight: 600; font-size: .9rem; color: var(--muted); margin-top: 10px; }
+
+/* International */
+.intl { text-align: center; }
+.intl .flags { font-size: 1.5rem; letter-spacing: .3em; margin: 10px 0 18px; }
+
+/* Final CTA */
+.final { text-align: center; }
+.final .btn { margin-top: 10px; }
+
+/* Footer */
+.site-footer { background: var(--brand-900); color: #c7cbee; padding: 56px 0 30px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+.site-footer a { color: #c7cbee; }
+.site-footer a:hover { color: #fff; }
+.site-footer h4 { color: #fff; font-family: var(--sans); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin-bottom: 8px; font-size: .95rem; }
+.socials { display: flex; gap: 14px; margin-top: 12px; }
+.socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; }
+.legal { border-top: 1px solid rgba(255,255,255,.14); padding-top: 20px; font-size: .82rem; color: #9aa0d0; }
+
+/* Floating WhatsApp */
+.fab { position: fixed; right: 20px; bottom: 20px; z-index: 60; background: var(--wa); color: #06351b; font-weight: 700; padding: 14px 20px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,.2); display: flex; align-items: center; gap: 8px; }
+.fab:hover { background: var(--wa-dark); }
+
+/* Mock banner */
+.mock-banner { background: var(--gold-500); color: #3a2f00; text-align: center; font-size: .8rem; font-weight: 700; padding: 6px; letter-spacing: .05em; }
+
+/* Responsive */
+@media (max-width: 880px) {
+  .hero-grid, .pillar-hero, .spec, .branch-grid { grid-template-columns: 1fr; }
+  .value-grid, .rising-grid, .tiktok-grid, .rev-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-art { order: -1; aspect-ratio: 16/10; }
+  section { padding: 52px 0; }
+  .tiktok-grid { grid-template-columns: 1fr 1fr; }
+}

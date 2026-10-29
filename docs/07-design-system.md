@@ -16,41 +16,52 @@ template."
 
 ---
 
-## 2. Color palette (elevated from the logo)
+## 2. Color palette (anchored on the real navy logo)
 
 ### Brand anchor
-The Poliklinik Walid logo reads as a **teal-green**. Prior builds used `#0F5B5C` (ops) and
-`#103F46` (live). We unify and elevate to a single confident primary + a supporting scale.
+The real Poliklinik Walid logo is a **deep royal / navy blue** circular emblem with white
+Arabic calligraphy. Navy is an excellent corporate-trust anchor (institutional, premium,
+trustworthy), and the Arabic calligraphy is a brand asset that ties naturally to the
+international / medical-tourism audience (Sudan, Gulf). We build the palette on navy, with a
+restrained **gold** accent for premium heritage warmth and a distinct **green** for actions.
 
 | Role | Token | Hex | Use |
 |---|---|---|---|
-| **Primary / Brand teal** | `--brand-700` | `#0E4F4C` | Headings, primary surfaces, logo lockup |
-| Primary deep | `--brand-800` | `#0A3B39` | Dark sections, footer, high-contrast headings |
-| Primary mid | `--brand-600` | `#15726C` | Links, secondary brand surfaces |
+| **Primary / Brand navy** | `--brand-700` | `#232B8F` | Headings, primary surfaces, logo lockup |
+| Primary deep | `--brand-900` | `#161B5E` | Dark sections, footer, high-contrast headings |
+| Primary mid | `--brand-500` | `#3A43B0` | Links, hover, secondary brand surfaces |
+| Soft brand surface | `--brand-050` | `#EEF0FB` | Section backgrounds, cards |
+| **Gold accent** | `--gold-500` | `#C9A227` | Premium accent, selected/highlight, dividers (sparingly) |
+| Gold soft | `--gold-100` | `#F6EFD6` | Subtle accent surfaces |
 | **Action green** | `--accent-600` | `#1E8E66` | Primary CTAs, confirmed/positive states |
 | Action green hover | `--accent-700` | `#176F50` | CTA hover/active |
 | **WhatsApp green** | `--wa` | `#25D366` | WhatsApp button only (platform-recognisable) |
-| **Warm accent (clay)** | `--clay-500` | `#C2674B` | Sparingly — selected/highlight, never alarms |
-| Soft brand surface | `--brand-050` | `#E9F1EF` | Section backgrounds, cards |
 
-### Neutrals (warm, not clinical-cold)
+### Neutrals (clean, flatter navy)
 | Role | Token | Hex |
 |---|---|---|
-| Warm white (canvas) | `--bg` | `#F7F6F2` |
+| Canvas (off-white) | `--bg` | `#F8F9FC` |
 | White (surfaces) | `--surface` | `#FFFFFF` |
-| Ink (body) | `--ink` | `#17201F` |
-| Muted (secondary) | `--muted` | `#5A6763` |
-| Rule (borders) | `--rule` | `#D5DED9` |
+| Ink (body) | `--ink` | `#1A1D2E` |
+| Muted (secondary) | `--muted` | `#5B607A` |
+| Rule (borders) | `--rule` | `#DDE0EC` |
 
-**Discipline:** max **3 brand colors + neutrals** active at once. WhatsApp green is reserved
-exclusively for the WhatsApp action so it reads as "the familiar button," not decoration.
+**Discipline:** navy leads; gold is a *restrained* premium accent; green means "do this";
+WhatsApp green is reserved exclusively for the WhatsApp action. Max 3 brand colors + neutrals active.
 
 ### Why these choices
-- **Deeper, unified teal (`#0E4F4C`):** more premium/corporate than the brighter logo teal,
-  still unmistakably the same brand.
-- **Distinct action green:** separates "brand" from "do this" — cleaner conversion.
-- **Warm neutrals:** avoid the cold, sterile hospital-portal feel; signal "trusted, human group."
-- **Clay used sparingly:** one warm human accent; never for warnings (no alarm tone — per brief).
+- **Navy `#232B8F` (elevated from the logo):** institutional trust + premium. The strongest
+  possible corporate anchor, and faithful to the real brand.
+- **Gold accent:** classic navy pairing; adds premium heritage warmth that echoes the logo's
+  Arabic calligraphy and flatters the international audience. Used sparingly, never as alarm.
+- **Distinct action green:** separates "brand navy" from "do this" so CTAs pop against navy.
+- **Clean cool-neutral whites:** flatter navy (warm whites muddy it); still soft, not clinical.
+
+### Logo usage
+- The emblem is a circular monogram with no Latin wordmark. Pair it with a typeset
+  "Poliklinik Walid" wordmark (Fraunces) in the header for legibility across audiences.
+- Keep clear space around the emblem; place on white or `--brand-050`, never on busy photos.
+- The Arabic calligraphy is a brand asset; treat the international/heritage feel as intentional.
 
 ---
 
@@ -93,16 +104,16 @@ or counters. Respect `prefers-reduced-motion`.
 - Sections become **Gutenberg patterns**; no page-builder runtime dependency.
 - Vanilla CSS variables in the child theme so the palette is swappable in one place.
 
-### Kadence Global Palette mapping (starting values)
+### Kadence Global Palette mapping (navy-anchored)
 ```
-Palette 1  Brand teal      #0E4F4C
+Palette 1  Brand navy      #232B8F
 Palette 2  Action green    #1E8E66
-Palette 3  Clay accent     #C2674B
-Palette 4  Ink             #17201F
-Palette 5  Muted           #5A6763
-Palette 6  Rule            #D5DED9
-Palette 7  Soft surface    #E9F1EF
-Palette 8  Warm white      #F7F6F2
+Palette 3  Gold accent     #C9A227
+Palette 4  Ink             #1A1D2E
+Palette 5  Muted           #5B607A
+Palette 6  Rule            #DDE0EC
+Palette 7  Soft surface    #EEF0FB
+Palette 8  Canvas off-white #F8F9FC
 Palette 9  White           #FFFFFF
 ```
 
