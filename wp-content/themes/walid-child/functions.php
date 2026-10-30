@@ -145,7 +145,7 @@ function walid_brand_footer() {
 			<div class="walid-footer-grid">
 				<div>
 					<div class="walid-footer-brand">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo.svg' ); ?>" alt="<?php esc_attr_e( 'Poliklinik Walid', 'walid' ); ?>" width="40" height="40" />
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo.jpg' ); ?>" alt="<?php esc_attr_e( 'Poliklinik Walid', 'walid' ); ?>" width="40" height="40" />
 						<span><?php esc_html_e( 'Poliklinik Walid', 'walid' ); ?></span>
 					</div>
 					<p><?php esc_html_e( 'Surgeon-led day-care minor surgery, aesthetics and women\'s health, with general practice across our branch network.', 'walid' ); ?></p>
