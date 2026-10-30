@@ -131,6 +131,35 @@ function walid_proof_videos() {
 }
 
 /**
+ * Permitted reviews tied to a specific branch (no cross-branch borrowing).
+ *
+ * @param int $branch_id Branch post ID.
+ * @param int $limit     Max reviews.
+ * @return WP_Post[]
+ */
+function walid_branch_reviews( $branch_id, $limit = 6 ) {
+	return get_posts(
+		array(
+			'post_type'      => 'review',
+			'posts_per_page' => $limit,
+			// phpcs:disable WordPress.DB.SlowDBQuery
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array(
+					'key'   => 'review_permission',
+					'value' => '1',
+				),
+				array(
+					'key'   => 'review_branch',
+					'value' => $branch_id,
+				),
+			),
+			// phpcs:enable WordPress.DB.SlowDBQuery
+		)
+	);
+}
+
+/**
  * Published reviews that have permission to be shown.
  *
  * @param int $limit Max reviews.

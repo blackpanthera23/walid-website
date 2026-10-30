@@ -119,29 +119,17 @@ while ( have_posts() ) :
 			</div>
 
 			<?php
-			// Google reviews linked to this branch (permission-gated).
-			$branch_reviews = get_posts(
-				array(
-					'post_type'      => 'review',
-					'posts_per_page' => 6,
-					'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
-						'relation' => 'AND',
-						array( 'key' => 'review_permission', 'value' => '1' ),
-						array( 'key' => 'review_branch', 'value' => '"' . $id . '"', 'compare' => 'LIKE' ),
-					),
-				)
-			);
-			// Fall back to any permitted reviews if none are branch-specific.
-			if ( ! $branch_reviews ) {
-				$branch_reviews = walid_permitted_reviews( 3 );
-			}
-			if ( $branch_reviews ) :
-				?>
-				<section class="branch-reviews">
-					<div class="group-head">
-						<span class="pin"><?php esc_html_e( '4.9 ★', 'walid' ); ?></span>
-						<h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2>
-					</div>
+			// Reviews for THIS branch only (permission-gated). No borrowing other branches'
+			// reviews: a branch shows its own, or a clean "coming soon" state.
+			$branch_reviews = walid_branch_reviews( $id, 6 );
+			$maps_link      = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( wp_strip_all_tags( $map_query ) );
+			?>
+			<section class="branch-reviews">
+				<div class="group-head">
+					<span class="pin"><?php esc_html_e( '4.9 ★', 'walid' ); ?></span>
+					<h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2>
+				</div>
+				<?php if ( $branch_reviews ) : ?>
 					<div class="card-grid reveal-group">
 						<?php foreach ( $branch_reviews as $rv ) : ?>
 							<article class="card">
@@ -152,8 +140,11 @@ while ( have_posts() ) :
 						<?php endforeach; ?>
 					</div>
 					<p class="muted" style="font-size:.85rem;margin-top:12px;"><?php esc_html_e( 'Reviews shown with permission. Source: Google.', 'walid' ); ?></p>
-				</section>
-			<?php endif; ?>
+				<?php else : ?>
+					<p class="muted"><?php esc_html_e( 'Google reviews for this branch will appear here. In the meantime, see this branch on Google.', 'walid' ); ?></p>
+					<p style="margin-top:10px;"><a class="btn btn-ghost" href="<?php echo esc_url( $maps_link ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Read reviews on Google', 'walid' ); ?></a></p>
+				<?php endif; ?>
+			</section>
 
 		</div>
 	</main>

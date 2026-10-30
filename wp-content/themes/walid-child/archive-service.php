@@ -84,21 +84,28 @@ $hero_pillar = 'Minor Surgery';
 								$first = array_slice( $procedures, 0, 6 );
 								$rest  = array_slice( $procedures, 6 );
 								?>
-								<ul class="proc-list">
-									<?php foreach ( $first as $p ) : ?>
-										<li><?php echo esc_html( $p ); ?></li>
-									<?php endforeach; ?>
-								</ul>
-								<?php if ( $rest ) : ?>
-									<details class="proc-more">
-										<summary><?php echo esc_html( sprintf( /* translators: %d: count */ _n( 'See %d more', 'See %d more', count( $rest ), 'walid' ), count( $rest ) ) ); ?></summary>
-										<ul class="proc-list">
-											<?php foreach ( $rest as $p ) : ?>
-												<li><?php echo esc_html( $p ); ?></li>
-											<?php endforeach; ?>
-										</ul>
-									</details>
-								<?php endif; ?>
+								<div class="proc">
+									<ul class="proc-list">
+										<?php foreach ( $first as $p ) : ?>
+											<li><span class="proc-tick" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+										<?php endforeach; ?>
+									</ul>
+									<?php if ( $rest ) : ?>
+										<div class="proc-extra" hidden>
+											<ul class="proc-list">
+												<?php foreach ( $rest as $p ) : ?>
+													<li><span class="proc-tick" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+												<?php endforeach; ?>
+											</ul>
+										</div>
+										<button type="button" class="proc-toggle" aria-expanded="false"
+											data-more="<?php echo esc_attr( sprintf( /* translators: %d: count */ _n( 'Show %d more procedure', 'Show %d more procedures', count( $rest ), 'walid' ), count( $rest ) ) ); ?>"
+											data-less="<?php esc_attr_e( 'Show less', 'walid' ); ?>">
+											<span class="proc-toggle-label"><?php echo esc_html( sprintf( /* translators: %d: count */ _n( 'Show %d more procedure', 'Show %d more procedures', count( $rest ), 'walid' ), count( $rest ) ) ); ?></span>
+											<span class="proc-toggle-icon" aria-hidden="true"></span>
+										</button>
+									<?php endif; ?>
+								</div>
 							<?php endif; ?>
 
 							<div class="card-foot">
