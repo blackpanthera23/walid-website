@@ -107,6 +107,16 @@ function walid_enqueue_assets() {
 		);
 	}
 
+	// Procedure (per-treatment) page styles.
+	if ( is_singular( 'procedure' ) ) {
+		wp_enqueue_style(
+			'walid-procedure',
+			get_stylesheet_directory_uri() . '/assets/css/procedure.css',
+			array( 'walid-brand' ),
+			$version
+		);
+	}
+
 	// Archive (listing) + custom page template styles (all use the .walid-archive shell).
 	if (
 		is_post_type_archive( array( 'branch', 'service', 'doctor' ) )

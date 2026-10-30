@@ -87,14 +87,16 @@ $hero_pillar = 'Minor Surgery';
 								<div class="proc">
 									<ul class="proc-list">
 										<?php foreach ( $first as $p ) : ?>
-											<li><span class="proc-tick" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+											<?php list( $p_name, $p_desc ) = array_pad( array_map( 'trim', explode( '|', $p, 2 ) ), 2, '' ); ?>
+											<li><span class="proc-tick" aria-hidden="true"></span><span class="proc-text"><b><?php echo esc_html( $p_name ); ?></b><?php echo $p_desc ? '<span class="proc-desc">' . esc_html( $p_desc ) . '</span>' : ''; ?></span></li>
 										<?php endforeach; ?>
 									</ul>
 									<?php if ( $rest ) : ?>
 										<div class="proc-extra" hidden>
 											<ul class="proc-list">
 												<?php foreach ( $rest as $p ) : ?>
-													<li><span class="proc-tick" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+													<?php list( $p_name, $p_desc ) = array_pad( array_map( 'trim', explode( '|', $p, 2 ) ), 2, '' ); ?>
+													<li><span class="proc-tick" aria-hidden="true"></span><span class="proc-text"><b><?php echo esc_html( $p_name ); ?></b><?php echo $p_desc ? '<span class="proc-desc">' . esc_html( $p_desc ) . '</span>' : ''; ?></span></li>
 												<?php endforeach; ?>
 											</ul>
 										</div>

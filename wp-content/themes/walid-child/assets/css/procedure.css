@@ -1,0 +1,70 @@
+/* Poliklinik Walid — single Procedure page (AB look).
+   Trust-first 4-section treatment page. Tokens from brand.css (:root). */
+
+.walid-procedure .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+.walid-procedure .eyebrow { font-family: var(--sans); font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .7em; display: block; }
+.walid-procedure .eyebrow a { color: var(--gold-500); }
+.walid-procedure .muted { color: var(--muted); }
+.walid-procedure .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; font-size: 1rem; padding: 14px 26px; border-radius: 999px; border: 1.5px solid transparent; text-decoration: none; transition: transform .16s ease, background-color .16s ease; }
+.walid-procedure .btn:hover { transform: translateY(-2px); }
+.walid-procedure .btn-wa { background: var(--wa); color: #06351b; }
+.walid-procedure .btn-wa:hover { background: var(--wa-dark); }
+.walid-procedure .btn.lg { padding: 17px 34px; font-size: 1.08rem; }
+.walid-procedure .tag-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.walid-procedure .tag { background: var(--brand-050); color: var(--brand-700); border-radius: 999px; padding: 7px 16px; font-size: .85rem; font-weight: 600; text-decoration: none; }
+
+/* Hero — organic panel */
+.walid-procedure .proc-hero { padding: 80px 0 48px; }
+.walid-procedure .proc-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 52px; align-items: center; }
+.walid-procedure .proc-hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2.1rem, 4.6vw, 3.2rem); color: var(--brand-900); line-height: 1.12; margin: 0 0 .35em; }
+.walid-procedure .proc-hero .lead { font-size: 1.2rem; color: var(--muted); max-width: 42ch; margin-bottom: 26px; }
+.walid-procedure .proc-hero-art { aspect-ratio: 1/1; display: grid; place-items: center; }
+.walid-procedure .proc-panel { width: 90%; aspect-ratio: 1/1; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; overflow: hidden; background: linear-gradient(160deg, var(--brand-050), #fff); box-shadow: var(--shadow); }
+.walid-procedure .proc-panel img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Body sections */
+.walid-procedure .proc-body { padding-bottom: 40px; }
+.walid-procedure .proc-section { max-width: 760px; margin: 0 auto 56px; }
+.walid-procedure .proc-num { display: inline-block; font-family: var(--sans); font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-700); background: var(--brand-050); border-radius: 999px; padding: 6px 14px; margin-bottom: 18px; }
+.walid-procedure .proc-prose { font-size: 1.05rem; }
+.walid-procedure .proc-prose h2, .walid-procedure .proc-prose h3 { font-family: var(--serif); color: var(--brand-900); }
+.walid-procedure .proc-sub { margin-bottom: 20px; }
+
+/* Honest note box */
+.walid-procedure .proc-note { background: var(--gold-100); border-left: 4px solid var(--gold-500); border-radius: 10px; padding: 16px 20px; color: #5a4a00; font-size: .98rem; margin-top: 20px; }
+
+/* Methods — numbered cards */
+.walid-procedure .proc-methods { display: grid; gap: 18px; }
+.walid-procedure .proc-method { position: relative; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px 26px 24px 72px; box-shadow: 0 6px 18px rgba(22,27,94,.04); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.walid-procedure .proc-method:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: transparent; }
+.walid-procedure .proc-method-num { position: absolute; left: 22px; top: 24px; font-family: var(--serif); font-size: 1.5rem; color: var(--gold-500); font-weight: 600; }
+.walid-procedure .proc-method h3 { margin: 0 0 .3em; color: var(--brand-900); }
+.walid-procedure .proc-method p { margin: 0; color: var(--muted); }
+
+/* What to expect — numbered steps */
+.walid-procedure .proc-steps { list-style: none; counter-reset: step; padding: 0; margin: 0; display: grid; gap: 14px; }
+.walid-procedure .proc-step { counter-increment: step; position: relative; padding-left: 56px; }
+.walid-procedure .proc-step::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; width: 38px; height: 38px; border-radius: 50%; background: var(--brand-700); color: #fff; font-family: var(--serif); font-size: .95rem; display: grid; place-items: center; }
+.walid-procedure .proc-step h3 { margin: 4px 0 .2em; color: var(--brand-900); font-size: 1.1rem; }
+.walid-procedure .proc-step p { margin: 0; color: var(--muted); }
+
+/* Questions — gold ticks */
+.walid-procedure .proc-questions { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.walid-procedure .proc-questions li { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; font-size: 1rem; }
+.walid-procedure .q-tick { flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%; background: var(--gold-100); position: relative; margin-top: 1px; }
+.walid-procedure .q-tick::after { content: ""; position: absolute; left: 7px; top: 4px; width: 4px; height: 8px; border: solid var(--gold-500); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+/* Final CTA */
+.walid-procedure .proc-cta { background: linear-gradient(160deg, var(--brand-900), #0f1340); color: #fff; text-align: center; padding: 72px 0; margin-top: 40px; }
+.walid-procedure .proc-cta h2 { color: #fff; }
+.walid-procedure .proc-cta p { color: #c7cbee; max-width: 46ch; margin: 0 auto 22px; }
+
+@media (max-width: 960px) {
+  .walid-procedure .proc-hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .walid-procedure .proc-hero-art { order: -1; max-width: 340px; margin: 0 auto; width: 100%; }
+}
+@media (max-width: 560px) {
+  .walid-procedure .container { padding: 0 18px; }
+  .walid-procedure .proc-method { padding-left: 26px; }
+  .walid-procedure .proc-method-num { position: static; display: block; margin-bottom: 6px; }
+}

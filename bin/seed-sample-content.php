@@ -140,13 +140,33 @@ update_field(
 	implode(
 		"\n",
 		array(
-			'Ganglion cyst', 'Skin tag', 'Ingrown toenail', 'Sebaceous cyst', 'Lipoma',
-			'Keloid (surgical removal, not injection)', 'Xanthelasma', 'Keratosis',
-			'Genital warts', 'Warts', 'Milia', 'Mole', 'Haemorrhoids (assessment)',
-			'Granuloma', 'Eyebag', 'Gynaecomastia', 'Accessory breast', 'Circumcision',
-			'Extra finger (polydactyly)', 'Carbuncle', 'Abscess', 'Tongue tie',
-			'Giant skin tag', 'Neurofibromatosis', 'Eye warts', 'Syringoma', 'Gout',
-			'Infected hidradenitis suppurativa (HS)',
+			'Lipoma | A soft fatty lump under the skin, assessed and removed.',
+			'Sebaceous cyst | A fluid-filled lump under the skin.',
+			'Ganglion cyst | A fluid-filled lump, often near a joint or tendon.',
+			'Skin tag | A small, soft skin growth.',
+			'Giant skin tag | A larger skin tag needing removal.',
+			'Mole | A pigmented growth checked before removal.',
+			'Wart | A viral skin growth.',
+			'Genital warts | Viral warts needing discreet, careful care.',
+			'Eye warts | Warts near the eye, removed with precision.',
+			'Keloid (surgical removal) | An overgrown scar, excised rather than injected.',
+			'Xanthelasma | Yellow cholesterol deposits on the eyelid.',
+			'Keratosis | A rough, scaly skin patch.',
+			'Milia | Tiny white keratin cysts.',
+			'Syringoma | Small benign sweat-gland growths.',
+			'Granuloma | A small inflammatory nodule.',
+			'Eyebag | Surgical reduction of under-eye bags.',
+			'Gynaecomastia | Enlarged male breast tissue, assessed and treated.',
+			'Accessory breast | Extra breast tissue, usually in the armpit.',
+			'Circumcision | For children aged 2 and above, and adults.',
+			'Extra finger (polydactyly) | Removal of an additional digit.',
+			'Carbuncle | A cluster of infected hair follicles, drained.',
+			'Abscess | A collection of pus, drained under local anaesthetic.',
+			'Infected hidradenitis suppurativa (HS) | Recurrent skin abscesses, managed and drained.',
+			'Tongue tie | A tight band under the tongue, released.',
+			'Ingrown toenail | A nail growing into the skin, treated.',
+			'Neurofibromatosis | Removal of benign nerve-tissue lumps.',
+			'Gout | Assessment and management of gout-related lumps.',
 		)
 	),
 	$minor
@@ -248,6 +268,56 @@ if ( isset( $service_ids['outpatient-care'] ) ) {
 		$service_ids['outpatient-care']
 	);
 }
+
+// --- Procedure page: Xanthelasma (worked example from the reference page) ----
+$xanth = $mk( 'procedure', 'Xanthelasma treatment', 'xanthelasma-treatment' );
+update_field( 'proc_summary', 'Yellow cholesterol deposits in the skin of the eyelid, assessed and removed.', $xanth );
+update_field( 'proc_wa_routing', 'minor_surgery', $xanth );
+update_field( 'proc_parent_service', $minor, $xanth );
+update_field( 'proc_branches', array( $ampang, $jalanbaru ), $xanth );
+update_field(
+	'proc_what',
+	'<p>Xanthelasma is a collection of lipid-laden cells sitting in the upper layer of the skin. It appears as a soft, slightly raised, yellow-to-cream plaque. It is usually painless and does not itch.</p>'
+	. '<p>The deposits are common around the inner corner of the upper eyelid, and can appear on all four lids. They are more frequent in middle age and beyond, and in people of Asian and Mediterranean descent.</p>',
+	$xanth
+);
+update_field( 'proc_note', 'Roughly half of people with xanthelasma have abnormal lipid levels, so a doctor will usually ask about your cardiovascular risk and may recommend a lipid profile blood test. Removing the plaque does not change the underlying lipid level, so it can come back if the cause is not addressed. The removal is cosmetic and functional, but the blood test is the part that can matter to your health.', $xanth );
+if ( have_rows( 'proc_methods', $xanth ) ) {
+	delete_field( 'proc_methods', $xanth );
+}
+update_field(
+	'proc_methods',
+	array(
+		array( 'name' => 'Surgical excision', 'body' => 'The deposit is cut out under local anaesthetic through a superficial dissection that avoids the deeper eyelid structures. It gives the most complete removal for thicker plaques and has the lowest recurrence rate. It needs a wound that closes, so there is a fine scar.' ),
+		array( 'name' => 'Laser ablation', 'body' => 'A laser vaporises the deposit with precision. It suits smaller or more superficial plaques and avoids stitches. It can leave a temporary colour change, and thicker lesions may need more than one session.' ),
+		array( 'name' => 'Radiofrequency', 'body' => 'Controlled heat removes the plaque without stitches. Quick, with redness and mild swelling that settles over days. It suits plaques that are not too deep.' ),
+	),
+	$xanth
+);
+update_field(
+	'proc_expect',
+	array(
+		array( 'name' => 'Assessment', 'body' => 'The doctor examines the plaques, asks about your health and any family history of high cholesterol, and may arrange a lipid profile blood test.' ),
+		array( 'name' => 'Method and consent', 'body' => 'You are told which method is proposed, why, what the scar and recovery are likely to be, and what the recurrence risk is. You decide.' ),
+		array( 'name' => 'The procedure', 'body' => 'Performed under local anaesthetic, so the area is numb. Most removals are short and done as an outpatient visit.' ),
+		array( 'name' => 'Aftercare and review', 'body' => 'You are given wound care instructions and a review point. Recurrence is possible, so follow-up matters.' ),
+	),
+	$xanth
+);
+update_field(
+	'proc_questions',
+	implode(
+		"\n",
+		array(
+			'Is this definitely xanthelasma, or could it be something else?',
+			'Do I need a lipid profile, and who follows up the result?',
+			'Which removal method are you recommending for my lesion, and why that one?',
+			'What will the scar look like, and how long until it settles?',
+			'How likely is it to come back, and what would you do if it does?',
+		)
+	),
+	$xanth
+);
 
 // --- Reviews (real quotes from the Wix site, translated; permission pending) --
 // Sourced from websitewalid.wixsite.com/poliklinikwalid (Malay originals, translated to

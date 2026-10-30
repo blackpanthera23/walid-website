@@ -44,7 +44,10 @@
 /* Procedure (sub-service) list + premium show-more */
 .walid-archive .proc { margin: 6px 0 14px; }
 .walid-archive .proc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
-.walid-archive .proc-list li { display: flex; align-items: flex-start; gap: 9px; font-size: .92rem; color: var(--ink); padding: 5px 0; border-bottom: 1px solid rgba(221,224,236,.6); }
+.walid-archive .proc-list li { display: flex; align-items: flex-start; gap: 9px; font-size: .92rem; color: var(--ink); padding: 7px 0; border-bottom: 1px solid rgba(221,224,236,.6); }
+.walid-archive .proc-text { display: flex; flex-direction: column; }
+.walid-archive .proc-text b { font-weight: 600; }
+.walid-archive .proc-desc { font-size: .82rem; color: var(--muted); margin-top: 1px; }
 .walid-archive .proc-tick { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px; border-radius: 50%; background: var(--brand-050); position: relative; }
 .walid-archive .proc-tick::after { content: ""; position: absolute; left: 5px; top: 2.5px; width: 4px; height: 7px; border: solid var(--brand-700); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .walid-archive .pillar-section.is-hero .proc-tick { background: var(--gold-100); }

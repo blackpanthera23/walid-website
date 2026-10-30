@@ -82,6 +82,21 @@ function walid_register_post_types() {
 			'show_in_rest'  => true,
 		)
 	);
+
+	// --- Procedure (per-treatment pages) ------------------------------------
+	register_post_type(
+		'procedure',
+		array(
+			'labels'        => walid_cpt_labels( __( 'Procedure', 'walid' ), __( 'Procedures', 'walid' ) ),
+			'public'        => true,
+			'has_archive'   => true,
+			'menu_icon'     => 'dashicons-clipboard',
+			'menu_position' => 24,
+			'rewrite'       => array( 'slug' => 'procedures', 'with_front' => false ),
+			'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+			'show_in_rest'  => true,
+		)
+	);
 }
 add_action( 'init', 'walid_register_post_types' );
 

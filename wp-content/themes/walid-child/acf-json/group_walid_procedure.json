@@ -1,0 +1,104 @@
+{
+	"key": "group_walid_procedure",
+	"title": "Procedure details",
+	"fields": [
+		{
+			"key": "field_proc_summary",
+			"label": "Summary (one line)",
+			"name": "proc_summary",
+			"type": "text",
+			"instructions": "Tagline under the title. No em-dashes."
+		},
+		{
+			"key": "field_proc_image",
+			"label": "Hero image",
+			"name": "proc_image",
+			"type": "image",
+			"return_format": "id",
+			"preview_size": "medium",
+			"instructions": "Consented image. Placeholder used until supplied."
+		},
+		{
+			"key": "field_proc_parent_service",
+			"label": "Parent service",
+			"name": "proc_parent_service",
+			"type": "post_object",
+			"post_type": ["service"],
+			"return_format": "id",
+			"allow_null": 1,
+			"instructions": "e.g. Minor Surgery (for the breadcrumb link)."
+		},
+		{
+			"key": "field_proc_wa_routing",
+			"label": "WhatsApp routing",
+			"name": "proc_wa_routing",
+			"type": "select",
+			"choices": { "minor_surgery": "Minor-surgery line", "general": "General line" },
+			"default_value": "minor_surgery",
+			"return_format": "value"
+		},
+		{
+			"key": "field_proc_what",
+			"label": "01 · What it is",
+			"name": "proc_what",
+			"type": "wysiwyg",
+			"tabs": "visual",
+			"media_upload": 0
+		},
+		{
+			"key": "field_proc_note",
+			"label": "Why it matters (note box)",
+			"name": "proc_note",
+			"type": "textarea",
+			"rows": 3,
+			"instructions": "Optional honest callout, shown as a highlighted box."
+		},
+		{
+			"key": "field_proc_methods",
+			"label": "02 · Methods",
+			"name": "proc_methods",
+			"type": "repeater",
+			"layout": "block",
+			"button_label": "Add method",
+			"sub_fields": [
+				{ "key": "field_proc_method_name", "label": "Method name", "name": "name", "type": "text" },
+				{ "key": "field_proc_method_body", "label": "Description", "name": "body", "type": "textarea", "rows": 3 }
+			]
+		},
+		{
+			"key": "field_proc_expect",
+			"label": "03 · What to expect",
+			"name": "proc_expect",
+			"type": "repeater",
+			"layout": "block",
+			"button_label": "Add step",
+			"sub_fields": [
+				{ "key": "field_proc_expect_name", "label": "Step", "name": "name", "type": "text" },
+				{ "key": "field_proc_expect_body", "label": "Description", "name": "body", "type": "textarea", "rows": 3 }
+			]
+		},
+		{
+			"key": "field_proc_questions",
+			"label": "04 · Questions worth asking",
+			"name": "proc_questions",
+			"type": "textarea",
+			"rows": 6,
+			"instructions": "One question per line."
+		},
+		{
+			"key": "field_proc_branches",
+			"label": "Offered at branches",
+			"name": "proc_branches",
+			"type": "relationship",
+			"post_type": ["branch"],
+			"filters": ["search"],
+			"return_format": "id"
+		}
+	],
+	"location": [[{ "param": "post_type", "operator": "==", "value": "procedure" }]],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"active": true,
+	"description": "Procedure CPT fields — see docs/14-procedure-pages.md"
+}
