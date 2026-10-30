@@ -1,87 +1,169 @@
-# Handoff for OMP (Oh My Pi)
+# Handoff for OMP — Deploy Poliklinik Walid to a live host
 
-> Comprehensive brief for the OMP agent to apply the WordPress-side work. Read
-> `project-context.md` and `docs/00-project-brief.md` first; this file is the task list.
+> **Status: the build is DONE.** The theme, plugin, templates, CPTs, fields, pages, reviews,
+> schema and Google-reviews integration are all finished and verified in local Docker. Your job
+> now is **deployment**: stand up WordPress on the host, install our code, and wire it up.
+>
+> Read `project-context.md` + `docs/00-project-brief.md` for the "why". This file is the
+> deployment runbook. Deep detail: `docs/DEPLOY.md`, `docs/DEV.md`, `docs/GOOGLE-REVIEWS.md`.
 
 ---
 
-## Context in one paragraph
+## 0. What exists in this repo (the deliverable)
 
-We are building the Poliklinik Walid corporate healthcare website. Strategy, content model,
-design system, and a rendered homepage prototype are DONE and committed to this repo
-(`blackpanthera23/walid-website`). Your job is **Phase 4 onward: stand up WordPress and apply
-the build** on the actual host/local environment, because Kiro Web cannot click inside WordPress
-admin or run a local WP. The repo is the source of truth and the spec.
+Only our code is tracked; WordPress core/db/uploads are created on the host.
 
-## What is already done (do not redo)
+```
+wp-content/themes/walid-child/      ← the theme (navy brand, all templates)
+  ├── style.css, functions.php, theme.json
+  ├── front-page.php                ← homepage (11 sections)
+  ├── archive-service.php / archive-branch.php / archive-doctor.php
+  ├── single-branch.php / single-service.php / single-doctor.php
+  ├── page-governance.php (About) / page-contact.php / page-international.php
+  ├── inc/        helpers.php, seo.php, patterns.php, google-reviews.php
+  ├── acf-json/   4 field groups (auto-register, no manual field setup)
+  └── assets/     css, js, img (placeholders)
+wp-content/plugins/walid-cpts/      ← CPTs: Branch, Service, Doctor, Review + taxonomies
+bin/                                ← provision.sh, set-palette.php, seed-sample-content.php
+docker-compose.yml                  ← reference environment (PHP 8.2 + MariaDB + WP-CLI)
+```
 
-- `/docs/00`–`/docs/12`: full strategy (brief, journey, flow, sitemap, content model, source
-  facts, design system, owner decisions, value prop, proof strategy, pillars/specialists,
-  homepage wireframe + copy).
-- `/prototype/index.html` + `styles.css` + `assets/logo.svg`: the rendered homepage, navy brand,
-  Fraunces + Inter. **This is the visual + build spec.** Reuse its CSS variables verbatim.
-- `.kiro/steering/project-context.md`: auto-loading context for Kiro sessions.
+Verified build target: **WordPress 7.x / PHP 8.2+**. Parent theme **Kadence**. Plugins:
+**Advanced Custom Fields**, **Rank Math** (SEO). No page builder, no multilingual plugin.
 
-## Your tasks (in order)
+---
 
-### Task 1 — Environment
-- [ ] Stand up WordPress. Prefer **local first** (LocalWP or Docker) to iterate safely, then
-      promote to the host. Confirm PHP 8.2+ and current WordPress.
-- [ ] Record access details in `docs/08-owner-decisions.md` (URLs, host, admin owner, backups).
+## 1. Deploy method — choose A (recommended)
 
-### Task 2 — Base theme + plugins
-- [ ] Install **Kadence** parent theme.
-- [ ] Install **ACF** (Advanced Custom Fields).
-- [ ] Install an SEO plugin (**Rank Math** or Yoast). Do NOT install a page builder.
-- [ ] Do NOT install any multilingual plugin yet (English-only launch; stay i18n-ready).
+### Option A — Fresh install on host, enter content there (recommended)
+No database to migrate; real content is entered on the live site via the CMS. Cleanest.
 
-### Task 3 — Child theme + brand tokens
-- [ ] Create child theme `walid-child`.
-- [ ] Map the navy palette into Kadence Global Palette + `theme.json` using the exact values in
-      `docs/07-design-system.md` §2 and §6. Fonts: Fraunces (headings), Inter (body), with
-      system fallbacks. Keep font loading non-render-blocking.
-- [ ] Port the CSS variables from `prototype/styles.css` `:root` into the child theme so the
-      look matches the prototype 1:1.
+**Steps:**
+1. **Host prep**: PHP 8.2+, MySQL/MariaDB, HTTPS (Let's Encrypt). Point the domain. Confirm SSL
+   BEFORE launch (healthcare site).
+2. **Install WordPress** (host one-click or manual). Strong admin password; enable login limiting.
+3. **Install + activate the parent theme and plugins** (WP-CLI shown; admin UI works too):
+   ```bash
+   wp theme install kadence
+   wp plugin install advanced-custom-fields --activate
+   wp plugin install seo-by-rank-math --activate
+   ```
+4. **Upload our code** (SFTP / git / host file manager):
+   - `wp-content/themes/walid-child/`   (includes `acf-json/` → fields auto-register)
+   - `wp-content/plugins/walid-cpts/`
+5. **Activate ours**:
+   ```bash
+   wp theme activate walid-child
+   wp plugin activate walid-cpts
+   ```
+6. **Set the brand palette** (so Kadence renders navy). Upload `bin/set-palette.php`, then:
+   ```bash
+   wp eval-file set-palette.php
+   ```
+   (Or set the 9 Kadence Global Palette swatches by hand to the values in
+   `docs/07-design-system.md` §6: navy #232B8F, green #1E8E66, gold #C9A227, etc.)
+7. **Static homepage**: create a page titled "Home", then
+   `wp option update show_on_front page` and `wp option update page_on_front <home_page_id>`
+   (or Settings → Reading). `front-page.php` renders automatically on the front page.
+8. **Permalinks = Post name**: `wp rewrite structure '/%postname%/' --hard && wp rewrite flush --hard`
+   (gives `/services/...`, `/branches/...`, `/doctors/...`).
+9. **Create the key pages** (template is chosen via each page's Template attribute, or set
+   `_wp_page_template` meta):
+   | Page title | Slug | Template |
+   |---|---|---|
+   | About | `about` | `page-governance.php` |
+   | Contact | `contact` | `page-contact.php` |
+   | International Patients | `international-patients` | `page-international.php` |
+10. **Primary menu**: create a menu `Primary` with Home · Services · Branches · Doctors · About ·
+    International · Contact and assign it to Kadence's primary location. (Services/Branches/Doctors
+    point to the CPT archive URLs `/services/`, `/branches/`, `/doctors/`.)
 
-### Task 4 — Custom post types + fields (from docs/05 + docs/11)
-- [ ] Register CPTs: **Branch**, **Service**, **Doctor**, **Review**.
-- [ ] Taxonomies: Branch **Region** (Central / North / Other) + a "provides minor surgery"
-      toggle; Service **Pillar** (Minor Surgery / Aesthetics / Antenatal / Pillar-4-TBD /
-      General) + pillar-weight.
-- [ ] Relationships: Service ↔ lead Doctor (Dr Anis → Antenatal); Service ↔ Branches; Doctor ↔ Branches.
-- [ ] Keep content in fields (not hardcoded) so it stays translatable later.
+> A scripted version of steps 3–8 exists in `bin/provision.sh` (written for the Docker wpcli
+> container; adapt paths/`--allow-root` for the host).
 
-### Task 5 — Homepage + templates
-- [ ] Rebuild the `/prototype` homepage as Gutenberg patterns, section for section
-      (see `docs/12-homepage-wireframe.md`). Minor surgery must stay visually dominant.
-- [ ] Build Branch / Service / Doctor single templates that pull from the CPTs.
-- [ ] Wire the two WhatsApp numbers; floating WhatsApp button on every page; minor-surgery pages
-      route to the minor-surgery line.
+### Option B — Migrate the local DB (only if real content was entered locally)
+See `docs/DEPLOY.md` §"Option B". Involves `wp db export/import`, uploads tarball, and a careful
+`wp search-replace 'http://localhost:8080' 'https://DOMAIN' --precise --recount`. Prefer A.
 
-### Task 6 — Content + SEO + launch prep
-- [ ] Load the 10 branches, services, doctors, and curated reviews (pending owner data/permissions).
-- [ ] Branch pages optimised for local search (they are the SEO engine). Set up Google Business Profile links.
-- [ ] Every social icon links (TikTok, FB, IG, YouTube, Google). No empty hrefs.
-- [ ] Performance pass (lazy-load social embeds), accessibility pass (WCAG AA, focus states, alt text).
+---
 
-## Hard rules (do not break)
+## 2. Enter content (CMS — owner/consultant supplies the data)
 
-- WhatsApp-only conversion. No forms, no booking engine.
-- English-only content at launch. No translation plugins.
+All content is entered via wp-admin forms (that is the CMS payoff). Nothing is hardcoded.
+
+- **Branches** (×10): title, address, opening hours, phone, WhatsApp, region (Central / North /
+  Other), "provides minor surgery" toggle, photos, Google Place ID (for live reviews), map.
+  - Minor-surgery branches: Ampang (Central, flagship); Jalan Baru/Seberang Perai, Tasek Gelugor,
+    Sungai Petani (North). Others (Kuala Kangsar, Parit Buntar, …) = general practice.
+- **Services**: assign Pillar (Minor Surgery / Aesthetics / Antenatal & Women's Health / General
+  Medicine), pillar-weight, short description, procedures (one per line → drives the "show more"
+  list), WhatsApp routing, lead specialist, offered-at branches.
+- **Doctors**: name, role/credential, qualifications, photo, bio, branches, lead-specialist-for.
+- **Reviews** (optional/curated): quote, author, rating, source, **permission toggle ON** before
+  it ever shows. (Live Google reviews are the other path, see §3.)
+
+> There is a **local-only** sample seeder (`bin/seed-sample-content.php`) that creates placeholder
+> branches/services/doctors/reviews for preview. **Do NOT run it on production** — it is for the
+> local Docker preview only. Enter real content on the host.
+
+---
+
+## 3. Live Google reviews (optional, needs owner key) — see docs/GOOGLE-REVIEWS.md
+
+1. Owner creates a Google Cloud API key with **Places API (New)** enabled (+ billing on).
+2. Add to `wp-config.php`: `define( 'WALID_GOOGLE_PLACES_KEY', 'the-key' );`
+3. Put each branch's **Place ID** in the branch's "Google Place ID" field.
+Result: branch pages show the live rating + up to 5 reviews (cached 12h), else fall back to
+curated CPT reviews, else a "Read reviews on Google" link. Cost is tiny due to caching.
+
+---
+
+## 4. Pre-launch checklist (verify on the host)
+
+- [ ] HTTPS active; http→https redirect.
+- [ ] Static homepage set; permalinks = Post name; `/branches/...` resolve; no 404s in nav.
+- [ ] `walid-child` active, `walid-cpts` active, ACF + Rank Math active. No page builder.
+- [ ] Kadence palette = navy/green/gold; Fraunces + Inter load.
+- [ ] CPTs visible in admin; ACF fields show on each; relationships save (e.g. Service → lead Doctor).
+- [ ] Floating WhatsApp on every page; both numbers correct and routing right
+      (general 014-252 1684 · minor-surgery 017-549 7593).
+- [ ] Every social icon links (TikTok/FB/IG/Google). No empty hrefs.
+- [ ] Reviews render ONLY where permission is ON (or via a valid Google Place ID).
+- [ ] No content behind `[confirm]` / `[TBD]` / `[permission pending]` is published.
+- [ ] Branch JSON-LD validates (Rich Results Test). Rank Math titles/meta/sitemap set; submit
+      sitemap to Google Search Console.
+- [ ] Official logo swapped at `wp-content/themes/walid-child/assets/logo.svg` (currently a
+      faithful recreation).
+- [ ] Lighthouse + accessibility spot check (focus states, alt text, one h1, color contrast).
+- [ ] Backups scheduled (UpdraftPlus or host); auto-updates plan agreed.
+- [ ] Google Business Profile linked per branch; NAP consistent with branch pages.
+
+---
+
+## 5. Hard rules (do not break — from the brief)
+
+- WhatsApp-only conversion. No forms/booking engine.
+- English-only content at launch. No translation plugins (architecture is i18n-ready).
 - Copy: **no em-dashes**; avoid "not a..., not a...".
 - Do NOT reintroduce: care-path motif, emergency bar, 3-step process, pervasive disclaimers.
-  Compliance lives in the footer + one "About/Governance" page.
-- Navy `#232B8F` brand, gold `#C9A227` accent, green `#1E8E66` CTAs. Do not revert to teal.
-- Nothing fake published: respect every `[confirm]` / `[TBD]` / `[permission pending]` flag.
+  Compliance lives in the footer + the About/Governance page only.
+- Navy `#232B8F` brand, gold `#C9A227`, green `#1E8E66` CTAs. Do not revert to teal.
+- All custom code stays in `walid-child` + `walid-cpts`. Never edit the Kadence parent.
+- Nothing fake published: honor every `[confirm]` / `[TBD]` / `[permission pending]` flag.
 
-## When you finish a task
+---
 
-- Commit with a clear message; update the "Where we are" list in
-  `.kiro/steering/project-context.md`, the status table in `README.md`, and the progress table
-  in `project-context.md`. Push. That keeps every agent in sync.
+## 6. Owner-blocked items (collect before/at launch — see docs/08-owner-decisions.md)
 
-## Open items blocking full completion (owner)
+Official logo file + exact hex · Dr Anis exact credential · the 4th pillar · aesthetics launch
+scope · named-review permissions + source URLs · full 10-branch dataset (addresses/hours/phones/
+Place IDs) · confirm current social follower counts · real TikTok/IG proof-wall video URLs ·
+(optional) Google Places API key.
 
-Official logo file + exact hex · Dr Anis credential · 4th pillar · aesthetics launch scope ·
-named-review permissions · full 10-branch dataset · confirm current social counts.
-See `docs/08-owner-decisions.md`.
+---
+
+## 7. When done
+
+Update the status trackers and push: the "Where we are" block in
+`.kiro/steering/project-context.md`, the table in `README.md`, and the progress table in
+`project-context.md`. Record host/access details (not secrets) in `docs/08-owner-decisions.md`.
