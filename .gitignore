@@ -20,6 +20,10 @@ build/
 _salvage/
 *.tmp
 
+# Local backups (G1 rename-not-delete convention: <name>.bak.<stamp>)
+*.bak
+*.bak.*
+
 # WordPress — keep ONLY our code (walid-child theme + walid-cpts plugin).
 # Core, other themes/plugins, and uploads live in Docker volumes, not git.
 wp-content/uploads/

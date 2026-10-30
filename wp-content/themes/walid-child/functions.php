@@ -2,7 +2,7 @@
 /**
  * Walid Child theme bootstrap.
  *
- * Child theme on Kadence. Loads brand tokens (ported from the prototype) + Fraunces/Inter,
+ * Child theme on Astra. Loads brand tokens (ported from the prototype) + Fraunces/Inter,
  * registers the WhatsApp config, and wires custom templates/patterns (added in later tasks).
  *
  * @package walid
@@ -38,9 +38,9 @@ function walid_enqueue_assets() {
 	$theme   = wp_get_theme();
 	$version = $theme->get( 'Version' );
 
-	// Parent (Kadence) stylesheet.
+	// Parent (Astra) stylesheet.
 	wp_enqueue_style(
-		'kadence-parent',
+		'astra-parent',
 		get_template_directory_uri() . '/style.css',
 		array(),
 		$theme->parent() ? $theme->parent()->get( 'Version' ) : $version
@@ -58,7 +58,7 @@ function walid_enqueue_assets() {
 	wp_enqueue_style(
 		'walid-brand',
 		get_stylesheet_directory_uri() . '/assets/css/brand.css',
-		array( 'kadence-parent', 'walid-fonts' ),
+		array( 'astra-parent', 'walid-fonts' ),
 		$version
 	);
 

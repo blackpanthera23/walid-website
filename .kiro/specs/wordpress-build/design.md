@@ -5,7 +5,7 @@
 
 ## Overview
 
-We build on the Option C hybrid: **Kadence** parent theme + native **Gutenberg**, with a
+We build on the Option C hybrid: **Astra** parent theme + native **Gutenberg**, with a
 **`walid-child`** child theme holding the custom code (CPTs, fields, templates, CSS). The local
 environment is **Docker Compose** (WordPress + MariaDB + WP-CLI), so the stack is identical for
 every contributor and can be verified by actually booting it. Provisioning (plugins, theme
@@ -18,7 +18,7 @@ Docker Compose
 └── wp-cli (one-shot/console)      → provisioning + checks
         │
         └── wp-content/
-            ├── themes/kadence            (parent, installed via WP-CLI)
+            ├── themes/astra            (parent, installed via WP-CLI)
             ├── themes/walid-child        (OUR CODE — committed to repo)
             └── plugins/walid-cpts        (optional MU/plugin for CPTs, committed)
 ```
@@ -41,7 +41,7 @@ GUI-only. It also gives OMP the exact same environment.
 
 A scripted sequence (WP-CLI), runnable repeatably:
 1. Core install (title, admin user, URL) if not installed.
-2. `wp theme install kadence --activate` then activate `walid-child`.
+2. `wp theme install astra --activate` then activate `walid-child`.
 3. `wp plugin install advanced-custom-fields --activate`.
 4. `wp plugin install seo-by-rank-math --activate` (or Yoast).
 5. Explicitly do NOT install page builders or multilingual plugins.
@@ -115,4 +115,4 @@ JSON = reproducible fields without manual admin setup.
 - Agent cannot click in WP admin GUI → everything provisioned via WP-CLI + committed code/JSON.
 - Owner-blocked content (logo, branch data, review permissions, Dr Anis credential, 4th pillar)
   is built with safe placeholders behind flags; nothing fake is published.
-- Keep Kadence as parent; all edits in `walid-child` so parent updates don't clobber work.
+- Keep Astra as parent; all edits in `walid-child` so parent updates don't clobber work.

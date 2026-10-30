@@ -12,8 +12,8 @@
 - WordPress / PHP versions: `[PENDING]`
 
 ## Build approach (decided)
-- Theme: **Kadence** (free parent) `[CONFIRMED]`
-- Editor: **Gutenberg** + Kadence Blocks (where core is insufficient) `[CONFIRMED]`
+- Theme: **Astra** (free parent) `[CONFIRMED]`
+- Editor: **Gutenberg** + Spectra blocks (where core is insufficient) `[CONFIRMED]`
 - **Child theme:** yes — for CPT registration + custom CSS/templates `[CONFIRMED]`
 - Page builder (Elementor/Divi): **NOT USED** `[CONFIRMED]`
 - Custom fields: **ACF** `[CONFIRMED]`

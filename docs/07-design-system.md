@@ -99,12 +99,12 @@ or counters. Respect `prefers-reduced-motion`.
 
 ---
 
-## 6. WordPress / Kadence fit
-- Map every token above into **Kadence Global Palette** + `theme.json` (CSS variables map 1:1).
+## 6. WordPress / Astra fit
+- Map every token above into **Astra Global Palette** + `theme.json` (CSS variables map 1:1).
 - Sections become **Gutenberg patterns**; no page-builder runtime dependency.
 - Vanilla CSS variables in the child theme so the palette is swappable in one place.
 
-### Kadence Global Palette mapping (navy-anchored)
+### Astra global palette mapping (navy-anchored)
 ```
 Palette 1  Brand navy      #232B8F
 Palette 2  Action green    #1E8E66

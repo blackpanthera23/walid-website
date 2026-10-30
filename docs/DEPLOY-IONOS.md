@@ -59,7 +59,7 @@ public sees. Do it safely:
 1. IONOS panel → open the Managed WordPress site for `poliklinikdrwalid.com`; note its wp-admin URL.
 2. Log into wp-admin. Set a strong admin password + enable login limiting.
 3. Confirm **PHP 8.2+** in the IONOS panel (Hosting → PHP settings).
-4. **Appearance → Themes → Add** install **Kadence**; **Plugins → Add** install + activate
+4. **Appearance → Themes → Add** install **Astra**; **Plugins → Add** install + activate
    **Advanced Custom Fields** and **Rank Math** (SEO). Do NOT add a page builder or multilingual plugin.
 5. Upload our code via SFTP (see §C) and activate: theme **Walid Child**, plugin **Walid CPTs**.
 6. Continue at §D (configure).
@@ -69,7 +69,7 @@ public sees. Do it safely:
    manually: create the MySQL DB (§A.4), download WordPress, upload via SFTP, run the installer
    pointing at the IONOS DB host/name/user/password.
 2. Finish the WordPress 5-minute install (site title, admin user/password, admin email).
-3. Log into wp-admin; install **Kadence** + **ACF** + **Rank Math** (Appearance/Plugins).
+3. Log into wp-admin; install **Astra** + **ACF** + **Rank Math** (Appearance/Plugins).
 4. Upload our code (§C), activate theme + plugin.
 5. Continue at §D.
 
@@ -109,9 +109,9 @@ cd <webroot>/wp-content/themes && git clone <repo> _walid && \
 
 Do these in wp-admin (and WP-CLI if SSH is available):
 
-1. **Brand palette** — set Kadence Global Palette to navy. With SSH:
+1. **Brand palette** — set Astra Global Palette to navy. With SSH:
    `wp eval-file set-palette.php` (upload `bin/set-palette.php` first). Without SSH: Appearance →
-   Customize → Kadence Global Palette, set the 9 swatches per `docs/07-design-system.md` §6
+   Customize → Astra Global Palette, set the 9 swatches per `docs/07-design-system.md` §6
    (navy #232B8F, green #1E8E66, gold #C9A227, etc.).
 2. **Static homepage** — Settings → Reading → "A static page" → create/select page "Home".
    `front-page.php` renders automatically.
@@ -123,7 +123,7 @@ Do these in wp-admin (and WP-CLI if SSH is available):
    | Contact | contact | Contact |
    | International Patients | international-patients | International Patients |
 5. **Primary menu** — Appearance → Menus → create `Primary` with Home · Services · Branches ·
-   Doctors · About · International · Contact → assign to Kadence's primary location.
+   Doctors · About · International · Contact → assign to Astra's primary location.
 6. **Google reviews key** (optional) — add to `wp-config.php` via SFTP:
    `define( 'WALID_GOOGLE_PLACES_KEY', '...' );` then set each branch's Place ID. See
    `docs/GOOGLE-REVIEWS.md`.

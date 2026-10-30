@@ -24,7 +24,7 @@ across a 10-branch network. Replaces the placeholder at `poliklinikdrwalid.com`.
 - **Copy rules:** NO em-dashes. Avoid the "not a..., not a..." construction.
 - **REMOVED (do not reintroduce):** care-path motif, emergency bar, 3-step process, pervasive
   medical disclaimers. Compliance lives in the footer + one "About/Governance" page only.
-- **Build stack:** WordPress + **Kadence** parent theme + **Gutenberg** blocks + a **child theme**
+- **Build stack:** WordPress + **Astra** parent theme + **Gutenberg** blocks + a **child theme**
   (custom CPTs/CSS/templates) + **ACF**. NO page builder (Elementor/Divi).
 
 ## Content model (CPTs — see docs/05)
@@ -44,7 +44,7 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
 - ✅ Strategy docs `docs/00`–`docs/12` + homepage wireframe (approved).
 - ✅ Prototypes: `/prototype` (Concept A) + `/prototype-v2` (Concept B, calm/airy).
 - ✅ WordPress build COMPLETE + verified locally via Docker (`docs/DEV.md`). `walid-child` theme +
-  navy `theme.json`/Kadence palette; CPT plugin `walid-cpts` (Branch/Service/Doctor/Review) +
+  navy `theme.json`/Astra palette; CPT plugin `walid-cpts` (Branch/Service/Doctor/Review) +
   Region/Pillar taxonomies + ACF local-JSON; `front-page.php` (all homepage sections, CPT-driven
   with draft fallback) + `single-branch/service/doctor.php` + archives; About/Governance,
   International Patients, Contact pages; primary nav; context-routed WhatsApp + brand footer;
@@ -76,7 +76,7 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
 - To see it: `docker compose up -d` then open http://localhost:8080.
 
 ## Ground truth / gotchas
-- The `/prototype` is the visual + build SPEC. CSS variables map 1:1 to the Kadence Global Palette.
+- The `/prototype` is the visual + build SPEC. CSS variables map 1:1 to the Astra Global Palette.
 - Logo: `/prototype/assets/logo.svg` is a faithful recreation. Swap for the official file when supplied.
 - A prior build left EMPTY social `href`s — every social icon MUST link. Don't repeat.
 - Reg number confirmed **1466692-A** (ops repo wrongly had 1476692-A).

@@ -28,8 +28,16 @@ bin/                                ← provision.sh, set-palette.php, seed-samp
 docker-compose.yml                  ← reference environment (PHP 8.2 + MariaDB + WP-CLI)
 ```
 
-Verified build target: **WordPress 7.x / PHP 8.2+**. Parent theme **Kadence**. Plugins:
+Verified build target: **WordPress 7.x / PHP 8.2+**. Parent theme **Astra**. Plugins:
 **Advanced Custom Fields**, **Rank Math** (SEO). No page builder, no multilingual plugin.
+
+> **Theme note (31 Oct 2026).** The child theme was authored against **Kadence** but the live site
+> runs **Astra** (+ Spectra blocks). The theme had zero `kadence_*` API calls — the only coupling
+> was the `Template:` header and one enqueue handle — so it was ported to Astra:
+> `style.css` → `Template: astra`, `functions.php` → `astra-parent` handle, `bin/set-palette.php`
+> now writes `astra-settings[global-color-palette]` (+ Spectra), `bin/provision.sh` installs
+> `astra`. `get_template_directory_uri()` resolves the parent automatically, so no Kadence install
+> is required. Do **not** reintroduce a Kadence dependency.
 
 ---
 
@@ -44,7 +52,7 @@ No database to migrate; real content is entered on the live site via the CMS. Cl
 2. **Install WordPress** (host one-click or manual). Strong admin password; enable login limiting.
 3. **Install + activate the parent theme and plugins** (WP-CLI shown; admin UI works too):
    ```bash
-   wp theme install kadence
+   wp theme install astra
    wp plugin install advanced-custom-fields --activate
    wp plugin install seo-by-rank-math --activate
    ```
@@ -56,11 +64,11 @@ No database to migrate; real content is entered on the live site via the CMS. Cl
    wp theme activate walid-child
    wp plugin activate walid-cpts
    ```
-6. **Set the brand palette** (so Kadence renders navy). Upload `bin/set-palette.php`, then:
+6. **Set the brand palette** (so Astra renders navy). Upload `bin/set-palette.php`, then:
    ```bash
    wp eval-file set-palette.php
    ```
-   (Or set the 9 Kadence Global Palette swatches by hand to the values in
+   (Or set the 9 Astra Global Palette swatches by hand to the values in
    `docs/07-design-system.md` §6: navy #232B8F, green #1E8E66, gold #C9A227, etc.)
 7. **Static homepage**: create a page titled "Home", then
    `wp option update show_on_front page` and `wp option update page_on_front <home_page_id>`
@@ -75,7 +83,7 @@ No database to migrate; real content is entered on the live site via the CMS. Cl
    | Contact | `contact` | `page-contact.php` |
    | International Patients | `international-patients` | `page-international.php` |
 10. **Primary menu**: create a menu `Primary` with Home · Services · Branches · Doctors · About ·
-    International · Contact and assign it to Kadence's primary location. (Services/Branches/Doctors
+    International · Contact and assign it to Astra's primary location. (Services/Branches/Doctors
     point to the CPT archive URLs `/services/`, `/branches/`, `/doctors/`.)
 
 > A scripted version of steps 3–8 exists in `bin/provision.sh` (written for the Docker wpcli
@@ -131,7 +139,7 @@ curated CPT reviews, else a "Read reviews on Google" link. Cost is tiny due to c
 - [ ] HTTPS active; http→https redirect.
 - [ ] Static homepage set; permalinks = Post name; `/branches/...` resolve; no 404s in nav.
 - [ ] `walid-child` active, `walid-cpts` active, ACF + Rank Math active. No page builder.
-- [ ] Kadence palette = navy/green/gold; Fraunces + Inter load.
+- [ ] Astra palette = navy/green/gold; Fraunces + Inter load.
 - [ ] CPTs visible in admin; ACF fields show on each; relationships save (e.g. Service → lead Doctor).
 - [ ] Floating WhatsApp on every page; both numbers correct and routing right
       (general 014-252 1684 · minor-surgery 017-549 7593).
@@ -156,7 +164,7 @@ curated CPT reviews, else a "Read reviews on Google" link. Cost is tiny due to c
 - Do NOT reintroduce: care-path motif, emergency bar, 3-step process, pervasive disclaimers.
   Compliance lives in the footer + the About/Governance page only.
 - Navy `#232B8F` brand, gold `#C9A227`, green `#1E8E66` CTAs. Do not revert to teal.
-- All custom code stays in `walid-child` + `walid-cpts`. Never edit the Kadence parent.
+- All custom code stays in `walid-child` + `walid-cpts`. Never edit the Astra parent.
 - Nothing fake published: honor every `[confirm]` / `[TBD]` / `[permission pending]` flag.
 
 ---

@@ -139,7 +139,7 @@ Section label (draft): "Also expert in." Three cards, smaller weight:
 
 ---
 
-## Build notes (WordPress / Kadence)
+## Build notes (WordPress / Astra)
 - Each section becomes a **Gutenberg pattern** so staff can reorder/edit.
 - Pillars, specialist spotlight, branches, reviews pull from CPTs (see `05-content-model.md`),
   so content updates do not require touching layout.

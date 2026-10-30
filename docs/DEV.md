@@ -15,7 +15,7 @@ docker compose up -d        # boots wordpress + db
 Site: http://localhost:8080 (or your `WP_PORT`).
 
 ## Provision (first run)
-Installs WordPress core, the Kadence parent theme, ACF, and Rank Math; activates our child theme
+Installs WordPress core, the Astra parent theme, ACF, and Rank Math; activates our child theme
 and CPT plugin. Safe to re-run.
 ```bash
 docker compose run --rm wpcli bash /scripts/provision.sh

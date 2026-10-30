@@ -104,7 +104,7 @@ Build English-only, but keep the door open so languages add later with no rebuil
 - **ACF (Advanced Custom Fields)** — the custom fields above.
 - **CPT UI** or register CPTs in the child theme's `functions.php`.
 - **Rank Math** / Yoast — SEO (branch pages = local search engine).
-- **Astra / Kadence / GeneratePress** — lightweight corporate base theme + child theme.
+- **Astra / GeneratePress** — lightweight corporate base theme + child theme.
 
 ## Open questions
 1. Show a **Review** CPT (quotes), or just the headline stat from site options?

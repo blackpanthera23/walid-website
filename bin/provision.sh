@@ -34,8 +34,8 @@ else
   echo "==> WordPress already installed, skipping core install."
 fi
 
-echo "==> Installing Kadence parent theme..."
-wp theme install kadence --allow-root || echo "   (kadence install skipped/failed — check network)"
+echo "==> Installing Astra parent theme..."
+wp theme install astra --allow-root || echo "   (astra install skipped/failed — check network)"
 
 echo "==> Activating walid-child child theme..."
 wp theme activate walid-child --allow-root || echo "   (walid-child not ready yet — activate after task 3)"
@@ -49,7 +49,7 @@ wp plugin install seo-by-rank-math --activate --allow-root || echo "   (Rank Mat
 echo "==> Activating walid-cpts plugin..."
 wp plugin activate walid-cpts --allow-root || echo "   (walid-cpts not ready yet — activate after task 5)"
 
-echo "==> Setting the Kadence global palette to the Walid navy brand..."
+echo "==> Setting the Astra global palette to the Walid navy brand..."
 wp eval-file /scripts/set-palette.php --allow-root || echo "   (palette set skipped/failed)"
 
 echo "==> NOT installing page builders or multilingual plugins (by design)."

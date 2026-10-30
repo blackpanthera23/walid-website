@@ -8,7 +8,7 @@
 
 Phases 1–3 (strategy, wireframe, rendered prototype) are complete and committed. This spec
 covers turning that into a working, locally-runnable WordPress site: a reproducible environment,
-a child theme on Kadence, the custom post types and fields, and the homepage + singular
+a child theme on Astra, the custom post types and fields, and the homepage + singular
 templates rebuilt from the prototype. Conversion is WhatsApp-only; content is English-only at
 launch but architected to add languages later.
 
@@ -32,7 +32,7 @@ environment in the repo, so that anyone can boot the identical stack and verify 
 corporate site loads fast and stays maintainable.
 
 ### Acceptance criteria
-1. The Kadence parent theme SHALL be installed and the `walid-child` child theme active.
+1. The Astra parent theme SHALL be installed and the `walid-child` child theme active.
 2. ACF SHALL be installed for custom fields.
 3. An SEO plugin (Rank Math or Yoast) SHALL be installed.
 4. NO page builder (Elementor/Divi) and NO multilingual plugin SHALL be installed at launch.
@@ -44,7 +44,7 @@ corporate site loads fast and stays maintainable.
 
 ### Acceptance criteria
 1. The navy palette (`#232B8F`), gold accent (`#C9A227`), green CTA (`#1E8E66`), WhatsApp green
-   (`#25D366`) SHALL be mapped into `theme.json` / the Kadence Global Palette.
+   (`#25D366`) SHALL be mapped into `theme.json` / the Astra Global Palette.
 2. Fraunces (headings) + Inter (body) SHALL load with system fallbacks, non-render-blocking.
 3. The CSS variables from `prototype/styles.css` `:root` SHALL be ported into the child theme so
    the rendered look matches the prototype 1:1.

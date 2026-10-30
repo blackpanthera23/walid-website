@@ -23,8 +23,8 @@ to a single WhatsApp tap.
 | Layer | Choice |
 |---|---|
 | CMS | WordPress (self-hosted) |
-| Parent theme | **Kadence** (free) |
-| Editor | Native **Gutenberg** + Kadence Blocks (only where core is insufficient) |
+| Parent theme | **Astra** (free) |
+| Editor | Native **Gutenberg** + core blocks + Spectra (only where core is insufficient) |
 | Custom code | **Child theme** (CPT registration, custom CSS, page templates) |
 | Custom fields | **ACF** (Advanced Custom Fields) |
 | Page builder | **None** (no Elementor/Divi) |
@@ -55,10 +55,11 @@ to a single WhatsApp tap.
 | 1. Strategy docs | ✅ | `docs/00`–`docs/11` |
 | 2. Homepage wireframe + copy | ✅ | `docs/12`, approved by owner |
 | 3. Rendered prototype | ✅ | `/prototype/index.html` + `styles.css`, navy, branded logo |
-| 4. Stand up WordPress | ✅ | Docker (`docker-compose.yml`); Kadence + ACF + Rank Math; verified |
+| 4. Stand up WordPress | ✅ | Docker (`docker-compose.yml`); Astra + ACF + Rank Math; verified |
 | 5. Child theme + CPTs | ✅ | theme + navy palette; `walid-cpts` + ACF fields (acf-json/) |
 | 6. Templates | ✅ | `front-page.php` + Branch/Service/Doctor singles; WA + footer |
 | 7. Content, SEO, launch | 🔄 | schema/a11y/perf DONE in code; awaiting owner content + host |
+| 8. Port theme Kadence→Astra | ✅ | 31 Oct 2026: `Template: astra`, Astra palette script, docs cleaned |
 
 **Local dev:** WordPress runs via Docker — see `docs/DEV.md`. The spec at
 `.kiro/specs/wordpress-build/` (requirements → design → tasks) drove the build; all 10 tasks done
@@ -80,9 +81,13 @@ Full `/docs` index is in `README.md`.
 
 **Phase 4 — stand up WordPress.** Recommended path:
 1. Local dev first (LocalWP or Docker) to iterate safely before touching the live host.
-2. Install **Kadence** parent theme + **ACF**.
+2. Install **Astra** parent theme + **ACF**.
 3. Create a **child theme** (`walid-child`). Map the navy palette into `theme.json` /
-   Kadence Global Palette using the values in `docs/07-design-system.md`.
+   Astra Global Palette using the values in `docs/07-design-system.md`.
+
+> **Status (31 Oct 2026): phases 1–6 are done and phase 4/5 are live on IONOS.** This block is
+> kept as the original plan of record. What remains is **deployment + owner content**, not code —
+> see `HANDOFF-OMP.md` §1 and `docs/DEPLOY-IONOS.md`.
 4. Register CPTs (Branch, Service, Doctor, Review) + ACF field groups per `docs/05-content-model.md`.
 5. Rebuild the `/prototype` homepage as Gutenberg patterns; wire pillars/branches/specialist/
    reviews to the CPTs.

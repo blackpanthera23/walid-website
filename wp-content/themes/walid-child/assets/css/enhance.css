@@ -51,7 +51,7 @@
 .walid-home .tag, .walid-single .tag { transition: background-color .16s ease, color .16s ease, transform .16s ease; text-decoration: none; }
 .walid-home a.tag:hover, .walid-single .tag:hover { background: var(--brand-700); color: #fff; transform: translateY(-1px); }
 
-/* Sticky header subtle shadow on scroll (Kadence handles sticky; we add depth) */
+/* Sticky header subtle shadow on scroll (parent theme handles sticky; we add depth) */
 .walid-eyebrow, .walid-home .eyebrow, .walid-archive .eyebrow { position: relative; }
 
 /* Links: animated underline for in-content links */

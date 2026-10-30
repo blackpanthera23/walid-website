@@ -32,7 +32,7 @@
 	--shadow: 0 10px 30px rgba(22, 27, 94, 0.08);
 }
 
-/* Base typographic alignment with the prototype. Kadence handles layout chrome; these keep the
+/* Base typographic alignment with the prototype. The parent theme handles layout chrome; these keep the
    brand voice consistent across custom templates/patterns. */
 body {
 	font-family: var(--sans);

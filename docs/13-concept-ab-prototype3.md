@@ -27,7 +27,7 @@ Concept B looks better (premium-accessible reads as calm + spacious). Concept A 
 
 Navy `#232B8F`, deep navy `#161B5E`, gold `#C9A227`, action green `#1E8E66`, WhatsApp `#25D366`,
 canvas `#F8F9FC`. Fraunces (headings) + Inter (body). Reuse the CSS variables from
-`prototype/styles.css` `:root` and the theme's `brand.css` so it maps 1:1 to Kadence later.
+`prototype/styles.css` `:root` and the theme's `brand.css` so it maps 1:1 to Astra later.
 Real logo: `prototype-v2/assets/logo.svg` (copy into `prototype-v3/assets/`).
 
 ## 3. Section stack (top to bottom)

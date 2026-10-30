@@ -12,14 +12,14 @@
   - _Requirements: 1.1, 1.2, 1.3, 1.4_
 
 - [x] 2. Provision base theme + plugins (scripted)
-  - Add `bin/provision.sh` using WP-CLI: core install, `kadence` install+activate, activate
+  - Add `bin/provision.sh` using WP-CLI: core install, `astra` install+activate, activate
     `walid-child`, install+activate ACF, install+activate Rank Math.
   - Explicitly skip page builders and multilingual plugins.
-  - Verify: `wp theme list` shows kadence + walid-child; `wp plugin list` shows ACF + Rank Math.
+  - Verify: `wp theme list` shows astra + walid-child; `wp plugin list` shows ACF + Rank Math.
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
 - [x] 3. Scaffold `walid-child` child theme
-  - Create `style.css` header (Template: kadence), `functions.php`, `theme.json`, `screenshot`.
+  - Create `style.css` header (Template: astra), `functions.php`, `theme.json`, `screenshot`.
   - Enqueue child stylesheet; set up text domain `walid`.
   - Verify: theme activates with no errors; a test page renders.
   - _Requirements: 2.1, 3.3_

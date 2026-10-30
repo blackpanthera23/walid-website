@@ -77,7 +77,7 @@ whole update.
   wp-admin go Settings → Permalinks → Save (flushes rewrite rules so new URLs resolve).
 - **New procedure/branch/doctor page:** that is CONTENT → just add it in wp-admin. No deploy.
 - **Swap the logo:** replace `walid-child/assets/logo.jpg` (same filename) via SFTP. Done.
-- **Update a plugin (Kadence/ACF/Rank Math):** normal wp-admin → Plugins → Update. Our code does
+- **Update a plugin (Astra/ACF/Rank Math):** normal wp-admin → Plugins → Update. Our code does
   not change.
 
 ---

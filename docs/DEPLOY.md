@@ -16,7 +16,7 @@ database are environment-specific and are created fresh on the host.
 | `wp-content/themes/walid-child/` (theme + `acf-json/`) | WordPress core |
 | `wp-content/plugins/walid-cpts/` (content model) | Database |
 | `docs/07-design-system.md` palette values | Uploads / media |
-| `bin/set-palette.php` (Kadence palette) | Kadence, ACF, Rank Math (install on host) |
+| `bin/set-palette.php` (Astra palette) | Astra, ACF, Rank Math (install on host) |
 
 Content (branches, doctors, services, reviews) is entered on the host via the CMS. The sample
 seeder (`bin/seed-sample-content.php`) is for local preview only. Do NOT seed on production.
@@ -32,15 +32,15 @@ Cleanest path. No database migration; real content is entered on the live site.
 2. **Install WordPress** (host one-click or manual). Set a strong admin password; enable login
    limiting.
 3. **Install the parent theme + plugins** from wp-admin or WP-CLI:
-   - Theme: **Kadence**
+   - Theme: **Astra**
    - Plugins: **Advanced Custom Fields**, **Rank Math** (or Yoast)
    - Do NOT install a page builder or a multilingual plugin.
 4. **Upload our code** (SFTP, Git deploy, or host file manager):
    - `wp-content/themes/walid-child/`  (includes `acf-json/` — fields auto-register)
    - `wp-content/plugins/walid-cpts/`
 5. **Activate**: theme `Walid Child`, plugin `Walid CPTs`.
-6. **Set the brand palette** (so Kadence uses navy): run `bin/set-palette.php` via WP-CLI
-   (`wp eval-file set-palette.php`), or set the 9 Kadence Global Palette swatches by hand to the
+6. **Set the brand palette** (so Astra uses navy): run `bin/set-palette.php` via WP-CLI
+   (`wp eval-file set-palette.php`), or set the 9 Astra Global Palette swatches by hand to the
    values in `docs/07-design-system.md` §6.
 7. **Set the static homepage**: Settings → Reading → "A static page" → create/select a page named
    Home (the `front-page.php` template renders automatically for the front page).
@@ -70,7 +70,7 @@ If real content was entered into the local Docker site and you want to move it:
    ```bash
    wp search-replace 'http://localhost:8080' 'https://your-domain.com' --precise --recount
    ```
-4. Install/activate Kadence + ACF + Rank Math, our theme + plugin, set the palette (step 6 above).
+4. Install/activate Astra + ACF + Rank Math, our theme + plugin, set the palette (step 6 above).
 5. Re-save permalinks.
 
 > Prefer Option A unless you have real content locally. Migration carries serialized-data and
@@ -82,7 +82,7 @@ If real content was entered into the local Docker site and you want to move it:
 
 - [ ] HTTPS active; http → https redirect.
 - [ ] Static homepage set; permalinks = Post name; `/branches/...` resolve.
-- [ ] Kadence palette = navy/green/gold; Fraunces + Inter load.
+- [ ] Astra palette = navy/green/gold; Fraunces + Inter load.
 - [ ] CPTs visible in admin; ACF fields show on each; relationships save.
 - [ ] Floating WhatsApp button on every page; both numbers correct and routing right.
 - [ ] Every social icon links (TikTok/FB/IG/Google). No empty hrefs.

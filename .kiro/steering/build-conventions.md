@@ -11,7 +11,7 @@ fileMatchPattern: '**/*.{php,css,js,json,yml,yaml}'
 ## WordPress / PHP
 - Target **PHP 8.2+** and current WordPress. Follow WordPress coding standards (spacing,
   `snake_case` functions, prefixed with `walid_`).
-- All theme code goes in the **`walid-child`** child theme. Never edit the Kadence parent.
+- All theme code goes in the **`walid-child`** child theme. Never edit the Astra parent.
 - Register CPTs/taxonomies/fields in code (child theme or a small MU-plugin), not by clicking
   in admin, so everything is version-controlled and reproducible for OMP.
 - Enqueue assets properly (`wp_enqueue_style/script`), fonts non-render-blocking.
@@ -20,7 +20,7 @@ fileMatchPattern: '**/*.{php,css,js,json,yml,yaml}'
   not translated now).
 
 ## CSS
-- Port the CSS variables from `prototype/styles.css` `:root` verbatim; map them to the Kadence
+- Port the CSS variables from `prototype/styles.css` `:root` verbatim; map them to the Astra
   Global Palette / `theme.json`. Navy `#232B8F`, gold `#C9A227`, green `#1E8E66`, WhatsApp `#25D366`.
 - Mobile-first. Keep the look 1:1 with `/prototype`.
 

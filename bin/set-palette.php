@@ -1,43 +1,56 @@
 <?php
 /**
- * Set the Kadence Global Palette to the Poliklinik Walid navy brand.
+ * Set the Astra global colour palette (and Spectra's block palette) to the Poliklinik Walid
+ * navy brand.
  *
  * Run (reproducible, idempotent):
  *   docker compose run --rm wpcli wp eval-file /scripts/set-palette.php
  *
- * Mapping mirrors docs/07-design-system.md §6. Kadence stores 9 palette slots as
- * `palette[0..8]` plus a second (dark) set it keeps in sync; we set the primary nine.
+ * Mapping mirrors docs/07-design-system.md §6. Astra stores its palette in the `astra-settings`
+ * option under `global-color-palette` (a 1-indexed set of hexes); the block editor also reads
+ * `theme.json` from the child theme, which is already navy-anchored. Spectra keeps its own
+ * `spectra_global_colors` entry when present, so we set it too.
  *
  * @package walid
  */
 
 $colors = array(
-	'#232B8F', // palette1  Brand navy
-	'#1E8E66', // palette2  Action green
-	'#C9A227', // palette3  Gold accent
-	'#1A1D2E', // palette4  Ink
-	'#5B607A', // palette5  Muted
-	'#DDE0EC', // palette6  Rule
-	'#EEF0FB', // palette7  Soft surface
-	'#F8F9FC', // palette8  Canvas off-white
-	'#FFFFFF', // palette9  White
+	1 => '#232B8F', // Brand navy
+	2 => '#1E8E66', // Action green
+	3 => '#C9A227', // Gold accent
+	4 => '#1A1D2E', // Ink
+	5 => '#5B607A', // Muted
+	6 => '#DDE0EC', // Rule
+	7 => '#EEF0FB', // Soft surface
+	8 => '#F8F9FC', // Canvas off-white
+	9 => '#FFFFFF', // White
 );
 
-$palette = array();
-foreach ( $colors as $i => $hex ) {
-	$n           = $i + 1;
-	$palette[] = array(
-		'color' => $hex,
-		'slug'  => 'palette' . $n,
-		'name'  => 'Palette Color ' . $n,
-	);
+/* ---- 1. Astra global colour palette --------------------------------------- */
+$astra                    = get_option( 'astra-settings', array() );
+$astra['global-color-palette'] = array(
+	'palette' => $colors,
+);
+
+// Astra 4.x also carries a "theme" sub-key for the dark/second set; keep it in sync when present.
+if ( isset( $astra['global-color-palette']['theme'] ) ) {
+	$astra['global-color-palette']['theme'] = $colors;
 }
 
-$value = array(
-	'palette'       => $palette,
-	'second-palette' => $palette,
-);
+update_option( 'astra-settings', $astra );
 
-update_option( 'kadence_global_palette', wp_json_encode( $value ) );
+/* ---- 2. Spectra block palette (only if the plugin is active) --------------- */
+if ( defined( 'SPECTRA_VERSION' ) || class_exists( 'UAGB_Loader' ) ) {
+	$spectra_palette = array();
+	foreach ( $colors as $i => $hex ) {
+		$spectra_palette[] = array(
+			'color' => $hex,
+			'slug'  => 'palette' . $i,
+			'name'  => 'Palette Color ' . $i,
+		);
+	}
+	update_option( 'spectra_global_colors', wp_json_encode( $spectra_palette ) );
+	WP_CLI::log( 'Spectra global colours set.' );
+}
 
-WP_CLI::success( 'Kadence global palette set to the Walid navy brand.' );
+WP_CLI::success( 'Astra + Spectra global palette set to the Walid navy brand.' );

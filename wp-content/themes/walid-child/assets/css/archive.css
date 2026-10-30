@@ -117,7 +117,7 @@
 .walid-archive .narrow { max-width: 70ch; margin-left: auto; margin-right: auto; }
 .walid-archive .entry.narrow > * { margin-left: auto; margin-right: auto; }
 
-/* Make sure the custom-template wrapper always centers regardless of Kadence context. */
+/* Make sure the custom-template wrapper always centers regardless of parent theme context. */
 .walid-archive, .walid-single, .walid-home { width: 100%; }
 .walid-archive > .container,
 .walid-single > .container,

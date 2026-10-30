@@ -5,7 +5,7 @@ Corporate healthcare-group website for **Poliklinik Walid** (Walid Healthcare Gr
 pillars in **aesthetics** and **antenatal/women's health**, plus general practice across a
 10-branch network.
 
-> **Direction:** Corporate, English-first, WhatsApp-only conversion, built on WordPress (Kadence
+> **Direction:** Corporate, English-first, WhatsApp-only conversion, built on WordPress (Astra
 > + Gutenberg + a child theme). This repo is the **planning + code source of truth**; manual
 > WordPress steps are applied on the owner's side (e.g. via OMP).
 
@@ -70,7 +70,7 @@ then open `https://blackpanthera23.github.io/walid-website/prototype/`.
 - **Conversion:** WhatsApp only (general + minor-surgery lines). No forms/booking.
 - **Removed:** care-path motif, emergency bar, 3-step section, pervasive disclaimers.
 - **Copy rules:** no em-dashes; avoid "not a..., not a..." construction.
-- **Build:** Kadence + Gutenberg + child theme + ACF. No page builder.
+- **Build:** Astra + Gutenberg + child theme + ACF. No page builder.
 
 ---
 
@@ -108,7 +108,7 @@ then open `https://blackpanthera23.github.io/walid-website/prototype/`.
 
 ## 🛠 Build approach (Option C — hybrid)
 
-Lightweight theme (Kadence) + native block editor for pages + a **child theme** for the custom
+Lightweight theme (Astra) + native block editor for pages + a **child theme** for the custom
 parts (CPTs: Branch / Service / Doctor / Review; custom CSS; page templates). Clinic staff
 maintain content via CMS forms; developer code lives here and is applied on the WordPress side.
 
@@ -117,7 +117,7 @@ maintain content via CMS forms; developer code lives here and is applied on the 
 ## ⏭️ Next step
 
 Build a **rendered HTML/CSS homepage prototype** from `12-homepage-wireframe.md`, using the
-elevated teal design tokens (CSS variables → Kadence). It doubles as the WordPress build spec.
+elevated teal design tokens (CSS variables → Astra). It doubles as the WordPress build spec.
 
 ## 🔖 Open items
 
