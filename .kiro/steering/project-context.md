@@ -57,9 +57,14 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   homepage — align all pages (archives, singles, About/Contact/International) to the AB aesthetic:
   airy whitespace, organic rounded panels + floating accent dots, smooth rounded cards, calmer
   motion, navy+gold. Reuse `/prototype-v3` as the visual reference.
-- 🔄 NEXT: port AB into the live theme — rewrite `front-page.php` + section CSS to the Prototype 3
-  look (keep dynamic CPT content), then restyle archive/single/page templates to match.
-- ⬜ THEN: deploy to host (`HANDOFF-OMP.md`, `DEPLOY.md`); owner content + official logo + launch.
+- ✅ AB PORTED LIVE: `homepage.css` rewritten to the AB/Prototype 3 look (organic hero panel +
+  floating dots, airy whitespace, smooth cards); `front-page.php` hero wrapped in the panel.
+  Archive cards adopted the premium card craft (light + a dark navy FEATURED variant for the
+  hero service), inspired by the "Deep Blue Nights" card MINUS e-commerce (no cart/price/scarcity).
+  Service single has a styled procedures grid + animated donut stat charts.
+- 🔄 NEXT (optional polish): align remaining single/page templates fully to AB (organic panels),
+  then deploy to host (`HANDOFF-OMP.md`, `DEPLOY.md`).
+- ⬜ THEN: owner content (10 branches, doctors, real photos) + official logo + Google key + launch.
 
 ## Build workflow (Kiro IDE)
 - Local WP runs via Docker (`docs/DEV.md`). Spec drives the build:
