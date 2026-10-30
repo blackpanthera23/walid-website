@@ -81,6 +81,10 @@ No database to migrate; real content is entered on the live site via the CMS. Cl
 > A scripted version of steps 3–8 exists in `bin/provision.sh` (written for the Docker wpcli
 > container; adapt paths/`--allow-root` for the host).
 
+> **Host = IONOS.** A step-by-step IONOS runbook (panel specifics: DB host, SFTP/SSH, PHP
+> version, SSL, staging, Managed-WP vs Web-Hosting paths) is in **`docs/DEPLOY-IONOS.md`**.
+> Use that for the actual deploy; the steps below are the host-agnostic version.
+
 ### Option B — Migrate the local DB (only if real content was entered locally)
 See `docs/DEPLOY.md` §"Option B". Involves `wp db export/import`, uploads tarball, and a careful
 `wp search-replace 'http://localhost:8080' 'https://DOMAIN' --precise --recount`. Prefer A.
