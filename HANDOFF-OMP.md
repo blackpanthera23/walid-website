@@ -170,6 +170,12 @@ Place IDs) · confirm current social follower counts · real TikTok/IG proof-wal
 
 ---
 
+## Updating after launch
+How to make content vs code changes (small and big) safely once live is in **`docs/UPDATING.md`**.
+Short version: content = edit in wp-admin (no deploy); code = change in the repo, deploy the
+changed theme/plugin files via SFTP, test on staging first. Content and code update separately,
+so neither risks the other (DB/uploads are never in git).
+
 ## 7. When done
 
 Update the status trackers and push: the "Where we are" block in
