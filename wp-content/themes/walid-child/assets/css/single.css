@@ -1,9 +1,9 @@
 /* Poliklinik Walid — single CPT templates (Branch / Service / Doctor).
    Loaded only on those singulars. Tokens from brand.css (:root). */
 
-.walid-single { padding: 56px 0; }
-.walid-single .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-.walid-single .lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+.walid-single { padding: 72px 0; }
+.walid-single .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+.walid-single .lede { font-size: 1.22rem; color: var(--muted); max-width: 60ch; }
 .walid-single .eyebrow { font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .5em; }
 .walid-single .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; padding: 14px 24px; border-radius: 999px; border: 2px solid transparent; text-decoration: none; min-height: 48px; }
 .walid-single .btn-wa { background: var(--wa); color: #06351b; }
@@ -11,9 +11,9 @@
 .walid-single .btn-primary { background: var(--accent-600); color: #fff; }
 .walid-single .btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
 
-.walid-single .single-head { border-bottom: 1px solid var(--rule); padding-bottom: 28px; margin-bottom: 32px; }
-.walid-single .meta-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: start; }
-.walid-single .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px; }
+.walid-single .single-head { border-bottom: 1px solid var(--rule); padding-bottom: 30px; margin-bottom: 36px; }
+.walid-single .meta-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 44px; align-items: start; }
+.walid-single .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px; box-shadow: 0 6px 18px rgba(22,27,94,.04); }
 .walid-single .card h3 { margin-top: 0; }
 .walid-single .kv { margin: 0; }
 .walid-single .kv dt { font-weight: 700; color: var(--brand-900); margin-top: 12px; font-size: .9rem; }
@@ -22,7 +22,7 @@
 .walid-single .tag-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0; }
 .walid-single .tag { background: var(--brand-050); color: var(--brand-700); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 600; text-decoration: none; }
 .walid-single .doctor-hero { display: grid; grid-template-columns: .5fr 1fr; gap: 32px; align-items: center; }
-.walid-single .doctor-photo { aspect-ratio: 1/1; border-radius: var(--radius); overflow: hidden; background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); }
+.walid-single .doctor-photo { aspect-ratio: 1/1; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; overflow: hidden; background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); box-shadow: var(--shadow); }
 .walid-single .doctor-photo img { width: 100%; height: 100%; object-fit: cover; }
 .walid-single .gold-line { color: var(--gold-500); font-weight: 700; }
 .walid-single .flag-note { background: var(--gold-100); color: #5a4a00; border-radius: 8px; padding: 10px 14px; font-size: .9rem; margin: 16px 0; }
