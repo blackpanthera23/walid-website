@@ -26,7 +26,7 @@ $doctors = get_posts(
 		</div>
 
 		<?php if ( $doctors ) : ?>
-			<div class="card-grid">
+			<div class="card-grid reveal-group">
 				<?php foreach ( $doctors as $d ) : ?>
 					<?php
 					$role  = get_field( 'doctor_role', $d->ID );
@@ -37,7 +37,7 @@ $doctors = get_posts(
 							<?php if ( $photo ) : ?>
 								<?php echo wp_get_attachment_image( $photo, 'thumbnail', false, array( 'alt' => esc_attr( get_the_title( $d ) ) ) ); ?>
 							<?php else : ?>
-								<span><?php esc_html_e( 'Photo', 'walid' ); ?></span>
+								<img src="<?php echo walid_placeholder( 'doctor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title( $d ) ); ?>" loading="lazy" />
 							<?php endif; ?>
 						</div>
 						<h3><a href="<?php echo esc_url( get_permalink( $d ) ); ?>"><?php echo esc_html( get_the_title( $d ) ); ?></a></h3>

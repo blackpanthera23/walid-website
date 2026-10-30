@@ -32,7 +32,7 @@ $region_order = array( 'Central (Klang Valley)', 'North (Penang / Kedah)', 'Othe
 					<span class="pin"><?php echo esc_html( strtoupper( explode( ' ', $region_name )[0] ) ); ?></span>
 					<h2><?php echo esc_html( $region_name ); ?></h2>
 				</div>
-				<div class="card-grid">
+				<div class="card-grid reveal-group">
 					<?php foreach ( $branches as $b ) : ?>
 						<?php
 						$minor    = (bool) get_field( 'branch_provides_minor_surgery', $b->ID );

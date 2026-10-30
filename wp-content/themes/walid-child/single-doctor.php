@@ -29,7 +29,7 @@ while ( have_posts() ) :
 					<?php if ( $photo ) : ?>
 						<?php echo wp_get_attachment_image( $photo, 'large', false, array( 'alt' => esc_attr( get_the_title() ) ) ); ?>
 					<?php else : ?>
-						<span><?php esc_html_e( 'Photo (consent pending)', 'walid' ); ?></span>
+						<img src="<?php echo walid_placeholder( 'doctor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
 					<?php endif; ?>
 				</div>
 				<div>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Branch photo placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEF0FB"/>
+      <stop offset="1" stop-color="#DDE0EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g fill="none" stroke="#232B8F" stroke-opacity="0.7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M430 470 v-120 l170 -110 170 110 v120 z"/>
+    <path d="M560 470 v-70 h80 v70"/>
+  </g>
+  <circle cx="600" cy="300" r="10" fill="#C9A227"/>
+  <text x="600" y="600" text-anchor="middle" fill="#5B607A" font-family="Georgia, serif" font-size="30">Branch photo placeholder</text>
+</svg>

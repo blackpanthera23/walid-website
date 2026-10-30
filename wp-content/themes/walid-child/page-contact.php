@@ -23,7 +23,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 		</div>
 
 		<section class="group">
-			<div class="card-grid two">
+			<div class="card-grid two reveal-group">
 				<article class="card">
 					<h3><?php esc_html_e( 'General enquiries', 'walid' ); ?></h3>
 					<p><?php esc_html_e( 'Appointments, general practice, women\'s health and aesthetics.', 'walid' ); ?></p>

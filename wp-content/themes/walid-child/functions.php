@@ -67,6 +67,23 @@ function walid_enqueue_assets() {
 		$version
 	);
 
+	// UI/UX polish + motion (site-wide).
+	wp_enqueue_style(
+		'walid-enhance',
+		get_stylesheet_directory_uri() . '/assets/css/enhance.css',
+		array( 'walid-brand' ),
+		$version
+	);
+
+	// Scroll-reveal (deferred, reduced-motion aware).
+	wp_enqueue_script(
+		'walid-reveal',
+		get_stylesheet_directory_uri() . '/assets/js/reveal.js',
+		array(),
+		$version,
+		true
+	);
+
 	// Homepage-only styles (ported from the prototype).
 	if ( is_front_page() ) {
 		wp_enqueue_style(

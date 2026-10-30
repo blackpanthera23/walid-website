@@ -34,9 +34,8 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 					<div class="stat"><b>4.9&#9733;</b> <?php esc_html_e( 'from 1,098 Google reviews', 'walid' ); ?></div>
 				</div>
 			</div>
-			<div class="hero-art" aria-hidden="true">
-				<img class="emblem-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo.svg' ); ?>" alt="" width="150" height="150" />
-				<div class="cap"><?php esc_html_e( 'Real clinic photography to be supplied by the client.', 'walid' ); ?></div>
+			<div class="hero-art reveal" aria-hidden="true">
+				<img class="hero-photo" src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
 			</div>
 		</div>
 	</section>
@@ -44,7 +43,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	<!-- 2. VALUE STRIP -->
 	<section class="section-alt" id="services">
 		<div class="container">
-			<div class="value-grid">
+			<div class="value-grid reveal-group">
 				<div class="value-card">
 					<div class="ico">&#9201;</div>
 					<h3><?php esc_html_e( 'Day-care surgery', 'walid' ); ?></h3>
@@ -80,7 +79,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 				</div>
 				<a class="btn btn-primary" href="<?php echo $wa_surgery; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp the minor surgery team', 'walid' ); ?></a>
 			</div>
-			<div class="art"><?php esc_html_e( 'Procedure imagery (consented)', 'walid' ); ?></div>
+			<div class="art reveal"><img src="<?php echo walid_placeholder( 'procedure' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php esc_attr_e( 'Minor surgery procedure imagery', 'walid' ); ?>" loading="lazy" /></div>
 		</div>
 	</section>
 
@@ -89,7 +88,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 		<div class="container">
 			<p class="eyebrow"><?php esc_html_e( 'Also expert in', 'walid' ); ?></p>
 			<h2 style="margin-bottom:28px;"><?php esc_html_e( 'A growing range of specialist care.', 'walid' ); ?></h2>
-			<div class="rising-grid">
+			<div class="rising-grid reveal-group">
 				<div class="rise-card">
 					<div class="ico">&#10024;</div>
 					<h3><?php esc_html_e( 'Aesthetic procedures', 'walid' ); ?></h3>
@@ -139,11 +138,11 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	?>
 	<section id="specialist">
 		<div class="container spec">
-			<div class="photo">
+			<div class="photo reveal">
 				<?php if ( $spec_photo ) : ?>
 					<?php echo wp_get_attachment_image( $spec_photo, 'large', false, array( 'alt' => esc_attr( $spec_name ) ) ); ?>
 				<?php else : ?>
-					<?php esc_html_e( 'Specialist photo (consented)', 'walid' ); ?>
+					<img src="<?php echo walid_placeholder( 'doctor' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( $spec_name ); ?>" loading="lazy" />
 				<?php endif; ?>
 			</div>
 			<div>
@@ -162,7 +161,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 			<p class="eyebrow" style="color:var(--gold-500)"><?php esc_html_e( 'Seen on TikTok', 'walid' ); ?></p>
 			<h2><?php esc_html_e( 'The care hundreds of thousands follow.', 'walid' ); ?></h2>
 			<p style="max-width:52ch;margin-bottom:28px;"><?php esc_html_e( 'Real procedures and patient stories from the clinic. The content that earned our community of 561K on TikTok and 119K on Facebook.', 'walid' ); ?></p>
-			<div class="tiktok-grid">
+			<div class="tiktok-grid reveal-group">
 				<?php foreach ( walid_proof_videos() as $v ) : ?>
 					<a class="tiktok-card" href="<?php echo esc_url( $v['url'] ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $v['label'] ); ?>">
 						<div class="play">&#9654;</div>
@@ -183,7 +182,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 			<p class="eyebrow"><?php esc_html_e( 'Our network', 'walid' ); ?></p>
 			<h2 style="margin-bottom:8px;"><?php esc_html_e( 'Surgical centres Central and North, general practice everywhere.', 'walid' ); ?></h2>
 			<p class="muted" style="margin-bottom:28px;"><?php esc_html_e( 'Minor surgery is performed at our surgical centres. General practice is available across the full branch network.', 'walid' ); ?></p>
-			<div class="branch-grid">
+			<div class="branch-grid reveal-group">
 				<div class="branch-col">
 					<h3><span class="pin"><?php esc_html_e( 'CENTRAL', 'walid' ); ?></span> <?php esc_html_e( 'Klang Valley', 'walid' ); ?></h3>
 					<ul>
@@ -222,7 +221,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 				<div class="rev-stat">4.9 &#9733;</div>
 				<p class="muted"><?php esc_html_e( 'from 1,098 Google reviews', 'walid' ); ?></p>
 			</div>
-			<div class="rev-grid">
+			<div class="rev-grid reveal-group">
 				<?php if ( $reviews ) : ?>
 					<?php foreach ( $reviews as $r ) : ?>
 						<div class="rev-card">

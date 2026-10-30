@@ -1,0 +1,81 @@
+/* Poliklinik Walid — UI/UX polish + motion. Loaded site-wide.
+   Motion is subtle and ALWAYS gated by prefers-reduced-motion (see end of file).
+   Design system: minimal motion, no parallax/autoplay. */
+
+/* ---- Images (placeholders + real photos) ---------------------------------- */
+.walid-home .hero-art { background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); }
+.walid-home .hero-art .hero-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
+.walid-home .pillar-hero .art { padding: 0; overflow: hidden; }
+.walid-home .pillar-hero .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.walid-single .branch-photo { border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; box-shadow: var(--shadow); aspect-ratio: 16/8; }
+.walid-single .branch-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- Buttons: micro-interaction ------------------------------------------- */
+.btn, .walid-btn, .wp-block-button__link {
+	transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease;
+	will-change: transform;
+}
+.btn:hover, .walid-btn:hover, .wp-block-button__link:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22,27,94,.16); }
+.btn:active, .walid-btn:active, .wp-block-button__link:active { transform: translateY(0); }
+.btn-wa, .walid-btn--wa { position: relative; }
+
+/* ---- Cards: lift + gold top-accent on hover ------------------------------- */
+.walid-archive .card,
+.walid-home .value-card,
+.walid-home .rise-card,
+.walid-home .rev-card { position: relative; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.walid-archive .card::before,
+.walid-home .value-card::before {
+	content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px;
+	background: var(--gold-500); border-radius: var(--radius) var(--radius) 0 0;
+	transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+}
+.walid-archive .card:hover::before,
+.walid-home .value-card:hover::before { transform: scaleX(1); }
+.walid-archive .card:hover,
+.walid-home .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+
+/* Value-card icon pop */
+.walid-home .value-card .ico { transition: transform .2s ease, background-color .2s ease; }
+.walid-home .value-card:hover .ico { transform: scale(1.08); background: var(--gold-100); color: var(--gold-500); }
+
+/* Proof wall play button pulse on hover */
+.walid-home .tiktok-card .play { transition: transform .2s ease, background-color .2s ease; }
+.walid-home .tiktok-card:hover .play { transform: scale(1.12); background: rgba(255,255,255,.28); }
+.walid-home .tiktok-card { transition: transform .2s ease; }
+.walid-home .tiktok-card:hover { transform: translateY(-3px); }
+
+/* Tags */
+.walid-home .tag, .walid-single .tag { transition: background-color .16s ease, color .16s ease; }
+.walid-single .tag:hover { background: var(--brand-700); color: #fff; }
+
+/* Sticky header subtle shadow on scroll (Kadence handles sticky; we add depth) */
+.walid-eyebrow, .walid-home .eyebrow, .walid-archive .eyebrow { position: relative; }
+
+/* Links: animated underline for in-content links */
+.walid-archive .card h3 a,
+.walid-home .branch-col li a { background-image: linear-gradient(var(--gold-500), var(--gold-500)); background-size: 0% 2px; background-repeat: no-repeat; background-position: left bottom; transition: background-size .25s ease; }
+.walid-archive .card h3 a:hover,
+.walid-home .branch-col li a:hover { background-size: 100% 2px; }
+
+/* ---- Scroll reveal --------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+/* Stagger children when a grid is marked .reveal-group */
+.reveal-group > * { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+.reveal-group.is-visible > * { opacity: 1; transform: none; }
+.reveal-group.is-visible > *:nth-child(2) { transition-delay: .08s; }
+.reveal-group.is-visible > *:nth-child(3) { transition-delay: .16s; }
+.reveal-group.is-visible > *:nth-child(4) { transition-delay: .24s; }
+.reveal-group.is-visible > *:nth-child(5) { transition-delay: .32s; }
+
+/* Floating WhatsApp: gentle attention without being annoying */
+.walid-fab { transition: transform .16s ease, box-shadow .16s ease; }
+.walid-fab:hover { transform: translateY(-2px) scale(1.03); }
+
+/* ---- Reduced motion: disable all of the above ----------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	.reveal, .reveal-group > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+	.btn, .walid-btn, .wp-block-button__link, .card, .value-card, .tiktok-card, .walid-fab { transition: none !important; }
+	.btn:hover, .walid-btn:hover, .card:hover, .value-card:hover, .tiktok-card:hover, .walid-fab:hover { transform: none !important; }
+}

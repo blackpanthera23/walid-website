@@ -59,7 +59,7 @@ $hero_pillar = 'Minor Surgery';
 						<span class="pin pin-hero"><?php esc_html_e( 'OUR SPECIALTY', 'walid' ); ?></span>
 					<?php endif; ?>
 				</div>
-				<div class="card-grid">
+				<div class="card-grid reveal-group">
 					<?php foreach ( $services as $s ) : ?>
 						<?php
 						$short   = get_field( 'service_short_desc', $s->ID );

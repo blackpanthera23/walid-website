@@ -86,6 +86,18 @@ function walid_branches_in_region( $region_name ) {
 }
 
 /**
+ * URI for a branded placeholder image (used until real photos are supplied).
+ *
+ * @param string $name One of: hero, procedure, doctor, branch.
+ * @return string
+ */
+function walid_placeholder( $name ) {
+	$allowed = array( 'hero', 'procedure', 'doctor', 'branch' );
+	$name    = in_array( $name, $allowed, true ) ? $name : 'procedure';
+	return esc_url( get_stylesheet_directory_uri() . '/assets/img/placeholder-' . $name . '.svg' );
+}
+
+/**
  * Proof-wall videos for the homepage social wall.
  * Each item: platform, url (to the post/profile), label. Owner replaces the URLs with real
  * video links; until then they point at the profiles. Filterable so a future options page can

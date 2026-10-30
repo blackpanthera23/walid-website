@@ -30,7 +30,7 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			<div class="entry"><?php the_content(); ?></div>
 		<?php else : ?>
 			<section class="group">
-				<div class="card-grid">
+				<div class="card-grid reveal-group">
 					<article class="card">
 						<h3><?php esc_html_e( 'Why patients travel to us', 'walid' ); ?></h3>
 						<p><?php esc_html_e( 'Surgeon-led day-care surgery and specialist care, with a community of hundreds of thousands across TikTok, Facebook and Instagram, and a 4.9 Google rating from over a thousand reviews.', 'walid' ); ?></p>
