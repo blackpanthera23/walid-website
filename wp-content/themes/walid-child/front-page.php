@@ -35,7 +35,11 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 				</div>
 			</div>
 			<div class="hero-art reveal" aria-hidden="true">
-				<img class="hero-photo" src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
+				<div class="hero-panel">
+					<img class="hero-photo" src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
+				</div>
+				<span class="float-dot dot-gold"></span>
+				<span class="float-dot dot-navy"></span>
 			</div>
 		</div>
 	</section>
@@ -204,10 +208,10 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 					<ul>
 						<?php if ( $central ) : ?>
 							<?php foreach ( $central as $b ) : ?>
-								<li><a href="<?php echo esc_url( get_permalink( $b ) ); ?>"><b><?php echo esc_html( get_the_title( $b ) ); ?></b></a><?php echo get_field( 'branch_is_flagship', $b->ID ) ? ' &mdash; ' . esc_html__( 'flagship surgical hub (HQ)', 'walid' ) : ''; ?></li>
+								<li><a href="<?php echo esc_url( get_permalink( $b ) ); ?>"><b><?php echo esc_html( get_the_title( $b ) ); ?></b></a><?php echo get_field( 'branch_is_flagship', $b->ID ) ? ', ' . esc_html__( 'flagship surgical hub (HQ)', 'walid' ) : ''; ?></li>
 							<?php endforeach; ?>
 						<?php else : ?>
-							<li><b><?php esc_html_e( 'Ampang', 'walid' ); ?></b> &mdash; <?php esc_html_e( 'flagship surgical hub (HQ)', 'walid' ); ?></li>
+							<li><b><?php esc_html_e( 'Ampang', 'walid' ); ?></b>, <?php esc_html_e( 'flagship surgical hub (HQ)', 'walid' ); ?></li>
 						<?php endif; ?>
 					</ul>
 				</div>
@@ -219,7 +223,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 								<li><a href="<?php echo esc_url( get_permalink( $b ) ); ?>"><b><?php echo esc_html( get_the_title( $b ) ); ?></b></a></li>
 							<?php endforeach; ?>
 						<?php else : ?>
-							<li><b><?php esc_html_e( 'Jalan Baru', 'walid' ); ?></b> &mdash; <?php esc_html_e( 'Seberang Perai, Penang', 'walid' ); ?></li>
+							<li><b><?php esc_html_e( 'Jalan Baru', 'walid' ); ?></b>, <?php esc_html_e( 'Seberang Perai, Penang', 'walid' ); ?></li>
 							<li><b><?php esc_html_e( 'Tasek Gelugor', 'walid' ); ?></b></li>
 							<li><b><?php esc_html_e( 'Sungai Petani', 'walid' ); ?></b></li>
 						<?php endif; ?>

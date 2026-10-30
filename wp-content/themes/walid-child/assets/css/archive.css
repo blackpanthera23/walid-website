@@ -15,9 +15,20 @@
 
 .walid-archive .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .walid-archive .card-grid.two { grid-template-columns: repeat(2, 1fr); }
-.walid-archive .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; transition: box-shadow .18s, transform .18s; }
-.walid-archive .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-.walid-archive .card.hero-card { border-color: var(--brand-500); border-width: 2px; }
+.walid-archive .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; box-shadow: 0 6px 18px rgba(22,27,94,.04); transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease; }
+.walid-archive .card:hover { box-shadow: var(--shadow); transform: translateY(-4px); border-color: transparent; }
+/* Featured (hero) card — dark navy variant, from the premium card inspiration */
+.walid-archive .card.hero-card { background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); border-color: transparent; color: #fff; }
+.walid-archive .card.hero-card h3 a, .walid-archive .card.hero-card h3 { color: #fff; }
+.walid-archive .card.hero-card p { color: #d7daf2; }
+.walid-archive .card.hero-card .proc-list li { color: #eceefb; border-bottom-color: rgba(255,255,255,.12); }
+.walid-archive .card.hero-card .proc-tick { background: rgba(255,255,255,.14); }
+.walid-archive .card.hero-card .proc-tick::after { border-color: var(--gold-500); }
+.walid-archive .card.hero-card .proc-toggle { color: #fff; border-color: rgba(255,255,255,.3); }
+.walid-archive .card.hero-card .proc-toggle:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+.walid-archive .card.hero-card .svc-tag { background: rgba(255,255,255,.14); color: #fff; }
+.walid-archive .card.hero-card .btn-ghost { color: #fff; border-color: rgba(255,255,255,.4); }
+.walid-archive .card.hero-card .btn-ghost:hover { background: rgba(255,255,255,.1); }
 .walid-archive .card.has-media { padding: 0; overflow: hidden; }
 .walid-archive .card.has-media > :not(.card-media) { padding-left: 24px; padding-right: 24px; }
 .walid-archive .card.has-media > h3 { margin-top: 18px; }

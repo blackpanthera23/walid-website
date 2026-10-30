@@ -1,139 +1,125 @@
-/* Poliklinik Walid — homepage styles.
-   Ported from prototype/styles.css (sections 1-11). Loaded only on the front page.
-   The header/nav come from Kadence; these styles cover the page sections + footer blocks
-   our template renders. Tokens live in brand.css (:root). */
+/* Poliklinik Walid — homepage (Concept AB / Prototype 3 look).
+   Calm/airy aesthetic: organic hero panel + floating accent dots, generous whitespace,
+   smooth rounded cards. Navy + gold. Tokens from brand.css (:root). Class names match
+   front-page.php. */
 
-.walid-home section { padding: 72px 0; }
-.walid-home .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-.walid-home .eyebrow { font-family: var(--sans); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .75em; }
+.walid-home section { padding: 92px 0; }
+.walid-home .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+.walid-home .eyebrow { font-family: var(--sans); font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-500); margin: 0 0 .7em; display: block; }
 .walid-home .muted { color: var(--muted); }
-.walid-home .section-alt { background: var(--surface); }
-.walid-home .section-navy { background: var(--brand-900); color: #fff; }
+.walid-home .section-alt { background: var(--brand-050); }
+.walid-home .section-navy { background: linear-gradient(160deg, var(--brand-900), #0f1340); color: #fff; }
 .walid-home .section-navy h2, .walid-home .section-navy h3 { color: #fff; }
 .walid-home .section-navy p { color: #d7daf2; }
+.walid-home h1 em { font-style: italic; color: var(--brand-500); }
 
 /* Buttons */
-.walid-home .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; font-size: 1rem; padding: 14px 24px; border-radius: 999px; border: 2px solid transparent; cursor: pointer; transition: all .18s ease; min-height: 48px; text-decoration: none; }
+.walid-home .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; font-size: 1rem; padding: 14px 26px; border-radius: 999px; border: 1.5px solid transparent; cursor: pointer; transition: transform .16s ease, box-shadow .16s ease, background-color .16s ease; text-decoration: none; }
+.walid-home .btn:hover { transform: translateY(-2px); }
 .walid-home .btn-wa { background: var(--wa); color: #06351b; }
 .walid-home .btn-wa:hover { background: var(--wa-dark); }
 .walid-home .btn-primary { background: var(--accent-600); color: #fff; }
-.walid-home .btn-primary:hover { background: var(--accent-700); }
-.walid-home .btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
-.walid-home .btn-ghost:hover { background: var(--brand-050); }
+.walid-home .btn-primary:hover { background: var(--accent-700); box-shadow: 0 10px 24px rgba(30,142,102,.28); }
+.walid-home .btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--rule); }
+.walid-home .btn-ghost:hover { border-color: var(--brand-700); background: var(--brand-050); }
 
-/* Hero */
-.walid-home .hero { padding: 84px 0 64px; }
-.walid-home .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+/* Hero — organic panel + floating accent dots + proof rail */
+.walid-home .hero { padding: 96px 0 84px; }
+.walid-home .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
 .walid-home .hero h1 { margin-bottom: .4em; }
-.walid-home .hero .lead { font-size: 1.2rem; color: var(--muted); max-width: 34ch; }
-.walid-home .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin: 28px 0 30px; }
-.walid-home .proof-rail { display: flex; gap: 22px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--rule); }
-.walid-home .proof-rail .stat { font-size: .95rem; color: var(--muted); }
-.walid-home .proof-rail .stat b { display: block; font-family: var(--serif); font-size: 1.35rem; color: var(--brand-700); }
-.walid-home .hero-art { aspect-ratio: 4/5; border-radius: 20px; background:
-    radial-gradient(120% 90% at 80% 10%, var(--gold-100) 0%, transparent 45%),
-    linear-gradient(160deg, var(--brand-700), var(--brand-900));
-  position: relative; box-shadow: var(--shadow); overflow: hidden; display: grid; place-items: center; }
-.walid-home .hero-art .emblem-img { filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
-.walid-home .hero-art .cap { position: absolute; bottom: 18px; left: 18px; right: 18px; color: rgba(255,255,255,.8); font-size: .8rem; }
+.walid-home .hero .lead { font-size: 1.22rem; color: var(--muted); max-width: 40ch; margin-bottom: 30px; }
+.walid-home .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+.walid-home .proof-rail { display: flex; gap: 38px; flex-wrap: wrap; padding-top: 26px; border-top: 1px solid var(--rule); }
+.walid-home .proof-rail .stat { font-size: .82rem; color: var(--muted); display: flex; flex-direction: column; }
+.walid-home .proof-rail .stat b { font-family: var(--serif); font-size: 1.55rem; color: var(--brand-700); line-height: 1; margin-bottom: 4px; }
+.walid-home .hero-art { position: relative; aspect-ratio: 1/1; display: grid; place-items: center; }
+.walid-home .hero-panel { width: 86%; aspect-ratio: 1/1; border-radius: 42% 58% 58% 42% / 48% 42% 58% 52%; background: radial-gradient(130% 110% at 75% 15%, var(--brand-050), #fff 60%); border: 1px solid var(--rule); box-shadow: var(--shadow); overflow: hidden; display: grid; place-items: center; }
+.walid-home .hero-panel .hero-photo { width: 100%; height: 100%; object-fit: cover; }
+.walid-home .float-dot { position: absolute; border-radius: 50%; }
+.walid-home .dot-gold { width: 64px; height: 64px; background: var(--gold-500); top: 6%; right: 10%; box-shadow: 0 10px 24px rgba(201,162,39,.35); }
+.walid-home .dot-navy { width: 40px; height: 40px; background: var(--brand-700); bottom: 10%; left: 8%; }
 
-/* Value strip */
-.walid-home .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.walid-home .value-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 26px; }
-.walid-home .value-card .ico { width: 42px; height: 42px; border-radius: 10px; background: var(--brand-050); color: var(--brand-700); display: grid; place-items: center; font-size: 1.3rem; margin-bottom: 14px; }
+/* Value strip — smooth cards */
+.walid-home .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.walid-home .value-card { background: var(--surface); border-radius: var(--radius); padding: 32px; box-shadow: 0 6px 18px rgba(22,27,94,.05); transition: transform .2s ease, box-shadow .2s ease; }
+.walid-home .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.walid-home .value-card .ico { width: 46px; height: 46px; border-radius: 12px; background: var(--brand-050); color: var(--brand-700); display: grid; place-items: center; font-size: 1.4rem; margin-bottom: 16px; transition: background-color .2s ease, color .2s ease; }
+.walid-home .value-card:hover .ico { background: var(--gold-100); color: var(--gold-500); }
 .walid-home .value-card h3 { margin-bottom: .25em; }
-.walid-home .value-card p { margin: 0; color: var(--muted); font-size: .97rem; }
+.walid-home .value-card p { margin: 0; color: var(--muted); }
 
-/* Hero pillar */
-.walid-home .pillar-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
-.walid-home .pillar-hero .art { aspect-ratio: 16/11; border-radius: var(--radius); background: linear-gradient(150deg, var(--brand-050), #fff); border: 1px solid var(--rule); display: grid; place-items: center; color: var(--brand-500); font-family: var(--serif); text-align: center; }
-.walid-home .tag-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 22px; }
-.walid-home .tag { background: var(--brand-050); color: var(--brand-700); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 600; }
+/* Hero pillar (Minor Surgery) — organic image panel */
+.walid-home .pillar-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 52px; align-items: center; }
+.walid-home .pillar-hero .art { aspect-ratio: 16/12; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; overflow: hidden; background: linear-gradient(150deg, var(--brand-050), #fff); box-shadow: var(--shadow); }
+.walid-home .pillar-hero .art img { width: 100%; height: 100%; object-fit: cover; }
+.walid-home .tag-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 24px; }
+.walid-home .tag { background: var(--brand-050); color: var(--brand-700); border-radius: 999px; padding: 7px 16px; font-size: .85rem; font-weight: 600; text-decoration: none; transition: background-color .16s ease, color .16s ease, transform .16s ease; }
+.walid-home a.tag:hover { background: var(--brand-700); color: #fff; transform: translateY(-1px); }
 
-/* Rising pillars */
-.walid-home .rising-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.walid-home .rise-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 28px; transition: box-shadow .18s, transform .18s; }
-.walid-home .rise-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-.walid-home .rise-card .ico { font-size: 1.6rem; margin-bottom: 10px; }
-.walid-home .rise-card.tbd { border-style: dashed; opacity: .8; }
+/* Rising pillars — smooth cards */
+.walid-home .rising-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.walid-home .rise-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 32px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.walid-home .rise-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
+.walid-home .rise-card .ico { font-size: 1.7rem; margin-bottom: 12px; }
+.walid-home .rise-card.tbd { border-style: dashed; opacity: .85; }
 
-/* Specialist */
-.walid-home .spec { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
-.walid-home .spec .photo { aspect-ratio: 1/1; border-radius: var(--radius); background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); box-shadow: var(--shadow); overflow: hidden; text-align: center; }
+/* Specialist — organic photo panel */
+.walid-home .spec { display: grid; grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; }
+.walid-home .spec .photo { aspect-ratio: 1/1; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; overflow: hidden; background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); box-shadow: var(--shadow); }
 .walid-home .spec .photo img { width: 100%; height: 100%; object-fit: cover; }
-.walid-home .spec .gold-line { color: var(--gold-500); font-weight: 700; margin-bottom: .3em; }
+.walid-home .spec .gold-line { color: var(--gold-500); font-weight: 700; margin-bottom: .4em; }
 
 /* Proof wall */
-.walid-home .tiktok-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.walid-home .tiktok-card { aspect-ratio: 9/16; border-radius: var(--radius); background: #0d0d14; color: #fff; display: grid; place-items: center; position: relative; overflow: hidden; }
-.walid-home .tiktok-card .play { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 1.3rem; }
-.walid-home .tiktok-card .lbl { position: absolute; bottom: 12px; left: 12px; font-size: .8rem; color: rgba(255,255,255,.75); }
+.walid-home .tiktok-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.walid-home .tiktok-card { aspect-ratio: 9/16; border-radius: var(--radius); background: #0d0d14; color: #fff; display: grid; place-items: center; position: relative; overflow: hidden; text-decoration: none; transition: transform .2s ease; }
+.walid-home .tiktok-card:hover { transform: translateY(-4px); }
+.walid-home .tiktok-card .play { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 1.3rem; transition: transform .2s ease, background-color .2s ease; }
+.walid-home .tiktok-card:hover .play { transform: scale(1.12); background: rgba(255,255,255,.28); }
+.walid-home .tiktok-card .lbl { position: absolute; bottom: 14px; left: 14px; font-size: .8rem; color: rgba(255,255,255,.8); }
 
-/* Branches */
-.walid-home .branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.walid-home .branch-col { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 28px; }
+/* Branch network — smooth cards */
+.walid-home .branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.walid-home .branch-col { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 32px; box-shadow: 0 6px 18px rgba(22,27,94,.04); }
 .walid-home .branch-col h3 { display: flex; align-items: center; gap: 10px; }
-.walid-home .pin { background: var(--gold-100); color: var(--gold-500); border-radius: 8px; padding: 2px 10px; font-size: .75rem; font-weight: 700; letter-spacing: .05em; }
-.walid-home .branch-col ul { margin: 12px 0 0; padding-left: 18px; }
-.walid-home .branch-col li { margin-bottom: 6px; }
+.walid-home .pin { background: var(--gold-100); color: var(--gold-500); border-radius: 8px; padding: 2px 10px; font-size: .72rem; font-weight: 700; letter-spacing: .05em; }
+.walid-home .branch-col ul { margin: 14px 0 0; padding-left: 18px; }
+.walid-home .branch-col li { margin-bottom: 7px; }
 
-/* Reviews */
-.walid-home .rev-head { text-align: center; margin-bottom: 36px; }
+/* Reviews — serif quote cards */
+.walid-home .rev-head { text-align: center; margin-bottom: 40px; }
 .walid-home .rev-stat { font-family: var(--serif); font-size: 3rem; color: var(--gold-500); line-height: 1; }
-.walid-home .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.walid-home .rev-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 24px; }
-.walid-home .rev-card .stars { color: var(--gold-500); margin-bottom: 8px; }
-.walid-home .rev-card .who { font-weight: 600; font-size: .9rem; color: var(--muted); margin-top: 10px; }
+.walid-home .rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.walid-home .rev-card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 30px; }
+.walid-home .rev-card .stars { color: var(--gold-500); margin-bottom: 10px; }
+.walid-home .rev-card p { font-family: var(--serif); font-size: 1.08rem; color: var(--brand-900); font-style: italic; }
+.walid-home .rev-card .who { font-weight: 600; font-size: .86rem; color: var(--muted); margin-top: 10px; }
 
 /* International */
 .walid-home .intl { text-align: center; }
-.walid-home .intl .flags { font-size: 1.5rem; letter-spacing: .3em; margin: 10px 0 18px; }
+.walid-home .intl .flags { font-size: 1.9rem; letter-spacing: .2em; margin: 12px 0 18px; }
+.walid-home .intl .flags { display: block; }
 
 /* Final CTA */
-.walid-home .final { text-align: center; }
-.walid-home .final .btn { margin-top: 10px; }
+.walid-home .final { text-align: center; background: linear-gradient(160deg, var(--brand-900), #0f1340); }
+.walid-home .final h2 { color: #fff; }
+.walid-home .final p { color: #c7cbee; max-width: 46ch; margin: 0 auto 22px; }
+.walid-home .final .btn { margin-top: 6px; }
 
 /* Floating WhatsApp */
-.walid-fab { position: fixed; right: 20px; bottom: 20px; z-index: 60; background: var(--wa); color: #06351b; font-weight: 700; padding: 14px 20px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,.2); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.walid-fab { position: fixed; right: 22px; bottom: 22px; z-index: 60; background: var(--wa); color: #06351b; font-weight: 700; padding: 14px 22px; border-radius: 999px; box-shadow: 0 10px 28px rgba(0,0,0,.22); display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .walid-fab:hover { background: var(--wa-dark); }
 
-/* ---- Responsive -------------------------------------------------------------
-   Tiers: desktop (default) > tablet (<=980px) > mobile (<=680px) > small (<=420px) */
-
-/* Tablet: 3-col grids become 2-col; two-up layouts stay side-by-side a bit longer. */
-@media (max-width: 980px) {
-  .walid-home .value-grid,
-  .walid-home .rising-grid,
-  .walid-home .rev-grid,
-  .walid-home .tiktok-grid { grid-template-columns: repeat(2, 1fr); }
-  .walid-home .hero-grid { grid-template-columns: 1fr; }
-  .walid-home .hero-art { order: -1; aspect-ratio: 16/9; max-height: 320px; }
-  .walid-home section { padding: 60px 0; }
+/* Responsive */
+@media (max-width: 960px) {
+  .walid-home .hero-grid, .walid-home .pillar-hero, .walid-home .spec { grid-template-columns: 1fr; gap: 40px; }
+  .walid-home .hero-art { order: -1; max-width: 360px; margin: 0 auto; width: 100%; }
+  .walid-home .value-grid, .walid-home .rising-grid, .walid-home .tiktok-grid, .walid-home .rev-grid { grid-template-columns: repeat(2, 1fr); }
+  .walid-home .branch-grid { grid-template-columns: 1fr; }
+  .walid-home section { padding: 64px 0; }
 }
-
-/* Mobile: everything stacks to a single column. */
-@media (max-width: 680px) {
-  .walid-home .pillar-hero,
-  .walid-home .spec,
-  .walid-home .branch-grid,
-  .walid-home .value-grid,
-  .walid-home .rising-grid,
-  .walid-home .rev-grid { grid-template-columns: 1fr; }
-  .walid-home .tiktok-grid { grid-template-columns: repeat(2, 1fr); }
-  .walid-home section { padding: 48px 0; }
+@media (max-width: 560px) {
   .walid-home .container { padding: 0 18px; }
-  .walid-home .hero { padding: 56px 0 44px; }
-  .walid-home .hero-cta { gap: 10px; }
+  .walid-home .value-grid, .walid-home .rising-grid, .walid-home .tiktok-grid, .walid-home .rev-grid { grid-template-columns: 1fr; }
   .walid-home .hero-cta .btn { flex: 1 1 auto; justify-content: center; }
-  .walid-home .proof-rail { gap: 16px; }
-}
-
-/* Small phones: tighten type + padding, single-column proof wall. */
-@media (max-width: 420px) {
-  .walid-home .tiktok-grid { grid-template-columns: 1fr; }
-  .walid-home .container { padding: 0 14px; }
-  .walid-home .hero .lead { font-size: 1.08rem; }
-  .walid-home .value-card,
-  .walid-home .rise-card,
-  .walid-home .rev-card { padding: 20px; }
+  .walid-home .proof-rail { gap: 22px; }
 }
