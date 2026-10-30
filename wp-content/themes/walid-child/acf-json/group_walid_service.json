@@ -41,6 +41,14 @@
 			"preview_size": "medium"
 		},
 		{
+			"key": "field_service_procedures",
+			"label": "Procedures / sub-services",
+			"name": "service_procedures",
+			"type": "textarea",
+			"instructions": "One procedure per line. The services archive shows the first 6 then a 'see more' dropdown.",
+			"rows": 8
+		},
+		{
 			"key": "field_service_lead_doctor",
 			"label": "Lead specialist",
 			"name": "service_lead_doctor",

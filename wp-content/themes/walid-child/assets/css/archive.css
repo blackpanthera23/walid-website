@@ -25,6 +25,28 @@
 .walid-archive .card-media { aspect-ratio: 16/10; background: var(--brand-050); overflow: hidden; }
 .walid-archive .card-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
 .walid-archive .card.has-media:hover .card-media img { transform: scale(1.05); }
+
+/* Hero pillar section: give Minor Surgery visual weight */
+.walid-archive .pillar-section.is-hero { background: var(--brand-050); border-radius: var(--radius); padding: 28px; margin-left: -28px; margin-right: -28px; }
+.walid-archive .pillar-section.is-hero .group-head h2 { color: var(--brand-700); }
+
+/* Procedure (sub-service) list + see-more dropdown */
+.walid-archive .proc-list { list-style: none; padding: 0; margin: 4px 0 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
+.walid-archive .proc-list li { position: relative; padding-left: 16px; font-size: .9rem; color: var(--ink); }
+.walid-archive .proc-list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-500); }
+.walid-archive .proc-more { margin: 0 0 12px; }
+.walid-archive .proc-more summary { cursor: pointer; font-weight: 600; font-size: .88rem; color: var(--brand-700); list-style: none; display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; }
+.walid-archive .proc-more summary::-webkit-details-marker { display: none; }
+.walid-archive .proc-more summary::after { content: "\25BE"; font-size: .7em; transition: transform .2s ease; }
+.walid-archive .proc-more[open] summary::after { transform: rotate(180deg); }
+.walid-archive .proc-more summary:hover { color: var(--gold-500); }
+.walid-archive .card-foot { display: flex; gap: 10px; flex-wrap: wrap; }
+.walid-archive .card-foot .btn { padding: 9px 16px; min-height: 0; }
+
+@media (max-width: 680px) {
+  .walid-archive .pillar-section.is-hero { margin-left: 0; margin-right: 0; padding: 20px; }
+  .walid-archive .proc-list { grid-template-columns: 1fr; }
+}
 .walid-archive .card h3 { margin: 0 0 .3em; }
 .walid-archive .card h3 a { color: var(--brand-900); text-decoration: none; }
 .walid-archive .card p { color: var(--muted); font-size: .96rem; margin: 0 0 14px; flex: 1; }

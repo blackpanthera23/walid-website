@@ -52,7 +52,7 @@ $hero_pillar = 'Minor Surgery';
 			}
 			$is_hero = ( $hero_pillar === $pillar_name );
 			?>
-			<section class="group">
+			<section class="group pillar-section<?php echo $is_hero ? ' is-hero' : ''; ?>">
 				<div class="group-head">
 					<h2><?php echo esc_html( $pillar_name ); ?></h2>
 					<?php if ( $is_hero ) : ?>
@@ -62,11 +62,12 @@ $hero_pillar = 'Minor Surgery';
 				<div class="card-grid reveal-group">
 					<?php foreach ( $services as $s ) : ?>
 						<?php
-						$short   = get_field( 'service_short_desc', $s->ID );
-						$routing = get_field( 'service_wa_routing', $s->ID );
-						$wa      = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title( $s ) ) );
+						$short      = get_field( 'service_short_desc', $s->ID );
+						$routing    = get_field( 'service_wa_routing', $s->ID );
+						$procedures = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_field( 'service_procedures', $s->ID ) ) ) );
+						$icon       = get_field( 'service_icon', $s->ID );
+						$wa         = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title( $s ) ) );
 						?>
-						<?php $icon = get_field( 'service_icon', $s->ID ); ?>
 						<article class="card has-media<?php echo $is_hero ? ' hero-card' : ''; ?>">
 							<div class="card-media">
 								<?php if ( $icon ) : ?>
@@ -77,8 +78,32 @@ $hero_pillar = 'Minor Surgery';
 							</div>
 							<h3><a href="<?php echo esc_url( get_permalink( $s ) ); ?>"><?php echo esc_html( get_the_title( $s ) ); ?></a></h3>
 							<?php if ( $short ) : ?><p><?php echo esc_html( $short ); ?></p><?php endif; ?>
+
+							<?php if ( $procedures ) : ?>
+								<?php
+								$first = array_slice( $procedures, 0, 6 );
+								$rest  = array_slice( $procedures, 6 );
+								?>
+								<ul class="proc-list">
+									<?php foreach ( $first as $p ) : ?>
+										<li><?php echo esc_html( $p ); ?></li>
+									<?php endforeach; ?>
+								</ul>
+								<?php if ( $rest ) : ?>
+									<details class="proc-more">
+										<summary><?php echo esc_html( sprintf( /* translators: %d: count */ _n( 'See %d more', 'See %d more', count( $rest ), 'walid' ), count( $rest ) ) ); ?></summary>
+										<ul class="proc-list">
+											<?php foreach ( $rest as $p ) : ?>
+												<li><?php echo esc_html( $p ); ?></li>
+											<?php endforeach; ?>
+										</ul>
+									</details>
+								<?php endif; ?>
+							<?php endif; ?>
+
 							<div class="card-foot">
 								<a class="btn btn-ghost" href="<?php echo esc_url( get_permalink( $s ) ); ?>"><?php esc_html_e( 'Learn more', 'walid' ); ?></a>
+								<a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp', 'walid' ); ?></a>
 							</div>
 						</article>
 					<?php endforeach; ?>

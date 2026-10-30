@@ -87,9 +87,17 @@ $sgpetani = $mk( 'branch', 'Poliklinik Walid Sungai Petani', 'sungai-petani' );
 update_field( 'branch_provides_minor_surgery', 1, $sgpetani );
 wp_set_object_terms( $sgpetani, array( $region_north->term_id ), 'region' );
 
-$gp_branch = $mk( 'branch', 'Poliklinik Walid (GP branch)', 'gp-branch-sample' );
-update_field( 'branch_provides_minor_surgery', 0, $gp_branch );
-wp_set_object_terms( $gp_branch, array( $region_other->term_id ), 'region' );
+$kuala_kangsar = $mk( 'branch', 'Poliklinik Walid Kuala Kangsar', 'kuala-kangsar', '<!-- wp:paragraph --><p>General practice branch in Kuala Kangsar, Perak. [confirm details]</p><!-- /wp:paragraph -->' );
+update_field( 'branch_provides_minor_surgery', 0, $kuala_kangsar );
+update_field( 'branch_address', 'Kuala Kangsar, Perak [confirm full address]', $kuala_kangsar );
+update_field( 'branch_map_embed', 'Poliklinik Walid Kuala Kangsar, Perak', $kuala_kangsar );
+wp_set_object_terms( $kuala_kangsar, array( $region_other->term_id ), 'region' );
+
+$parit_buntar = $mk( 'branch', 'Poliklinik Walid Parit Buntar', 'parit-buntar', '<!-- wp:paragraph --><p>General practice branch in Parit Buntar, Perak. [confirm details]</p><!-- /wp:paragraph -->' );
+update_field( 'branch_provides_minor_surgery', 0, $parit_buntar );
+update_field( 'branch_address', 'Parit Buntar, Perak [confirm full address]', $parit_buntar );
+update_field( 'branch_map_embed', 'Poliklinik Walid Parit Buntar, Perak', $parit_buntar );
+wp_set_object_terms( $parit_buntar, array( $region_other->term_id ), 'region' );
 
 // --- Doctors -----------------------------------------------------------------
 $dr_walid = $mk( 'doctor', 'Dr Walid Utagha', 'dr-walid' );
@@ -128,6 +136,23 @@ update_field( 'service_wa_routing', 'minor_surgery', $minor );
 update_field( 'service_short_desc', 'Surgeon-led day-care minor surgery at our Central and Northern centres.', $minor );
 update_field( 'service_branches', array( $ampang, $jalanbaru, $tasek, $sgpetani ), $minor );
 update_field( 'service_lead_doctor', $dr_walid, $minor );
+// Minor surgery procedure list (translated from the owner list).
+update_field(
+	'service_procedures',
+	implode(
+		"\n",
+		array(
+			'Ganglion cyst', 'Skin tag', 'Ingrown toenail', 'Sebaceous cyst', 'Lipoma',
+			'Keloid (surgical removal, not injection)', 'Xanthelasma', 'Keratosis',
+			'Genital warts', 'Warts', 'Milia', 'Mole', 'Haemorrhoids (assessment)',
+			'Granuloma', 'Eyebag', 'Gynaecomastia', 'Accessory breast', 'Circumcision',
+			'Extra finger (polydactyly)', 'Carbuncle', 'Abscess', 'Tongue tie',
+			'Giant skin tag', 'Neurofibromatosis', 'Eye warts', 'Syringoma', 'Gout',
+			'Infected hidradenitis suppurativa (HS)',
+		)
+	),
+	$minor
+);
 wp_set_object_terms( $minor, array( $pillar_minor->term_id ), 'pillar' );
 // Back-link Dr Walid -> Minor Surgery (expertise-first).
 update_field( 'doctor_lead_for', array( $minor ), $dr_walid );
@@ -138,7 +163,41 @@ update_field( 'service_wa_routing', 'general', $antenatal );
 update_field( 'service_short_desc', 'Antenatal care led by a dedicated specialist.', $antenatal );
 update_field( 'service_lead_doctor', $dr_anis, $antenatal );
 update_field( 'service_branches', array( $ampang ), $antenatal );
+update_field(
+	'service_procedures',
+	implode(
+		"\n",
+		array(
+			'2D / 3D / 4D / 5D scan', 'Detailed scan', 'Transvaginal (TVS) scan',
+			'Anatomical scan', 'Nuchal translucency (NT) scan', 'Antenatal follow-up (pink book)',
+		)
+	),
+	$antenatal
+);
 wp_set_object_terms( $antenatal, array( $pillar_antenatal->term_id ), 'pillar' );
+
+// --- Wellness & Aesthetic (rising pillar) ------------------------------------
+$aesthetic = $mk( 'service', 'Wellness & Aesthetic', 'wellness-aesthetic', '<!-- wp:paragraph --><p>Doctor-led wellness and aesthetic treatments, from IV drips to skin and body procedures. [confirm scope]</p><!-- /wp:paragraph -->' );
+update_field( 'service_short_desc', 'Doctor-led wellness and aesthetic treatments.', $aesthetic );
+update_field( 'service_wa_routing', 'general', $aesthetic );
+update_field( 'service_branches', array( $ampang ), $aesthetic );
+update_field(
+	'service_procedures',
+	implode(
+		"\n",
+		array(
+			'Weight loss', 'Eye dark circles', 'NAD drip', 'Vitamin C drip',
+			'Glutathione drip', 'Peptide injection', 'Chemical peeling', 'Skin booster',
+			'Knee injection', 'Keloid injection', 'Trigger finger injection',
+			'Frozen shoulder injection',
+		)
+	),
+	$aesthetic
+);
+$pillar_aesthetic_term = get_term_by( 'name', 'Aesthetics', 'pillar' );
+if ( $pillar_aesthetic_term ) {
+	wp_set_object_terms( $aesthetic, array( $pillar_aesthetic_term->term_id ), 'pillar' );
+}
 
 // Back-link doctor -> service.
 update_field( 'doctor_lead_for', array( $antenatal ), $dr_anis );
@@ -163,6 +222,7 @@ $catalog = array(
 	array( 'Occupational Health (OHD)', 'occupational-health', $pillar_general, 'Health services for employees and workplaces.', 'general' ),
 	array( 'Medispa', 'medispa', $pillar_aesthetic, 'Hair wash, facials and massage treatments.', 'general' ),
 );
+$service_ids = array();
 foreach ( $catalog as $c ) {
 	list( $title, $slug, $pterm, $desc, $routing ) = $c;
 	$sid = $mk( 'service', $title, $slug );
@@ -173,6 +233,22 @@ foreach ( $catalog as $c ) {
 	if ( $pterm ) {
 		wp_set_object_terms( $sid, array( $pterm->term_id ), 'pillar' );
 	}
+	$service_ids[ $slug ] = $sid;
+}
+
+// Outpatient care procedure list (translated).
+if ( isset( $service_ids['outpatient-care'] ) ) {
+	update_field(
+		'service_procedures',
+		implode(
+			"\n",
+			array(
+				'Fever', 'Cough', 'Cold / flu', 'Gastritis', 'Wound cleaning', 'Asthma',
+				'Vaccination', 'Dizziness', 'Muscle aches', 'Medical check-up / GDL',
+			)
+		),
+		$service_ids['outpatient-care']
+	);
 }
 
 // --- Reviews (real quotes from the Wix site, translated; permission pending) --
@@ -204,4 +280,4 @@ update_field( 'review_source', 'Google review', $r3 );
 update_field( 'review_permission', 1, $r3 );
 update_field( 'review_branch', $ampang, $r3 );
 
-WP_CLI::success( 'Seeded sample content: 5 branches, 1 doctor, 2 services, 3 reviews. Run with --purge to remove.' );
+WP_CLI::success( 'Seeded sample content: 6 branches, 2 doctors, services + aesthetic, 3 reviews. Run with --purge to remove.' );
