@@ -29,8 +29,54 @@
 .walid-single .related { margin-top: 36px; }
 .walid-single .related ul { list-style: none; padding: 0; display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* Procedures we perform — styled grid + motion */
+.walid-single .svc-procedures { margin-top: 36px; }
+.walid-single .svc-procedures h2 { margin-bottom: 18px; }
+.walid-single .proc-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.walid-single .proc-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; font-size: .96rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.walid-single .proc-item:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: transparent; }
+.walid-single .proc-check { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-050); position: relative; margin-top: 1px; transition: background-color .2s ease; }
+.walid-single .proc-check::after { content: ""; position: absolute; left: 8px; top: 4px; width: 5px; height: 9px; border: solid var(--brand-700); border-width: 0 2px 2px 0; transform: rotate(45deg); transition: border-color .2s ease; }
+.walid-single .proc-item:hover .proc-check { background: var(--gold-100); }
+.walid-single .proc-item:hover .proc-check::after { border-color: var(--gold-500); }
+
+/* Stat donut charts (pure CSS conic-gradient) */
+.walid-single .svc-stats { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.walid-single .svc-stats h2 { margin-bottom: 20px; }
+.walid-single .stats-row { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.walid-single .donut { width: 150px; height: 150px; border-radius: 50%; position: relative; margin: 0; display: grid; place-items: center;
+  background: conic-gradient(var(--brand-700) calc(var(--pct) * 1%), var(--brand-050) 0);
+  transition: background .9s ease; }
+.walid-single .donut.donut-alt { background: conic-gradient(var(--gold-500) calc(var(--pct) * 1%), var(--gold-100) 0); }
+.walid-single .donut::before { content: ""; position: absolute; inset: 16px; background: var(--surface); border-radius: 50%; }
+.walid-single .donut-center { position: relative; text-align: center; line-height: 1.1; }
+.walid-single .donut-center b { display: block; font-family: var(--serif); font-size: 1.7rem; color: var(--brand-900); }
+.walid-single .donut-center span { font-size: .78rem; color: var(--muted); }
+.walid-single .stats-note { flex: 1; min-width: 180px; }
+
+/* Donut reveal: animate from 0 to --pct when visible */
+.walid-single .svc-stats .donut { --shown: 0; background: conic-gradient(var(--brand-700) calc(var(--shown) * 1%), var(--brand-050) 0); }
+.walid-single .svc-stats .donut.donut-alt { background: conic-gradient(var(--gold-500) calc(var(--shown) * 1%), var(--gold-100) 0); }
+.walid-single .svc-stats.is-visible .donut { --shown: var(--pct); }
+
 .walid-single .branch-map { border-radius: 10px; overflow: hidden; margin-top: 14px; border: 1px solid var(--rule); }
 .walid-single .branch-map iframe { display: block; width: 100%; }
+/* Animatable custom property for the donut fill */
+@property --shown {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+.walid-single .svc-stats .donut { transition: --shown .9s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .walid-single .svc-stats .donut { --shown: var(--pct); transition: none; }
+  .walid-single .proc-item { transition: none; }
+}
+@media (max-width: 560px) {
+  .walid-single .proc-cards { grid-template-columns: 1fr; }
+  .walid-single .donut { width: 128px; height: 128px; }
+}
+
 .walid-single .branch-reviews { margin-top: 44px; border-top: 1px solid var(--rule); padding-top: 32px; }
 .walid-single .branch-reviews .group-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .walid-single .branch-reviews .group-head h2 { margin: 0; }

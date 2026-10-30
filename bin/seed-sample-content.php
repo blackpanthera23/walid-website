@@ -121,8 +121,6 @@ $minor_body = implode(
 	"\n\n",
 	array(
 		'<!-- wp:paragraph --><p>Poliklinik Walid is a specialist minor surgery provider. Our surgeon-led team removes common lumps and skin lesions as day-care procedures, which means you are assessed and treated in a single visit and home the same day. Care is delivered to a hospital-grade standard at clinic speed and price, the smart choice for patients who want their time and money respected. [confirm scope]</p><!-- /wp:paragraph -->',
-		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Procedures we perform</h2><!-- /wp:heading -->',
-		'<!-- wp:list --><ul><li>Lipoma removal (fatty lumps)</li><li>Sebaceous cyst and ganglion cyst removal</li><li>Mole and skin tag removal</li><li>Wart removal</li><li>Keloid treatment</li><li>Abscess drainage</li><li>Removal of excess skin</li><li>Xanthelasma removal</li><li>Circumcision (children aged 2 and above, and adults)</li><li>Selected orthopaedic procedures such as bursitis [confirm per branch]</li></ul><!-- /wp:list -->',
 		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">How day-care surgery works</h2><!-- /wp:heading -->',
 		'<!-- wp:paragraph --><p>A doctor assesses the area first and explains your options clearly before anything is done. Many minor procedures are completed under local anaesthetic within the same appointment, so there is no hospital stay and no long wait.</p><!-- /wp:paragraph -->',
 		'<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Where we perform minor surgery</h2><!-- /wp:heading -->',

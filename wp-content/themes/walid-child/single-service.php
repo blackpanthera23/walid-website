@@ -46,6 +46,42 @@ while ( have_posts() ) :
 					<?php else : ?>
 						<p class="muted"><?php esc_html_e( 'Detailed information for this service is being prepared.', 'walid' ); ?></p>
 					<?php endif; ?>
+
+					<?php
+					// Styled "Procedures we perform" grid from the service_procedures field.
+					$procedures = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_field( 'service_procedures' ) ) ) );
+					if ( $procedures ) :
+						?>
+						<section class="svc-procedures">
+							<h2><?php esc_html_e( 'Procedures we perform', 'walid' ); ?></h2>
+							<ul class="proc-cards reveal-group">
+								<?php foreach ( $procedures as $p ) : ?>
+									<li class="proc-item"><span class="proc-check" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</section>
+					<?php endif; ?>
+
+					<?php
+					// Simple stat chart slot (donut). Values are placeholders the owner can set;
+					// they illustrate the day-care / same-day positioning. [confirm figures]
+					if ( ! empty( $procedures ) ) :
+						?>
+						<section class="svc-stats reveal">
+							<h2><?php esc_html_e( 'Why day-care surgery', 'walid' ); ?></h2>
+							<div class="stats-row">
+								<figure class="donut" style="--pct:92;" role="img" aria-label="<?php esc_attr_e( '92 percent of minor procedures completed same day', 'walid' ); ?>">
+									<div class="donut-center"><b>92%</b><span><?php esc_html_e( 'same-day', 'walid' ); ?></span></div>
+								</figure>
+								<figure class="donut donut-alt" style="--pct:70;" role="img" aria-label="<?php esc_attr_e( '70 percent under local anaesthetic', 'walid' ); ?>">
+									<div class="donut-center"><b>70%</b><span><?php esc_html_e( 'local anaesthetic', 'walid' ); ?></span></div>
+								</figure>
+								<div class="stats-note">
+									<p class="muted"><?php esc_html_e( 'Illustrative figures for the day-care model. [confirm with clinic]', 'walid' ); ?></p>
+								</div>
+							</div>
+						</section>
+					<?php endif; ?>
 				</div>
 
 				<aside>
