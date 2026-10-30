@@ -71,6 +71,13 @@
 			"rows": 2
 		},
 		{
+			"key": "field_branch_place_id",
+			"label": "Google Place ID",
+			"name": "branch_place_id",
+			"type": "text",
+			"instructions": "For live Google reviews. Find it at https://developers.google.com/maps/documentation/places/web-service/place-id (looks like ChIJ...). Requires WALID_GOOGLE_PLACES_KEY set in wp-config."
+		},
+		{
 			"key": "field_branch_photos",
 			"label": "Photos",
 			"name": "branch_photos",

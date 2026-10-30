@@ -119,19 +119,45 @@ while ( have_posts() ) :
 			</div>
 
 			<?php
-			// Reviews for THIS branch only (permission-gated). No borrowing other branches'
-			// reviews: a branch shows its own, or a clean "coming soon" state.
-			$branch_reviews = walid_branch_reviews( $id, 6 );
-			$maps_link      = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( wp_strip_all_tags( $map_query ) );
+			// Reviews for THIS branch. Priority: live Google (if Place ID + API key) ->
+			// curated CPT reviews -> clean "read on Google" state. No cross-branch borrowing.
+			$place_id   = get_field( 'branch_place_id' );
+			$google     = $place_id ? walid_google_reviews( $place_id ) : null;
+			$cpt_reviews = walid_branch_reviews( $id, 6 );
+			$maps_link  = ( $google && ! empty( $google['url'] ) )
+				? $google['url']
+				: 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( wp_strip_all_tags( $map_query ) );
+			$rating_label = ( $google && $google['rating'] )
+				? number_format( $google['rating'], 1 ) . ' ★'
+				: '4.9 ★';
 			?>
 			<section class="branch-reviews">
 				<div class="group-head">
-					<span class="pin"><?php esc_html_e( '4.9 ★', 'walid' ); ?></span>
+					<span class="pin"><?php echo esc_html( $rating_label ); ?></span>
 					<h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2>
+					<?php if ( $google && $google['total'] ) : ?>
+						<span class="muted" style="font-size:.9rem;"><?php echo esc_html( sprintf( /* translators: %s: count */ __( 'from %s Google reviews', 'walid' ), number_format_i18n( $google['total'] ) ) ); ?></span>
+					<?php endif; ?>
 				</div>
-				<?php if ( $branch_reviews ) : ?>
+
+				<?php if ( $google && ! empty( $google['reviews'] ) ) : ?>
 					<div class="card-grid reveal-group">
-						<?php foreach ( $branch_reviews as $rv ) : ?>
+						<?php foreach ( $google['reviews'] as $gr ) : ?>
+							<article class="card">
+								<div class="stars" style="color:var(--gold-500);margin-bottom:8px;"><?php echo esc_html( str_repeat( '★', max( 1, min( 5, (int) $gr['rating'] ) ) ) ); ?></div>
+								<p><?php echo esc_html( wp_trim_words( wp_strip_all_tags( $gr['text'] ), 45 ) ); ?></p>
+								<div class="meta"><?php echo esc_html( $gr['author'] ); ?> &middot; <?php echo esc_html( $gr['time'] ? $gr['time'] : __( 'Google review', 'walid' ) ); ?></div>
+							</article>
+						<?php endforeach; ?>
+					</div>
+					<p class="muted" style="font-size:.85rem;margin-top:12px;">
+						<?php esc_html_e( 'Live from Google.', 'walid' ); ?>
+						<a href="<?php echo esc_url( $maps_link ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'See all on Google', 'walid' ); ?></a>
+					</p>
+
+				<?php elseif ( $cpt_reviews ) : ?>
+					<div class="card-grid reveal-group">
+						<?php foreach ( $cpt_reviews as $rv ) : ?>
 							<article class="card">
 								<div class="stars" style="color:var(--gold-500);margin-bottom:8px;"><?php echo esc_html( str_repeat( '★', (int) ( get_field( 'review_rating', $rv->ID ) ?: 5 ) ) ); ?></div>
 								<p><?php echo esc_html( get_field( 'review_quote', $rv->ID ) ); ?></p>
@@ -140,6 +166,7 @@ while ( have_posts() ) :
 						<?php endforeach; ?>
 					</div>
 					<p class="muted" style="font-size:.85rem;margin-top:12px;"><?php esc_html_e( 'Reviews shown with permission. Source: Google.', 'walid' ); ?></p>
+
 				<?php else : ?>
 					<p class="muted"><?php esc_html_e( 'Google reviews for this branch will appear here. In the meantime, see this branch on Google.', 'walid' ); ?></p>
 					<p style="margin-top:10px;"><a class="btn btn-ghost" href="<?php echo esc_url( $maps_link ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Read reviews on Google', 'walid' ); ?></a></p>

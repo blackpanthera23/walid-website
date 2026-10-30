@@ -84,6 +84,12 @@
   2 editor block patterns (`inc/patterns.php`); local sample seeder (`bin/seed-sample-content.php`);
   deployment guide (`docs/DEPLOY.md`).
 
+## Live Google reviews (built, needs owner key)
+- `inc/google-reviews.php`: cached Places API (New) fetcher (rating + up to 5 reviews, 12h
+  transient, graceful fallback). Branch `branch_place_id` ACF field. Branch template: live
+  Google → curated CPT → "read on Google". Setup in `docs/GOOGLE-REVIEWS.md`.
+- Owner action: set `WALID_GOOGLE_PLACES_KEY` in wp-config + add each branch's Place ID.
+
 ## Owner-blocked (cannot complete until supplied — track in docs/08)
 Official logo file + exact hex · Dr Anis credential · 4th pillar · aesthetics launch scope ·
 named-review permissions + source URLs · full 10-branch dataset · confirm current social counts ·
