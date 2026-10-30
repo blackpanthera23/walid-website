@@ -13,6 +13,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * ACF safety shim.
+ *
+ * The theme reads CPT data via get_field(). If ACF is ever missing/deactivated, calling it would
+ * be a PHP fatal (white screen). This fallback returns null so templates degrade to their draft
+ * copy instead of crashing. When ACF is active, this stub is NOT defined and the real function
+ * is used. Also surfaces an admin notice so the missing dependency is obvious.
+ */
+if ( ! function_exists( 'get_field' ) ) {
+	/**
+	 * Fallback get_field() when ACF is not active.
+	 *
+	 * @return null Always null (no field data available).
+	 */
+	function get_field() {
+		return null;
+	}
+
+	add_action(
+		'admin_notices',
+		function () {
+			if ( current_user_can( 'activate_plugins' ) ) {
+				echo '<div class="notice notice-error"><p><strong>Walid theme:</strong> Advanced Custom Fields (ACF) is required and not active. Activate it so branch, service, doctor, and procedure content displays.</p></div>';
+			}
+		}
+	);
+}
+
+/**
  * WhatsApp numbers, in one place (used by the floating button + CTAs).
  * Minor-surgery pages route to the minor-surgery line; everything else to general.
  */

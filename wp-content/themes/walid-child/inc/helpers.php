@@ -10,6 +10,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Social proof / rating stats, in ONE place (owner-confirmed figures).
+ * Filterable so they can be updated without touching templates, and so a future options page or
+ * live Google data can override them. Verify counts periodically; socials drift.
+ *
+ * @return array{tiktok:string,facebook:string,instagram:string,rating:string,reviews:string}
+ */
+function walid_stats() {
+	return apply_filters(
+		'walid_stats',
+		array(
+			'tiktok'    => '561K',
+			'facebook'  => '119K',
+			'instagram' => '30.8K',
+			'rating'    => '4.9',
+			'reviews'   => '1,098',
+		)
+	);
+}
+
+/**
  * Build a wa.me link for a given routing context.
  *
  * @param string $context 'general' or 'minor_surgery'.

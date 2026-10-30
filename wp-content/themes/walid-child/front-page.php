@@ -28,10 +28,11 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 					<a class="btn btn-wa" href="<?php echo $wa_general; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp us', 'walid' ); ?></a>
 					<a class="btn btn-ghost" href="#services"><?php esc_html_e( 'Explore services', 'walid' ); ?></a>
 				</div>
+				<?php $stats = walid_stats(); ?>
 				<div class="proof-rail">
-					<div class="stat"><b>561K</b> <?php esc_html_e( 'on TikTok', 'walid' ); ?></div>
-					<div class="stat"><b>119K</b> <?php esc_html_e( 'on Facebook', 'walid' ); ?></div>
-					<div class="stat"><b>4.9&#9733;</b> <?php esc_html_e( 'from 1,098 Google reviews', 'walid' ); ?></div>
+					<div class="stat"><b><?php echo esc_html( $stats['tiktok'] ); ?></b> <?php esc_html_e( 'on TikTok', 'walid' ); ?></div>
+					<div class="stat"><b><?php echo esc_html( $stats['facebook'] ); ?></b> <?php esc_html_e( 'on Facebook', 'walid' ); ?></div>
+					<div class="stat"><b><?php echo esc_html( $stats['rating'] ); ?>&#9733;</b> <?php echo esc_html( sprintf( /* translators: %s: review count */ __( 'from %s Google reviews', 'walid' ), $stats['reviews'] ) ); ?></div>
 				</div>
 			</div>
 			<div class="hero-art reveal" aria-hidden="true">
@@ -180,7 +181,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 		<div class="container">
 			<p class="eyebrow" style="color:var(--gold-500)"><?php esc_html_e( 'Seen on TikTok', 'walid' ); ?></p>
 			<h2><?php esc_html_e( 'The care hundreds of thousands follow.', 'walid' ); ?></h2>
-			<p style="max-width:52ch;margin-bottom:28px;"><?php esc_html_e( 'Real procedures and patient stories from the clinic. The content that earned our community of 561K on TikTok and 119K on Facebook.', 'walid' ); ?></p>
+			<p style="max-width:52ch;margin-bottom:28px;"><?php echo esc_html( sprintf( /* translators: 1: tiktok count, 2: facebook count */ __( 'Real procedures and patient stories from the clinic. The content that earned our community of %1$s on TikTok and %2$s on Facebook.', 'walid' ), $stats['tiktok'], $stats['facebook'] ) ); ?></p>
 			<div class="tiktok-grid reveal-group">
 				<?php foreach ( walid_proof_videos() as $v ) : ?>
 					<a class="tiktok-card" href="<?php echo esc_url( $v['url'] ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $v['label'] ); ?>">
@@ -238,8 +239,8 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	<section>
 		<div class="container">
 			<div class="rev-head">
-				<div class="rev-stat">4.9 &#9733;</div>
-				<p class="muted"><?php esc_html_e( 'from 1,098 Google reviews', 'walid' ); ?></p>
+				<div class="rev-stat"><?php echo esc_html( $stats['rating'] ); ?> &#9733;</div>
+				<p class="muted"><?php echo esc_html( sprintf( /* translators: %s: review count */ __( 'from %s Google reviews', 'walid' ), $stats['reviews'] ) ); ?></p>
 			</div>
 			<div class="rev-grid reveal-group">
 				<?php if ( $reviews ) : ?>

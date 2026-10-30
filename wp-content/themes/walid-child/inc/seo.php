@@ -84,8 +84,8 @@ function walid_org_schema() {
 		'sameAs'      => wp_list_pluck( walid_social_links(), 'url' ),
 		'aggregateRating' => array(
 			'@type'       => 'AggregateRating',
-			'ratingValue' => '4.9',
-			'reviewCount' => '1098',
+			'ratingValue' => walid_stats()['rating'],
+			'reviewCount' => str_replace( ',', '', walid_stats()['reviews'] ),
 		),
 	);
 	echo "\n" . '<script type="application/ld+json">' . wp_json_encode( $data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>' . "\n";

@@ -48,9 +48,13 @@ WhatsApp · verified opening hours · map URL · services available · last-veri
 - Emergency capability NOT claimed unless confirmed: `[PENDING]`
 
 ## Reviews & proof
-- Permission to reuse named Google reviews: `[PENDING]`
-- Exact source URLs for approved reviews: `[PENDING]`
-- Permission to display Google rating/count (4.9 · 1,098): `[PENDING]`
+- Social follower counts for display (TikTok 561K · Facebook 119K · Instagram 30.8K):
+  `[CONFIRMED by owner]` — verify periodically; edit in one place via `walid_stats()` in
+  `inc/helpers.php` (filterable). These are group-level marketing stats, not patient claims.
+- Permission to display Google rating/count (4.9 · 1,098): `[CONFIRMED by owner]` — same source.
+- Permission to reuse **named** Google reviews (quotes + reviewer names): `[PENDING]` — curated
+  Review CPT entries stay gated behind the permission toggle until consent + source URLs.
+- Exact source URLs for approved named reviews: `[PENDING]`
 - Approved doctor profiles + MMC verification: `[PENDING]`
 - Approved panel list/logos: `[PENDING]`
 
