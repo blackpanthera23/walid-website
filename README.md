@@ -17,17 +17,23 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 |---|---|
 | 1. Strategy & planning docs | ✅ Done |
 | 2. Homepage wireframe + copy | ✅ Done (approved) |
-| 3. Visual direction (HTML/CSS prototype) | ✅ Done (`/prototype`) |
-| 4. Stand up WordPress (local, Docker) | ✅ Done (verified booting) |
-| 5. Child theme + CPTs (code) | ✅ Done (theme, navy tokens, CPTs, ACF fields) |
-| 6. Homepage + templates | ✅ Done (front-page + Branch/Service/Doctor singles) |
-| 7. Content, SEO, launch | 🔄 Code done (full site + schema/a11y/perf); awaiting owner content |
+| 3. Visual direction (prototypes) | ✅ Done (`/prototype` A, `/prototype-v2` B) |
+| 4. WordPress build (child theme, CPTs, templates, pages) | ✅ Done (built + verified locally) |
+| 5. Google reviews integration | ✅ Done (awaits API key) |
+| 6. **Homepage Concept AB — "Prototype 3"** | 🔄 Spec ready (`docs/13`), build next in IDE |
+| 7. Content, SEO, launch | 🔄 Code done; awaiting owner content + host |
 
-**Last updated:** 2026-10-30 · full WordPress build complete locally. Theme `walid-child` renders
-the navy homepage, Service/Branch/Doctor archives + singulars, About/Governance, International
-Patients, and Contact pages, primary nav, data-driven proof wall, WhatsApp routing, real social
-footer, MedicalClinic/Org schema, block patterns, and an accessibility pass. Deployment guide in
-`docs/DEPLOY.md`; local preview seeder in `bin/`. Remaining work is owner-supplied content + host.
+**Last updated:** 2026-10-30 · full WordPress build complete + verified locally. Theme
+`walid-child` renders the navy homepage, Service/Branch/Doctor archives + singulars,
+About/Governance, International Patients, and Contact pages, primary nav, data-driven proof wall,
+WhatsApp routing, real social footer, MedicalClinic/Org schema, block patterns, and an
+accessibility pass. Two homepage concepts live on Pages; the Concept AB ("Prototype 3") blend
+spec (`docs/13`) is ready for the IDE agent. Remaining: build Prototype 3, then owner content + host.
+
+### View
+- Concept A: https://blackpanthera23.github.io/walid-website/prototype/
+- Concept B: https://blackpanthera23.github.io/walid-website/prototype-v2/
+- Full WordPress site (local): `http://localhost:8080` (run `docker compose up -d` in the IDE)
 
 ### Run it locally
 See `docs/DEV.md`. In short: `docker compose up -d` then

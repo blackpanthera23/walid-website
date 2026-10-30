@@ -41,20 +41,19 @@ across a 10-branch network. Replaces the placeholder at `poliklinikdrwalid.com`.
 TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews.
 
 ## Where we are (update this as work progresses)
-- ✅ Phase 1–2: strategy docs `docs/00`–`docs/12` + homepage wireframe (approved).
-- ✅ Phase 3: rendered HTML/CSS homepage prototype in `/prototype` (navy, Fraunces+Inter).
-- ✅ Phase 4: WordPress stood up locally via Docker (`docker-compose.yml`, `bin/provision.sh`,
-  `docs/DEV.md`). Kadence + ACF + Rank Math installed; `walid-child` active. Verified booting.
-- ✅ Phase 5: `walid-child` + navy `theme.json` + Kadence palette (navy/green/gold). CPT plugin
-  `walid-cpts` (Branch/Service/Doctor/Review) + Region/Pillar taxonomies + ACF local-JSON fields.
-- ✅ Phase 6: `front-page.php` (all 11 homepage sections, CPT-driven with draft fallback) +
-  `single-branch/service/doctor.php`. Floating WhatsApp (context-routed) + brand footer.
-- ✅ Phase 7 (code): SEO/schema (MedicalClinic per branch, Org aggregateRating), a11y (skip link,
-  focus, one h1, alt text), perf (non-render-blocking fonts). PLUS full site: Service/Branch/
-  Doctor archives + singulars, About/Governance, International Patients, Contact pages, primary
-  nav, data-driven proof wall, block patterns, sample seeder (`bin/`), deploy guide (`docs/DEPLOY.md`).
-- 🔄 Remaining (owner, not code): 10 branch records, doctor bios/photos, review permissions,
-  official logo, Dr Anis credential, 4th pillar, real proof-wall video URLs, then launch to a host.
+- ✅ Strategy docs `docs/00`–`docs/12` + homepage wireframe (approved).
+- ✅ Prototypes: `/prototype` (Concept A) + `/prototype-v2` (Concept B, calm/airy).
+- ✅ WordPress build COMPLETE + verified locally via Docker (`docs/DEV.md`). `walid-child` theme +
+  navy `theme.json`/Kadence palette; CPT plugin `walid-cpts` (Branch/Service/Doctor/Review) +
+  Region/Pillar taxonomies + ACF local-JSON; `front-page.php` (all homepage sections, CPT-driven
+  with draft fallback) + `single-branch/service/doctor.php` + archives; About/Governance,
+  International Patients, Contact pages; primary nav; context-routed WhatsApp + brand footer;
+  premium services list; per-branch reviews; Google Places integration (awaits key); SEO/schema
+  (MedicalClinic per branch, Org aggregateRating); a11y + perf pass; motion; placeholders; block
+  patterns; sample seeder (`bin/`); deploy guide (`docs/DEPLOY.md`). Runs at `http://localhost:8080`.
+- 🔄 NEXT: build **Concept AB "Prototype 3"** (homepage blend) per `docs/13-concept-ab-prototype3.md`
+  as a standalone `/prototype-v3/` first; port to live `front-page.php` after owner sign-off.
+- ⬜ THEN: deploy to host (`HANDOFF-OMP.md`, `DEPLOY.md`); owner content + official logo + launch.
 
 ## Build workflow (Kiro IDE)
 - Local WP runs via Docker (`docs/DEV.md`). Spec drives the build:
