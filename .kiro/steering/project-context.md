@@ -62,8 +62,11 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   Archive cards adopted the premium card craft (light + a dark navy FEATURED variant for the
   hero service), inspired by the "Deep Blue Nights" card MINUS e-commerce (no cart/price/scarcity).
   Service single has a styled procedures grid + animated donut stat charts.
-- 🔄 NEXT (optional polish): align remaining single/page templates fully to AB (organic panels),
-  then deploy to host (`HANDOFF-OMP.md`, `DEPLOY.md`).
+- ✅ Inner single/page templates aligned to AB (airy spacing, organic photo panels).
+- 🔄 DEPLOY: host is **IONOS "Hosting for WordPress Grow"** (Managed WordPress), domain
+  **poliklinikdrwalid.com** (replace-in-place). Step-by-step in `docs/DEPLOY-IONOS.md` (SFTP host
+  access-5021078157.webspace-host.com, DB dbs15968559 MariaDB 10.11). OMP/owner runs it; back up +
+  prefer staging first. Secrets stay in the IONOS panel, never in git.
 - ⬜ THEN: owner content (10 branches, doctors, real photos) + official logo + Google key + launch.
 
 ## Build workflow (Kiro IDE)

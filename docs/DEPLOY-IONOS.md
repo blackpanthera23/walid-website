@@ -4,10 +4,26 @@
 > `HANDOFF-OMP.md`; this file covers the IONOS panel specifics. Recommended path: a **fresh
 > WordPress install on IONOS**, then upload our theme + plugin and enter content (no DB migration).
 
-IONOS sells two relevant products. Pick the one you have:
-- **Managed WordPress** — WordPress is pre-installed/managed. Easiest; you just add our code.
-- **Web Hosting (Linux/"Plus/Pro")** — a general hosting plan with the IONOS panel, MySQL,
-  SFTP, and (on Plus/Pro) SSH. You install WordPress yourself (1-click or manual).
+## THIS PROJECT'S IONOS SETUP (confirmed)
+
+| Item | Value |
+|---|---|
+| Plan | **Hosting for WordPress Grow** (use the Managed WordPress path below) |
+| Domain | **poliklinikdrwalid.com** (replaces the current placeholder site in place) |
+| SFTP host | `access-5021078157.webspace-host.com` · port **22** · protocol **SFTP** |
+| SFTP user | `su703680` (password: from the IONOS panel — NEVER commit it) |
+| Database | `dbs15968559` · **MariaDB 10.11** (DB user/password/host from the panel) |
+| PHP | automated (ensure **8.2+** is selected) |
+| SSL | enabled |
+
+> Secrets (SFTP password, DB password, Google API key) live only in the IONOS panel /
+> `wp-config.php` on the server. Do not put them in git or chat.
+
+---
+
+IONOS product paths (this plan = the first one):
+- **Managed WordPress** (THIS PLAN) — WordPress is pre-installed/managed. Easiest; you just add our code.
+- **Web Hosting (Linux/"Plus/Pro")** — a general hosting plan where you install WordPress yourself.
 
 ---
 
@@ -27,16 +43,26 @@ IONOS sells two relevant products. Pick the one you have:
 
 ---
 
-## B. Fresh install path (recommended)
+## ⚠️ This is a REPLACE-IN-PLACE on a LIVE domain
 
-### Managed WordPress
-1. IONOS panel → your Managed WordPress site is already running; note its admin URL.
-2. Log into wp-admin. Set a strong admin password.
-3. Go to **Appearance → Themes** and **Plugins** and install:
-   - Theme: **Kadence**
-   - Plugins: **Advanced Custom Fields**, **Rank Math** (SEO)
-4. Upload our code (see §C) and activate: theme `Walid Child`, plugin `Walid CPTs`.
-5. Continue at §D (configure).
+`poliklinikdrwalid.com` already serves the current placeholder site. Deploying changes what the
+public sees. Do it safely:
+1. **Back up first** — IONOS panel → back up the site + export the `dbs15968559` database before
+   touching anything. (Managed WordPress also offers a **staging** site — prefer staging: build
+   there, verify with §F checklist, then push staging → live.)
+2. If there is no staging option, consider a brief maintenance window, or build under a temporary
+   path/subdomain and switch the domain when verified.
+3. Keep the current site's content export until the new site is confirmed good.
+
+## B. Managed WordPress path (THIS PLAN)
+
+1. IONOS panel → open the Managed WordPress site for `poliklinikdrwalid.com`; note its wp-admin URL.
+2. Log into wp-admin. Set a strong admin password + enable login limiting.
+3. Confirm **PHP 8.2+** in the IONOS panel (Hosting → PHP settings).
+4. **Appearance → Themes → Add** install **Kadence**; **Plugins → Add** install + activate
+   **Advanced Custom Fields** and **Rank Math** (SEO). Do NOT add a page builder or multilingual plugin.
+5. Upload our code via SFTP (see §C) and activate: theme **Walid Child**, plugin **Walid CPTs**.
+6. Continue at §D (configure).
 
 ### Web Hosting (self-install)
 1. IONOS panel → **WordPress / Website** → use the **1-click WordPress installer**, or install
@@ -59,9 +85,12 @@ wp-content/plugins/walid-cpts/     → <webroot>/wp-content/plugins/walid-cpts/
 ```
 (`walid-child/acf-json/` must come along — it auto-registers the fields.)
 
-**Via SFTP (works on every plan):**
-1. Connect with an SFTP client (FileZilla/Cyberduck) using the IONOS SFTP creds.
-2. Navigate to the site's web root (often `/` or a folder shown in the panel).
+**Via SFTP (this plan):**
+1. Connect with an SFTP client (FileZilla/Cyberduck):
+   - Host `access-5021078157.webspace-host.com` · Port `22` · Protocol `SFTP`
+   - User `su703680` · Password from the IONOS panel
+2. Navigate to the Managed WordPress site's web root for `poliklinikdrwalid.com`
+   (the panel shows the document root; `wp-content/` lives under it).
 3. Upload the two folders into `wp-content/themes/` and `wp-content/plugins/`.
 4. In wp-admin: Appearance → Themes → activate **Walid Child**; Plugins → activate **Walid CPTs**.
 
