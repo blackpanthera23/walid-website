@@ -1,11 +1,46 @@
 # Handoff for OMP — Deploy Poliklinik Walid to a live host
 
-> **Status: the build is DONE.** The theme, plugin, templates, CPTs, fields, pages, reviews,
-> schema and Google-reviews integration are all finished and verified in local Docker. Your job
-> now is **deployment**: stand up WordPress on the host, install our code, and wire it up.
->
-> Read `project-context.md` + `docs/00-project-brief.md` for the "why". This file is the
-> deployment runbook. Deep detail: `docs/DEPLOY.md`, `docs/DEV.md`, `docs/GOOGLE-REVIEWS.md`.
+> **Status: BUILT + DEPLOYED LIVE** on `poliklinikdrwalid.com` (IONOS Managed WP, parent theme
+> **Astra** 4.14.2). Theme `walid-child` + plugin `walid-cpts` active; ACF + 5 field groups synced.
+> Remaining work is **live config + real content** (below). Read `project-context.md` +
+> `docs/00-project-brief.md` for the "why". Deep detail: `docs/DEPLOY-IONOS.md`, `docs/UPDATING.md`,
+> `docs/CONTENT-CHECKLIST.md`, `docs/GOOGLE-REVIEWS.md`.
+
+---
+
+## ★ DO THIS NEXT (live config — one command)
+
+The site is live but a few pages/menu/permalinks are not set yet (that is why `/about/`,
+`/international-patients/`, and `/procedures/<slug>/` 404). Run the one-shot setup on the host:
+
+```bash
+wp eval-file finish-setup.php      # upload bin/finish-setup.php first, or run from the repo copy
+```
+
+It is **idempotent** and does all of this:
+- creates **Home / About / International Patients / Contact** pages + assigns their templates
+- sets the **static front page** (Home) and **Post-name permalinks**
+- builds the **Primary menu** (Home · Services · Branches · Doctors · About · International ·
+  Contact) and assigns it to Astra's location
+- **flushes rewrites** (fixes the `/about`, `/international-patients`, `/procedures/<slug>` 404s)
+
+After running, verify: those URLs return 200, the nav shows 7 items, and
+`/procedures/xanthelasma-treatment/` resolves (if that post exists; otherwise it is created via
+the CMS as content).
+
+### Then, in order
+1. **Confirm ACF is active** (hard dependency — the theme reads content via `get_field()`; a
+   safety shim now prevents a white screen, but with ACF off the CPT content is blank).
+2. **Enter real content** via the CMS — `docs/CONTENT-CHECKLIST.md` (10 branches, doctors,
+   services + procedures, reviews). The local sample seeder (`bin/seed-sample-content.php`) is
+   LOCAL ONLY — do not run it on live.
+3. **Swap the official logo** at `wp-content/themes/walid-child/assets/logo.jpg` (same filename).
+4. **Optional:** Google Places key for live reviews (`docs/GOOGLE-REVIEWS.md`); Rank Math sitemap
+   → Google Search Console.
+5. Run the **pre-launch checklist** (§4) before announcing.
+
+> Updating later (small vs big changes): see `docs/UPDATING.md`. Content = edit in wp-admin;
+> code = deploy changed theme/plugin files, test on staging first.
 
 ---
 

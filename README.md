@@ -17,18 +17,19 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 |---|---|
 | 1. Strategy & planning docs | ✅ Done |
 | 2. Homepage wireframe + copy | ✅ Done (approved) |
-| 3. Visual direction (prototypes) | ✅ Done (`/prototype` A, `/prototype-v2` B) |
-| 4. WordPress build (child theme, CPTs, templates, pages) | ✅ Done (built + verified locally) |
-| 5. Google reviews integration | ✅ Done (awaits API key) |
-| 6. **Homepage Concept AB — "Prototype 3"** | 🔄 Spec ready (`docs/13`), build next in IDE |
-| 7. Content, SEO, launch | 🔄 Code done; awaiting owner content + host |
+| 3. Visual direction (prototypes A/B/AB) | ✅ Done (`/prototype`, `-v2`, `-v3`) |
+| 4. WordPress build (child theme, CPTs, templates, pages) | ✅ Done |
+| 5. Concept AB applied to the live theme | ✅ Done (homepage + inner pages + cards) |
+| 6. Per-treatment Procedure pages + Google reviews integration | ✅ Done (Google awaits API key) |
+| 7. **Deployed live** (IONOS, Astra parent) | ✅ Done — `poliklinikdrwalid.com` |
+| 8. Live config (pages/menu/permalinks) | 🔄 Run `bin/finish-setup.php` |
+| 9. Real content + SEO + launch | ⬜ Owner (see `docs/CONTENT-CHECKLIST.md`) |
 
-**Last updated:** 2026-10-30 · full WordPress build complete + verified locally. Theme
-`walid-child` renders the navy homepage, Service/Branch/Doctor archives + singulars,
-About/Governance, International Patients, and Contact pages, primary nav, data-driven proof wall,
-WhatsApp routing, real social footer, MedicalClinic/Org schema, block patterns, and an
-accessibility pass. Two homepage concepts live on Pages; the Concept AB ("Prototype 3") blend
-spec (`docs/13`) is ready for the IDE agent. Remaining: build Prototype 3, then owner content + host.
+**Last updated:** 2026-10-31 · LIVE on `poliklinikdrwalid.com` (IONOS Managed WP, parent theme
+Astra). `walid-child` + `walid-cpts` active, ACF synced. Concept AB applied across the homepage
+and inner pages; per-treatment Procedure pages added (Xanthelasma example). ACF safety shim +
+centralized proof stats added. **Next:** OMP runs `bin/finish-setup.php` (pages/menu/permalinks),
+then owner enters real content via `docs/CONTENT-CHECKLIST.md`. Updating guide: `docs/UPDATING.md`.
 
 ### View
 - Concept A: https://blackpanthera23.github.io/walid-website/prototype/

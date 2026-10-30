@@ -58,8 +58,10 @@ to a single WhatsApp tap.
 | 4. Stand up WordPress | ✅ | Docker (`docker-compose.yml`); Astra + ACF + Rank Math; verified |
 | 5. Child theme + CPTs | ✅ | theme + navy palette; `walid-cpts` + ACF fields (acf-json/) |
 | 6. Templates | ✅ | `front-page.php` + Branch/Service/Doctor singles; WA + footer |
-| 7. Content, SEO, launch | 🔄 | schema/a11y/perf DONE in code; awaiting owner content + host |
-| 8. Port theme Kadence→Astra | ✅ | 31 Oct 2026: `Template: astra`, Astra palette script, docs cleaned |
+| 7. Port theme Kadence→Astra | ✅ | 31 Oct 2026: matches the host; zero Kadence APIs used |
+| 8. Deployed LIVE | ✅ | poliklinikdrwalid.com (IONOS); walid-child + walid-cpts active, ACF synced |
+| 9. Live config | 🔄 | run `bin/finish-setup.php` (pages/menu/permalinks) |
+| 10. Real content + launch | ⬜ | owner: `docs/CONTENT-CHECKLIST.md` + logo + Google key |
 
 **Local dev:** WordPress runs via Docker — see `docs/DEV.md`. The spec at
 `.kiro/specs/wordpress-build/` (requirements → design → tasks) drove the build; all 10 tasks done

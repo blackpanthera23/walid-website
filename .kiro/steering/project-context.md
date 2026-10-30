@@ -63,11 +63,18 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   hero service), inspired by the "Deep Blue Nights" card MINUS e-commerce (no cart/price/scarcity).
   Service single has a styled procedures grid + animated donut stat charts.
 - ✅ Inner single/page templates aligned to AB (airy spacing, organic photo panels).
-- 🔄 DEPLOY: host is **IONOS "Hosting for WordPress Grow"** (Managed WordPress), domain
-  **poliklinikdrwalid.com** (replace-in-place). Step-by-step in `docs/DEPLOY-IONOS.md` (SFTP host
-  access-5021078157.webspace-host.com, DB dbs15968559 MariaDB 10.11). OMP/owner runs it; back up +
-  prefer staging first. Secrets stay in the IONOS panel, never in git.
-- ⬜ THEN: owner content (10 branches, doctors, real photos) + official logo + Google key + launch.
+- ✅ Per-treatment **Procedure** pages (CPT + single-procedure.php, AB look); Xanthelasma seeded.
+  Service `/services/` list shows `Name | explainer` one-liners. Service single has procedures
+  grid + donut stat charts.
+- ✅ DEPLOYED LIVE on **poliklinikdrwalid.com** (IONOS Managed WP). Parent theme switched
+  **Kadence → Astra** (host has Astra; we use zero Kadence APIs, so the look is unchanged; all
+  design lives in the child theme). walid-child + walid-cpts active; ACF + 5 field groups synced.
+- ✅ Robustness: ACF safety shim (no white screen if ACF off); proof stats centralized in
+  `walid_stats()` (helpers.php) and marked owner-confirmed in docs/08.
+- 🔄 LIVE CONFIG PENDING: run `bin/finish-setup.php` on host (creates About/International/Contact
+  pages, static home, Post-name permalinks, Primary menu, flush — fixes current 404s).
+- ⬜ THEN: real content via `docs/CONTENT-CHECKLIST.md` + official logo + Google key + launch.
+  Rollback: Astra is intact (Appearance → Themes → Astra). Updating guide: `docs/UPDATING.md`.
 
 ## Build workflow (Kiro IDE)
 - Local WP runs via Docker (`docs/DEV.md`). Spec drives the build:
