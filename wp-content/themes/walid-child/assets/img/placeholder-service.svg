@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Service image placeholder">
+  <defs>
+    <linearGradient id="sg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEF0FB"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="520" fill="url(#sg)"/>
+  <g fill="none" stroke="#232B8F" stroke-opacity="0.65" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M360 170 h80 v70 h70 v80 h-70 v70 h-80 v-70 h-70 v-80 h70 z"/>
+  </g>
+  <circle cx="300" cy="180" r="7" fill="#C9A227"/>
+  <text x="400" y="420" text-anchor="middle" fill="#5B607A" font-family="Georgia, serif" font-size="26">Service image placeholder</text>
+</svg>

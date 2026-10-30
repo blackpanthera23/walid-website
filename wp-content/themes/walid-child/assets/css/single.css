@@ -29,9 +29,19 @@
 .walid-single .related { margin-top: 36px; }
 .walid-single .related ul { list-style: none; padding: 0; display: flex; gap: 12px; flex-wrap: wrap; }
 
+.walid-single .branch-map { border-radius: 10px; overflow: hidden; margin-top: 14px; border: 1px solid var(--rule); }
+.walid-single .branch-map iframe { display: block; width: 100%; }
+.walid-single .branch-reviews { margin-top: 44px; border-top: 1px solid var(--rule); padding-top: 32px; }
+.walid-single .branch-reviews .group-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.walid-single .branch-reviews .group-head h2 { margin: 0; }
+.walid-single .branch-reviews .pin { background: var(--gold-100); color: var(--gold-500); border-radius: 8px; padding: 2px 10px; font-size: .8rem; font-weight: 700; }
+.walid-single .branch-reviews .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.walid-single .branch-reviews .card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 22px; }
+
 @media (max-width: 880px) {
   .walid-single .meta-grid, .walid-single .doctor-hero { grid-template-columns: 1fr; }
   .walid-single .doctor-photo { max-width: 320px; }
+  .walid-single .branch-reviews .card-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
   .walid-single { padding: 44px 0; }

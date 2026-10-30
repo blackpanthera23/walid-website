@@ -92,7 +92,7 @@ function walid_branches_in_region( $region_name ) {
  * @return string
  */
 function walid_placeholder( $name ) {
-	$allowed = array( 'hero', 'procedure', 'doctor', 'branch' );
+	$allowed = array( 'hero', 'procedure', 'doctor', 'branch', 'service' );
 	$name    = in_array( $name, $allowed, true ) ? $name : 'procedure';
 	return esc_url( get_stylesheet_directory_uri() . '/assets/img/placeholder-' . $name . '.svg' );
 }

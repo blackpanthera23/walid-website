@@ -70,9 +70,13 @@ update_field( 'branch_phone', '017-224 8275', $ampang );
 update_field( 'branch_hours', array( array( 'day' => 'Mon-Sat', 'time' => '9:00am - 6:00pm [confirm]' ) ), $ampang );
 wp_set_object_terms( $ampang, array( $region_central->term_id ), 'region' );
 
-$jalanbaru = $mk( 'branch', 'Poliklinik Walid Jalan Baru', 'jalan-baru' );
+$jalanbaru = $mk( 'branch', 'Poliklinik Walid Jalan Baru', 'jalan-baru', '<!-- wp:paragraph --><p>Our Jalan Baru branch in Seberang Perai is one of our Northern surgical centres, offering day-care minor surgery alongside general practice. [confirm details]</p><!-- /wp:paragraph -->' );
 update_field( 'branch_provides_minor_surgery', 1, $jalanbaru );
-update_field( 'branch_address', 'Seberang Perai, Penang [confirm]', $jalanbaru );
+update_field( 'branch_address', 'Jalan Baru, Seberang Perai, Penang [confirm full address]', $jalanbaru );
+update_field( 'branch_phone', '017-549 7593', $jalanbaru );
+update_field( 'branch_hours', array( array( 'day' => 'Mon-Sat', 'time' => '9:00am - 6:00pm [confirm]' ) ), $jalanbaru );
+// Map field left as a plain query so the template renders a Google Maps embed from it.
+update_field( 'branch_map_embed', 'Poliklinik Walid Jalan Baru, Seberang Perai, Penang', $jalanbaru );
 wp_set_object_terms( $jalanbaru, array( $region_north->term_id ), 'region' );
 
 $tasek = $mk( 'branch', 'Poliklinik Walid Tasek Gelugor', 'tasek-gelugor' );
@@ -138,6 +142,38 @@ wp_set_object_terms( $antenatal, array( $pillar_antenatal->term_id ), 'pillar' )
 
 // Back-link doctor -> service.
 update_field( 'doctor_lead_for', array( $antenatal ), $dr_anis );
+
+// --- Full service catalog (from the Wix "Perkhidmatan" page, translated) -----
+// Each: title, slug, pillar term name, short description, WA routing.
+$pillar_aesthetic = get_term_by( 'name', 'Aesthetics', 'pillar' );
+$pillar_general   = get_term_by( 'name', 'General Medicine', 'pillar' );
+$catalog = array(
+	array( 'Knee Injection', 'knee-injection', $pillar_general, 'PRP knee injections and treatment for knee pain.', 'general' ),
+	array( "Men's Health", 'mens-health', $pillar_general, 'Treatment and consultation for men\'s health concerns.', 'general' ),
+	array( 'Nebuliser & Suction', 'nebuliser-suction', $pillar_general, 'Nebuliser to loosen phlegm and suction to clear it.', 'general' ),
+	array( 'Radiology', 'radiology', $pillar_general, 'Imaging services. Coming soon. [confirm]', 'general' ),
+	array( 'Pregnancy Scan', 'pregnancy-scan', $pillar_antenatal, 'Pregnancy checks from 7 weeks of gestation and above.', 'general' ),
+	array( 'Family Planning', 'family-planning', $pillar_antenatal, 'A range of family planning options.', 'general' ),
+	array( 'Immunisation', 'immunisation', $pillar_general, 'Vaccinations for protection across ages.', 'general' ),
+	array( 'ENT', 'ent', $pillar_general, 'Ear, nose and throat examinations.', 'general' ),
+	array( 'Physiotherapy', 'physiotherapy', $pillar_general, 'Physiotherapy including rehabilitation and more.', 'general' ),
+	array( 'Mother & Child Health', 'mother-child-health', $pillar_antenatal, 'Health checks for mother and child.', 'general' ),
+	array( 'Fertility Treatment', 'fertility-treatment', $pillar_antenatal, 'Fertility treatment by an O&G doctor.', 'general' ),
+	array( 'Outpatient Care', 'outpatient-care', $pillar_general, 'Outpatient treatment for fever, cough, cold and more.', 'general' ),
+	array( 'Occupational Health (OHD)', 'occupational-health', $pillar_general, 'Health services for employees and workplaces.', 'general' ),
+	array( 'Medispa', 'medispa', $pillar_aesthetic, 'Hair wash, facials and massage treatments.', 'general' ),
+);
+foreach ( $catalog as $c ) {
+	list( $title, $slug, $pterm, $desc, $routing ) = $c;
+	$sid = $mk( 'service', $title, $slug );
+	update_field( 'service_short_desc', $desc, $sid );
+	update_field( 'service_pillar_weight', ( $pterm && $pterm->name === 'Aesthetics' ) ? 'rising' : 'base', $sid );
+	update_field( 'service_wa_routing', $routing, $sid );
+	update_field( 'service_branches', array( $ampang ), $sid );
+	if ( $pterm ) {
+		wp_set_object_terms( $sid, array( $pterm->term_id ), 'pillar' );
+	}
+}
 
 // --- Reviews (real quotes from the Wix site, translated; permission pending) --
 // Sourced from websitewalid.wixsite.com/poliklinikwalid (Malay originals, translated to

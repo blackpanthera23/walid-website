@@ -39,7 +39,18 @@ $region_order = array( 'Central (Klang Valley)', 'North (Penang / Kedah)', 'Othe
 						$flagship = (bool) get_field( 'branch_is_flagship', $b->ID );
 						$address  = get_field( 'branch_address', $b->ID );
 						?>
-						<article class="card">
+						<?php
+						$bphotos = get_field( 'branch_photos', $b->ID );
+						$bthumb  = ( $bphotos && is_array( $bphotos ) ) ? $bphotos[0] : 0;
+						?>
+						<article class="card has-media">
+							<div class="card-media">
+								<?php if ( $bthumb ) : ?>
+									<?php echo wp_get_attachment_image( is_array( $bthumb ) ? $bthumb['ID'] : $bthumb, 'medium', false, array( 'alt' => esc_attr( get_the_title( $b ) ), 'loading' => 'lazy' ) ); ?>
+								<?php else : ?>
+									<img src="<?php echo walid_placeholder( 'branch' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title( $b ) ); ?>" loading="lazy" />
+								<?php endif; ?>
+							</div>
 							<h3>
 								<a href="<?php echo esc_url( get_permalink( $b ) ); ?>"><?php echo esc_html( get_the_title( $b ) ); ?></a>
 								<?php if ( $minor ) : ?><span class="surgery-badge"><?php esc_html_e( 'Minor surgery', 'walid' ); ?></span><?php endif; ?>

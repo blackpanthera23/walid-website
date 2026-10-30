@@ -7,8 +7,10 @@
 .walid-home .hero-art .hero-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
 .walid-home .pillar-hero .art { padding: 0; overflow: hidden; }
 .walid-home .pillar-hero .art img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.walid-single .branch-photo { border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; box-shadow: var(--shadow); aspect-ratio: 16/8; }
-.walid-single .branch-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.walid-single .branch-photo,
+.walid-single .service-photo { border-radius: var(--radius); overflow: hidden; margin-bottom: 32px; box-shadow: var(--shadow); aspect-ratio: 16/8; background: var(--brand-050); }
+.walid-single .branch-photo img,
+.walid-single .service-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ---- Buttons: micro-interaction ------------------------------------------- */
 .btn, .walid-btn, .wp-block-button__link {
@@ -45,9 +47,9 @@
 .walid-home .tiktok-card { transition: transform .2s ease; }
 .walid-home .tiktok-card:hover { transform: translateY(-3px); }
 
-/* Tags */
-.walid-home .tag, .walid-single .tag { transition: background-color .16s ease, color .16s ease; }
-.walid-single .tag:hover { background: var(--brand-700); color: #fff; }
+/* Tags (now links) */
+.walid-home .tag, .walid-single .tag { transition: background-color .16s ease, color .16s ease, transform .16s ease; text-decoration: none; }
+.walid-home a.tag:hover, .walid-single .tag:hover { background: var(--brand-700); color: #fff; transform: translateY(-1px); }
 
 /* Sticky header subtle shadow on scroll (Kadence handles sticky; we add depth) */
 .walid-eyebrow, .walid-home .eyebrow, .walid-archive .eyebrow { position: relative; }

@@ -66,7 +66,15 @@ $hero_pillar = 'Minor Surgery';
 						$routing = get_field( 'service_wa_routing', $s->ID );
 						$wa      = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title( $s ) ) );
 						?>
-						<article class="card<?php echo $is_hero ? ' hero-card' : ''; ?>">
+						<?php $icon = get_field( 'service_icon', $s->ID ); ?>
+						<article class="card has-media<?php echo $is_hero ? ' hero-card' : ''; ?>">
+							<div class="card-media">
+								<?php if ( $icon ) : ?>
+									<?php echo wp_get_attachment_image( $icon, 'medium', false, array( 'alt' => esc_attr( get_the_title( $s ) ), 'loading' => 'lazy' ) ); ?>
+								<?php else : ?>
+									<img src="<?php echo walid_placeholder( 'service' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title( $s ) ); ?>" loading="lazy" />
+								<?php endif; ?>
+							</div>
 							<h3><a href="<?php echo esc_url( get_permalink( $s ) ); ?>"><?php echo esc_html( get_the_title( $s ) ); ?></a></h3>
 							<?php if ( $short ) : ?><p><?php echo esc_html( $short ); ?></p><?php endif; ?>
 							<div class="card-foot">

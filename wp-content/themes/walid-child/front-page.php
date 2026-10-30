@@ -70,12 +70,28 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 				<p class="eyebrow"><?php esc_html_e( 'Our specialty', 'walid' ); ?></p>
 				<h2><?php esc_html_e( 'Minor surgery, done the smart-value way.', 'walid' ); ?></h2>
 				<p><?php esc_html_e( 'Lipoma, cysts, moles, skin tags, warts and more, assessed and treated in a day. Performed at our Central centre in Ampang and our Northern centres in Seberang Perai, Tasek Gelugor and Sungai Petani.', 'walid' ); ?></p>
+				<?php
+				// Link tags to the Minor Surgery service page if it exists, else to WhatsApp.
+				$minor_service = get_posts(
+					array(
+						'post_type'      => 'service',
+						'posts_per_page' => 1,
+						'name'           => 'minor-surgery',
+					)
+				);
+				$minor_url = $minor_service ? get_permalink( $minor_service[0] ) : $wa_surgery;
+				$tags      = array(
+					__( 'Lipoma', 'walid' ),
+					__( 'Cysts', 'walid' ),
+					__( 'Moles & skin tags', 'walid' ),
+					__( 'Warts', 'walid' ),
+					__( 'Circumcision', 'walid' ),
+				);
+				?>
 				<div class="tag-row">
-					<span class="tag"><?php esc_html_e( 'Lipoma', 'walid' ); ?></span>
-					<span class="tag"><?php esc_html_e( 'Cysts', 'walid' ); ?></span>
-					<span class="tag"><?php esc_html_e( 'Moles & skin tags', 'walid' ); ?></span>
-					<span class="tag"><?php esc_html_e( 'Warts', 'walid' ); ?></span>
-					<span class="tag"><?php esc_html_e( 'Circumcision', 'walid' ); ?></span>
+					<?php foreach ( $tags as $t ) : ?>
+						<a class="tag" href="<?php echo esc_url( $minor_url ); ?>"><?php echo esc_html( $t ); ?></a>
+					<?php endforeach; ?>
 				</div>
 				<a class="btn btn-primary" href="<?php echo $wa_surgery; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp the minor surgery team', 'walid' ); ?></a>
 			</div>

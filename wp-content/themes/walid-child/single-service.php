@@ -30,6 +30,15 @@ while ( have_posts() ) :
 				<p style="margin-top:16px;"><a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp about this', 'walid' ); ?></a></p>
 			</div>
 
+			<?php $svc_img = get_field( 'service_icon' ); ?>
+			<div class="service-photo reveal">
+				<?php if ( $svc_img ) : ?>
+					<?php echo wp_get_attachment_image( $svc_img, 'large', false, array( 'alt' => esc_attr( get_the_title() ), 'loading' => 'lazy' ) ); ?>
+				<?php else : ?>
+					<img src="<?php echo walid_placeholder( 'service' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
+				<?php endif; ?>
+			</div>
+
 			<div class="meta-grid">
 				<div>
 					<?php if ( get_the_content() ) : ?>
