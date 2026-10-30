@@ -93,6 +93,10 @@ See `docs/DEPLOY.md` §"Option B". Involves `wp db export/import`, uploads tarba
 
 ## 2. Enter content (CMS — owner/consultant supplies the data)
 
+> A fill-in-the-blanks sheet mapping every CMS field is in **`docs/CONTENT-CHECKLIST.md`** — use
+> it to gather the 10 branches, doctors, services, and reviews before typing them into wp-admin.
+
+
 All content is entered via wp-admin forms (that is the CMS payoff). Nothing is hardcoded.
 
 - **Branches** (×10): title, address, opening hours, phone, WhatsApp, region (Central / North /
