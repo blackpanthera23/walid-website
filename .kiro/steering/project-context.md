@@ -51,8 +51,14 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   premium services list; per-branch reviews; Google Places integration (awaits key); SEO/schema
   (MedicalClinic per branch, Org aggregateRating); a11y + perf pass; motion; placeholders; block
   patterns; sample seeder (`bin/`); deploy guide (`docs/DEPLOY.md`). Runs at `http://localhost:8080`.
-- 🔄 NEXT: build **Concept AB "Prototype 3"** (homepage blend) per `docs/13-concept-ab-prototype3.md`
-  as a standalone `/prototype-v3/` first; port to live `front-page.php` after owner sign-off.
+- ✅ Concept AB "Prototype 3" built at `/prototype-v3/` (per `docs/13`): Concept B's calm/airy look
+  + Concept A's substance; premium footer (CTA band, social buttons with counts, two-column bottom).
+- ✅ **DECISION (owner): Concept AB is the chosen direction for the WHOLE website.** Not just the
+  homepage — align all pages (archives, singles, About/Contact/International) to the AB aesthetic:
+  airy whitespace, organic rounded panels + floating accent dots, smooth rounded cards, calmer
+  motion, navy+gold. Reuse `/prototype-v3` as the visual reference.
+- 🔄 NEXT: port AB into the live theme — rewrite `front-page.php` + section CSS to the Prototype 3
+  look (keep dynamic CPT content), then restyle archive/single/page templates to match.
 - ⬜ THEN: deploy to host (`HANDOFF-OMP.md`, `DEPLOY.md`); owner content + official logo + launch.
 
 ## Build workflow (Kiro IDE)

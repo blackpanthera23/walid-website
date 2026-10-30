@@ -178,20 +178,57 @@
 
   <!-- 10. FOOTER -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <div class="brand"><img src="assets/logo.jpg" alt="Poliklinik Walid" width="42" height="42" class="footer-logo" /><span class="brand-name light">Poliklinik Walid</span></div>
-        <p class="muted-light">Surgeon-led day-care minor surgery, aesthetics and women's health, with general practice across our network.</p>
-        <div class="socials"><a href="https://www.tiktok.com/@drwalidutagha" target="_blank" rel="noopener">TikTok</a><a href="https://www.facebook.com/profile.php?id=100080089330356" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/drwalidutagha/" target="_blank" rel="noopener">IG</a><a href="https://www.google.com/search?q=Poliklinik+Walid" target="_blank" rel="noopener">G</a></div>
+    <div class="container">
+
+      <!-- footer CTA band -->
+      <div class="footer-cta">
+        <div>
+          <h3>Have a lump, mole or skin concern?</h3>
+          <p class="muted-light">Message us on WhatsApp and our team will help you choose a branch and a time.</p>
+        </div>
+        <a class="btn btn-wa" href="#contact">WhatsApp us</a>
       </div>
-      <div><h4>Explore</h4><ul><li><a href="#services">Services</a></li><li><a href="#network">Branches</a></li><li><a href="#specialist">Doctors</a></li><li><a href="#intl">About</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li>WhatsApp (general): 014-252 1684</li><li>WhatsApp (surgery): 017-549 7593</li></ul></div>
+
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="brand"><img src="assets/logo.jpg" alt="Poliklinik Walid" width="46" height="46" class="footer-logo" /><span class="brand-name light">Poliklinik Walid</span></div>
+          <p class="muted-light">Surgeon-led day-care minor surgery, aesthetics and women's health, with general practice across our branch network.</p>
+          <div class="socials">
+            <a href="https://www.tiktok.com/@drwalidutagha" target="_blank" rel="noopener" aria-label="TikTok"><span class="s-ico">TikTok</span><b>561K</b></a>
+            <a href="https://www.facebook.com/profile.php?id=100080089330356" target="_blank" rel="noopener" aria-label="Facebook"><span class="s-ico">Facebook</span><b>119K</b></a>
+            <a href="https://www.instagram.com/drwalidutagha/" target="_blank" rel="noopener" aria-label="Instagram"><span class="s-ico">Instagram</span><b>30.8K</b></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul><li><a href="#services">Services</a></li><li><a href="#network">Branches</a></li><li><a href="#specialist">Doctors</a></li><li><a href="#intl">International patients</a></li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Surgical centres</h4>
+          <ul><li>Ampang (Central)</li><li>Jalan Baru, Seberang Perai</li><li>Tasek Gelugor</li><li>Sungai Petani</li></ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://wa.me/60142521684" target="_blank" rel="noopener">WhatsApp (general)<br/><b>014-252 1684</b></a></li>
+            <li><a href="https://wa.me/60175497593" target="_blank" rel="noopener">WhatsApp (minor surgery)<br/><b>017-549 7593</b></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span id="yr">2026</span> Walid Healthcare Group Sdn. Bhd. (1466692-A). All rights reserved.</span>
+        <span class="footer-compliance">MMC-registered doctors &middot; Records kept confidential under the PDPA 2010</span>
+      </div>
     </div>
-    <div class="container legal">MMC-registered doctors. Patient records kept confidential under the PDPA 2010. Walid Healthcare Group Sdn. Bhd. (1466692-A).</div>
   </footer>
 
   <a class="fab" href="#contact">&#128172; WhatsApp us</a>
 
   <script src="reveal.js" defer></script>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>
 </html>
