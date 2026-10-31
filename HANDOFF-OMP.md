@@ -8,15 +8,48 @@
 
 ---
 
-## ★ DO THIS NEXT (live config — one command)
+## ★ DO THIS NEXT (live config) — ✅ COMPLETED 31 Oct 2026
 
-The site is live but a few pages/menu/permalinks are not set yet (that is why `/about/`,
-`/international-patients/`, and `/procedures/<slug>/` 404). Run the one-shot setup on the host:
+> **Status: DONE.** All five operations below were executed on the live site via **wp-admin UI**.
+> Result: `/about/` and `/international-patients/` are live (200), both About and Contact pages
+> carry their templates, the **Primary** menu exists with all 7 items, and rewrites are flushed.
+> Details + evidence: `2026-10-31__walid__astra-deploy__report__README.md` §3b.
+> The two corrections below are what a future agent needs to know; the rest of this section is
+> the original instruction, kept for reference.
 
+### Correction 1 — `wp eval-file` is not reachable on this host
+```bash
+wp eval-file finish-setup.php      # NOT USABLE — needs SSH
+```
+IONOS Managed WP here gives no SSH shell to the operator, so `wp eval-file` cannot run. SFTP
+credentials live in the IONOS panel and should not be handled by an agent. **Use wp-admin UI
+instead** — it reaches the identical end state:
+
+| Script operation | wp-admin equivalent |
+|---|---|
+| create pages + assign templates | Pages → Add New; Page → Template in the sidebar |
+| static front page | Settings → Reading |
+| Post-name permalinks | Settings → Permalinks |
+| build + assign Primary menu | Appearance → Menus |
+| flush rewrites | Settings → Permalinks → **Save Changes** |
+
+### Correction 2 — Astra's menu locations are not `menu-1`
+The script sets `nav_menu_locations['menu-1']`. That key is **not registered** on this install.
+Astra registers: `primary`, `secondary_menu`, `mobile_menu`, `loggedin_account_menu`,
+`footer_menu`. Assign the Primary menu to **`primary`** and **`mobile_menu`** (the latter is what
+the mobile header actually renders).
+
+### Known blocker found and fixed during execution
+The **Extendify** plugin ("Extendify WordPress Onboarding and AI Assistant") auto-opens a
+full-screen "Design Library" modal over every new-page editor. `#editor-canvas` never renders
+behind it and clicks are intercepted, so **no page can be created** while it is active. It was
+**deactivated** (not deleted; one click to reverse). Any future reproduction of this build on a
+host with Extendify bundled must account for it.
+
+### Original instruction (for reference)
 ```bash
 wp eval-file finish-setup.php      # upload bin/finish-setup.php first, or run from the repo copy
 ```
-
 It is **idempotent** and does all of this:
 - creates **Home / About / International Patients / Contact** pages + assigns their templates
 - sets the **static front page** (Home) and **Post-name permalinks**
@@ -24,9 +57,12 @@ It is **idempotent** and does all of this:
   Contact) and assigns it to Astra's location
 - **flushes rewrites** (fixes the `/about`, `/international-patients`, `/procedures/<slug>` 404s)
 
-After running, verify: those URLs return 200, the nav shows 7 items, and
-`/procedures/xanthelasma-treatment/` resolves (if that post exists; otherwise it is created via
-the CMS as content).
+### Still open: `/procedures/<slug>/` resolves only once content exists
+The rewrite rules are correct and flushed, but `/procedures/xanthelasma-treatment/` remains 404
+because **zero procedure records exist** (WP admin → Procedures reports "All (0)"). This is not a
+routing bug — the CPT archive and singe templates are in place and were verified rendering. It
+resolves as soon as a Procedure post is created with that slug. A CPT permalink cannot be
+verified against a record that does not exist.
 
 ### Then, in order
 1. **Confirm ACF is active** (hard dependency — the theme reads content via `get_field()`; a
