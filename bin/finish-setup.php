@@ -74,10 +74,21 @@ $add( 'About', get_permalink( $about ) );
 $add( 'International', get_permalink( $intl ) );
 $add( 'Contact', get_permalink( $contact ) );
 
-// Assign to the theme's primary location (Astra uses "primary"/"menu-1"; set both to be safe).
-$locations            = get_theme_mod( 'nav_menu_locations', array() );
-$locations['primary'] = $menu_id;
-$locations['menu-1']  = $menu_id;
+// Assign to the theme's registered menu locations. Astra registers: primary, secondary_menu,
+// mobile_menu, loggedin_account_menu, footer_menu (NOT "menu-1", which is a block-theme key).
+// Set every registered location that looks like a main/mobile nav so the menu actually shows.
+$locations     = get_theme_mod( 'nav_menu_locations', array() );
+$registered    = get_registered_nav_menus(); // slug => description
+$primary_keys  = array( 'primary', 'menu-1', 'main', 'mobile_menu' );
+foreach ( $primary_keys as $loc ) {
+	if ( isset( $registered[ $loc ] ) || 'menu-1' === $loc ) {
+		$locations[ $loc ] = $menu_id;
+	}
+}
+// Fallback: if none of the expected keys are registered, use the first registered location.
+if ( empty( array_intersect_key( $locations, $registered ) ) && $registered ) {
+	$locations[ array_key_first( $registered ) ] = $menu_id;
+}
 set_theme_mod( 'nav_menu_locations', $locations );
 
 // 5. Flush rewrite rules so CPT URLs (/procedures/..., /services/...) resolve.

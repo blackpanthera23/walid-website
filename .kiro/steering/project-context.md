@@ -71,9 +71,15 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
   design lives in the child theme). walid-child + walid-cpts active; ACF + 5 field groups synced.
 - ✅ Robustness: ACF safety shim (no white screen if ACF off); proof stats centralized in
   `walid_stats()` (helpers.php) and marked owner-confirmed in docs/08.
-- 🔄 LIVE CONFIG PENDING: run `bin/finish-setup.php` on host (creates About/International/Contact
-  pages, static home, Post-name permalinks, Primary menu, flush — fixes current 404s).
+- ✅ LIVE CONFIG DONE (31 Oct, OMP via wp-admin UI since no SSH): About + International Patients
+  pages created with templates, Contact template set, Primary 7-item menu assigned (Astra uses
+  `primary`/`mobile_menu`, NOT `menu-1`), rewrites flushed. `/about/` + `/international-patients/`
+  verified 200. Extendify plugin deactivated (it auto-opened a modal that blocked the page editor).
+  Note: `wp eval-file finish-setup.php` is NOT runnable on this host (no SSH) — use wp-admin UI;
+  the script now uses correct Astra menu keys for any future host.
 - ⬜ THEN: real content via `docs/CONTENT-CHECKLIST.md` + official logo + Google key + launch.
+  Still live but UNVERIFIED-flagged: 561K/119K/4.9-1,098 stats (owner-confirmed per docs/08) and
+  `[confirm ...]` placeholder lines on About/International (owner to replace with real copy).
   Rollback: Astra is intact (Appearance → Themes → Astra). Updating guide: `docs/UPDATING.md`.
 
 ## Build workflow (Kiro IDE)
