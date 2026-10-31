@@ -33,11 +33,12 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			</div>
 		</div>
 
+		<?php $stats = walid_stats(); ?>
 		<div class="intl-proof reveal-group">
-			<div class="intl-stat"><b>561K</b><span><?php esc_html_e( 'TikTok', 'walid' ); ?></span></div>
-			<div class="intl-stat"><b>119K</b><span><?php esc_html_e( 'Facebook', 'walid' ); ?></span></div>
-			<div class="intl-stat"><b>30.8K</b><span><?php esc_html_e( 'Instagram', 'walid' ); ?></span></div>
-			<div class="intl-stat"><b>4.9&#9733;</b><span><?php esc_html_e( '1,098 reviews', 'walid' ); ?></span></div>
+			<div class="intl-stat"><b><?php echo esc_html( $stats['tiktok'] ); ?></b><span><?php esc_html_e( 'TikTok', 'walid' ); ?></span></div>
+			<div class="intl-stat"><b><?php echo esc_html( $stats['facebook'] ); ?></b><span><?php esc_html_e( 'Facebook', 'walid' ); ?></span></div>
+			<div class="intl-stat"><b><?php echo esc_html( $stats['instagram'] ); ?></b><span><?php esc_html_e( 'Instagram', 'walid' ); ?></span></div>
+			<div class="intl-stat"><b><?php echo esc_html( $stats['rating'] ); ?>&#9733;</b><span><?php echo esc_html( sprintf( /* translators: %s: review count */ __( '%s reviews', 'walid' ), $stats['reviews'] ) ); ?></span></div>
 		</div>
 
 		<?php
@@ -51,15 +52,15 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 				<div class="card-grid reveal-group">
 					<article class="card">
 						<h3><?php esc_html_e( 'Why patients travel to us', 'walid' ); ?></h3>
-						<p><?php esc_html_e( 'Surgeon-led day-care surgery and specialist care, with a community of hundreds of thousands across TikTok, Facebook and Instagram, and a 4.9 Google rating from over a thousand reviews.', 'walid' ); ?></p>
+						<p><?php esc_html_e( 'Surgeon-led day-care surgery and specialist care, backed by a large and active community across TikTok, Facebook and Instagram and a strong record of Google reviews.', 'walid' ); ?></p>
 					</article>
 					<article class="card">
 						<h3><?php esc_html_e( 'Planning your visit', 'walid' ); ?></h3>
-						<p><?php esc_html_e( 'Message us before you travel so we can confirm the right branch, timing and what to prepare. [confirm travel guidance]', 'walid' ); ?></p>
+						<p><?php esc_html_e( 'Message us on WhatsApp before you travel. We will confirm which branch to visit, suggest timing, and tell you what to prepare, so your trip is straightforward from the start.', 'walid' ); ?></p>
 					</article>
 					<article class="card">
 						<h3><?php esc_html_e( 'Care that respects your time', 'walid' ); ?></h3>
-						<p><?php esc_html_e( 'Hospital-grade care, the smart choice, with many procedures completed in a single day.', 'walid' ); ?></p>
+						<p><?php esc_html_e( 'Hospital-grade care, the smart choice, with many procedures assessed and completed in a single day.', 'walid' ); ?></p>
 					</article>
 				</div>
 			</section>
