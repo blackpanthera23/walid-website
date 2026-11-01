@@ -126,3 +126,91 @@
 @media (max-width: 420px) {
   .walid-single .container { padding: 0 14px; }
 }
+
+/* ============================================================================
+   Service single: photo-as-background hero (replaces the floating blob image)
+   ========================================================================== */
+.walid-single .service-hero {
+  position: relative;
+  margin-bottom: 44px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  background-image: var(--svc-bg);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow);
+}
+.walid-single .service-hero .service-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(22,27,94,.15) 0%, rgba(22,27,94,.55) 55%, rgba(16,18,54,.86) 100%);
+  z-index: 0;
+}
+.walid-single .service-hero .container { position: relative; z-index: 1; width: 100%; }
+.walid-single .service-hero .service-hero-inner { max-width: 62ch; padding: 40px 0 44px; color: #fff; }
+.walid-single .service-hero .service-hero-inner h1 { color: #fff; margin: .1em 0 .2em; }
+.walid-single .service-hero .service-hero-inner .lede { color: rgba(255,255,255,.9); }
+.walid-single .service-hero .service-hero-inner .eyebrow { color: var(--gold-100); }
+/* Antenatal: warm rose overlay instead of navy. */
+.walid-single.walid-antenatal .service-hero .service-hero-overlay {
+  background: linear-gradient(180deg, rgba(110,35,64,.18) 0%, rgba(110,35,64,.55) 55%, rgba(78,22,46,.86) 100%);
+}
+.walid-single.walid-antenatal .service-hero .service-hero-inner .eyebrow { color: var(--accent-050); }
+@media (max-width: 680px) {
+  .walid-single .service-hero { min-height: 260px; }
+  .walid-single .service-hero .service-hero-inner { padding: 28px 0 30px; }
+}
+
+/* ============================================================================
+   "Where we perform" — full-width branch cards
+   ========================================================================== */
+.walid-single .svc-where { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.walid-single .svc-where h2 { margin-bottom: 6px; }
+.walid-single .svc-where .muted { margin-top: 0; margin-bottom: 20px; }
+.walid-single .where-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.walid-single .where-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 14px;
+  padding: 18px 20px; text-decoration: none; color: var(--brand-900); font-weight: 600;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.walid-single .where-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(22,27,94,.1); border-color: var(--brand-700); }
+.walid-single .where-card .where-go { color: var(--gold-500); font-size: 1.1rem; transition: transform .2s ease; }
+.walid-single .where-card:hover .where-go { transform: translateX(4px); }
+.walid-single.walid-antenatal .where-card:hover { border-color: var(--accent-700); }
+.walid-single.walid-antenatal .where-card .where-go { color: var(--accent-600); }
+
+/* ============================================================================
+   Short testimonials (3)
+   ========================================================================== */
+.walid-single .svc-testimonials { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.walid-single .svc-testimonials h2 { margin-bottom: 20px; }
+.walid-single .tst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.walid-single .tst-card {
+  margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px;
+  padding: 24px 22px; box-shadow: 0 6px 18px rgba(22,27,94,.04);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.walid-single .tst-card .stars { color: var(--gold-500); letter-spacing: 2px; font-size: .95rem; }
+.walid-single .tst-card blockquote { margin: 0; font-size: 1.02rem; line-height: 1.55; color: var(--ink); }
+.walid-single .tst-card figcaption { font-size: .85rem; margin-top: auto; }
+
+/* ============================================================================
+   Brand promise band (one promise)
+   ========================================================================== */
+.walid-single .svc-promise {
+  margin-top: 48px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--brand-900), var(--brand-700));
+  color: #fff; overflow: hidden; position: relative;
+}
+.walid-single .svc-promise .promise-inner { padding: 40px 36px; max-width: 70ch; position: relative; z-index: 1; }
+.walid-single .svc-promise .eyebrow { color: var(--gold-100); }
+.walid-single .svc-promise .promise-line { font-family: var(--serif); font-size: 1.5rem; line-height: 1.3; color: #fff; margin: .2em 0 1em; }
+.walid-single.walid-antenatal .svc-promise { background: linear-gradient(135deg, var(--accent-900), var(--accent-600)); }
+@media (max-width: 680px) {
+  .walid-single .svc-promise .promise-inner { padding: 30px 24px; }
+  .walid-single .svc-promise .promise-line { font-size: 1.25rem; }
+}
