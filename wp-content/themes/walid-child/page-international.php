@@ -19,13 +19,7 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			<div class="intl-hero-text">
 				<p class="eyebrow"><?php esc_html_e( 'International patients', 'walid' ); ?></p>
 				<h1><?php esc_html_e( 'Trusted across the region.', 'walid' ); ?></h1>
-				<div class="intl-flags" aria-label="<?php esc_attr_e( 'Sudan, Singapore, Indonesia, Brunei', 'walid' ); ?>">
-					<span title="Sudan">&#127480;&#127465;</span>
-					<span title="Singapore">&#127480;&#127468;</span>
-					<span title="Indonesia">&#127470;&#127465;</span>
-					<span title="Brunei">&#127463;&#127475;</span>
-				</div>
-				<p class="lede"><?php esc_html_e( 'Patients travel from Sudan, Singapore, Indonesia and Brunei for care with Poliklinik Walid. Message the clinic and our team will help you plan your visit.', 'walid' ); ?></p>
+				<p class="lede"><?php esc_html_e( 'Patients travel from across the region and beyond for care with Poliklinik Walid. Message the clinic and our team will help you plan your visit.', 'walid' ); ?></p>
 				<p style="margin-top:16px;"><a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp us to plan a visit', 'walid' ); ?></a></p>
 			</div>
 			<div class="intl-hero-art">
@@ -40,6 +34,20 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			<div class="intl-stat"><b><?php echo esc_html( $stats['instagram'] ); ?></b><span><?php esc_html_e( 'Instagram', 'walid' ); ?></span></div>
 			<div class="intl-stat"><b><?php echo esc_html( $stats['rating'] ); ?>&#9733;</b><span><?php echo esc_html( sprintf( /* translators: %s: review count */ __( '%s reviews', 'walid' ), $stats['reviews'] ) ); ?></span></div>
 		</div>
+
+		<?php $intl_countries = walid_international_countries(); ?>
+		<section class="group intl-countries reveal">
+			<div class="group-head"><h2><?php esc_html_e( 'Patients travel from around the world', 'walid' ); ?></h2></div>
+			<p class="muted" style="margin-top:0;"><?php esc_html_e( 'A snapshot of the countries our patients come from.', 'walid' ); ?></p>
+			<ul class="flag-grid reveal-group" aria-label="<?php esc_attr_e( 'Countries our patients travel from', 'walid' ); ?>">
+				<?php foreach ( $intl_countries as $c ) : ?>
+					<li class="flag-item">
+						<span class="flag-emoji" aria-hidden="true"><?php echo walid_flag_emoji( $c['iso'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<span class="flag-name"><?php echo esc_html( $c['name'] ); ?></span>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</section>
 
 		<?php
 		// If the editor added page content, show it; otherwise show the branded default blocks.

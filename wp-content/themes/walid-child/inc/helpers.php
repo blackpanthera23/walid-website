@@ -330,3 +330,66 @@ function walid_category_icon( $key ) {
 	);
 	return isset( $icons[ $key ] ) ? $icons[ $key ] : $icons['others'];
 }
+
+/**
+ * Convert a two-letter ISO country code to its flag emoji (regional indicator pair).
+ *
+ * @param string $iso2 Two-letter code, e.g. "MY".
+ * @return string Flag emoji, or empty string on bad input.
+ */
+function walid_flag_emoji( $iso2 ) {
+	$iso2 = strtoupper( trim( (string) $iso2 ) );
+	if ( ! preg_match( '/^[A-Z]{2}$/', $iso2 ) ) {
+		return '';
+	}
+	$base  = 0x1F1E6; // Regional Indicator Symbol Letter A.
+	$out   = '';
+	foreach ( str_split( $iso2 ) as $ch ) {
+		$out .= mb_convert_encoding( '&#' . ( $base + ( ord( $ch ) - ord( 'A' ) ) ) . ';', 'UTF-8', 'HTML-ENTITIES' );
+	}
+	return $out;
+}
+
+/**
+ * Countries that patients travel from, for the International Patients page.
+ * Owner-confirmed list. Filterable so it can be extended without template edits.
+ *
+ * @return array<int,array{name:string,iso:string}>
+ */
+function walid_international_countries() {
+	$countries = array(
+		array( 'name' => 'Singapore', 'iso' => 'SG' ),
+		array( 'name' => 'Indonesia', 'iso' => 'ID' ),
+		array( 'name' => 'Brunei', 'iso' => 'BN' ),
+		array( 'name' => 'Thailand', 'iso' => 'TH' ),
+		array( 'name' => 'Vietnam', 'iso' => 'VN' ),
+		array( 'name' => 'Laos', 'iso' => 'LA' ),
+		array( 'name' => 'Myanmar', 'iso' => 'MM' ),
+		array( 'name' => 'Philippines', 'iso' => 'PH' ),
+		array( 'name' => 'China', 'iso' => 'CN' ),
+		array( 'name' => 'Korea', 'iso' => 'KR' ),
+		array( 'name' => 'India', 'iso' => 'IN' ),
+		array( 'name' => 'Bangladesh', 'iso' => 'BD' ),
+		array( 'name' => 'Sri Lanka', 'iso' => 'LK' ),
+		array( 'name' => 'Nepal', 'iso' => 'NP' ),
+		array( 'name' => 'Pakistan', 'iso' => 'PK' ),
+		array( 'name' => 'Afghanistan', 'iso' => 'AF' ),
+		array( 'name' => 'Kazakhstan', 'iso' => 'KZ' ),
+		array( 'name' => 'Iran', 'iso' => 'IR' ),
+		array( 'name' => 'Turkey', 'iso' => 'TR' ),
+		array( 'name' => 'Saudi Arabia', 'iso' => 'SA' ),
+		array( 'name' => 'Oman', 'iso' => 'OM' ),
+		array( 'name' => 'Yemen', 'iso' => 'YE' ),
+		array( 'name' => 'Syria', 'iso' => 'SY' ),
+		array( 'name' => 'Egypt', 'iso' => 'EG' ),
+		array( 'name' => 'Libya', 'iso' => 'LY' ),
+		array( 'name' => 'Algeria', 'iso' => 'DZ' ),
+		array( 'name' => 'Sudan', 'iso' => 'SD' ),
+		array( 'name' => 'Somalia', 'iso' => 'SO' ),
+		array( 'name' => 'Nigeria', 'iso' => 'NG' ),
+		array( 'name' => 'France', 'iso' => 'FR' ),
+		array( 'name' => 'United States', 'iso' => 'US' ),
+		array( 'name' => 'Australia', 'iso' => 'AU' ),
+	);
+	return apply_filters( 'walid_international_countries', $countries );
+}

@@ -274,3 +274,22 @@
 .walid-archive .card.ms-cat-card .proc-list { grid-template-columns: 1fr 1fr; gap: 2px 20px; }
 .walid-archive .card.ms-cat-card .proc-list li { padding: 8px 0; }
 .walid-archive .card.ms-cat-card .card-foot { padding-top: 6px; padding-bottom: 24px; }
+
+/* International page: countries flag grid */
+.walid-archive .intl-countries { margin-top: 40px; }
+.walid-archive .intl-countries .group-head { margin-bottom: 6px; }
+.walid-archive .flag-grid {
+  list-style: none; padding: 0; margin: 18px 0 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;
+}
+.walid-archive .flag-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+  padding: 12px 16px; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.walid-archive .flag-item:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(22,27,94,.08); border-color: var(--brand-700); }
+.walid-archive .flag-emoji { font-size: 1.5rem; line-height: 1; flex: 0 0 auto; }
+.walid-archive .flag-name { font-weight: 600; color: var(--brand-900); font-size: .95rem; }
+@media (max-width: 560px) {
+  .walid-archive .flag-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
