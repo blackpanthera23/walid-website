@@ -2,9 +2,9 @@
 
 > **For OMP.** This is a single, self-contained deploy of all theme changes that have stacked up
 > in the repo since the last live sync (the Astra port). Everything here is in `main` (through
-> commit `b455546`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
+> commit `ce14c09`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
 > no database/content changes, so nothing in wp-admin needs touching. Deploy = SFTP upload the
-> files below, then cache-bust. Theme version is already bumped to **0.2.5** for that.
+> files below, then cache-bust. Theme version is already bumped to **0.2.6** for that.
 
 ## Why this batch exists
 A long run of UI/UX polish landed in the repo across many commits but was never pushed to live.
@@ -26,9 +26,10 @@ change — only theme files.
   benefits paragraph; 3 pillar-tailored testimonials; a brand-promise band; procedures shown as
   compact A–Z chips (name + description on hover).
 - **Services archive** — featured navy Minor Surgery card text fixed for contrast (white title +
-  light body); 5 Minor Surgery category cards (Skin & Subcutaneous Tissue, Wound Care & Trauma
-  Repair, Nail & Minor Dermatological Surgeries, Therapeutic & Joint Injections, Minor
-  Gynaecological & Urological Procedures).
+  light body); the single Minor Surgery service card is replaced by **6 category cards** (Skin &
+  Subcutaneous Tissue, Wound Care & Trauma Repair, Nail & Minor Dermatological Surgeries,
+  Therapeutic & Joint Injections, Minor Gynaecological & Urological Procedures, and Others), each
+  listing its grouped procedures with a Show-more toggle.
 - **Locations pages aligned to Services** — Branches archive region sections are now tinted
   soft-tone panels (Central navy, North teal, Other mauve); single-branch uses the same
   photo-as-background hero + per-branch accent (surgical = navy, general = teal).
@@ -44,10 +45,10 @@ change — only theme files.
 
 ## Files to upload (17 — SFTP, same paths under `wp-content/themes/walid-child/`)
 ```
-wp-content/themes/walid-child/style.css                    # version bump 0.2.5 (cache-bust)
+wp-content/themes/walid-child/style.css                    # version bump 0.2.6 (cache-bust)
 wp-content/themes/walid-child/functions.php                # footer pillars+branches, ACF shim
 wp-content/themes/walid-child/front-page.php               # specialist section transition
-wp-content/themes/walid-child/archive-service.php          # pillar panels, Minor-Surgery category cards
+wp-content/themes/walid-child/archive-service.php          # pillar panels, 6 Minor-Surgery category cards
 wp-content/themes/walid-child/single-service.php           # hero, where-we-perform, stats, testimonials, chips
 wp-content/themes/walid-child/archive-branch.php           # tinted per-region panels
 wp-content/themes/walid-child/single-branch.php            # photo-as-background hero + accent
@@ -68,15 +69,17 @@ changed since the Astra port, but the rest are identical to live.
 
 ## After upload — cache-bust (required)
 The CSS and JS are enqueued with the theme version as a query string, so bumping `style.css` to
-0.2.5 busts browser cache automatically once that file is uploaded. Then:
+0.2.6 busts browser cache automatically once that file is uploaded. Then:
 1. If a caching/optimizer plugin is active (host cache, WP Rocket, Autoptimize, etc.), **purge all
    cache**.
 2. Hard-refresh a browser (Cmd/Ctrl + Shift + R) on the pages below to confirm.
 
 ## Verify on live (quick pass)
 - `/` — the **Dr Anis specialist** block: rose accents, soft tint fading in on scroll, neutral bg.
-- `/services/` — four pillar panels in their own tones (blue / mauve / rose / teal); the featured
-  navy **Minor Surgery** card reads clearly (white title, light text); **5 category cards** appear.
+- `/services/` — four pillar panels in their own tones (blue / mauve / rose / teal); the Minor
+  Surgery pillar shows **6 category cards** (5 categories + Others), each listing its procedures,
+  and no duplicate standalone "Minor Surgery" card; the navy cards read clearly (white title,
+  light text).
 - `/services/minor-surgery/` — background-photo hero; procedures are compact A–Z chips; the
   "Why day-care surgery" stats sit under "Where we perform" with the benefits paragraph; 3
   testimonials; navy promise band.
