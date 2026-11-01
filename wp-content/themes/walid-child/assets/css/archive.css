@@ -205,11 +205,4 @@
 .walid-archive .intl-cards.reveal-group > * { transform: translateY(26px); }
 .walid-archive .intl-cards .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 
-/* Minor Surgery: "Categories we cover" is a regular service card (light pillar style),
-   sitting in the grid alongside the service cards. Single-column list for the longer
-   category names, using the same accent check icon as the other pillar lists. */
-.walid-archive .ms-cat-card .proc-list-single { grid-template-columns: 1fr; }
-/* Keep the categories card on the light accent tick even inside the is-hero section
-   (the sibling service cards are the dark navy hero variant). */
-.walid-archive .pillar-section.is-hero .ms-cat-card .proc-tick { background: #fff; border: 1px solid color-mix(in srgb, var(--accent-500) 30%, transparent); }
-.walid-archive .pillar-section.is-hero .ms-cat-card .proc-tick::after { border-color: var(--accent-700); }
+

@@ -72,27 +72,43 @@ $hero_pillar = 'Minor Surgery';
 
 					<?php if ( $is_hero ) : ?>
 						<?php
-						// Categories of minor surgery Dr Walid offers, as a card matching the
-						// other service cards. [confirm exact category list with clinic]
+						// Categories of minor surgery Dr Walid offers, each shown as its own card
+						// (same craft as the service cards). [confirm exact list with clinic]
 						$ms_categories = array(
-							__( 'Skin and Subcutaneous Tissue', 'walid' ),
-							__( 'Wound Care and Trauma Repair', 'walid' ),
-							__( 'Nail and Minor Dermatological Surgeries', 'walid' ),
-							__( 'Therapeutic and Joint Injections', 'walid' ),
-							__( 'Minor Gynaecological and Urological Procedures', 'walid' ),
+							array(
+								'title' => __( 'Skin and Subcutaneous Tissue', 'walid' ),
+								'desc'  => __( 'Lipoma, cysts, lumps, moles and skin lesions removed under local anaesthetic.', 'walid' ),
+							),
+							array(
+								'title' => __( 'Wound Care and Trauma Repair', 'walid' ),
+								'desc'  => __( 'Suturing, wound debridement and repair of minor cuts and injuries.', 'walid' ),
+							),
+							array(
+								'title' => __( 'Nail and Minor Dermatological Surgeries', 'walid' ),
+								'desc'  => __( 'Ingrown toenail surgery, nail procedures and minor skin surgery.', 'walid' ),
+							),
+							array(
+								'title' => __( 'Therapeutic and Joint Injections', 'walid' ),
+								'desc'  => __( 'Targeted injections for pain relief and joint or soft-tissue conditions.', 'walid' ),
+							),
+							array(
+								'title' => __( 'Minor Gynaecological and Urological Procedures', 'walid' ),
+								'desc'  => __( 'Selected day-care procedures for common gynaecological and urological needs.', 'walid' ),
+							),
 						);
-						?>
-						<article class="card ms-cat-card">
-							<h3><?php esc_html_e( 'Categories we cover', 'walid' ); ?></h3>
-							<p><?php esc_html_e( 'The main areas of day-care minor surgery performed by our surgeon-led team.', 'walid' ); ?></p>
-							<div class="proc">
-								<ul class="proc-list proc-list-single">
-									<?php foreach ( $ms_categories as $cat ) : ?>
-										<li><span class="proc-tick" aria-hidden="true"></span><span class="proc-text"><b><?php echo esc_html( $cat ); ?></b></span></li>
-									<?php endforeach; ?>
-								</ul>
-							</div>
-						</article>
+						foreach ( $ms_categories as $cat ) :
+							?>
+							<article class="card has-media hero-card">
+								<div class="card-media">
+									<img src="<?php echo walid_placeholder( 'service' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( $cat['title'] ); ?>" loading="lazy" />
+								</div>
+								<h3><?php echo esc_html( $cat['title'] ); ?></h3>
+								<p><?php echo esc_html( $cat['desc'] ); ?></p>
+								<div class="card-foot">
+									<a class="btn btn-wa" href="<?php echo walid_whatsapp_url( 'minor_surgery', sprintf( /* translators: %s: category */ __( 'Hi, I would like to ask about %s.', 'walid' ), $cat['title'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp', 'walid' ); ?></a>
+								</div>
+							</article>
+						<?php endforeach; ?>
 					<?php endif; ?>
 
 					<?php foreach ( $services as $s ) : ?>
