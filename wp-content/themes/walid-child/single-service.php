@@ -200,6 +200,58 @@ while ( have_posts() ) :
 				</div>
 			</section>
 
+			<?php
+			// FAQ (last section). Accessible native accordion + FAQPage schema.
+			$faqs = array(
+				array(
+					'q' => __( 'What ages do you treat?', 'walid' ),
+					'a' => __( 'We care for patients across a wide age range, from young children through to older adults aged up to 96. Our team assesses each patient individually and advises on the safest approach for their age and health.', 'walid' ),
+				),
+				array(
+					'q' => __( 'Is this really done in a single day?', 'walid' ),
+					'a' => __( 'Most day-care procedures are assessed and treated in one visit, with patients going home the same day. Your doctor confirms this during assessment.', 'walid' ),
+				),
+				array(
+					'q' => __( 'Will I be awake during the procedure?', 'walid' ),
+					'a' => __( 'Many minor procedures are performed under local anaesthetic, so the area is numbed while you stay awake and comfortable. The team explains exactly what to expect beforehand.', 'walid' ),
+				),
+				array(
+					'q' => __( 'How do I book or ask a question?', 'walid' ),
+					'a' => __( 'Message us on WhatsApp. Our team will answer your questions, advise on the right branch, and help you plan your visit.', 'walid' ),
+				),
+			);
+			?>
+			<section class="svc-faq reveal">
+				<h2><?php esc_html_e( 'Frequently asked questions', 'walid' ); ?></h2>
+				<div class="faq-list">
+					<?php foreach ( $faqs as $i => $f ) : ?>
+						<details class="faq-item"<?php echo 0 === $i ? ' open' : ''; ?>>
+							<summary><?php echo esc_html( $f['q'] ); ?></summary>
+							<div class="faq-answer"><p><?php echo esc_html( $f['a'] ); ?></p></div>
+						</details>
+					<?php endforeach; ?>
+				</div>
+			</section>
+			<?php
+			// FAQPage structured data for this service's questions.
+			$faq_schema = array(
+				'@context'   => 'https://schema.org',
+				'@type'      => 'FAQPage',
+				'mainEntity' => array(),
+			);
+			foreach ( $faqs as $f ) {
+				$faq_schema['mainEntity'][] = array(
+					'@type'          => 'Question',
+					'name'           => $f['q'],
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => $f['a'],
+					),
+				);
+			}
+			echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema ) . '</script>';
+			?>
+
 		</div>
 	</main>
 	<?php
