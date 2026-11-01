@@ -148,10 +148,9 @@ $hero_pillar = 'Minor Surgery';
 						);
 						foreach ( $ms_categories as $cat ) :
 							?>
-							<article class="card has-media hero-card ms-cat-card">
-								<div class="card-media ms-cat-art ms-cat-art--<?php echo esc_attr( $cat['icon'] ); ?>">
-									<span class="ms-cat-dots" aria-hidden="true"></span>
-									<span class="ms-cat-icon" aria-hidden="true"><?php echo walid_category_icon( $cat['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+							<article class="card has-media ms-cat-card">
+								<div class="card-media">
+									<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/cards/' . $cat['icon'] . '.webp' ); ?>" alt="<?php echo esc_attr( $cat['title'] ); ?>" loading="lazy" width="900" height="604" />
 								</div>
 								<h3><?php echo esc_html( $cat['title'] ); ?></h3>
 								<p><?php echo esc_html( $cat['desc'] ); ?></p>
@@ -204,13 +203,22 @@ $hero_pillar = 'Minor Surgery';
 						$procedures = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_field( 'service_procedures', $s->ID ) ) ) );
 						$icon       = get_field( 'service_icon', $s->ID );
 						$wa         = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title( $s ) ) );
+						// On-brand generated pillar texture used when a service has no own photo.
+						$pillar_img_map = array(
+							'walid-aesthetic' => 'aesthetics',
+							'walid-antenatal' => 'antenatal',
+							'walid-general'   => 'injection',
+							'walid-minor'     => 'skin',
+						);
+						$pillar_img_key = isset( $pillar_img_map[ $accent_class ] ) ? $pillar_img_map[ $accent_class ] : 'skin';
+						$pillar_img_url = get_stylesheet_directory_uri() . '/assets/img/cards/' . $pillar_img_key . '.webp';
 						?>
 						<article class="card has-media<?php echo $is_hero ? ' hero-card' : ''; ?>">
 							<div class="card-media">
 								<?php if ( $icon ) : ?>
 									<?php echo wp_get_attachment_image( $icon, 'medium', false, array( 'alt' => esc_attr( get_the_title( $s ) ), 'loading' => 'lazy' ) ); ?>
 								<?php else : ?>
-									<img src="<?php echo walid_placeholder( 'service' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title( $s ) ); ?>" loading="lazy" />
+									<img src="<?php echo esc_url( $pillar_img_url ); ?>" alt="<?php echo esc_attr( get_the_title( $s ) ); ?>" loading="lazy" width="900" height="604" />
 								<?php endif; ?>
 							</div>
 							<h3><a href="<?php echo esc_url( get_permalink( $s ) ); ?>"><?php echo esc_html( get_the_title( $s ) ); ?></a></h3>
