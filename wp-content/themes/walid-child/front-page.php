@@ -175,9 +175,9 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	$spec_role   = $spec_role ? $spec_role : __( 'O&G specialist [confirm credential]', 'walid' );
 	$spec_photo  = $spec_doctor ? get_field( 'doctor_photo', $spec_doctor->ID ) : 0;
 	?>
-	<section id="specialist" class="walid-antenatal">
+	<section id="specialist" class="walid-antenatal reveal">
 		<div class="container spec">
-			<div class="photo reveal">
+			<div class="photo">
 				<?php if ( $spec_photo ) : ?>
 					<?php echo wp_get_attachment_image( $spec_photo, 'large', false, array( 'alt' => esc_attr( $spec_name ) ) ); ?>
 				<?php else : ?>
