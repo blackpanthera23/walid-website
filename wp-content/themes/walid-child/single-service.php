@@ -84,14 +84,9 @@ while ( have_posts() ) :
 									$proc_name = $parts[0];
 									$proc_desc = isset( $parts[1] ) ? $parts[1] : '';
 									?>
-									<li class="proc-item">
+									<li class="proc-item"<?php echo $proc_desc ? ' title="' . esc_attr( $proc_desc ) . '"' : ''; ?>>
 										<span class="proc-check" aria-hidden="true"></span>
-										<span class="proc-body">
-											<span class="proc-name"><?php echo esc_html( $proc_name ); ?></span>
-											<?php if ( $proc_desc ) : ?>
-												<span class="proc-desc"><?php echo esc_html( $proc_desc ); ?></span>
-											<?php endif; ?>
-										</span>
+										<span class="proc-name"><?php echo esc_html( $proc_name ); ?></span>
 									</li>
 								<?php endforeach; ?>
 							</ul>

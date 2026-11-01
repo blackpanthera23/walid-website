@@ -59,14 +59,12 @@
 /* Procedures we perform — styled grid + motion */
 .walid-single .svc-procedures { margin-top: 36px; }
 .walid-single .svc-procedures h2 { margin-bottom: 18px; }
-.walid-single .proc-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: stretch; }
-.walid-single .proc-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 16px 18px; font-size: .96rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-.walid-single .proc-item .proc-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.walid-single .proc-cards { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.walid-single .proc-item { display: flex; align-items: center; gap: 10px; background: var(--surface); border: 1px solid var(--rule); border-radius: 999px; padding: 9px 16px 9px 12px; font-size: .9rem; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; cursor: default; }
 .walid-single .proc-item .proc-name { font-weight: 600; color: var(--brand-900); line-height: 1.3; }
-.walid-single .proc-item .proc-desc { font-size: .86rem; color: var(--muted); line-height: 1.45; }
-.walid-single .proc-item:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: transparent; }
-.walid-single .proc-check { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%; background: var(--brand-050); position: relative; margin-top: 1px; transition: background-color .2s ease; }
-.walid-single .proc-check::after { content: ""; position: absolute; left: 8px; top: 4px; width: 5px; height: 9px; border: solid var(--brand-700); border-width: 0 2px 2px 0; transform: rotate(45deg); transition: border-color .2s ease; }
+.walid-single .proc-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: transparent; }
+.walid-single .proc-check { flex: 0 0 auto; width: 18px; height: 18px; border-radius: 50%; background: var(--brand-050); position: relative; transition: background-color .15s ease; }
+.walid-single .proc-check::after { content: ""; position: absolute; left: 6px; top: 3px; width: 4px; height: 7px; border: solid var(--brand-700); border-width: 0 2px 2px 0; transform: rotate(45deg); transition: border-color .15s ease; }
 .walid-single .proc-item:hover .proc-check { background: var(--gold-100); }
 .walid-single .proc-item:hover .proc-check::after { border-color: var(--gold-500); }
 
@@ -102,14 +100,7 @@
   .walid-single .svc-stats .donut { --shown: var(--pct); transition: none; }
   .walid-single .proc-item { transition: none; }
 }
-@media (max-width: 1040px) {
-  .walid-single .proc-cards { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 820px) {
-  .walid-single .proc-cards { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 560px) {
-  .walid-single .proc-cards { grid-template-columns: 1fr; }
   .walid-single .donut { width: 128px; height: 128px; }
 }
 
