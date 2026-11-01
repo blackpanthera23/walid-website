@@ -15,6 +15,19 @@ $doctors = get_posts(
 		'order'          => 'ASC',
 	)
 );
+
+// Lead the list with Dr Walid (the founding minor-surgery specialist), then the rest.
+usort(
+	$doctors,
+	static function ( $a, $b ) {
+		$a_lead = ( false !== stripos( get_the_title( $a ), 'walid' ) ) ? 0 : 1;
+		$b_lead = ( false !== stripos( get_the_title( $b ), 'walid' ) ) ? 0 : 1;
+		if ( $a_lead !== $b_lead ) {
+			return $a_lead <=> $b_lead;
+		}
+		return strcasecmp( get_the_title( $a ), get_the_title( $b ) );
+	}
+);
 ?>
 <main class="walid-archive" id="primary">
 	<div class="container">

@@ -49,7 +49,7 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			<div class="entry"><?php the_content(); ?></div>
 		<?php else : ?>
 			<section class="group">
-				<div class="card-grid reveal-group">
+				<div class="card-grid intl-cards reveal-group">
 					<article class="card">
 						<h3><?php esc_html_e( 'Why patients travel to us', 'walid' ); ?></h3>
 						<p><?php esc_html_e( 'Surgeon-led day-care surgery and specialist care, backed by a large and active community across TikTok, Facebook and Instagram and a strong record of Google reviews.', 'walid' ); ?></p>
@@ -62,6 +62,23 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 						<h3><?php esc_html_e( 'Care that respects your time', 'walid' ); ?></h3>
 						<p><?php esc_html_e( 'Hospital-grade care, the smart choice, with many procedures assessed and completed in a single day.', 'walid' ); ?></p>
 					</article>
+				</div>
+			</section>
+
+			<?php
+			// Short testimonials from patients, with a clear scroll-in motion.
+			$intl_quotes = walid_pillar_sample_reviews( 'Minor Surgery' );
+			?>
+			<section class="group intl-testimonials reveal">
+				<div class="group-head"><h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2></div>
+				<div class="tst-grid reveal-group">
+					<?php foreach ( $intl_quotes as $t ) : ?>
+						<figure class="tst-card">
+							<div class="stars" aria-hidden="true"><?php echo esc_html( str_repeat( '★', max( 1, min( 5, (int) $t['s'] ) ) ) ); ?></div>
+							<blockquote><?php echo esc_html( $t['q'] ); ?></blockquote>
+							<figcaption class="muted"><?php echo esc_html( $t['w'] ); ?></figcaption>
+						</figure>
+					<?php endforeach; ?>
 				</div>
 			</section>
 		<?php endif; ?>

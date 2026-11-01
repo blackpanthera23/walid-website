@@ -30,6 +30,14 @@ the_post();
 				<h2><?php esc_html_e( 'What we stand for', 'walid' ); ?></h2>
 				<p><?php esc_html_e( 'Qualified doctors, efficient day-care treatment, and care that patients trust. Our minor surgery is concentrated at our Central and Northern surgical centres, so the right expertise is where it is needed.', 'walid' ); ?></p>
 
+				<h2><?php esc_html_e( 'Our philosophy', 'walid' ); ?></h2>
+				<p><?php esc_html_e( 'We are a reputable day-care surgical centre and healthcare facility, dedicated to delivering cost-effective, premium services with unwavering integrity and a commitment to righteous principles.', 'walid' ); ?></p>
+				<p><?php esc_html_e( 'We are a one-stop destination specialising in day-care surgical procedures and comprehensive healthcare services.', 'walid' ); ?></p>
+				<p><?php esc_html_e( 'We prioritise halal medications, distinctive minor surgeries, personalised care and exceptional customer service, embodying principles of righteousness to ensure holistic well-being and affordability.', 'walid' ); ?></p>
+				<p><?php esc_html_e( 'We empower individuals to thrive in body, mind and spirit through compassionate healthcare, fostering wellness, restoring hope and enriching lives.', 'walid' ); ?></p>
+				<p><?php esc_html_e( 'We foster long-term well-being, prosperity and unity by empowering the ummah and uplifting our nation through accessible and friendly healthcare.', 'walid' ); ?></p>
+				<p class="philosophy-motto"><?php esc_html_e( 'Your Health Journey, Our Commitment', 'walid' ); ?></p>
+
 				<h2><?php esc_html_e( 'Governance and patient information', 'walid' ); ?></h2>
 				<p><?php esc_html_e( 'Our doctors are registered with the Malaysian Medical Council (MMC). Patient records are kept confidential in line with the Personal Data Protection Act 2010 (PDPA).', 'walid' ); ?></p>
 				<p class="muted"><?php esc_html_e( 'Walid Healthcare Group Sdn. Bhd. (1466692-A).', 'walid' ); ?></p>

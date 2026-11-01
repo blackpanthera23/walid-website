@@ -118,6 +118,7 @@
 .walid-archive .doctor-card .avatar { width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 14px; overflow: hidden; background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); display: grid; place-items: center; color: rgba(255,255,255,.7); font-size: .8rem; }
 .walid-archive .doctor-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .walid-archive .doctor-card .role { color: var(--gold-500); font-weight: 700; font-size: .9rem; }
+.walid-archive .doctor-card .card-foot { display: flex; justify-content: center; }
 
 .walid-archive .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; padding: 11px 20px; border-radius: 999px; border: 2px solid transparent; text-decoration: none; }
 .walid-archive .btn-ghost { background: transparent; color: var(--brand-700); border-color: var(--brand-700); }
@@ -166,3 +167,48 @@
   .walid-archive .intl-hero-art { order: -1; aspect-ratio: 16/9; max-height: 280px; }
   .walid-archive .intl-proof { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* About page: philosophy motto */
+.walid-archive .philosophy-motto {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--brand-900);
+  border-left: 4px solid var(--gold-500);
+  padding-left: 18px;
+  margin: 26px 0 8px;
+  font-style: italic;
+}
+
+/* International page: testimonials + livelier card motion */
+.walid-archive .intl-testimonials { margin-top: 40px; }
+.walid-archive .intl-testimonials .group-head { margin-bottom: 20px; }
+.walid-archive .tst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.walid-archive .tst-card {
+  margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px;
+  padding: 24px 22px; box-shadow: 0 6px 18px rgba(22,27,94,.04);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.walid-archive .tst-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.walid-archive .tst-card .stars { color: var(--gold-500); letter-spacing: 2px; font-size: .95rem; }
+.walid-archive .tst-card blockquote { margin: 0; font-size: 1.02rem; line-height: 1.55; color: var(--ink); }
+.walid-archive .tst-card figcaption { font-size: .85rem; margin-top: auto; }
+
+/* Slightly deeper lift for the "why travel" cards so the motion reads clearly on this page */
+.walid-archive .intl-cards.reveal-group > * { transform: translateY(26px); }
+.walid-archive .intl-cards .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+
+/* Minor Surgery: "categories we cover" card above the service grid */
+.walid-archive .ms-categories {
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--accent-500) 22%, transparent);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 18px rgba(22,27,94,.05);
+}
+.walid-archive .ms-categories h3 { margin: 0 0 14px; color: var(--accent-700); }
+.walid-archive .ms-cat-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 22px; }
+.walid-archive .ms-cat-list li { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; color: var(--accent-900); }
+.walid-archive .ms-cat-list .proc-tick { background: var(--gold-100); margin-top: 3px; }
+.walid-archive .ms-cat-list .proc-tick::after { border-color: var(--gold-500); }

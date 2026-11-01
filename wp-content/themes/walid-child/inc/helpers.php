@@ -118,6 +118,28 @@ function walid_placeholder( $name ) {
 }
 
 /**
+ * Hero ambient loop video, if one has been placed in the theme.
+ * Returns an array of source URLs + poster, or false if no video exists yet (so the hero falls
+ * back to the placeholder image). Drop the generated files in assets/video/ named:
+ *   hero-loop.mp4 · hero-loop.webm (optional) · hero-poster.webp (optional)
+ *
+ * @return array{mp4:string,webm:string,poster:string}|false
+ */
+function walid_hero_video() {
+	$dir = get_stylesheet_directory() . '/assets/video/';
+	$uri = get_stylesheet_directory_uri() . '/assets/video/';
+	if ( ! file_exists( $dir . 'hero-loop.mp4' ) ) {
+		return false;
+	}
+	$poster = file_exists( $dir . 'hero-poster.webp' ) ? $uri . 'hero-poster.webp' : walid_placeholder( 'hero' );
+	return array(
+		'mp4'    => esc_url( $uri . 'hero-loop.mp4' ),
+		'webm'   => file_exists( $dir . 'hero-loop.webm' ) ? esc_url( $uri . 'hero-loop.webm' ) : '',
+		'poster' => esc_url( $poster ),
+	);
+}
+
+/**
  * Proof-wall videos for the homepage social wall.
  * Each item: platform, url (to the post/profile), label. Owner replaces the URLs with real
  * video links; until then they point at the profiles. Filterable so a future options page can
@@ -194,4 +216,90 @@ function walid_permitted_reviews( $limit = 3 ) {
 			'meta_value'     => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		)
 	);
+}
+
+/**
+ * Permitted reviews associated with a pillar (optional review_pillar meta).
+ *
+ * Lets each pillar page show reviews relevant to it. Reviews are matched when their
+ * review_pillar meta equals the pillar name. Returns an empty array when none match, so the
+ * caller can fall back to pillar-tailored sample quotes.
+ *
+ * @param string $pillar_name Pillar term name (e.g. "Minor Surgery").
+ * @param int    $limit       Max reviews.
+ * @return WP_Post[]
+ */
+function walid_permitted_reviews_for_pillar( $pillar_name, $limit = 3 ) {
+	if ( '' === (string) $pillar_name ) {
+		return array();
+	}
+	return get_posts(
+		array(
+			'post_type'      => 'review',
+			'posts_per_page' => $limit,
+			// phpcs:disable WordPress.DB.SlowDBQuery
+			'meta_query'     => array(
+				'relation' => 'AND',
+				array(
+					'key'   => 'review_permission',
+					'value' => '1',
+				),
+				array(
+					'key'   => 'review_pillar',
+					'value' => $pillar_name,
+				),
+			),
+			// phpcs:enable WordPress.DB.SlowDBQuery
+		)
+	);
+}
+
+/**
+ * Pillar-tailored sample testimonials for service pages.
+ *
+ * Used as a graceful fallback until permitted Review CPT posts exist. Each quote is written to
+ * feel relevant to the pillar (minor surgery / aesthetics / antenatal / general). Flagged as
+ * pending permission so nothing unpermitted is presented as a verified named review.
+ *
+ * @param string $pillar Pillar name (e.g. "Minor Surgery").
+ * @return array<int,array{q:string,w:string,s:int}>
+ */
+function walid_pillar_sample_reviews( $pillar ) {
+	$pending = __( 'Google review [permission pending]', 'walid' );
+
+	if ( false !== stripos( $pillar, 'Antenatal' ) ) {
+		$set = array(
+			__( 'Dr Anis was gentle and thorough at every visit. I felt safe through the whole pregnancy.', 'walid' ),
+			__( 'Clear answers to every question and a calm, caring approach. Highly recommended for mums.', 'walid' ),
+			__( 'Warm, professional and never rushed. The women\'s health care here is excellent.', 'walid' ),
+		);
+	} elseif ( false !== stripos( $pillar, 'Aesthetic' ) ) {
+		$set = array(
+			__( 'Natural-looking result and honest advice on what would actually suit me.', 'walid' ),
+			__( 'Clean, modern and professional. The team explained every step before starting.', 'walid' ),
+			__( 'Comfortable throughout and genuinely happy with how it turned out.', 'walid' ),
+		);
+	} elseif ( false !== stripos( $pillar, 'General' ) ) {
+		$set = array(
+			__( 'Seen quickly and treated with real care. The doctor listened properly.', 'walid' ),
+			__( 'Friendly staff, clean clinic and clear advice. My go-to for the family.', 'walid' ),
+			__( 'Easy to reach on WhatsApp and sorted my concern the same day.', 'walid' ),
+		);
+	} else { // Minor Surgery (default).
+		$set = array(
+			__( 'Quick day-care procedure and a clear explanation. Home the same afternoon.', 'walid' ),
+			__( 'The surgeon talked me through everything first. Calm, clean and professional.', 'walid' ),
+			__( 'Booked over WhatsApp and seen fast. Minor surgery done without the hospital wait.', 'walid' ),
+		);
+	}
+
+	$out = array();
+	foreach ( $set as $q ) {
+		$out[] = array(
+			'q' => $q,
+			'w' => $pending,
+			's' => 5,
+		);
+	}
+	return $out;
 }

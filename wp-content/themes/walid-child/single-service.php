@@ -19,14 +19,23 @@ while ( have_posts() ) :
 	$branches  = get_field( 'service_branches' );
 	$pillars   = wp_get_post_terms( $id, 'pillar', array( 'fields' => 'names' ) );
 	$wa        = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title() ) );
-	// Antenatal / women's health services get the rose accent.
-	$is_antenatal = ! empty( $pillars ) && false !== stripos( $pillars[0], 'Antenatal' );
+	// Per-pillar accent class so the whole page (hero + accents) follows the pillar theme.
+	$pillar_name  = ! empty( $pillars ) ? $pillars[0] : '';
+	$is_antenatal = false !== stripos( $pillar_name, 'Antenatal' );
+	$accent_class = 'walid-minor'; // default navy (Minor Surgery / unknown)
+	if ( $is_antenatal ) {
+		$accent_class = 'walid-antenatal';
+	} elseif ( false !== stripos( $pillar_name, 'Aesthetic' ) ) {
+		$accent_class = 'walid-aesthetic';
+	} elseif ( false !== stripos( $pillar_name, 'General' ) ) {
+		$accent_class = 'walid-general';
+	}
 	?>
 	<?php
 	$svc_img     = get_field( 'service_icon' );
 	$svc_img_url = $svc_img ? wp_get_attachment_image_url( $svc_img, 'large' ) : walid_placeholder( 'service' );
 	?>
-	<main class="walid-single<?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>" id="primary">
+	<main class="walid-single <?php echo esc_attr( $accent_class ); ?><?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>" id="primary">
 
 		<!-- Service hero: photo as a full-width background rather than a floating standing image. -->
 		<header class="service-hero reveal" style="--svc-bg:url('<?php echo esc_url( $svc_img_url ); ?>');">
@@ -54,6 +63,15 @@ while ( have_posts() ) :
 					<?php
 					// Styled "Procedures we perform" grid from the service_procedures field.
 					$procedures = array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_field( 'service_procedures' ) ) ) );
+					// Sort A to Z by procedure name (text before the first pipe).
+					usort(
+						$procedures,
+						static function ( $a, $b ) {
+							$an = trim( explode( '|', $a, 2 )[0] );
+							$bn = trim( explode( '|', $b, 2 )[0] );
+							return strcasecmp( $an, $bn );
+						}
+					);
 					if ( $procedures ) :
 						?>
 						<section class="svc-procedures">
@@ -138,18 +156,21 @@ while ( have_posts() ) :
 						</figure>
 						<div class="stats-note">
 							<p class="muted"><?php esc_html_e( 'Illustrative figures for the day-care model. [confirm with clinic]', 'walid' ); ?></p>
+							<p><?php esc_html_e( 'Day-care surgery means shorter waiting times, a faster return to normal routine, and far less time away from work or family. Most patients recover comfortably at home the same day, protecting both their productivity and their quality of life without a lengthy hospital stay.', 'walid' ); ?></p>
 						</div>
 					</div>
 				</section>
 			<?php endif; ?>
 
 			<?php
-			// Short testimonials (3). Use permitted Review CPT posts; fall back to sample quotes
-			// flagged as pending, matching the homepage pattern.
-			$svc_reviews = walid_permitted_reviews( 3 );
-			$svc_quotes  = array();
-			if ( $svc_reviews ) {
-				foreach ( $svc_reviews as $rv ) {
+			// Short testimonials (3), tailored to THIS pillar. Prefer permitted Review CPT
+			// posts whose review_pillar matches this service's pillar; otherwise fall back to
+			// pillar-specific sample quotes (flagged pending) so each pillar page reads
+			// relevant rather than showing one shared generic set.
+			$svc_quotes    = array();
+			$pillar_reviews = $pillar_name ? walid_permitted_reviews_for_pillar( $pillar_name, 3 ) : array();
+			if ( $pillar_reviews ) {
+				foreach ( $pillar_reviews as $rv ) {
 					$svc_quotes[] = array(
 						'q' => (string) get_field( 'review_quote', $rv->ID ),
 						'w' => trim( ( (string) get_field( 'review_author', $rv->ID ) ) . ' · ' . ( get_field( 'review_source', $rv->ID ) ?: __( 'Google review', 'walid' ) ), ' ·' ),
@@ -157,11 +178,7 @@ while ( have_posts() ) :
 					);
 				}
 			} else {
-				$svc_quotes = array(
-					array( 'q' => __( 'Quick day-care procedure and a clear explanation. Home the same afternoon.', 'walid' ), 'w' => __( 'Google review [permission pending]', 'walid' ), 's' => 5 ),
-					array( 'q' => __( 'The doctor took time to talk me through everything. Calm and reassuring.', 'walid' ), 'w' => __( 'Google review [permission pending]', 'walid' ), 's' => 5 ),
-					array( 'q' => __( 'Booked over WhatsApp and seen fast. Professional from start to finish.', 'walid' ), 'w' => __( 'Google review [permission pending]', 'walid' ), 's' => 5 ),
-				);
+				$svc_quotes = walid_pillar_sample_reviews( $pillar_name );
 			}
 			?>
 			<section class="svc-testimonials reveal">

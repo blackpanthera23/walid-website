@@ -96,7 +96,7 @@ button:focus-visible,
 /* Brand footer (site-wide) — ported from the prototype footer. */
 .walid-footer { background: var(--brand-900); color: #c7cbee; padding: 56px 0 30px; }
 .walid-footer .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
-.walid-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 36px; }
+.walid-footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 36px; }
 .walid-footer a { color: #c7cbee; text-decoration: none; }
 .walid-footer a:hover { color: #fff; }
 .walid-footer h4 { color: #fff; font-family: var(--sans); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 14px; }
@@ -110,7 +110,10 @@ button:focus-visible,
 .walid-socials a { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; font-size: .85rem; font-weight: 600; }
 .walid-legal { border-top: 1px solid rgba(255,255,255,.14); padding-top: 20px; font-size: .82rem; color: #9aa0d0; }
 
-@media (max-width: 880px) {
+@media (max-width: 980px) {
+  .walid-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
   .walid-footer-grid { grid-template-columns: 1fr; }
 }
 
@@ -144,13 +147,14 @@ button:focus-visible,
 	--accent-050: #E7F4F1;
 }
 
-/* Minor surgery (hero) — brand navy, as accent vars so it uses the same panel treatment */
+/* Minor surgery (hero) — softer blue tone (panel was too dark). Text keeps navy weight,
+   panel tint + accents lighten to match the other pillars' airy feel. */
 .walid-minor {
-	--accent-500: #3A43B0;
-	--accent-600: #2D3597;
-	--accent-700: #232B8F;
-	--accent-900: #161B5E;
-	--accent-050: #EEF0FB;
+	--accent-500: #6B74D6;
+	--accent-600: #4A54C4;
+	--accent-700: #3A43B0;
+	--accent-900: #232B8F;
+	--accent-050: #EEF1FD;
 }
 
 /* Accessibility: skip link (visible on focus). */

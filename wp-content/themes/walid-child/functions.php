@@ -194,11 +194,70 @@ function walid_brand_footer() {
 					</div>
 				</div>
 				<div>
-					<h4><?php esc_html_e( 'Explore', 'walid' ); ?></h4>
+					<h4><?php esc_html_e( 'Services', 'walid' ); ?></h4>
 					<ul>
-						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'service' ) ); ?>"><?php esc_html_e( 'Services', 'walid' ); ?></a></li>
-						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'branch' ) ); ?>"><?php esc_html_e( 'Branches', 'walid' ); ?></a></li>
-						<li><a href="<?php echo esc_url( get_post_type_archive_link( 'doctor' ) ); ?>"><?php esc_html_e( 'Doctors', 'walid' ); ?></a></li>
+						<?php
+						// The four care pillars, each linking to its lead service page when one
+						// exists, else falling back to the services archive.
+						$footer_pillars = array(
+							'Minor Surgery',
+							'Aesthetics',
+							"Antenatal & Women's Health",
+							'General Medicine',
+						);
+						$services_archive = get_post_type_archive_link( 'service' );
+						foreach ( $footer_pillars as $fp ) :
+							$fp_term = get_term_by( 'name', $fp, 'pillar' );
+							$fp_link = $services_archive;
+							if ( $fp_term ) {
+								$fp_services = get_posts(
+									array(
+										'post_type'      => 'service',
+										'posts_per_page' => 1,
+										'orderby'        => 'menu_order title',
+										'order'          => 'ASC',
+										'fields'         => 'ids',
+										'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+											array(
+												'taxonomy' => 'pillar',
+												'field'    => 'term_id',
+												'terms'    => $fp_term->term_id,
+											),
+										),
+									)
+								);
+								if ( $fp_services ) {
+									$fp_link = get_permalink( $fp_services[0] );
+								}
+							}
+							?>
+							<li><a href="<?php echo esc_url( $fp_link ); ?>"><?php echo esc_html( $fp ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<div>
+					<h4><?php esc_html_e( 'Branches', 'walid' ); ?></h4>
+					<ul>
+						<?php
+						// Up to six branches, then a link to the full network.
+						$footer_branches = get_posts(
+							array(
+								'post_type'      => 'branch',
+								'posts_per_page' => 6,
+								'orderby'        => 'menu_order title',
+								'order'          => 'ASC',
+							)
+						);
+						if ( $footer_branches ) :
+							foreach ( $footer_branches as $fb ) :
+								?>
+								<li><a href="<?php echo esc_url( get_permalink( $fb ) ); ?>"><?php echo esc_html( get_the_title( $fb ) ); ?></a></li>
+							<?php endforeach; ?>
+							<li><a href="<?php echo esc_url( get_post_type_archive_link( 'branch' ) ); ?>"><?php esc_html_e( 'All branches', 'walid' ); ?></a></li>
+						<?php else : ?>
+							<li><a href="<?php echo esc_url( get_post_type_archive_link( 'branch' ) ); ?>"><?php esc_html_e( 'All branches', 'walid' ); ?></a></li>
+							<li><a href="<?php echo esc_url( get_post_type_archive_link( 'doctor' ) ); ?>"><?php esc_html_e( 'Our doctors', 'walid' ); ?></a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 				<div>
