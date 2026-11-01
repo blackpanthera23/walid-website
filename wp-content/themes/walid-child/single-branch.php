@@ -24,30 +24,34 @@ while ( have_posts() ) :
 	$wa_context = $minor ? 'minor_surgery' : 'general';
 	$wa         = walid_whatsapp_url( $wa_context, sprintf( /* translators: %s: branch */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title() ) );
 	?>
-	<main class="walid-single" id="primary">
+	<?php
+	// Per-branch accent: surgical branches keep navy (our specialty), others use teal to
+	// match the General region tone on the locations archive.
+	$branch_accent = $minor ? 'walid-minor' : 'walid-general';
+	$photos        = get_field( 'branch_photos' );
+	$hero_photo    = ( $photos && is_array( $photos ) ) ? $photos[0] : 0;
+	$hero_photo_id = $hero_photo ? ( is_array( $hero_photo ) ? $hero_photo['ID'] : $hero_photo ) : 0;
+	$hero_bg       = $hero_photo_id ? wp_get_attachment_image_url( $hero_photo_id, 'large' ) : walid_placeholder( 'branch' );
+	?>
+	<main class="walid-single <?php echo esc_attr( $branch_accent ); ?>" id="primary">
+
+		<!-- Branch hero: photo as a full-width background, consistent with service pages. -->
+		<header class="service-hero reveal" style="--svc-bg:url('<?php echo esc_url( $hero_bg ); ?>');">
+			<div class="service-hero-overlay"></div>
+			<div class="container">
+				<div class="service-hero-inner">
+					<p class="eyebrow">
+						<?php esc_html_e( 'Branch', 'walid' ); ?>
+						<?php if ( $flagship ) : ?><span class="pin"><?php esc_html_e( 'FLAGSHIP', 'walid' ); ?></span><?php endif; ?>
+					</p>
+					<h1><?php the_title(); ?></h1>
+					<?php if ( has_excerpt() ) : ?><p class="lede"><?php echo esc_html( get_the_excerpt() ); ?></p><?php endif; ?>
+					<p style="margin-top:18px;"><a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp this branch', 'walid' ); ?></a></p>
+				</div>
+			</div>
+		</header>
+
 		<div class="container">
-
-			<div class="single-head">
-				<p class="eyebrow">
-					<?php esc_html_e( 'Branch', 'walid' ); ?>
-					<?php if ( $flagship ) : ?><span class="pin"><?php esc_html_e( 'FLAGSHIP', 'walid' ); ?></span><?php endif; ?>
-				</p>
-				<h1><?php the_title(); ?></h1>
-				<?php if ( has_excerpt() ) : ?><p class="lede"><?php echo esc_html( get_the_excerpt() ); ?></p><?php endif; ?>
-				<p style="margin-top:16px;"><a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp this branch', 'walid' ); ?></a></p>
-			</div>
-
-			<?php
-			$photos = get_field( 'branch_photos' );
-			$hero_photo = ( $photos && is_array( $photos ) ) ? $photos[0] : 0;
-			?>
-			<div class="branch-photo reveal">
-				<?php if ( $hero_photo ) : ?>
-					<?php echo wp_get_attachment_image( is_array( $hero_photo ) ? $hero_photo['ID'] : $hero_photo, 'large', false, array( 'alt' => esc_attr( get_the_title() ) ) ); ?>
-				<?php else : ?>
-					<img src="<?php echo walid_placeholder( 'branch' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
-				<?php endif; ?>
-			</div>
 
 			<div class="meta-grid">
 				<div>

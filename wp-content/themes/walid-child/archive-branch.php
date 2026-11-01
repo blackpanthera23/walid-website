@@ -26,10 +26,19 @@ $region_order = array( 'Central (Klang Valley)', 'North (Penang / Kedah)', 'Othe
 				continue;
 			}
 			$any = true;
+			// Per-region accent, mirroring the services page soft-tone panels.
+			// Central = navy (our surgical HQ region), North = teal, Other = aesthetic mauve.
+			$region_accent = 'walid-minor';
+			if ( false !== stripos( $region_name, 'North' ) ) {
+				$region_accent = 'walid-general';
+			} elseif ( false !== stripos( $region_name, 'Other' ) ) {
+				$region_accent = 'walid-aesthetic';
+			}
+			$is_central = ( false !== stripos( $region_name, 'Central' ) );
 			?>
-			<section class="group">
+			<section class="group pillar-section pillar-tinted <?php echo esc_attr( $region_accent ); ?><?php echo $is_central ? ' is-hero' : ''; ?>">
 				<div class="group-head">
-					<span class="pin"><?php echo esc_html( strtoupper( explode( ' ', $region_name )[0] ) ); ?></span>
+					<span class="pin<?php echo $is_central ? ' pin-hero' : ''; ?>"><?php echo esc_html( strtoupper( explode( ' ', $region_name )[0] ) ); ?></span>
 					<h2><?php echo esc_html( $region_name ); ?></h2>
 				</div>
 				<div class="card-grid reveal-group">
