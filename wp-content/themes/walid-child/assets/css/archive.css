@@ -22,6 +22,8 @@
 .walid-archive .card.hero-card h3 a, .walid-archive .card.hero-card h3 { color: #fff; }
 .walid-archive .card.hero-card p { color: #d7daf2; }
 .walid-archive .card.hero-card .proc-list li { color: #eceefb; border-bottom-color: rgba(255,255,255,.12); }
+.walid-archive .card.hero-card .proc-text b { color: #fff; }
+.walid-archive .card.hero-card .proc-desc { color: #c3c8ee; }
 .walid-archive .card.hero-card .proc-tick { background: rgba(255,255,255,.14); }
 .walid-archive .card.hero-card .proc-tick::after { border-color: var(--gold-500); }
 .walid-archive .card.hero-card .proc-toggle { color: #fff; border-color: rgba(255,255,255,.3); }
@@ -58,6 +60,11 @@
 .walid-archive .pillar-section.pillar-tinted .proc-toggle { color: var(--accent-700); border-color: var(--accent-500); }
 .walid-archive .pillar-section.pillar-tinted .proc-toggle:hover { background: #fff; border-color: var(--accent-700); }
 .walid-archive .pillar-section.pillar-tinted .card h3 a { color: var(--accent-900); }
+/* Featured (dark navy) card keeps white title even inside a tinted pillar section. */
+.walid-archive .pillar-section.pillar-tinted .card.hero-card h3,
+.walid-archive .pillar-section.pillar-tinted .card.hero-card h3 a { color: #fff; }
+.walid-archive .pillar-section.pillar-tinted .card.hero-card p { color: #d7daf2; }
+.walid-archive .pillar-section.pillar-tinted .card.hero-card .proc-desc { color: #c3c8ee; }
 .walid-archive .pillar-section.pillar-tinted .card::before { background: var(--accent-500); }
 .walid-archive .pillar-section.pillar-tinted .btn-ghost { color: var(--accent-700); border-color: var(--accent-500); }
 .walid-archive .pillar-section.pillar-tinted .btn-ghost:hover { background: #fff; border-color: var(--accent-700); }
