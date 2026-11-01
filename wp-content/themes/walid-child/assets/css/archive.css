@@ -250,3 +250,27 @@
 @media (prefers-reduced-motion: reduce) {
   .walid-archive .ms-cat-card:hover .ms-cat-icon { transform: none; }
 }
+
+/* Category card BODY is white with dark, high-contrast text. The art header above
+   stays navy; only the content area below is light. Overrides the .hero-card dark body. */
+.walid-archive .card.ms-cat-card { background: var(--surface); color: var(--ink); }
+.walid-archive .card.ms-cat-card h3,
+.walid-archive .card.ms-cat-card h3 a { color: var(--brand-900); }
+.walid-archive .card.ms-cat-card > p { color: var(--muted); }
+/* list rows: dark text, light tick, tidy rule lines */
+.walid-archive .card.ms-cat-card .proc-list li { color: var(--ink); border-bottom-color: rgba(221,224,236,.7); }
+.walid-archive .card.ms-cat-card .proc-text b { color: var(--brand-900); }
+.walid-archive .card.ms-cat-card .proc-desc { color: var(--muted); }
+.walid-archive .card.ms-cat-card .proc-tick { background: var(--brand-050); border: 0; }
+.walid-archive .card.ms-cat-card .proc-tick::after { border-color: var(--brand-700); }
+.walid-archive .card.ms-cat-card .proc-toggle { color: var(--brand-700); border-color: var(--rule); }
+.walid-archive .card.ms-cat-card .proc-toggle:hover { background: var(--brand-050); border-color: var(--brand-700); }
+.walid-archive .card.ms-cat-card .btn-wa { background: var(--wa); color: #06351b; }
+
+/* Spacing: tighten the header-to-title gap and give the body comfortable rhythm. */
+.walid-archive .card.ms-cat-card > h3 { margin-top: 20px; margin-bottom: 6px; }
+.walid-archive .card.ms-cat-card > p { margin-bottom: 16px; }
+.walid-archive .card.ms-cat-card .proc { margin-top: 2px; }
+.walid-archive .card.ms-cat-card .proc-list { grid-template-columns: 1fr 1fr; gap: 2px 20px; }
+.walid-archive .card.ms-cat-card .proc-list li { padding: 8px 0; }
+.walid-archive .card.ms-cat-card .card-foot { padding-top: 6px; padding-bottom: 24px; }
