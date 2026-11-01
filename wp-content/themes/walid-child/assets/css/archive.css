@@ -41,6 +41,19 @@
 .walid-archive .pillar-section.is-hero { background: var(--brand-050); border-radius: var(--radius); padding: 28px; margin-left: -28px; margin-right: -28px; }
 .walid-archive .pillar-section.is-hero .group-head h2 { color: var(--brand-700); }
 
+/* Antenatal pillar section: rose accent (scoped) */
+.walid-archive .pillar-section.walid-antenatal { background: var(--accent-050); border-radius: var(--radius); padding: 28px; margin-left: -28px; margin-right: -28px; }
+.walid-archive .pillar-section.walid-antenatal .group-head h2 { color: var(--accent-700); }
+.walid-archive .pillar-section.walid-antenatal .proc-tick { background: #fff; }
+.walid-archive .pillar-section.walid-antenatal .proc-tick::after { border-color: var(--accent-700); }
+.walid-archive .pillar-section.walid-antenatal .proc-toggle { color: var(--accent-700); border-color: var(--accent-500); }
+.walid-archive .pillar-section.walid-antenatal .proc-toggle:hover { background: #fff; border-color: var(--accent-700); }
+.walid-archive .pillar-section.walid-antenatal .card h3 a { color: var(--accent-900); }
+.walid-archive .pillar-section.walid-antenatal .btn-ghost { color: var(--accent-700); border-color: var(--accent-500); }
+.walid-archive .pillar-section.walid-antenatal .btn-ghost:hover { background: #fff; border-color: var(--accent-700); }
+.walid-archive .pillar-section.walid-antenatal .btn-wa { background: var(--wa); } /* keep WhatsApp green */
+.walid-archive .pillar-section.walid-antenatal .card::before { background: var(--accent-500); }
+
 /* Procedure (sub-service) list + premium show-more */
 .walid-archive .proc { margin: 6px 0 14px; }
 .walid-archive .proc-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }

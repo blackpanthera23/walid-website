@@ -50,9 +50,10 @@ $hero_pillar = 'Minor Surgery';
 			if ( ! $services ) {
 				continue;
 			}
-			$is_hero = ( $hero_pillar === $pillar_name );
+			$is_hero      = ( $hero_pillar === $pillar_name );
+			$is_antenatal = ( false !== stripos( $pillar_name, 'Antenatal' ) );
 			?>
-			<section class="group pillar-section<?php echo $is_hero ? ' is-hero' : ''; ?>">
+			<section class="group pillar-section<?php echo $is_hero ? ' is-hero' : ''; ?><?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>">
 				<div class="group-head">
 					<h2><?php echo esc_html( $pillar_name ); ?></h2>
 					<?php if ( $is_hero ) : ?>
