@@ -50,10 +50,18 @@ $hero_pillar = 'Minor Surgery';
 			if ( ! $services ) {
 				continue;
 			}
-			$is_hero      = ( $hero_pillar === $pillar_name );
-			$is_antenatal = ( false !== stripos( $pillar_name, 'Antenatal' ) );
+			$is_hero = ( $hero_pillar === $pillar_name );
+			// Per-pillar accent palette (scoped soft-tone panel).
+			$accent_class = 'walid-minor'; // default/hero navy
+			if ( false !== stripos( $pillar_name, 'Antenatal' ) ) {
+				$accent_class = 'walid-antenatal';
+			} elseif ( false !== stripos( $pillar_name, 'Aesthetic' ) ) {
+				$accent_class = 'walid-aesthetic';
+			} elseif ( false !== stripos( $pillar_name, 'General' ) ) {
+				$accent_class = 'walid-general';
+			}
 			?>
-			<section class="group pillar-section<?php echo $is_hero ? ' is-hero' : ''; ?><?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>">
+			<section class="group pillar-section pillar-tinted <?php echo esc_attr( $accent_class ); ?><?php echo $is_hero ? ' is-hero' : ''; ?>">
 				<div class="group-head">
 					<h2><?php echo esc_html( $pillar_name ); ?></h2>
 					<?php if ( $is_hero ) : ?>

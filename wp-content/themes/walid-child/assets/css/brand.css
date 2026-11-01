@@ -114,15 +114,43 @@ button:focus-visible,
   .walid-footer-grid { grid-template-columns: 1fr; }
 }
 
-/* Antenatal / women's health accent (rose). Scoped: apply .walid-antenatal to a section/page
-   wrapper and its accent-* vars drive eyebrow, headings accents, tags, CTA, soft background.
-   The rest of the site stays navy/gold. */
+/* Pillar accent palettes. Each sets accent-* vars used by scoped sections (service archive
+   pillar blocks, specialist section, antenatal pages). The site chrome stays navy/gold. */
+
+/* Antenatal / women's health — rose */
 .walid-antenatal {
 	--accent-500: #D16B86;
 	--accent-600: #C14E6E;
 	--accent-700: #A23A59;
 	--accent-900: #6E2340;
 	--accent-050: #FBEEF2;
+}
+
+/* Aesthetics — mauve / soft purple */
+.walid-aesthetic {
+	--accent-500: #8A6BBF;
+	--accent-600: #7352A8;
+	--accent-700: #5B3E8C;
+	--accent-900: #3C275E;
+	--accent-050: #F3EEFA;
+}
+
+/* General medicine — teal / calm green */
+.walid-general {
+	--accent-500: #2E9C8E;
+	--accent-600: #1F8375;
+	--accent-700: #166457;
+	--accent-900: #0C423A;
+	--accent-050: #E7F4F1;
+}
+
+/* Minor surgery (hero) — brand navy, as accent vars so it uses the same panel treatment */
+.walid-minor {
+	--accent-500: #3A43B0;
+	--accent-600: #2D3597;
+	--accent-700: #232B8F;
+	--accent-900: #161B5E;
+	--accent-050: #EEF0FB;
 }
 
 /* Accessibility: skip link (visible on focus). */
