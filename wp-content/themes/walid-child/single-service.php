@@ -66,10 +66,12 @@ while ( have_posts() ) :
 									?>
 									<li class="proc-item">
 										<span class="proc-check" aria-hidden="true"></span>
-										<span class="proc-name"><?php echo esc_html( $proc_name ); ?></span>
-										<?php if ( $proc_desc ) : ?>
-											<span class="proc-desc"><?php echo esc_html( $proc_desc ); ?></span>
-										<?php endif; ?>
+										<span class="proc-body">
+											<span class="proc-name"><?php echo esc_html( $proc_name ); ?></span>
+											<?php if ( $proc_desc ) : ?>
+												<span class="proc-desc"><?php echo esc_html( $proc_desc ); ?></span>
+											<?php endif; ?>
+										</span>
 									</li>
 								<?php endforeach; ?>
 							</ul>
