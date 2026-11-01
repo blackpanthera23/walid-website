@@ -68,29 +68,33 @@ $hero_pillar = 'Minor Surgery';
 						<span class="pin pin-hero"><?php esc_html_e( 'OUR SPECIALTY', 'walid' ); ?></span>
 					<?php endif; ?>
 				</div>
-				<?php if ( $is_hero ) : ?>
-					<?php
-					// Categories of minor surgery Dr Walid offers, for at-a-glance scanning.
-					// [confirm exact category list with clinic]
-					$ms_categories = array(
-						__( 'Skin and Subcutaneous Tissue', 'walid' ),
-						__( 'Wound Care and Trauma Repair', 'walid' ),
-						__( 'Nail and Minor Dermatological Surgeries', 'walid' ),
-						__( 'Therapeutic and Joint Injections', 'walid' ),
-						__( 'Minor Gynaecological and Urological Procedures', 'walid' ),
-					);
-					?>
-					<div class="ms-categories reveal">
-						<h3><?php esc_html_e( 'Categories we cover', 'walid' ); ?></h3>
-						<ul class="ms-cat-list">
-							<?php foreach ( $ms_categories as $cat ) : ?>
-								<li><span class="proc-tick" aria-hidden="true"></span><span><?php echo esc_html( $cat ); ?></span></li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-				<?php endif; ?>
-
 				<div class="card-grid reveal-group">
+
+					<?php if ( $is_hero ) : ?>
+						<?php
+						// Categories of minor surgery Dr Walid offers, as a card matching the
+						// other service cards. [confirm exact category list with clinic]
+						$ms_categories = array(
+							__( 'Skin and Subcutaneous Tissue', 'walid' ),
+							__( 'Wound Care and Trauma Repair', 'walid' ),
+							__( 'Nail and Minor Dermatological Surgeries', 'walid' ),
+							__( 'Therapeutic and Joint Injections', 'walid' ),
+							__( 'Minor Gynaecological and Urological Procedures', 'walid' ),
+						);
+						?>
+						<article class="card ms-cat-card">
+							<h3><?php esc_html_e( 'Categories we cover', 'walid' ); ?></h3>
+							<p><?php esc_html_e( 'The main areas of day-care minor surgery performed by our surgeon-led team.', 'walid' ); ?></p>
+							<div class="proc">
+								<ul class="proc-list proc-list-single">
+									<?php foreach ( $ms_categories as $cat ) : ?>
+										<li><span class="proc-tick" aria-hidden="true"></span><span class="proc-text"><b><?php echo esc_html( $cat ); ?></b></span></li>
+									<?php endforeach; ?>
+								</ul>
+							</div>
+						</article>
+					<?php endif; ?>
+
 					<?php foreach ( $services as $s ) : ?>
 						<?php
 						$short      = get_field( 'service_short_desc', $s->ID );
