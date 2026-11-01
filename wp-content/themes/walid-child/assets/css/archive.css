@@ -205,17 +205,27 @@
 .walid-archive .intl-cards.reveal-group > * { transform: translateY(26px); }
 .walid-archive .intl-cards .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 
-/* Minor Surgery: "categories we cover" card above the service grid */
+/* Minor Surgery: "categories we cover" card above the service grid.
+   Styled like the pillar soft-panel cards (same craft as the antenatal card) and uses the
+   same subtle accent check icon as the pillar procedure lists. */
 .walid-archive .ms-categories {
-  background: #fff;
-  border: 1px solid color-mix(in srgb, var(--accent-500) 22%, transparent);
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-radius: var(--radius);
-  padding: 24px 26px;
+  padding: 26px;
   margin-bottom: 22px;
-  box-shadow: 0 6px 18px rgba(22,27,94,.05);
+  box-shadow: 0 6px 18px rgba(22,27,94,.04);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
 }
-.walid-archive .ms-categories h3 { margin: 0 0 14px; color: var(--accent-700); }
-.walid-archive .ms-cat-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 22px; }
-.walid-archive .ms-cat-list li { display: flex; align-items: flex-start; gap: 10px; font-weight: 600; color: var(--accent-900); }
-.walid-archive .ms-cat-list .proc-tick { background: var(--gold-100); margin-top: 3px; }
-.walid-archive .ms-cat-list .proc-tick::after { border-color: var(--gold-500); }
+/* Accent spine down the left edge, matching the pillar card treatment. */
+.walid-archive .ms-categories::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent-500); }
+.walid-archive .ms-categories:hover { box-shadow: var(--shadow); transform: translateY(-4px); border-color: transparent; }
+.walid-archive .ms-categories h3 { margin: 0 0 16px; color: var(--accent-900); }
+.walid-archive .ms-cat-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4px 22px; }
+.walid-archive .ms-cat-list li { display: flex; align-items: flex-start; gap: 9px; font-size: .92rem; font-weight: 600; color: var(--accent-900); padding: 7px 0; border-bottom: 1px solid rgba(221,224,236,.6); }
+/* Same subtle check icon as the pillar procedure lists (accent-tinted, not a gold badge).
+   Scoped under .pillar-section so it beats the is-hero gold-tick override. */
+.walid-archive .pillar-section .ms-cat-list .proc-tick { background: #fff; margin-top: 2px; border: 1px solid color-mix(in srgb, var(--accent-500) 30%, transparent); }
+.walid-archive .pillar-section .ms-cat-list .proc-tick::after { border-color: var(--accent-700); }
