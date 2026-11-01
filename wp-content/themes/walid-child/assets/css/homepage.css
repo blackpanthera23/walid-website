@@ -131,13 +131,59 @@
 .walid-home .spec .photo img { width: 100%; height: 100%; object-fit: cover; }
 .walid-home .spec .gold-line { color: var(--gold-500); font-weight: 700; margin-bottom: .4em; }
 
-/* Antenatal rose accent on the specialist section */
-.walid-home #specialist.walid-antenatal { background: linear-gradient(180deg, var(--bg), var(--accent-050)); }
+/* ---- Antenatal rose accent + warm scroll transition ----------------------
+   The section before the specialist block eases its background toward rose at the
+   bottom, the specialist section is a full rose wash with a soft warm glow, and it
+   fades back toward neutral at the bottom so the navy proof wall below feels intentional.
+   Result: scrolling down from the pillars blooms gently into the warm antenatal zone. */
+
+/* Lead-in: warm the bottom of the section immediately above the specialist block. */
+.walid-home .section-alt:has(+ #specialist.walid-antenatal) {
+  background: linear-gradient(180deg, var(--brand-050) 55%, var(--accent-050) 100%);
+}
+
+/* The warm zone itself: a soft vertical rose wash (enters warm, exits calm). */
+.walid-home #specialist.walid-antenatal {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--accent-050) 0%, #FFF4F7 45%, var(--bg) 100%);
+}
+/* Diffuse warm glow that drifts, giving the section a living, warm feel. */
+.walid-home #specialist.walid-antenatal::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(60% 80% at 30% 20%, rgba(209,107,134,.18), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.walid-home #specialist.walid-antenatal .container { position: relative; z-index: 1; }
+
 .walid-home #specialist.walid-antenatal .eyebrow { color: var(--accent-600); }
-.walid-home #specialist.walid-antenatal .spec .photo { background: linear-gradient(160deg, var(--accent-700), var(--accent-900)); }
+.walid-home #specialist.walid-antenatal h2 { color: var(--accent-900); }
+.walid-home #specialist.walid-antenatal .spec .photo { background: linear-gradient(160deg, var(--accent-700), var(--accent-900)); box-shadow: 0 18px 50px rgba(110,35,64,.18); }
 .walid-home #specialist.walid-antenatal .gold-line { color: var(--accent-700); }
 .walid-home #specialist.walid-antenatal .btn-primary { background: var(--accent-700); }
 .walid-home #specialist.walid-antenatal .btn-primary:hover { background: var(--accent-900); box-shadow: 0 10px 24px rgba(110,35,64,.28); }
+
+/* Warm "bloom" entrance: the section + photo rise and warm in as they scroll into view.
+   Uses the existing reveal.js (.reveal -> .is-visible). Gated by reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .walid-home #specialist.walid-antenatal .photo.reveal {
+    transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1), filter .8s ease;
+    filter: saturate(.7);
+  }
+  .walid-home #specialist.walid-antenatal .photo.reveal.is-visible { filter: saturate(1); }
+  .walid-home #specialist.walid-antenatal::before {
+    animation: walid-warm-drift 18s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+}
+@keyframes walid-warm-drift {
+  0%, 100% { transform: translate3d(0,0,0); opacity: .9; }
+  50%      { transform: translate3d(4%, 3%, 0); opacity: 1; }
+}
 
 /* Proof wall */
 .walid-home .tiktok-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
