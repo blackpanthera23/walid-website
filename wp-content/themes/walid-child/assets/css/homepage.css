@@ -24,7 +24,29 @@
 .walid-home .btn-ghost:hover { border-color: var(--brand-700); background: var(--brand-050); }
 
 /* Hero — organic panel + floating accent dots + proof rail */
-.walid-home .hero { padding: 96px 0 84px; }
+.walid-home .hero { padding: 96px 0 84px; position: relative; overflow: hidden; }
+
+/* A·v2 — calm breathing background motion behind the hero (free, on-brand) */
+.walid-home .hero-motion { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.walid-home .hero > .container { position: relative; z-index: 1; }
+.walid-home .hero-shape { position: absolute; border-radius: 46% 54% 56% 44% / 52% 44% 56% 48%; }
+.walid-home .hero-shape.hs1 { width: 520px; height: 460px; top: -160px; left: -120px; background: var(--brand-050); opacity: .7; }
+.walid-home .hero-shape.hs2 { width: 400px; height: 380px; bottom: -180px; right: -100px; background: rgba(201,162,39,.08); }
+.walid-home .hero-shape.hs3 { width: 260px; height: 240px; top: 44%; right: 34%; background: rgba(35,43,143,.05); }
+@media (prefers-reduced-motion: no-preference) {
+  .walid-home .hero-shape { will-change: transform, border-radius; }
+  .walid-home .hero-shape.hs1 { animation: walid-breathe-a 24s ease-in-out infinite; }
+  .walid-home .hero-shape.hs2 { animation: walid-breathe-b 30s ease-in-out infinite; }
+  .walid-home .hero-shape.hs3 { animation: walid-breathe-a 27s ease-in-out infinite reverse; }
+}
+@keyframes walid-breathe-a {
+  0%,100% { transform: translate(0,0) scale(1); border-radius: 46% 54% 56% 44% / 52% 44% 56% 48%; }
+  50%     { transform: translate(28px,20px) scale(1.06); border-radius: 54% 46% 44% 56% / 44% 56% 48% 52%; }
+}
+@keyframes walid-breathe-b {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%     { transform: translate(-24px,-18px) scale(1.05); }
+}
 .walid-home .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
 .walid-home .hero h1 { margin-bottom: .4em; }
 .walid-home .hero .lead { font-size: 1.22rem; color: var(--muted); max-width: 40ch; margin-bottom: 30px; }
@@ -35,9 +57,49 @@
 .walid-home .hero-art { position: relative; aspect-ratio: 1/1; display: grid; place-items: center; }
 .walid-home .hero-panel { width: 86%; aspect-ratio: 1/1; border-radius: 42% 58% 58% 42% / 48% 42% 58% 52%; background: radial-gradient(130% 110% at 75% 15%, var(--brand-050), #fff 60%); border: 1px solid var(--rule); box-shadow: var(--shadow); overflow: hidden; display: grid; place-items: center; }
 .walid-home .hero-panel .hero-photo { width: 100%; height: 100%; object-fit: cover; }
+.walid-home .hero-panel .hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.walid-home .hero-panel .hero-video-fallback { display: none; position: absolute; inset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .walid-home .hero-panel .hero-video { display: none; }
+  .walid-home .hero-panel .hero-video-fallback { display: block; }
+}
 .walid-home .float-dot { position: absolute; border-radius: 50%; }
 .walid-home .dot-gold { width: 64px; height: 64px; background: var(--gold-500); top: 6%; right: 10%; box-shadow: 0 10px 24px rgba(201,162,39,.35); }
 .walid-home .dot-navy { width: 40px; height: 40px; background: var(--brand-700); bottom: 10%; left: 8%; }
+.walid-home .dot-gold-sm { width: 22px; height: 22px; background: var(--gold-500); opacity: .5; top: 70%; right: 4%; }
+.walid-home .dot-navy-sm { width: 16px; height: 16px; background: var(--brand-700); opacity: .4; top: 16%; left: 2%; }
+
+/* Route A — free CSS hero motion (ambient, on-brand, no credits).
+   Organic panel breathes + morphs; gradient drifts; accent dots float.
+   Everything freezes under prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .walid-home .hero-panel {
+    background-size: 160% 160%;
+    animation: walid-panel-morph 16s ease-in-out infinite, walid-gradient-drift 22s ease-in-out infinite;
+    will-change: border-radius, transform, background-position;
+  }
+  .walid-home .dot-gold    { animation: walid-float-a 9s ease-in-out infinite; }
+  .walid-home .dot-navy    { animation: walid-float-b 11s ease-in-out infinite; }
+  .walid-home .dot-gold-sm { animation: walid-float-b 7.5s ease-in-out infinite; }
+  .walid-home .dot-navy-sm { animation: walid-float-a 12s ease-in-out infinite; }
+  .walid-home .float-dot   { will-change: transform, opacity; }
+}
+@keyframes walid-panel-morph {
+  0%,100% { border-radius: 42% 58% 58% 42% / 48% 42% 58% 52%; transform: scale(1) rotate(0deg); }
+  50%     { border-radius: 56% 44% 46% 54% / 42% 56% 44% 58%; transform: scale(1.015) rotate(0.6deg); }
+}
+@keyframes walid-gradient-drift {
+  0%,100% { background-position: 75% 15%; }
+  50%     { background-position: 60% 35%; }
+}
+@keyframes walid-float-a {
+  0%,100% { transform: translate3d(0,0,0); }
+  50%     { transform: translate3d(0,-14px,0); }
+}
+@keyframes walid-float-b {
+  0%,100% { transform: translate3d(0,0,0); }
+  50%     { transform: translate3d(6px,10px,0); }
+}
 
 /* Value strip — smooth cards */
 .walid-home .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -69,6 +131,14 @@
 .walid-home .spec .photo img { width: 100%; height: 100%; object-fit: cover; }
 .walid-home .spec .gold-line { color: var(--gold-500); font-weight: 700; margin-bottom: .4em; }
 
+/* Antenatal rose accent on the specialist section */
+.walid-home #specialist.walid-antenatal { background: linear-gradient(180deg, var(--bg), var(--accent-050)); }
+.walid-home #specialist.walid-antenatal .eyebrow { color: var(--accent-600); }
+.walid-home #specialist.walid-antenatal .spec .photo { background: linear-gradient(160deg, var(--accent-700), var(--accent-900)); }
+.walid-home #specialist.walid-antenatal .gold-line { color: var(--accent-700); }
+.walid-home #specialist.walid-antenatal .btn-primary { background: var(--accent-700); }
+.walid-home #specialist.walid-antenatal .btn-primary:hover { background: var(--accent-900); box-shadow: 0 10px 24px rgba(110,35,64,.28); }
+
 /* Proof wall */
 .walid-home .tiktok-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .walid-home .tiktok-card { aspect-ratio: 9/16; border-radius: var(--radius); background: #0d0d14; color: #fff; display: grid; place-items: center; position: relative; overflow: hidden; text-decoration: none; transition: transform .2s ease; }
@@ -93,6 +163,26 @@
 .walid-home .rev-card .stars { color: var(--gold-500); margin-bottom: 10px; }
 .walid-home .rev-card p { font-family: var(--serif); font-size: 1.08rem; color: var(--brand-900); font-style: italic; }
 .walid-home .rev-card .who { font-weight: 600; font-size: .86rem; color: var(--muted); margin-top: 10px; }
+
+/* B·v2 — proof motion: count-up stats + slow reviews marquee (free, on-brand) */
+.walid-home .proof-motion .statrow { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 0 0 40px; }
+.walid-home .statcard { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--rule); border-radius: 16px; padding: 24px 32px; min-width: 190px; text-align: center; box-shadow: 0 6px 18px rgba(22,27,94,.05); }
+.walid-home .statcard b { display: block; font-family: var(--serif); font-size: 2.1rem; color: var(--brand-700); line-height: 1; }
+.walid-home .statcard span { font-size: .84rem; color: var(--muted); }
+.walid-home .statcard .bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--gold-500); }
+.walid-home .statcard.filled .bar { width: 100%; transition: width 1.4s ease; }
+.walid-home .rev-marquee { position: relative; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.walid-home .rev-track { display: flex; gap: 20px; width: max-content; }
+.walid-home .rev-marquee .rev-card { flex: 0 0 330px; }
+@media (prefers-reduced-motion: no-preference) {
+  .walid-home .rev-track { animation: walid-rev-marquee 70s linear infinite; will-change: transform; }
+  .walid-home .rev-marquee:hover .rev-track { animation-play-state: paused; }
+}
+@keyframes walid-rev-marquee { 0% { transform: translateX(0); } to { transform: translateX(calc(-50% - 10px)); } }
+@media (prefers-reduced-motion: reduce) {
+  .walid-home .rev-track { flex-wrap: wrap; width: auto; justify-content: center; }
+  .walid-home .statcard.filled .bar { transition: none; width: 100%; }
+}
 
 /* International */
 .walid-home .intl { text-align: center; }

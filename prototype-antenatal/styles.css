@@ -1,0 +1,65 @@
+/* Antenatal section colour-theme preview. Base brand tokens = navy/gold.
+   Each .theme-* sets --accent-* vars used ONLY by the specialist section. */
+
+:root {
+  --brand-700: #232B8F;
+  --brand-900: #161B5E;
+  --gold-500: #C9A227;
+  --ink: #1A1D2E;
+  --muted: #5B607A;
+  --rule: #E6E8F2;
+  --surface: #FFFFFF;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Inter", system-ui, Arial, sans-serif;
+  --maxw: 1140px;
+  --radius: 18px;
+  --shadow: 0 18px 50px rgba(22,27,94,.10);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--sans); color: var(--ink); background: #FBFBFD; line-height: 1.65; }
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.6rem,3.4vw,2.4rem); line-height: 1.14; margin: 0 0 .4em; color: var(--brand-900); }
+p { margin: 0 0 1em; }
+
+.mock-banner { background: var(--gold-500); color: #3a2f00; text-align: center; font-size: .78rem; font-weight: 700; padding: 7px; letter-spacing: .04em; }
+
+/* Switcher */
+.switcher { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 24px; padding-bottom: 8px; font-size: .9rem; }
+.switcher span { color: var(--muted); font-weight: 600; }
+.switcher button { font-family: var(--sans); font-weight: 600; font-size: .85rem; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--rule); background: #fff; cursor: pointer; transition: all .15s ease; }
+.switcher button:hover { border-color: var(--brand-700); }
+.switcher button.is-active { background: var(--brand-900); color: #fff; border-color: var(--brand-900); }
+
+.note { color: var(--muted); font-size: .9rem; max-width: 60ch; margin: 10px auto 60px; }
+
+/* ---- Accent themes (only affect the specialist section) ---- */
+.theme-navy  { --accent-500:#3A43B0; --accent-600:#2d3597; --accent-700:#232B8F; --accent-900:#161B5E; --accent-050:#EEF0FB; --accent-chip:#EEF0FB; }
+.theme-rose  { --accent-500:#D16B86; --accent-600:#C14E6E; --accent-700:#A23A59; --accent-900:#6E2340; --accent-050:#FBEEF2; --accent-chip:#FBEEF2; }
+.theme-mauve { --accent-500:#8A6BBF; --accent-600:#7352A8; --accent-700:#5B3E8C; --accent-900:#3C275E; --accent-050:#F2EDFA; --accent-chip:#F2EDFA; }
+.theme-teal  { --accent-500:#2E9C8E; --accent-600:#1F8375; --accent-700:#166457; --accent-900:#0C423A; --accent-050:#E6F4F1; --accent-chip:#E6F4F1; }
+
+/* Specialist section */
+.spec-section { padding: 84px 0; background:
+    linear-gradient(180deg, #fff, var(--accent-050)); transition: background .3s ease; }
+.spec { display: grid; grid-template-columns: .9fr 1.1fr; gap: 52px; align-items: center; }
+.photo { position: relative; aspect-ratio: 1/1; }
+.photo-panel { width: 100%; height: 100%; border-radius: 46% 54% 52% 48% / 52% 46% 54% 48%; overflow: hidden; box-shadow: var(--shadow); }
+.photo-panel svg { display: block; }
+.float-dot { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: var(--accent-500); top: -12px; right: 6%; box-shadow: 0 10px 24px rgba(0,0,0,.18); transition: background .3s ease; }
+
+.eyebrow { font-family: var(--sans); font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-600); margin: 0 0 .7em; transition: color .3s ease; }
+.accent-line { color: var(--accent-700); font-weight: 700; font-size: 1.05rem; margin-bottom: .5em; transition: color .3s ease; }
+.spec-text p:not(.eyebrow):not(.accent-line) { color: var(--muted); max-width: 46ch; }
+
+.tag-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 24px; }
+.tag { background: var(--accent-chip); color: var(--accent-700); border-radius: 999px; padding: 7px 16px; font-size: .85rem; font-weight: 600; transition: all .3s ease; }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--sans); font-weight: 600; font-size: 1rem; padding: 14px 26px; border-radius: 999px; border: 1.5px solid transparent; text-decoration: none; transition: all .18s ease; cursor: pointer; }
+.btn-accent { background: var(--accent-700); color: #fff; }
+.btn-accent:hover { background: var(--accent-900); transform: translateY(-2px); }
+
+@media (max-width: 880px) {
+  .spec { grid-template-columns: 1fr; gap: 36px; }
+  .photo { order: -1; max-width: 320px; margin: 0 auto; width: 100%; }
+}

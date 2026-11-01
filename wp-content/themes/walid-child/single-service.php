@@ -19,8 +19,10 @@ while ( have_posts() ) :
 	$branches  = get_field( 'service_branches' );
 	$pillars   = wp_get_post_terms( $id, 'pillar', array( 'fields' => 'names' ) );
 	$wa        = walid_whatsapp_url( $routing ? $routing : 'general', sprintf( /* translators: %s: service */ __( 'Hi, I would like to ask about %s.', 'walid' ), get_the_title() ) );
+	// Antenatal / women's health services get the rose accent.
+	$is_antenatal = ! empty( $pillars ) && false !== stripos( $pillars[0], 'Antenatal' );
 	?>
-	<main class="walid-single" id="primary">
+	<main class="walid-single<?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>" id="primary">
 		<div class="container">
 
 			<div class="single-head">
@@ -55,8 +57,20 @@ while ( have_posts() ) :
 						<section class="svc-procedures">
 							<h2><?php esc_html_e( 'Procedures we perform', 'walid' ); ?></h2>
 							<ul class="proc-cards reveal-group">
-								<?php foreach ( $procedures as $p ) : ?>
-									<li class="proc-item"><span class="proc-check" aria-hidden="true"></span><?php echo esc_html( $p ); ?></li>
+								<?php
+								foreach ( $procedures as $p ) :
+									// Each line may be "Name | short description". Split on the first pipe.
+									$parts     = array_map( 'trim', explode( '|', $p, 2 ) );
+									$proc_name = $parts[0];
+									$proc_desc = isset( $parts[1] ) ? $parts[1] : '';
+									?>
+									<li class="proc-item">
+										<span class="proc-check" aria-hidden="true"></span>
+										<span class="proc-name"><?php echo esc_html( $proc_name ); ?></span>
+										<?php if ( $proc_desc ) : ?>
+											<span class="proc-desc"><?php echo esc_html( $proc_desc ); ?></span>
+										<?php endif; ?>
+									</li>
 								<?php endforeach; ?>
 							</ul>
 						</section>

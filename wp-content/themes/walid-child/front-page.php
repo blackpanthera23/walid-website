@@ -19,6 +19,11 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 
 	<!-- 1. HERO -->
 	<section class="hero">
+		<div class="hero-motion" aria-hidden="true">
+			<span class="hero-shape hs1"></span>
+			<span class="hero-shape hs2"></span>
+			<span class="hero-shape hs3"></span>
+		</div>
 		<div class="container hero-grid">
 			<div>
 				<p class="eyebrow"><?php esc_html_e( 'Walid Healthcare Group', 'walid' ); ?></p>
@@ -37,10 +42,23 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 			</div>
 			<div class="hero-art reveal" aria-hidden="true">
 				<div class="hero-panel">
-					<img class="hero-photo" src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
+					<?php $hero_video = walid_hero_video(); ?>
+					<?php if ( $hero_video ) : ?>
+						<video class="hero-video" poster="<?php echo $hero_video['poster']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" autoplay muted loop playsinline preload="metadata">
+							<?php if ( $hero_video['webm'] ) : ?>
+								<source src="<?php echo $hero_video['webm']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" type="video/webm" />
+							<?php endif; ?>
+							<source src="<?php echo $hero_video['mp4']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" type="video/mp4" />
+						</video>
+						<img class="hero-photo hero-video-fallback" src="<?php echo $hero_video['poster']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
+					<?php else : ?>
+						<img class="hero-photo" src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" alt="" loading="eager" />
+					<?php endif; ?>
 				</div>
 				<span class="float-dot dot-gold"></span>
 				<span class="float-dot dot-navy"></span>
+				<span class="float-dot dot-gold-sm"></span>
+				<span class="float-dot dot-navy-sm"></span>
 			</div>
 		</div>
 	</section>
@@ -157,7 +175,7 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	$spec_role   = $spec_role ? $spec_role : __( 'O&G specialist [confirm credential]', 'walid' );
 	$spec_photo  = $spec_doctor ? get_field( 'doctor_photo', $spec_doctor->ID ) : 0;
 	?>
-	<section id="specialist">
+	<section id="specialist" class="walid-antenatal">
 		<div class="container spec">
 			<div class="photo reveal">
 				<?php if ( $spec_photo ) : ?>
@@ -235,27 +253,62 @@ $wa_surgery = walid_whatsapp_url( 'minor_surgery', __( 'Hi, I would like to ask 
 	</section>
 
 	<!-- 8. REVIEWS -->
-	<?php $reviews = walid_permitted_reviews( 3 ); ?>
-	<section>
+	<?php
+	$reviews = walid_permitted_reviews( 8 );
+	// Fallback sample quotes (shown only until permitted reviews exist). Marked as pending.
+	$rev_fallback = array(
+		array( 'q' => 'Amazing service with friendly doctors and staff. Highly professional and recommended.', 'w' => 'Google review [permission pending]' ),
+		array( 'q' => 'The doctor is so nice and gives good advice. I feel comfortable and safe.', 'w' => 'Google review [permission pending]' ),
+		array( 'q' => 'Clean clinic, friendly nurses, caring doctor. Will come again.', 'w' => 'Google review [permission pending]' ),
+		array( 'q' => 'Quick day-care procedure and clear explanation. Home the same afternoon.', 'w' => 'Google review [permission pending]' ),
+		array( 'q' => 'Booked over WhatsApp and seen fast. Calm and reassuring throughout.', 'w' => 'Google review [permission pending]' ),
+	);
+	?>
+	<section class="proof-motion">
 		<div class="container">
 			<div class="rev-head">
-				<div class="rev-stat"><?php echo esc_html( $stats['rating'] ); ?> &#9733;</div>
-				<p class="muted"><?php echo esc_html( sprintf( /* translators: %s: review count */ __( 'from %s Google reviews', 'walid' ), $stats['reviews'] ) ); ?></p>
+				<p class="eyebrow"><?php esc_html_e( 'The proof, not the promise', 'walid' ); ?></p>
+				<h2><?php esc_html_e( 'Trusted by hundreds of thousands.', 'walid' ); ?></h2>
 			</div>
-			<div class="rev-grid reveal-group">
-				<?php if ( $reviews ) : ?>
-					<?php foreach ( $reviews as $r ) : ?>
-						<div class="rev-card">
-							<div class="stars"><?php echo esc_html( str_repeat( '★', (int) ( get_field( 'review_rating', $r->ID ) ?: 5 ) ) ); ?></div>
-							<p><?php echo esc_html( get_field( 'review_quote', $r->ID ) ); ?></p>
-							<div class="who"><?php echo esc_html( get_field( 'review_author', $r->ID ) ); ?> &middot; <?php echo esc_html( get_field( 'review_source', $r->ID ) ?: 'Google review' ); ?></div>
-						</div>
-					<?php endforeach; ?>
-				<?php else : ?>
-					<div class="rev-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p><?php esc_html_e( '"Amazing service with friendly doctors and staff. Highly professional and recommended."', 'walid' ); ?></p><div class="who"><?php esc_html_e( 'Google review [permission pending]', 'walid' ); ?></div></div>
-					<div class="rev-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p><?php esc_html_e( '"The doctor is so nice and gives good advice. I feel comfortable and safe."', 'walid' ); ?></p><div class="who"><?php esc_html_e( 'Google review [permission pending]', 'walid' ); ?></div></div>
-					<div class="rev-card"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p><?php esc_html_e( '"Clean clinic, friendly nurses, caring doctor. Will come again."', 'walid' ); ?></p><div class="who"><?php esc_html_e( 'Google review [permission pending]', 'walid' ); ?></div></div>
-				<?php endif; ?>
+			<div class="statrow reveal-group" id="walid-statrow">
+				<div class="statcard" data-target="561" data-suffix="K"><b>0</b><span><?php esc_html_e( 'TikTok followers', 'walid' ); ?></span><i class="bar"></i></div>
+				<div class="statcard" data-target="119" data-suffix="K"><b>0</b><span><?php esc_html_e( 'Facebook followers', 'walid' ); ?></span><i class="bar"></i></div>
+				<div class="statcard" data-target="<?php echo esc_attr( $stats['rating'] ); ?>" data-suffix="&#9733;"><b>0</b><span><?php esc_html_e( 'Google rating', 'walid' ); ?></span><i class="bar"></i></div>
+				<div class="statcard" data-target="<?php echo esc_attr( preg_replace( '/[^0-9.]/', '', (string) $stats['reviews'] ) ); ?>" data-suffix=""><b>0</b><span><?php esc_html_e( 'Google reviews', 'walid' ); ?></span><i class="bar"></i></div>
+			</div>
+			<div class="rev-marquee" aria-label="<?php esc_attr_e( 'Patient reviews', 'walid' ); ?>">
+				<div class="rev-track">
+					<?php
+					// Duplicate the set so the marquee loop is seamless.
+					for ( $pass = 0; $pass < 2; $pass++ ) :
+						if ( $reviews ) :
+							foreach ( $reviews as $r ) :
+								$stars  = (int) ( get_field( 'review_rating', $r->ID ) ?: 5 );
+								$quote  = get_field( 'review_quote', $r->ID );
+								$author = get_field( 'review_author', $r->ID );
+								$source = get_field( 'review_source', $r->ID ) ?: __( 'Google review', 'walid' );
+								?>
+								<div class="rev-card">
+									<div class="stars"><?php echo esc_html( str_repeat( '★', $stars ) ); ?></div>
+									<p><?php echo esc_html( $quote ); ?></p>
+									<div class="who"><?php echo esc_html( $author ); ?> &middot; <?php echo esc_html( $source ); ?></div>
+								</div>
+								<?php
+							endforeach;
+						else :
+							foreach ( $rev_fallback as $r ) :
+								?>
+								<div class="rev-card">
+									<div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+									<p><?php echo esc_html( $r['q'] ); ?></p>
+									<div class="who"><?php echo esc_html( $r['w'] ); ?></div>
+								</div>
+								<?php
+							endforeach;
+						endif;
+					endfor;
+					?>
+				</div>
 			</div>
 		</div>
 	</section>

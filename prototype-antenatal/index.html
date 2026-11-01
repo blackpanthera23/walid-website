@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Antenatal section — colour theme preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="mock-banner">PREVIEW — antenatal / Dr Anis section colour themes. Pick one. Not live.</div>
+
+  <div class="switcher container">
+    <span>Colour theme:</span>
+    <button data-theme="navy" class="is-active">A · Current (navy/gold)</button>
+    <button data-theme="rose">B · Rose (warm)</button>
+    <button data-theme="mauve">C · Mauve (soft purple)</button>
+    <button data-theme="teal">D · Teal (calm green)</button>
+  </div>
+
+  <!-- SPECIALIST SECTION (Dr Anis) — the only section being re-themed -->
+  <section id="specialist" class="spec-section theme-navy">
+    <div class="container spec">
+      <div class="photo">
+        <div class="photo-panel">
+          <!-- placeholder doctor -->
+          <svg viewBox="0 0 600 600" width="100%" height="100%" aria-hidden="true">
+            <defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent-700)"/><stop offset="1" stop-color="var(--accent-900)"/></linearGradient></defs>
+            <rect width="600" height="600" fill="url(#dg)"/>
+            <g fill="#ffffff" fill-opacity="0.85"><circle cx="300" cy="235" r="92"/><path d="M150 520 a150 150 0 0 1 300 0 z"/></g>
+            <text x="300" y="565" text-anchor="middle" fill="#ffffff" fill-opacity="0.55" font-family="Arial" font-size="22">Dr Anis photo</text>
+          </svg>
+        </div>
+        <span class="float-dot"></span>
+      </div>
+      <div class="spec-text">
+        <p class="eyebrow">Specialist care</p>
+        <h2>Antenatal care, led by a dedicated specialist.</h2>
+        <p class="accent-line">Led by Dr Anis, O&amp;G specialist</p>
+        <p>Pregnancy scans from 7 weeks onward, with mother-and-child health and family planning. Care delivered with the same standard across every visit.</p>
+        <div class="tag-row">
+          <span class="tag">2D / 3D / 4D scan</span>
+          <span class="tag">Antenatal follow-up</span>
+          <span class="tag">Family planning</span>
+        </div>
+        <a class="btn btn-accent" href="#">WhatsApp about antenatal</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="note container">The rest of the site stays navy/gold. Only the antenatal / women's-health section uses this accent, so it reads as a distinct specialist area without breaking the brand.</p>
+
+  <script>
+    const sec = document.getElementById('specialist');
+    document.querySelectorAll('.switcher button').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.switcher button').forEach(x => x.classList.remove('is-active'));
+        b.classList.add('is-active');
+        sec.className = 'spec-section theme-' + b.dataset.theme;
+      });
+    });
+  </script>
+</body>
+</html>
