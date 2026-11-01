@@ -303,3 +303,30 @@ function walid_pillar_sample_reviews( $pillar ) {
 	}
 	return $out;
 }
+
+/**
+ * Inline line-icon for a Minor Surgery category card header.
+ *
+ * Returns an SVG that uses currentColor so the card can tint it. Abstract, non-clinical marks
+ * (no blood, needles or gore) in keeping with the brand's calm, premium imagery rules.
+ *
+ * @param string $key Category icon key.
+ * @return string SVG markup.
+ */
+function walid_category_icon( $key ) {
+	$icons = array(
+		// Skin and subcutaneous tissue: concentric soft layers.
+		'skin'      => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 30c0-9 7-16 16-16s16 7 16 16"/><path d="M15 31c0-5 4-9 9-9s9 4 9 9"/><circle cx="24" cy="31" r="2.6" fill="currentColor" stroke="none"/></svg>',
+		// Wound care and trauma repair: dressing / plaster cross.
+		'wound'     => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="18" width="26" height="12" rx="6" transform="rotate(-25 24 24)"/><path d="M24 20v8M20 24h8"/></svg>',
+		// Nail and minor dermatological surgeries: fine precision point.
+		'nail'      => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 34l16-16 4 4-16 16-6 2z"/><path d="M28 16l4-4 4 4-4 4"/></svg>',
+		// Therapeutic and joint injections: joint / pivot marks.
+		'injection' => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="6"/><path d="M24 6v8M24 34v8M6 24h8M34 24h8"/></svg>',
+		// Minor gynaecological and urological: shield of care.
+		'gynae'     => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7l14 5v9c0 9-6 15-14 20-8-5-14-11-14-20v-9z"/><path d="M19 24l4 4 7-8"/></svg>',
+		// Others: soft cluster of dots.
+		'others'    => '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="19" r="4"/><circle cx="31" cy="19" r="4"/><circle cx="24" cy="31" r="4"/></svg>',
+	);
+	return isset( $icons[ $key ] ) ? $icons[ $key ] : $icons['others'];
+}

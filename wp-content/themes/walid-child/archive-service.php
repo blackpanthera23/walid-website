@@ -79,6 +79,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Skin and Subcutaneous Tissue', 'walid' ),
 								'desc'  => __( 'Lumps, cysts, moles and skin lesions removed under local anaesthetic.', 'walid' ),
+								'icon'  => 'skin',
 								'items' => array(
 									array( 'Lipoma', 'A soft fatty lump under the skin, assessed and removed.' ),
 									array( 'Sebaceous cyst', 'A fluid-filled lump under the skin.' ),
@@ -97,6 +98,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Wound Care and Trauma Repair', 'walid' ),
 								'desc'  => __( 'Drainage and management of abscesses and infected skin conditions.', 'walid' ),
+								'icon'  => 'wound',
 								'items' => array(
 									array( 'Abscess', 'A collection of pus, drained under local anaesthetic.' ),
 									array( 'Carbuncle', 'A cluster of infected hair follicles, drained.' ),
@@ -106,6 +108,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Nail and Minor Dermatological Surgeries', 'walid' ),
 								'desc'  => __( 'Nail procedures and precise removal of warts and eyelid lesions.', 'walid' ),
+								'icon'  => 'nail',
 								'items' => array(
 									array( 'Wart', 'A viral skin growth.' ),
 									array( 'Genital warts', 'Viral warts needing discreet, careful care.' ),
@@ -117,6 +120,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Therapeutic and Joint Injections', 'walid' ),
 								'desc'  => __( 'Assessment and management of joint and soft-tissue conditions.', 'walid' ),
+								'icon'  => 'injection',
 								'items' => array(
 									array( 'Gout', 'Assessment and management of gout-related lumps.' ),
 								),
@@ -124,6 +128,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Minor Gynaecological and Urological Procedures', 'walid' ),
 								'desc'  => __( 'Day-care procedures for common gynaecological and urological needs.', 'walid' ),
+								'icon'  => 'gynae',
 								'items' => array(
 									array( 'Circumcision', 'For children aged 2 and above, and adults.' ),
 									array( 'Gynaecomastia', 'Enlarged male breast tissue, assessed and treated.' ),
@@ -133,6 +138,7 @@ $hero_pillar = 'Minor Surgery';
 							array(
 								'title' => __( 'Others', 'walid' ),
 								'desc'  => __( 'Further day-care procedures performed by our surgeon-led team.', 'walid' ),
+								'icon'  => 'others',
 								'items' => array(
 									array( 'Eyebag', 'Surgical reduction of under-eye bags.' ),
 									array( 'Tongue tie', 'A tight band under the tongue, released.' ),
@@ -142,9 +148,10 @@ $hero_pillar = 'Minor Surgery';
 						);
 						foreach ( $ms_categories as $cat ) :
 							?>
-							<article class="card has-media hero-card">
-								<div class="card-media">
-									<img src="<?php echo walid_placeholder( 'service' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( $cat['title'] ); ?>" loading="lazy" />
+							<article class="card has-media hero-card ms-cat-card">
+								<div class="card-media ms-cat-art ms-cat-art--<?php echo esc_attr( $cat['icon'] ); ?>">
+									<span class="ms-cat-dots" aria-hidden="true"></span>
+									<span class="ms-cat-icon" aria-hidden="true"><?php echo walid_category_icon( $cat['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 								</div>
 								<h3><?php echo esc_html( $cat['title'] ); ?></h3>
 								<p><?php echo esc_html( $cat['desc'] ); ?></p>

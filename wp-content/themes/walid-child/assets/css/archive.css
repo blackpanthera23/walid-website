@@ -206,3 +206,47 @@
 .walid-archive .intl-cards .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 
 
+
+/* ---- Minor Surgery category cards: abstract on-brand art header -------------
+   No photo needed: a navy gradient panel with floating gold accent dots and a
+   single line icon per category. Matches the brand's calm/premium imagery rules. */
+.walid-archive .ms-cat-art {
+  position: relative;
+  aspect-ratio: 16/10;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 120% at 85% 15%, rgba(201,162,39,.22), transparent 55%),
+    linear-gradient(150deg, var(--brand-700) 0%, var(--brand-900) 85%);
+}
+/* soft organic glow bottom-left for depth */
+.walid-archive .ms-cat-art::after {
+  content: ""; position: absolute; left: -20%; bottom: -40%;
+  width: 70%; height: 90%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,67,176,.55), transparent 70%);
+  pointer-events: none;
+}
+/* floating gold accent dots (AB motif) */
+.walid-archive .ms-cat-dots { position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(201,162,39,.9) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,255,255,.5) 0 1.5px, transparent 3px),
+    radial-gradient(circle, rgba(201,162,39,.55) 0 1.5px, transparent 3px);
+  background-position: 22% 30%, 72% 22%, 60% 70%;
+  background-repeat: no-repeat;
+  background-size: 40px 40px, 30px 30px, 30px 30px;
+}
+.walid-archive .ms-cat-icon { position: relative; z-index: 1; width: 56px; height: 56px; color: var(--gold-500); display: block;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); transition: transform .3s ease; }
+.walid-archive .ms-cat-icon svg { width: 100%; height: 100%; display: block; }
+.walid-archive .ms-cat-card:hover .ms-cat-icon { transform: translateY(-3px) scale(1.06); }
+/* subtle per-category hue shift so the six headers are not identical */
+.walid-archive .ms-cat-art--wound { background: radial-gradient(120% 120% at 15% 15%, rgba(201,162,39,.20), transparent 55%), linear-gradient(150deg, #2a3296 0%, var(--brand-900) 85%); }
+.walid-archive .ms-cat-art--nail { background: radial-gradient(120% 120% at 85% 80%, rgba(201,162,39,.22), transparent 55%), linear-gradient(150deg, var(--brand-700) 0%, #141955 85%); }
+.walid-archive .ms-cat-art--injection { background: radial-gradient(120% 120% at 50% 10%, rgba(201,162,39,.20), transparent 55%), linear-gradient(135deg, #2d3597 0%, var(--brand-900) 90%); }
+.walid-archive .ms-cat-art--gynae { background: radial-gradient(120% 120% at 80% 20%, rgba(201,162,39,.20), transparent 55%), linear-gradient(160deg, var(--brand-700) 0%, #161b5e 85%); }
+.walid-archive .ms-cat-art--others { background: radial-gradient(120% 120% at 20% 80%, rgba(201,162,39,.18), transparent 55%), linear-gradient(150deg, #262f93 0%, var(--brand-900) 85%); }
+@media (prefers-reduced-motion: reduce) {
+  .walid-archive .ms-cat-card:hover .ms-cat-icon { transform: none; }
+}
