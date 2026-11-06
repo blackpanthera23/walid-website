@@ -2,9 +2,9 @@
 
 > **For OMP.** This is a single, self-contained deploy of all theme changes that have stacked up
 > in the repo since the last live sync (the Astra port). Everything here is in `main` (through
-> commit `9f59f45`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
+> commit `994c468`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
 > no database/content changes, so nothing in wp-admin needs touching. Deploy = SFTP upload the
-> files below, then cache-bust. Theme version is already bumped to **0.3.1** for that.
+> files below, then cache-bust. Theme version is already bumped to **0.3.2** for that.
 
 ## Why this batch exists
 A long run of UI/UX polish landed in the repo across many commits but was never pushed to live.
@@ -44,17 +44,19 @@ change — only theme files.
   **countries flag grid** (32 countries) built from an ISO-to-emoji helper.
 - **Service FAQ** — a Frequently-asked-questions accordion is the last section on every service
   single page (includes the patient age range up to 96), with FAQPage schema.
+- **Homepage proof stats** — the TikTok/Facebook/rating/review numbers count up once when scrolled
+  into view (respects reduced-motion).
 - **About page** — the "Our philosophy" mission/values copy + motto added.
 - **Copy** — `[confirm ...]` placeholder lines on About + International replaced with publishable
   copy.
 - **Robustness (no visible change)** — ACF safety shim (no white screen if ACF is ever off) and
   centralized proof stats via `walid_stats()`.
 
-## Files to upload (25 — SFTP, same paths under `wp-content/themes/walid-child/`)
+## Files to upload (26 — SFTP, same paths under `wp-content/themes/walid-child/`)
 
-**17 code/CSS files:**
+**18 code/CSS/JS files:**
 ```
-wp-content/themes/walid-child/style.css                    # version bump 0.3.1 (cache-bust)
+wp-content/themes/walid-child/style.css                    # version bump 0.3.2 (cache-bust)
 wp-content/themes/walid-child/functions.php                # footer pillars+branches, ACF shim
 wp-content/themes/walid-child/front-page.php               # specialist section transition
 wp-content/themes/walid-child/archive-service.php          # pillar panels, 6 category cards, generated imagery
@@ -69,6 +71,7 @@ wp-content/themes/walid-child/inc/helpers.php              # stats, pillar revie
 wp-content/themes/walid-child/inc/seo.php                  # stats via walid_stats()
 wp-content/themes/walid-child/assets/css/brand.css         # accent palettes + softened minor blue + footer grid
 wp-content/themes/walid-child/assets/css/homepage.css      # specialist transition styles
+wp-content/themes/walid-child/assets/js/reveal.js          # homepage proof-stats count-up animation
 wp-content/themes/walid-child/assets/css/single.css        # service/branch/doctor hero, chips, testimonials, FAQ
 wp-content/themes/walid-child/assets/css/archive.css       # pillar/region panels, category, testimonials, flags, imagery
 ```
@@ -86,12 +89,12 @@ wp-content/themes/walid-child/assets/img/cards/antenatal.webp
 ```
 Overwrite the live copies; do not rename. The `assets/img/cards/` folder is new on live, create it.
 If uploading whole folders is easier, pushing the entire `wp-content/themes/walid-child/`
-directory is safe — these 25 are the only files that changed since the Astra port, but the rest
+directory is safe — these 26 are the only files that changed since the Astra port, but the rest
 are identical to live.
 
 ## After upload — cache-bust (required)
 The CSS and JS are enqueued with the theme version as a query string, so bumping `style.css` to
-0.3.1 busts browser cache automatically once that file is uploaded. Then:
+0.3.2 busts browser cache automatically once that file is uploaded. Then:
 1. If a caching/optimizer plugin is active (host cache, WP Rocket, Autoptimize, etc.), **purge all
    cache**.
 2. Hard-refresh a browser (Cmd/Ctrl + Shift + R) on the pages below to confirm.
