@@ -19,6 +19,8 @@ build/
 # Temp
 _salvage/
 *.tmp
+# Local design experiments (not part of the build)
+concepts/
 
 # Local backups (G1 rename-not-delete convention: <name>.bak.<stamp>)
 *.bak
