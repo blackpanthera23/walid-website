@@ -405,8 +405,11 @@ function walid_international_countries() {
 function walid_remove_parent_footer() {
 	// Kadence (local dev parent).
 	remove_action( 'kadence_footer', 'Kadence\footer_markup' );
-	// Astra (live parent).
+	// Astra (live parent): legacy footer and the footer builder ("Copyright ... | Powered by Astra").
 	remove_action( 'astra_footer', 'astra_footer_markup' );
+	if ( class_exists( 'Astra_Builder_Footer' ) && method_exists( 'Astra_Builder_Footer', 'get_instance' ) ) {
+		remove_action( 'astra_footer', array( Astra_Builder_Footer::get_instance(), 'footer_markup' ), 10 );
+	}
 }
 add_action( 'wp', 'walid_remove_parent_footer', 20 );
 
