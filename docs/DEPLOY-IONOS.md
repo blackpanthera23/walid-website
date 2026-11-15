@@ -1,5 +1,9 @@
 # Deploy to IONOS — Poliklinik Walid
 
+> **Superseded (16 Nov 2026).** Read [`HANDOFF.md`](../HANDOFF.md) at the repo root for the current state, deploy method
+> and to-do list. This file describes an older stage and is kept for history.
+
+
 > IONOS-specific runbook. General steps + checklist live in `docs/DEPLOY.md` and
 > `HANDOFF-OMP.md`; this file covers the IONOS panel specifics. Recommended path: a **fresh
 > WordPress install on IONOS**, then upload our theme + plugin and enter content (no DB migration).

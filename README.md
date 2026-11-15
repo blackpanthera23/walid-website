@@ -13,23 +13,21 @@ pillars in **aesthetics** and **antenatal/women's health**, plus general practic
 
 ## 📍 Project status
 
+**Start here: [`HANDOFF.md`](HANDOFF.md)** (current state, architecture, deploy, owner to-do).
+
 | Phase | Status |
 |---|---|
 | 1. Strategy & planning docs | ✅ Done |
 | 2. Homepage wireframe + copy | ✅ Done (approved) |
-| 3. Visual direction (prototypes A/B/AB) | ✅ Done (`/prototype`, `-v2`, `-v3`) |
+| 3. Visual direction (prototypes A/B/AB/Concept 4) | ✅ Done (`/prototype` ... `/prototype-v4`) |
 | 4. WordPress build (child theme, CPTs, templates, pages) | ✅ Done |
-| 5. Concept AB applied to the live theme | ✅ Done (homepage + inner pages + cards) |
-| 6. Per-treatment Procedure pages + Google reviews integration | ✅ Done (Google awaits API key) |
-| 7. **Deployed live** (IONOS, Astra parent) | ✅ Done — `poliklinikdrwalid.com` |
-| 8. Live config (pages/menu/permalinks) | 🔄 Run `bin/finish-setup.php` |
-| 9. Real content + SEO + launch | ⬜ Owner (see `docs/CONTENT-CHECKLIST.md`) |
+| 5. Concept 4 homepage + International section + services/branches rework | ✅ Done |
+| 6. Deployed live (IONOS, Astra 4.14.3, theme 0.4.6) | ✅ Done, 16 Nov 2026 |
+| 7. Real content (branches, services, doctors, reviews) | ⬜ Owner (`docs/CONTENT-CHECKLIST.md`) |
+| 8. Launch checks (licences, credentials, Google key) | ⬜ Owner (`HANDOFF.md` section 11) |
 
-**Last updated:** 2026-10-31 · LIVE on `poliklinikdrwalid.com` (IONOS Managed WP, parent theme
-Astra). `walid-child` + `walid-cpts` active, ACF synced. Concept AB applied across the homepage
-and inner pages; per-treatment Procedure pages added (Xanthelasma example). ACF safety shim +
-centralized proof stats added. **Next:** OMP runs `bin/finish-setup.php` (pages/menu/permalinks),
-then owner enters real content via `docs/CONTENT-CHECKLIST.md`. Updating guide: `docs/UPDATING.md`.
+**Last updated:** 2026-11-16 · Live on `poliklinikdrwalid.com` runs walid-child **0.4.6** on Astra, deployed as a
+theme zip through wp-admin (no SFTP). Live content is still empty; adding it in wp-admin needs no code change.
 
 ### View
 - Concept A: https://blackpanthera23.github.io/walid-website/prototype/

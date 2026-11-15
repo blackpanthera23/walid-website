@@ -1,5 +1,9 @@
 # Deploy batch: Homepage Concept 4 + motion layer (theme 0.4.0)
 
+> **Superseded (16 Nov 2026).** Read [`HANDOFF.md`](../HANDOFF.md) at the repo root for the current state, deploy method
+> and to-do list. This file describes an older stage and is kept for history.
+
+
 Not deployed yet. Verified locally on http://localhost:8080 (desktop, mobile, reduced motion).
 
 ## What changes on live

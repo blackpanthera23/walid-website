@@ -1,5 +1,9 @@
 # Handoff for OMP — Deploy Poliklinik Walid to a live host
 
+> **Superseded (16 Nov 2026).** Read [`HANDOFF.md`](HANDOFF.md) at the repo root for the current state, deploy method
+> and to-do list. This file describes an older stage and is kept for history.
+
+
 > **Status: BUILT + DEPLOYED LIVE** on `poliklinikdrwalid.com` (IONOS Managed WP, parent theme
 > **Astra** 4.14.2). Theme `walid-child` + plugin `walid-cpts` active; ACF + 5 field groups synced.
 > Remaining work is **live config + real content** (below). Read `project-context.md` +

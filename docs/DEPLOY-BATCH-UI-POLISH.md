@@ -1,5 +1,9 @@
 # Deploy batch — UI polish (accents, pillar/region tones, heroes, copy, robustness)
 
+> **Superseded (16 Nov 2026).** Read [`HANDOFF.md`](../HANDOFF.md) at the repo root for the current state, deploy method
+> and to-do list. This file describes an older stage and is kept for history.
+
+
 > **For OMP.** This is a single, self-contained deploy of all theme changes that have stacked up
 > in the repo since the last live sync (the Astra port). Everything here is in `main` (through
 > commit `7e4418c`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
