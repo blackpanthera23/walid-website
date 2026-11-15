@@ -2,9 +2,9 @@
 
 > **For OMP.** This is a single, self-contained deploy of all theme changes that have stacked up
 > in the repo since the last live sync (the Astra port). Everything here is in `main` (through
-> commit `994c468`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
+> commit `7e4418c`) and verified on local Docker (`http://localhost:8080`). It is **code only** —
 > no database/content changes, so nothing in wp-admin needs touching. Deploy = SFTP upload the
-> files below, then cache-bust. Theme version is already bumped to **0.3.2** for that.
+> files below, then cache-bust. Theme version is already bumped to **0.3.3** for that.
 
 ## Why this batch exists
 A long run of UI/UX polish landed in the repo across many commits but was never pushed to live.
@@ -44,6 +44,18 @@ change — only theme files.
   **countries flag grid** (32 countries) built from an ISO-to-emoji helper.
 - **Service FAQ** — a Frequently-asked-questions accordion is the last section on every service
   single page (includes the patient age range up to 96), with FAQPage schema.
+- **Parent footer credit removed** — the parent theme's footer bar ("(c) year Site - WordPress Theme
+by Kadence WP" locally, Astra's "Powered by Astra" bar on the live host) no longer renders; the brand
+  footer with the legal line stays. Done in PHP (`walid_remove_parent_footer`) plus a CSS safety net.
+  The Kadence hook was tested locally; the Astra hook (`astra_footer_markup`) could not be tested here,
+  so confirm the Astra bar is gone on live (the CSS safety net hides it either way).
+- **"See it explained" video strip** — four short videos from Dr Walid's YouTube channel (pilar cyst,
+  xanthelasma, keloid, neurofibromatosis type 1) on `/services/` and on the Minor Surgery page.
+  Self-hosted thumbnails; nothing loads from YouTube until a visitor taps play (then the
+  privacy-enhanced youtube-nocookie player). Videos are in Bahasa Malaysia and labelled so.
+- **Responsive fixes** — checked 55 page/width combinations (360 to 1440px): no horizontal overflow.
+  Fixed the category-card lists (single column on tablet/phone), the donut label, footer link tap
+  targets, and the section heading/tag wrap.
 - **Homepage proof stats** — the TikTok/Facebook/rating/review numbers count up once when scrolled
   into view (respects reduced-motion).
 - **About page** — the "Our philosophy" mission/values copy + motto added.
@@ -52,11 +64,11 @@ change — only theme files.
 - **Robustness (no visible change)** — ACF safety shim (no white screen if ACF is ever off) and
   centralized proof stats via `walid_stats()`.
 
-## Files to upload (26 — SFTP, same paths under `wp-content/themes/walid-child/`)
+## Files to upload (30 — SFTP, same paths under `wp-content/themes/walid-child/`)
 
 **18 code/CSS/JS files:**
 ```
-wp-content/themes/walid-child/style.css                    # version bump 0.3.2 (cache-bust)
+wp-content/themes/walid-child/style.css                    # version bump 0.3.3 (cache-bust)
 wp-content/themes/walid-child/functions.php                # footer pillars+branches, ACF shim
 wp-content/themes/walid-child/front-page.php               # specialist section transition
 wp-content/themes/walid-child/archive-service.php          # pillar panels, 6 category cards, generated imagery
@@ -76,7 +88,7 @@ wp-content/themes/walid-child/assets/css/single.css        # service/branch/doct
 wp-content/themes/walid-child/assets/css/archive.css       # pillar/region panels, category, testimonials, flags, imagery
 ```
 
-**8 new image assets (NEW folder — create it):**
+**8 new card image assets (NEW folder — create it):**
 ```
 wp-content/themes/walid-child/assets/img/cards/skin.webp
 wp-content/themes/walid-child/assets/img/cards/wound.webp
@@ -87,14 +99,21 @@ wp-content/themes/walid-child/assets/img/cards/others.webp
 wp-content/themes/walid-child/assets/img/cards/aesthetics.webp
 wp-content/themes/walid-child/assets/img/cards/antenatal.webp
 ```
-Overwrite the live copies; do not rename. The `assets/img/cards/` folder is new on live, create it.
+**4 new video thumbnails (NEW folder — create it):**
+```
+wp-content/themes/walid-child/assets/img/videos/gCNfu4x79ak.webp
+wp-content/themes/walid-child/assets/img/videos/bUQ41MfRgOk.webp
+wp-content/themes/walid-child/assets/img/videos/Gw5euq8gy0U.webp
+wp-content/themes/walid-child/assets/img/videos/JE9EWJoJeA8.webp
+```
+Overwrite the live copies; do not rename. The `assets/img/cards/` and `assets/img/videos/` folders are new on live, create them.
 If uploading whole folders is easier, pushing the entire `wp-content/themes/walid-child/`
-directory is safe — these 26 are the only files that changed since the Astra port, but the rest
+directory is safe — these 30 are the only files that changed since the Astra port, but the rest
 are identical to live.
 
 ## After upload — cache-bust (required)
 The CSS and JS are enqueued with the theme version as a query string, so bumping `style.css` to
-0.3.2 busts browser cache automatically once that file is uploaded. Then:
+0.3.3 busts browser cache automatically once that file is uploaded. Then:
 1. If a caching/optimizer plugin is active (host cache, WP Rocket, Autoptimize, etc.), **purge all
    cache**.
 2. Hard-refresh a browser (Cmd/Ctrl + Shift + R) on the pages below to confirm.
@@ -116,6 +135,9 @@ The CSS and JS are enqueued with the theme version as a query string, so bumping
 - `/doctors/` — **Dr Walid** is first; "View profile" button centred.
 - `/doctors/dr-walid/` — richer profile (areas of focus, how we care, proof stats, at-a-glance).
 - `/about/` — "Our philosophy" section + motto; no `[confirm ...]` text.
+- every page footer — no "Powered by"/"Theme by" credit line above the brand footer.
+- `/services/` and `/services/minor-surgery/` — a **See it explained** strip with 4 video thumbnails;
+  tapping one starts the player in place.
 - `/international-patients/` — testimonials animate in on scroll; a **flag grid of 32 countries**
   appears below the proof stats; no `[confirm ...]` text.
 - footer (any page) — **Services** column lists 4 pillars; **Branches** column lists branches.
