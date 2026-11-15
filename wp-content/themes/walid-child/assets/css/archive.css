@@ -302,3 +302,7 @@
 }
 /* Section heading + tag (e.g. "Minor Surgery" + "OUR SPECIALTY"): let the tag drop below on narrow screens. */
 .walid-archive .group-head { flex-wrap: wrap; row-gap: 6px; }
+
+/* International page: self-hosted flag images (emoji flags show as letters on Windows). */
+.walid-archive .flag-img { width: 32px; height: 22px; object-fit: contain; border-radius: 3px; flex: 0 0 auto; display: block; }
+.walid-archive .flag-img.flag-emoji { width: auto; height: auto; font-size: 1.5rem; line-height: 1; }

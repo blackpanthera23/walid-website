@@ -1,0 +1,144 @@
+/* Poliklinik Walid: professional motion system. Loaded site-wide after enhance.css.
+
+   Principles
+   - One easing curve, one rhythm (90ms stagger), restrained distances (under 40px).
+   - Everything lives inside prefers-reduced-motion: no-preference. Reduced-motion users get none of it.
+   - Hidden "before" states only exist under html.m-js, which a tiny head script adds only when motion
+     is allowed, and which is removed again if motion.js fails to start (see walid_motion_flag()).
+   - Entrances use CSS animations with fill-mode "backwards", so hover transforms stay usable afterwards.
+   - JS hooks (set by assets/js/motion.js): html.m-js / m-ready / m-scrolled, [data-m] + .m-in,
+     [data-hero-item], .m-word, --i (group index), --hi (hero index), --wi (word index). */
+
+:root {
+	--m-ease: cubic-bezier(.22, .8, .24, 1);
+	--m-spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* ---- Scroll progress bar (element is created by motion.js) ------------------ */
+.m-progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 9999; pointer-events: none; }
+.m-progress i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold-500), #e3c55a); transform: scaleX(0); transform-origin: 0 50%; will-change: transform; }
+
+@media (prefers-reduced-motion: no-preference) {
+
+	/* ---- Keyframes ----------------------------------------------------------- */
+	@keyframes m-rise { from { opacity: 0; transform: translate3d(0, 26px, 0); } to { opacity: 1; transform: none; } }
+	@keyframes m-word { from { transform: translate3d(0, 110%, 0); } to { transform: none; } }
+	@keyframes m-fab-in { from { opacity: 0; transform: translate3d(0, 18px, 0) scale(.9); } to { opacity: 1; transform: none; } }
+	@keyframes m-ring { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .45); } 80%, 100% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); } }
+	@keyframes m-par-hero { from { translate: 0 0; } to { translate: 0 -46px; } }
+	@keyframes m-par-img { from { translate: 0 -5%; } to { translate: 0 5%; } }
+
+	/* ---- Header: depth once the page has scrolled -------------------------- */
+	#masthead { transition: box-shadow .4s var(--m-ease); }
+	html.m-scrolled #masthead { box-shadow: 0 8px 28px rgba(22, 27, 94, .10); }
+
+	/* ---- Hero choreography --------------------------------------------------
+	   Text column of the home hero, service hero and procedure hero. The h1 is split into words;
+	   everything else rises in sequence. Hidden only until motion.js flips html.m-ready. */
+	html.m-js:not(.m-ready) :is(
+		.walid-home .hero .hero-grid > div:first-child,
+		.walid-single .service-hero-inner,
+		.walid-procedure .proc-hero-grid > div:first-child
+	) > * { opacity: 0; }
+
+	html.m-ready [data-hero-item]:not(h1) {
+		animation: m-rise .95s var(--m-ease) backwards;
+		animation-delay: calc(var(--hi, 0) * 110ms + 120ms);
+	}
+	.m-word { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .14em; margin-bottom: -.14em; }
+	.m-word > span { display: inline-block; transform: translate3d(0, 110%, 0); }
+	html.m-ready .m-word > span {
+		animation: m-word 1s var(--m-ease) forwards;
+		animation-delay: calc(var(--hi, 0) * 110ms + var(--wi, 0) * 70ms + 160ms);
+	}
+
+	/* ---- Scroll reveals: headings, text blocks, closing CTAs ----------------- */
+	html.m-js [data-m] {
+		opacity: 0;
+		transition: opacity .85s var(--m-ease), transform .85s var(--m-ease);
+		transition-delay: var(--m-d, 0ms);
+	}
+	html.m-js [data-m]:not(.m-in) { will-change: opacity, transform; }
+	html.m-js [data-m="up"]    { transform: translate3d(0, 28px, 0); }
+	html.m-js [data-m="left"]  { transform: translate3d(-38px, 0, 0); }
+	html.m-js [data-m="right"] { transform: translate3d(38px, 0, 0); }
+	html.m-js [data-m="scale"] { transform: scale(.92); }
+	html.m-js [data-m].m-in    { opacity: 1; transform: none; }
+
+	/* Eyebrow labels draw a short gold-toned rule in front of the text. */
+	html.m-js main .eyebrow[data-m]::before {
+		content: ""; display: inline-block; width: 26px; height: 2px; margin-right: .7em; vertical-align: middle;
+		background: currentColor; transform: scaleX(0); transform-origin: left center;
+		transition: transform .9s var(--m-ease) .25s;
+	}
+	html.m-js main .eyebrow[data-m].m-in::before { transform: scaleX(1); }
+	html.m-js main :is(.intl, .final, .proc-cta) .eyebrow[data-m]::before { display: none; }
+
+	/* ---- Card groups: true stagger (replaces the old nth-child delays) ------- */
+	html.m-js .reveal-group.is-visible > * {
+		animation: m-rise .85s var(--m-ease) backwards;
+		animation-delay: calc(min(var(--i, 0), 8) * 90ms);
+	}
+
+	/* ---- Buttons: light sweep on hover -------------------------------------- */
+	.btn { position: relative; overflow: hidden; isolation: isolate; }
+	.btn::after {
+		content: ""; position: absolute; inset: 0; pointer-events: none;
+		background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .30) 50%, transparent 65%);
+		transform: translateX(-120%); transition: transform .8s var(--m-ease);
+	}
+	.btn:hover::after { transform: translateX(120%); }
+
+	/* ---- Imagery: slow zoom on hover, gentle parallax on scroll -------------- */
+	.walid-home .pillar-hero .art img { transform: scale(1.12); transition: transform 1.4s var(--m-ease); }
+	.walid-home .pillar-hero .art:hover img { transform: scale(1.18); }
+
+	/* Where-we-perform cards: arrow nudge. Procedure methods: lift. */
+	.walid-single .where-card .where-go { display: inline-block; transition: transform .35s var(--m-ease); }
+	.walid-single .where-card:hover .where-go { transform: translateX(6px); }
+	.walid-procedure .proc-method { transition: transform .35s var(--m-ease), box-shadow .35s var(--m-ease); }
+	.walid-procedure .proc-method:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+	/* ---- Procedure steps: numbered badge pops, connector line draws ---------- */
+	html.m-js .walid-procedure .proc-step::before {
+		transform: scale(.4); opacity: 0;
+		transition: transform .6s var(--m-spring), opacity .4s ease;
+		transition-delay: calc(var(--i, 0) * 120ms + 120ms);
+	}
+	html.m-js .walid-procedure .proc-steps.is-visible .proc-step::before { transform: none; opacity: 1; }
+	.walid-procedure .proc-step:not(:last-child)::after {
+		content: ""; position: absolute; left: 18px; top: 44px; bottom: -12px; width: 2px;
+		background: linear-gradient(var(--gold-500), rgba(201, 162, 39, .12));
+		transform: scaleY(0); transform-origin: top center;
+		transition: transform .8s var(--m-ease);
+		transition-delay: calc(var(--i, 0) * 120ms + 380ms);
+	}
+	.walid-procedure .proc-steps.is-visible .proc-step:not(:last-child)::after { transform: scaleY(1); }
+
+	/* ---- Reviews marquee: soft edge fade ------------------------------------- */
+	.walid-home .rev-marquee { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+
+	/* ---- Floating WhatsApp: entrance, then a short ring pulse (3 times) ------- */
+	.walid-fab { animation: m-fab-in .8s var(--m-ease) 1.2s backwards; }
+	.walid-fab::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; animation: m-ring 2.6s ease-out 2.4s 3; }
+
+	/* ---- FAQ: smooth open and close (progressive: Chromium 131+) ------------- */
+	:root { interpolate-size: allow-keywords; }
+	@supports selector(::details-content) {
+		.walid-single .faq-item::details-content { block-size: 0; overflow: clip; transition: block-size .45s var(--m-ease), content-visibility .45s allow-discrete; }
+		.walid-single .faq-item[open]::details-content { block-size: auto; }
+	}
+
+	/* ---- Scroll-driven parallax (progressive: Chromium 115+, Safari 26) ------- */
+	@supports (animation-timeline: view()) {
+		.walid-home .hero-art { animation: m-par-hero linear both; animation-timeline: scroll(root); animation-range: 0 70vh; }
+		.walid-home .pillar-hero .art img { animation: m-par-img linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+	}
+}
+
+/* ---- Page-to-page crossfade (progressive: Chromium 126+, Safari 18.2+) ------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .28s; animation-timing-function: var(--m-ease); }
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

@@ -201,3 +201,22 @@ button:focus-visible,
   .walid-footer li a { padding: 10px 0; }
   .walid-socials a { width: 44px; height: 44px; }
 }
+
+/* ---- Text contrast (WCAG AA) ---------------------------------------------------
+   The parent theme colours h1-h3 with brand gold (#C9A227, about 2.4:1 on white, below the 3:1
+   minimum for large text). Inner-page headings use navy, or the pillar's darkest tone on pillar
+   pages; components with their own heading colour (heroes, tinted panels, dark cards) still win
+   through higher specificity. Small gold text uses a darker gold that keeps the brand hue. */
+:root { --gold-700: #8A6A0F; --gold-800: #7D6110; }
+body .walid-single :is(h1, h2, h3),
+body .walid-archive :is(h1, h2, h3),
+body .walid-procedure :is(h1, h2, h3) { color: var(--accent-900, var(--brand-900)); }
+body .walid-single .eyebrow,
+body .walid-archive .eyebrow,
+body .walid-procedure .eyebrow,
+body .walid-procedure .eyebrow a { color: var(--gold-700); }
+body .walid-single .gold-line,
+body .walid-single .gold-line a { color: var(--gold-700); }
+body .walid-single .pin,
+body .walid-archive .pin { color: var(--gold-800); }
+body .walid-archive .doctor-card .role { color: var(--gold-700); }

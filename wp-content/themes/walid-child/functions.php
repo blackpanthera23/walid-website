@@ -56,6 +56,9 @@ require_once get_stylesheet_directory() . '/inc/seo.php';
 // Google Places reviews (live, cached) for branch pages.
 require_once get_stylesheet_directory() . '/inc/google-reviews.php';
 
+// WhatsApp click counters (first-party, no personal data). Report: Tools > WhatsApp clicks.
+require_once get_stylesheet_directory() . '/inc/wa-tracking.php';
+
 // Editor block patterns (reusable branded sections for staff).
 require_once get_stylesheet_directory() . '/inc/patterns.php';
 
@@ -77,7 +80,7 @@ function walid_enqueue_assets() {
 	// Web fonts: Fraunces (headings) + Inter (body), display=swap, preconnected (see below).
 	wp_enqueue_style(
 		'walid-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap',
 		array(),
 		null
 	);
@@ -115,13 +118,43 @@ function walid_enqueue_assets() {
 		true
 	);
 
-	// Homepage-only styles (ported from the prototype).
+	// Professional motion system (hero choreography, scroll reveals, stagger, polish).
+	// filemtime() as version so edits bust the cache during development.
+	$motion_css = get_stylesheet_directory() . '/assets/css/motion.css';
+	$motion_js  = get_stylesheet_directory() . '/assets/js/motion.js';
+	wp_enqueue_style(
+		'walid-motion',
+		get_stylesheet_directory_uri() . '/assets/css/motion.css',
+		array( 'walid-enhance' ),
+		file_exists( $motion_css ) ? (string) filemtime( $motion_css ) : $version
+	);
+	wp_enqueue_script(
+		'walid-motion',
+		get_stylesheet_directory_uri() . '/assets/js/motion.js',
+		array( 'walid-reveal' ),
+		file_exists( $motion_js ) ? (string) filemtime( $motion_js ) : $version,
+		true
+	);
+
+	// Homepage (Concept 4, editorial). Self-contained: its own styles and motion, so the site-wide
+	// motion layer (which targets the older markup) is switched off on this page only.
 	if ( is_front_page() ) {
+		$home_css = get_stylesheet_directory() . '/assets/css/home.css';
+		$home_js  = get_stylesheet_directory() . '/assets/js/home.js';
+		wp_dequeue_style( 'walid-motion' );
+		wp_dequeue_script( 'walid-motion' );
 		wp_enqueue_style(
-			'walid-homepage',
-			get_stylesheet_directory_uri() . '/assets/css/homepage.css',
-			array( 'walid-brand' ),
-			$version
+			'walid-home',
+			get_stylesheet_directory_uri() . '/assets/css/home.css',
+			array( 'walid-brand', 'walid-enhance' ),
+			file_exists( $home_css ) ? (string) filemtime( $home_css ) : $version
+		);
+		wp_enqueue_script(
+			'walid-home',
+			get_stylesheet_directory_uri() . '/assets/js/home.js',
+			array(),
+			file_exists( $home_js ) ? (string) filemtime( $home_js ) : $version,
+			true
 		);
 	}
 
@@ -170,6 +203,18 @@ function walid_enqueue_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'walid_enqueue_assets' );
+
+/**
+ * Motion flag. Runs in <head> before first paint: marks the page as "motion allowed" so the hidden
+ * start states in motion.css apply with no flash. Skipped for reduced-motion users. If motion.js has
+ * not taken over within 3.5s (blocked, slow or errored), the flag is removed and content shows.
+ */
+function walid_motion_flag() {
+	?>
+<script>(function(d){try{var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(m||!('IntersectionObserver' in window)){return;}var c=d.documentElement;c.classList.add('m-js');setTimeout(function(){if(!c.classList.contains('m-ready')){c.classList.remove('m-js');}},3500);}catch(e){}})(document);</script>
+	<?php
+}
+add_action( 'wp_head', 'walid_motion_flag', 1 );
 
 /**
  * Site-wide brand footer: group blurb, social links (real hrefs), explore links, contact,

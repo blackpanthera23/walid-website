@@ -23,7 +23,8 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 				<p style="margin-top:16px;"><a class="btn btn-wa" href="<?php echo $wa; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" target="_blank" rel="noopener"><?php esc_html_e( 'WhatsApp us to plan a visit', 'walid' ); ?></a></p>
 			</div>
 			<div class="intl-hero-art">
-				<img src="<?php echo walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="" loading="eager" />
+				<?php $intl_art = walid_photo( 'surgeon-dark' ); ?>
+				<img src="<?php echo $intl_art ? $intl_art : walid_placeholder( 'hero' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helpers. ?>" alt="<?php echo $intl_art ? esc_attr__( 'A surgeon passing an instrument during a procedure (illustrative image)', 'walid' ) : ''; ?>" width="960" height="1200" loading="eager" />
 			</div>
 		</div>
 
@@ -42,7 +43,7 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 			<ul class="flag-grid reveal-group" aria-label="<?php esc_attr_e( 'Countries our patients travel from', 'walid' ); ?>">
 				<?php foreach ( $intl_countries as $c ) : ?>
 					<li class="flag-item">
-						<span class="flag-emoji" aria-hidden="true"><?php echo walid_flag_emoji( $c['iso'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						<?php echo walid_flag_img( $c['iso'], 'flag-img' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>
 						<span class="flag-name"><?php echo esc_html( $c['name'] ); ?></span>
 					</li>
 				<?php endforeach; ?>

@@ -532,3 +532,34 @@ function walid_video_strip_script() {
 		30
 	);
 }
+
+/**
+ * URL of a theme photo in assets/img/photos/ (illustrative stock imagery supplied by the owner).
+ *
+ * @param string $name File name without extension: surgeon-bright, surgeon-dark, surgeon-loupe, consult.
+ * @return string Escaped URL, or '' if the file does not exist.
+ */
+function walid_photo( $name ) {
+	$name = sanitize_file_name( (string) $name );
+	if ( ! file_exists( get_stylesheet_directory() . '/assets/img/photos/' . $name . '.webp' ) ) {
+		return '';
+	}
+	return esc_url( get_stylesheet_directory_uri() . '/assets/img/photos/' . $name . '.webp' );
+}
+
+/**
+ * Flag image for a country (self-hosted PNG in assets/img/flags/<iso>.png, public-domain flags).
+ * Falls back to the emoji flag when the file is missing. Images render on every OS; emoji flags
+ * show as two letters on Windows.
+ *
+ * @param string $iso2  Two-letter ISO code.
+ * @param string $class CSS class for the image.
+ * @return string HTML.
+ */
+function walid_flag_img( $iso2, $class = 'flag-img' ) {
+	$iso = strtolower( preg_replace( '/[^A-Za-z]/', '', (string) $iso2 ) );
+	if ( 2 === strlen( $iso ) && file_exists( get_stylesheet_directory() . '/assets/img/flags/' . $iso . '.png' ) ) {
+		return '<img class="' . esc_attr( $class ) . '" src="' . esc_url( get_stylesheet_directory_uri() . '/assets/img/flags/' . $iso . '.png' ) . '" alt="" width="40" height="27" loading="lazy" decoding="async" />';
+	}
+	return '<span class="' . esc_attr( $class ) . ' flag-emoji" aria-hidden="true">' . esc_html( walid_flag_emoji( $iso ) ) . '</span>';
+}

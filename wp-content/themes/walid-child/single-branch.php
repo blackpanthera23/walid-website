@@ -31,7 +31,8 @@ while ( have_posts() ) :
 	$photos        = get_field( 'branch_photos' );
 	$hero_photo    = ( $photos && is_array( $photos ) ) ? $photos[0] : 0;
 	$hero_photo_id = $hero_photo ? ( is_array( $hero_photo ) ? $hero_photo['ID'] : $hero_photo ) : 0;
-	$hero_bg       = $hero_photo_id ? wp_get_attachment_image_url( $hero_photo_id, 'large' ) : walid_placeholder( 'branch' );
+	// Fallback: the neutral clinic still, not the placeholder SVG (its label showed through the hero).
+	$hero_bg       = $hero_photo_id ? wp_get_attachment_image_url( $hero_photo_id, 'large' ) : get_stylesheet_directory_uri() . '/assets/img/home/clinic.webp';
 	?>
 	<main class="walid-single <?php echo esc_attr( $branch_accent ); ?>" id="primary">
 

@@ -33,7 +33,23 @@ while ( have_posts() ) :
 	?>
 	<?php
 	$svc_img     = get_field( 'service_icon' );
-	$svc_img_url = $svc_img ? wp_get_attachment_image_url( $svc_img, 'large' ) : walid_placeholder( 'service' );
+	// Hero background: the Minor Surgery pillar uses the theme's surgeon photo; other services use their
+	// own image, then the pillar's navy/gold texture. Never the placeholder SVG (its label showed through).
+	$pillar_tex  = array(
+		'walid-aesthetic' => 'aesthetics',
+		'walid-antenatal' => 'antenatal',
+		'walid-general'   => 'injection',
+		'walid-minor'     => 'skin',
+	);
+	$tex_url     = get_stylesheet_directory_uri() . '/assets/img/cards/' . ( isset( $pillar_tex[ $accent_class ] ) ? $pillar_tex[ $accent_class ] : 'skin' ) . '.webp';
+	if ( 'walid-minor' === $accent_class && walid_photo( 'surgeon-loupe' ) ) {
+		$svc_img_url = walid_photo( 'surgeon-loupe' );
+	} elseif ( $svc_img ) {
+		$svc_img_url = wp_get_attachment_image_url( $svc_img, 'large' );
+	} else {
+		$svc_img_url = $tex_url;
+	}
+	$svc_img_url = apply_filters( 'walid_service_hero_image', $svc_img_url, get_the_ID() );
 	?>
 	<main class="walid-single <?php echo esc_attr( $accent_class ); ?><?php echo $is_antenatal ? ' walid-antenatal' : ''; ?>" id="primary">
 

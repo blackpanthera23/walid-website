@@ -37,3 +37,8 @@ wp-content/plugins/*
 !wp-content/plugins/walid-cpts/
 # ACF local JSON IS tracked (field definitions are source):
 !wp-content/themes/walid-child/acf-json/
+
+# Reel render intermediates (regenerate with: node concepts/reel-proof/render.mjs)
+concepts/reel-proof/out/frames/
+concepts/reel-proof/out/chk_*.png
+concepts/reel-proof/out/preview-*.png

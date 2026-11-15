@@ -1,6 +1,6 @@
 /* Poliklinik Walid — UI/UX polish + motion. Loaded site-wide.
    Motion is subtle and ALWAYS gated by prefers-reduced-motion (see end of file).
-   Design system: minimal motion, no parallax/autoplay. */
+   The richer motion layer (hero choreography, stagger, subtle parallax) lives in motion.css. */
 
 /* ---- Images (placeholders + real photos) ---------------------------------- */
 .walid-home .hero-art { background: linear-gradient(160deg, var(--brand-700), var(--brand-900)); }

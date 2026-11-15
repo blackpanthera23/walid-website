@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Poliklinik Walid — Docs, Sitemap &amp; Wireframe</title>
+<style>
+  :root{
+    --navy:#232B8F; --gold:#C9A227; --green:#1E8E66;
+    --ink:#1b1f3b; --muted:#5b6080; --line:#e7e8f2;
+    --bg:#f6f7fb; --panel:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.6;
+  }
+  .layout{display:grid; grid-template-columns:300px 1fr; min-height:100vh}
+  /* Sidebar */
+  aside{
+    background:var(--navy); color:#fff; padding:22px 16px;
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  aside .brand{font-weight:800; font-size:18px; letter-spacing:.2px; margin:0 0 4px}
+  aside .brand span{color:var(--gold)}
+  aside .sub{color:#c9ccf0; font-size:12px; margin:0 0 18px}
+  aside h4{
+    text-transform:uppercase; font-size:11px; letter-spacing:.12em;
+    color:#9aa0e0; margin:18px 8px 6px;
+  }
+  nav a{
+    display:block; color:#eef0ff; text-decoration:none; font-size:13.5px;
+    padding:7px 10px; border-radius:8px; margin:2px 0;
+  }
+  nav a:hover{background:rgba(255,255,255,.08)}
+  nav a.active{background:var(--gold); color:#1a1a1a; font-weight:600}
+  /* Content */
+  main{padding:0}
+  .topbar{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:14px 32px; background:var(--panel); border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:5;
+  }
+  .topbar .links a{
+    color:var(--navy); text-decoration:none; font-size:13px; font-weight:600;
+    border:1px solid var(--line); padding:6px 12px; border-radius:999px; margin-right:6px;
+  }
+  .topbar .links a:hover{background:var(--bg)}
+  .doc{max-width:900px; margin:0 auto; padding:34px 32px 80px}
+  .doc h1{font-size:30px; color:var(--navy); margin-top:0; border-bottom:3px solid var(--gold); padding-bottom:10px}
+  .doc h2{font-size:22px; color:var(--navy); margin-top:34px}
+  .doc h3{font-size:17px; color:var(--ink)}
+  .doc blockquote{
+    border-left:4px solid var(--gold); background:#fffdf4; margin:16px 0;
+    padding:10px 16px; color:#6a5a1e; border-radius:0 8px 8px 0;
+  }
+  .doc pre{
+    background:#0f1330; color:#dfe3ff; padding:16px; border-radius:10px;
+    overflow:auto; font-size:12.5px; line-height:1.5;
+  }
+  .doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .doc :not(pre)>code{background:#eef0fb; color:var(--navy); padding:2px 6px; border-radius:5px; font-size:.9em}
+  .doc table{border-collapse:collapse; width:100%; margin:16px 0; font-size:14px}
+  .doc th,.doc td{border:1px solid var(--line); padding:8px 11px; text-align:left}
+  .doc th{background:var(--navy); color:#fff}
+  .doc tr:nth-child(even) td{background:#fafbff}
+  .doc a{color:var(--green)}
+  .doc hr{border:0; border-top:1px solid var(--line); margin:28px 0}
+  .loading{color:var(--muted); padding:40px 32px}
+  @media (max-width:820px){
+    .layout{grid-template-columns:1fr}
+    aside{position:static; height:auto}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <p class="brand">Poliklinik <span>Walid</span></p>
+    <p class="sub">Planning docs · sitemap · wireframe</p>
+
+    <h4>Key blueprints</h4>
+    <nav id="nav-key"></nav>
+    <h4>Strategy</h4>
+    <nav id="nav-strategy"></nav>
+    <h4>Build &amp; ops</h4>
+    <nav id="nav-ops"></nav>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <strong style="color:var(--navy)">Docs Viewer</strong>
+      <div class="links">
+        <a href="http://localhost:8080/" target="_blank">WordPress (8080)</a>
+        <a href="/prototype-v4/" target="_blank">Prototype v4 (editorial)</a>
+        <a href="/prototype-v3/" target="_blank">Prototype v3 (AB)</a>
+        <a href="/prototype/" target="_blank">Prototype A</a>
+        <a href="/prototype-v2/" target="_blank">Prototype B</a>
+      </div>
+    </div>
+    <article class="doc" id="doc"><p class="loading">Loading…</p></article>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  const KEY = [
+    ["docs/04-sitemap.md", "Sitemap"],
+    ["docs/12-homepage-wireframe.md", "Homepage Wireframe"],
+    ["docs/13-concept-ab-prototype3.md", "Concept AB (Prototype 3)"],
+    ["docs/14-procedure-pages.md", "Procedure Pages"],
+  ];
+  const STRATEGY = [
+    ["docs/00-project-brief.md", "00 · Project Brief"],
+    ["docs/01-references.md", "01 · References"],
+    ["docs/02-customer-journey.md", "02 · Customer Journey"],
+    ["docs/03-patient-flow.md", "03 · Patient Flow"],
+    ["docs/05-content-model.md", "05 · Content Model"],
+    ["docs/06-source-facts.md", "06 · Source Facts"],
+    ["docs/07-design-system.md", "07 · Design System"],
+    ["docs/08-owner-decisions.md", "08 · Owner Decisions"],
+    ["docs/09-value-proposition.md", "09 · Value Proposition"],
+    ["docs/10-proof-and-content.md", "10 · Proof & Content"],
+    ["docs/11-pillars-and-specialists.md", "11 · Pillars & Specialists"],
+  ];
+  const OPS = [
+    ["docs/CONTENT-CHECKLIST.md", "Content Checklist"],
+    ["docs/DEV.md", "Dev Setup"],
+    ["docs/DEPLOY.md", "Deploy"],
+    ["docs/DEPLOY-IONOS.md", "Deploy · IONOS"],
+    ["docs/UPDATING.md", "Updating"],
+    ["docs/GOOGLE-REVIEWS.md", "Google Reviews"],
+  ];
+
+  function build(listEl, items){
+    items.forEach(([path,label])=>{
+      const a=document.createElement("a");
+      a.textContent=label; a.href="#"+encodeURIComponent(path);
+      a.dataset.path=path;
+      a.onclick=e=>{e.preventDefault(); load(path);};
+      listEl.appendChild(a);
+    });
+  }
+  build(document.getElementById("nav-key"), KEY);
+  build(document.getElementById("nav-strategy"), STRATEGY);
+  build(document.getElementById("nav-ops"), OPS);
+
+  async function load(path){
+    const doc=document.getElementById("doc");
+    doc.innerHTML='<p class="loading">Loading '+path+'…</p>';
+    document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("active", a.dataset.path===path));
+    try{
+      const res=await fetch("/"+path, {cache:"no-store"});
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      const md=await res.text();
+      doc.innerHTML=marked.parse(md);
+      window.scrollTo(0,0);
+      location.hash=encodeURIComponent(path);
+    }catch(err){
+      doc.innerHTML='<p class="loading">Could not load '+path+' ('+err.message+'). '+
+        'Make sure you opened this via <code>http://localhost:8090/docs-viewer.html</code>, not file://</p>';
+    }
+  }
+
+  // open from hash or default to the wireframe
+  const start=location.hash? decodeURIComponent(location.hash.slice(1)) : "docs/12-homepage-wireframe.md";
+  load(start);
+</script>
+</body>
+</html>
