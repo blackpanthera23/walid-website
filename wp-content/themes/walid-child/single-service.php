@@ -158,15 +158,20 @@ while ( have_posts() ) :
 				?>
 				<section class="svc-stats reveal">
 					<h2><?php esc_html_e( 'Why day-care surgery', 'walid' ); ?></h2>
+					<?php $dc = walid_daycare_stats(); ?>
 					<div class="stats-row">
-						<figure class="donut" style="--pct:92;" role="img" aria-label="<?php esc_attr_e( '92 percent of minor procedures completed same day', 'walid' ); ?>">
-							<div class="donut-center"><b>92%</b><span><?php esc_html_e( 'same-day', 'walid' ); ?></span></div>
-						</figure>
-						<figure class="donut donut-alt" style="--pct:70;" role="img" aria-label="<?php esc_attr_e( '70 percent under local anaesthetic', 'walid' ); ?>">
-							<div class="donut-center"><b>70%</b><span><?php esc_html_e( 'local anaesthetic', 'walid' ); ?></span></div>
-						</figure>
+						<?php if ( isset( $dc[0], $dc[1] ) ) : ?>
+							<figure class="donut" style="--pct:<?php echo (int) $dc[0]; ?>;" role="img" aria-label="<?php echo esc_attr( sprintf( /* translators: %d: percent */ __( '%d percent of minor procedures completed same day', 'walid' ), $dc[0] ) ); ?>">
+								<div class="donut-center"><b><?php echo (int) $dc[0]; ?>%</b><span><?php esc_html_e( 'same-day', 'walid' ); ?></span></div>
+							</figure>
+							<figure class="donut donut-alt" style="--pct:<?php echo (int) $dc[1]; ?>;" role="img" aria-label="<?php echo esc_attr( sprintf( /* translators: %d: percent */ __( '%d percent under local anaesthetic', 'walid' ), $dc[1] ) ); ?>">
+								<div class="donut-center"><b><?php echo (int) $dc[1]; ?>%</b><span><?php esc_html_e( 'local anaesthetic', 'walid' ); ?></span></div>
+							</figure>
+						<?php endif; ?>
 						<div class="stats-note">
-							<p class="muted"><?php esc_html_e( 'Illustrative figures for the day-care model. [confirm with clinic]', 'walid' ); ?></p>
+							<?php if ( isset( $dc[0] ) && empty( $dc['confirmed'] ) ) : ?>
+								<p class="muted"><?php esc_html_e( 'Illustrative figures for the day-care model. [confirm with clinic]', 'walid' ); ?></p>
+							<?php endif; ?>
 							<p><?php esc_html_e( 'Day-care surgery means shorter waiting times, a faster return to normal routine, and far less time away from work or family. Most patients recover comfortably at home the same day, protecting both their productivity and their quality of life without a lengthy hospital stay.', 'walid' ); ?></p>
 						</div>
 					</div>
@@ -195,10 +200,12 @@ while ( have_posts() ) :
 						's' => (int) ( get_field( 'review_rating', $rv->ID ) ?: 5 ),
 					);
 				}
-			} else {
+			} elseif ( walid_show_samples() ) {
+				// Local preview only: sample quotes, never on the live site.
 				$svc_quotes = walid_pillar_sample_reviews( $pillar_name );
 			}
 			?>
+			<?php if ( $svc_quotes ) : ?>
 			<section class="svc-testimonials reveal">
 				<h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2>
 				<div class="tst-grid reveal-group">
@@ -211,6 +218,7 @@ while ( have_posts() ) :
 					<?php endforeach; ?>
 				</div>
 			</section>
+			<?php endif; ?>
 
 			<?php
 			// Brand promise band (one promise).

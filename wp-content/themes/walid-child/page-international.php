@@ -76,8 +76,9 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 
 			<?php
 			// Short testimonials from patients, with a clear scroll-in motion.
-			$intl_quotes = walid_pillar_sample_reviews( 'Minor Surgery' );
+			$intl_quotes = walid_show_samples() ? walid_pillar_sample_reviews( 'Minor Surgery' ) : array();
 			?>
+			<?php if ( $intl_quotes ) : ?>
 			<section class="group intl-testimonials reveal">
 				<div class="group-head"><h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2></div>
 				<div class="tst-grid reveal-group">
@@ -90,6 +91,7 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 					<?php endforeach; ?>
 				</div>
 			</section>
+			<?php endif; ?>
 		<?php endif; ?>
 
 	</div>

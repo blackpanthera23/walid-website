@@ -566,3 +566,30 @@ function walid_flag_img( $iso2, $class = 'flag-img' ) {
 	}
 	return '<span class="' . esc_attr( $class ) . ' flag-emoji" aria-hidden="true">' . esc_html( walid_flag_emoji( $iso ) ) . '</span>';
 }
+
+/**
+ * Whether sample or unconfirmed content may render (sample review quotes, illustrative figures,
+ * placeholder copy). On by default only when WP_DEBUG is on, so local previews look complete while
+ * the live site never publishes invented reviews or numbers.
+ *
+ * @return bool
+ */
+function walid_show_samples() {
+	return (bool) apply_filters( 'walid_show_sample_content', defined( 'WP_DEBUG' ) && WP_DEBUG );
+}
+
+/**
+ * Day-care figures for the "Why day-care surgery" donuts: array( same_day_pct, local_anaesthetic_pct ).
+ * Empty on the live site until the clinic confirms real numbers; set them here (or through the
+ * walid_daycare_stats filter) once confirmed, and the donuts appear without the "illustrative" note.
+ *
+ * @return array{0?:int,1?:int,confirmed:bool}
+ */
+function walid_daycare_stats() {
+	$confirmed = array(); // e.g. array( 92, 70 ) once the clinic confirms the figures.
+	if ( $confirmed ) {
+		return array( (int) $confirmed[0], (int) $confirmed[1], 'confirmed' => true );
+	}
+	$stats = walid_show_samples() ? array( 92, 70, 'confirmed' => false ) : array( 'confirmed' => false );
+	return apply_filters( 'walid_daycare_stats', $stats );
+}

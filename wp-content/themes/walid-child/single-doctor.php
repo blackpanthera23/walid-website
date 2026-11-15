@@ -62,7 +62,7 @@ while ( have_posts() ) :
 									<a class="tag" href="<?php echo esc_url( get_permalink( $sid ) ); ?>"><?php echo esc_html( get_the_title( $sid ) ); ?></a>
 								<?php endforeach; ?>
 							</div>
-						<?php else : ?>
+						<?php elseif ( walid_show_samples() ) : ?>
 							<p class="muted"><?php esc_html_e( 'Surgeon-led day-care minor surgery, general consultations and patient-first care. [confirm specific focus areas]', 'walid' ); ?></p>
 						<?php endif; ?>
 					</section>
