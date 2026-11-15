@@ -293,3 +293,12 @@
 @media (max-width: 560px) {
   .walid-archive .flag-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 }
+
+/* ---- Responsive fixes (phone/tablet) --------------------------------------
+   Category card lists: one column when the card is narrow. The white-body override above set
+   two columns with higher specificity than the generic mobile rule, leaving ~130px columns. */
+@media (max-width: 980px) {
+  .walid-archive .card.ms-cat-card .proc-list { grid-template-columns: 1fr; }
+}
+/* Section heading + tag (e.g. "Minor Surgery" + "OUR SPECIALTY"): let the tag drop below on narrow screens. */
+.walid-archive .group-head { flex-wrap: wrap; row-gap: 6px; }

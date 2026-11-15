@@ -265,6 +265,8 @@ $hero_pillar = 'Minor Surgery';
 			</section>
 		<?php endforeach; ?>
 
+		<?php walid_render_video_strip(); ?>
+
 	</div>
 </main>
 <?php

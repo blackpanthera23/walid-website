@@ -158,6 +158,13 @@ while ( have_posts() ) :
 			<?php endif; ?>
 
 			<?php
+			// Minor Surgery pages get Dr Walid's explainer videos (the channel is about minor surgery).
+			if ( 'walid-minor' === $accent_class ) {
+				walid_render_video_strip();
+			}
+			?>
+
+			<?php
 			// Short testimonials (3), tailored to THIS pillar. Prefer permitted Review CPT
 			// posts whose review_pillar matches this service's pillar; otherwise fall back to
 			// pillar-specific sample quotes (flagged pending) so each pillar page reads

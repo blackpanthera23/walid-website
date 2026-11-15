@@ -258,3 +258,9 @@
 @media (prefers-reduced-motion: reduce) {
   .walid-single .faq-item summary::after { transition: none; }
 }
+
+/* ---- Responsive fixes (phone) ---------------------------------------------- */
+/* Donut label wraps inside the ring instead of spilling over it. */
+.walid-single .donut-center span { display: block; max-width: 84px; margin: 2px auto 0; line-height: 1.15; }
+/* "Led by" doctor link: comfortable tap height. */
+.walid-single .card .gold-line a { display: inline-block; padding: 8px 0; }

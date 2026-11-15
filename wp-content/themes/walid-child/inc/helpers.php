@@ -393,3 +393,142 @@ function walid_international_countries() {
 	);
 	return apply_filters( 'walid_international_countries', $countries );
 }
+
+/**
+ * Remove the parent theme's footer bar ("(c) year Site - WordPress Theme by Kadence WP" locally,
+ * "Powered by Astra" on the live host). The site has its own brand footer (walid_brand_footer),
+ * which carries the legal line, so the parent credit is redundant.
+ *
+ * Runs on `wp` so the parent has already registered its hooks. remove_action() is a no-op for a
+ * hook that is not registered, so one callback covers both Kadence and Astra.
+ */
+function walid_remove_parent_footer() {
+	// Kadence (local dev parent).
+	remove_action( 'kadence_footer', 'Kadence\footer_markup' );
+	// Astra (live parent).
+	remove_action( 'astra_footer', 'astra_footer_markup' );
+}
+add_action( 'wp', 'walid_remove_parent_footer', 20 );
+
+/**
+ * Dr Walid's YouTube channel (public). Used for the "See it explained" video strip.
+ *
+ * @return string
+ */
+function walid_youtube_channel_url() {
+	return 'https://www.youtube.com/@Drwalidchannel';
+}
+
+/**
+ * Curated videos from Dr Walid's channel for the services pages.
+ *
+ * Picked for calm, explanatory thumbnails (no graphic surgical frames). Thumbnails are self-hosted
+ * in assets/img/videos/<id>.webp so the page makes no request to YouTube until a visitor plays one.
+ * Filterable so the list can change without template edits.
+ *
+ * @return array<int,array{id:string,title:string}>
+ */
+function walid_video_items() {
+	$items = array(
+		array(
+			'id'    => 'gCNfu4x79ak',
+			'title' => __( 'Pilar cyst', 'walid' ),
+		),
+		array(
+			'id'    => 'bUQ41MfRgOk',
+			'title' => __( 'Xanthelasma', 'walid' ),
+		),
+		array(
+			'id'    => 'Gw5euq8gy0U',
+			'title' => __( 'Keloid', 'walid' ),
+		),
+		array(
+			'id'    => 'JE9EWJoJeA8',
+			'title' => __( 'Neurofibromatosis type 1', 'walid' ),
+		),
+	);
+	return apply_filters( 'walid_video_items', $items );
+}
+
+/**
+ * Render the "See it explained" video strip.
+ *
+ * Each card is a real link to the video on YouTube (works without JavaScript). With JavaScript,
+ * clicking swaps the thumbnail for a privacy-enhanced (youtube-nocookie) player and starts it.
+ */
+function walid_render_video_strip() {
+	$dir   = get_stylesheet_directory() . '/assets/img/videos/';
+	$uri   = get_stylesheet_directory_uri() . '/assets/img/videos/';
+	$items = array();
+	foreach ( walid_video_items() as $v ) {
+		if ( ! empty( $v['id'] ) && preg_match( '/^[A-Za-z0-9_-]{11}$/', $v['id'] ) && file_exists( $dir . $v['id'] . '.webp' ) ) {
+			$items[] = $v;
+		}
+	}
+	if ( ! $items ) {
+		return;
+	}
+	?>
+	<section class="vid-strip reveal" aria-labelledby="vid-strip-title">
+		<div class="vid-strip-head">
+			<div>
+				<p class="eyebrow"><?php esc_html_e( 'Watch', 'walid' ); ?></p>
+				<h2 id="vid-strip-title"><?php esc_html_e( 'See it explained', 'walid' ); ?></h2>
+				<p><?php esc_html_e( 'Short videos from Dr Walid\'s YouTube channel, in Bahasa Malaysia.', 'walid' ); ?></p>
+			</div>
+			<a class="btn btn-ghost" href="<?php echo esc_url( walid_youtube_channel_url() ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'More on YouTube', 'walid' ); ?></a>
+		</div>
+		<div class="vid-grid reveal-group">
+			<?php foreach ( $items as $v ) : ?>
+				<figure class="vid-item">
+					<div class="vid-media">
+						<a class="vid-card" href="<?php echo esc_url( 'https://www.youtube.com/shorts/' . $v['id'] ); ?>" target="_blank" rel="noopener" data-yt="<?php echo esc_attr( $v['id'] ); ?>" data-title="<?php echo esc_attr( $v['title'] ); ?>" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: video title */ __( 'Play video: %s', 'walid' ), $v['title'] ) ); ?>">
+							<img src="<?php echo esc_url( $uri . $v['id'] . '.webp' ); ?>" alt="" width="360" height="640" loading="lazy" />
+							<span class="vid-play" aria-hidden="true"></span>
+						</a>
+					</div>
+					<figcaption>
+						<b><?php echo esc_html( $v['title'] ); ?></b>
+						<span><?php esc_html_e( 'Bahasa Malaysia', 'walid' ); ?></span>
+					</figcaption>
+				</figure>
+			<?php endforeach; ?>
+		</div>
+	</section>
+	<?php
+	walid_video_strip_script();
+}
+
+/**
+ * Print the click-to-play script once, in the footer, only on pages that render the strip.
+ */
+function walid_video_strip_script() {
+	static $queued = false;
+	if ( $queued ) {
+		return;
+	}
+	$queued = true;
+	add_action(
+		'wp_footer',
+		static function () {
+			?>
+<script>
+(function(){
+	document.addEventListener('click',function(e){
+		var a=e.target.closest&&e.target.closest('.vid-card[data-yt]');
+		if(!a||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey){return;}
+		e.preventDefault();
+		var f=document.createElement('iframe');
+		f.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(a.getAttribute('data-yt'))+'?autoplay=1&rel=0&playsinline=1';
+		f.title=a.getAttribute('data-title')||'Video';
+		f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+		f.setAttribute('allowfullscreen','');
+		a.parentNode.replaceChild(f,a);
+	});
+})();
+</script>
+			<?php
+		},
+		30
+	);
+}
