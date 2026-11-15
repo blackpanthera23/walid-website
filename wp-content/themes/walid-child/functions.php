@@ -58,6 +58,8 @@ require_once get_stylesheet_directory() . '/inc/google-reviews.php';
 
 // WhatsApp click counters (first-party, no personal data). Report: Tools > WhatsApp clicks.
 require_once get_stylesheet_directory() . '/inc/wa-tracking.php';
+// Parent (Astra) settings cannot override the brand palette or turn on a transparent header.
+require_once get_stylesheet_directory() . '/inc/parent-compat.php';
 
 // Editor block patterns (reusable branded sections for staff).
 require_once get_stylesheet_directory() . '/inc/patterns.php';

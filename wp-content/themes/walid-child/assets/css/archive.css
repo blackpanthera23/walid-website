@@ -306,3 +306,13 @@
 /* International page: self-hosted flag images (emoji flags show as letters on Windows). */
 .walid-archive .flag-img { width: 32px; height: 22px; object-fit: contain; border-radius: 3px; flex: 0 0 auto; display: block; }
 .walid-archive .flag-img.flag-emoji { width: auto; height: auto; font-size: 1.5rem; line-height: 1; }
+
+/* Tinted pillar/region panels bleed 30px past the text column on desktop. Below that width the
+   container padding is smaller than the bleed, so the panel ran past the screen edge (Kadence's
+   wrapper used to clip it; Astra's full-width layout does not). Match the bleed to the padding. */
+@media (max-width: 1220px) {
+  .walid-archive .pillar-section.pillar-tinted { margin-left: -12px; margin-right: -12px; padding: 24px 12px; }
+}
+@media (max-width: 680px) {
+  .walid-archive .pillar-section.pillar-tinted { margin-left: -6px; margin-right: -6px; padding: 20px 6px; }
+}

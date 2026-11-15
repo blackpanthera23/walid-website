@@ -210,7 +210,7 @@ button:focus-visible,
 :root { --gold-700: #8A6A0F; --gold-800: #7D6110; }
 body .walid-single :is(h1, h2, h3),
 body .walid-archive :is(h1, h2, h3),
-body .walid-procedure :is(h1, h2, h3) { color: var(--accent-900, var(--brand-900)); }
+body .walid-procedure :is(h1, h2, h3) { color: var(--accent-900, var(--brand-900)); font-family: var(--serif); }
 body .walid-single .eyebrow,
 body .walid-archive .eyebrow,
 body .walid-procedure .eyebrow,
@@ -220,3 +220,30 @@ body .walid-single .gold-line a { color: var(--gold-700); }
 body .walid-single .pin,
 body .walid-archive .pin { color: var(--gold-800); }
 body .walid-archive .doctor-card .role { color: var(--gold-700); }
+
+/* Parent header button (Astra header builder): WhatsApp links stay WhatsApp green whatever the
+   parent palette says. */
+.site-header a.ast-custom-button-link[href*="wa.me"] .ast-custom-button,
+.site-header a[href*="wa.me"].ast-custom-button,
+.site-header .ast-builder-button-wrap a[href*="wa.me"],
+.site-header .menu-item a[href*="wa.me"] {
+	background: var(--wa) !important;
+	border-color: var(--wa) !important;
+	color: #06351b !important;
+}
+.site-header a.ast-custom-button-link[href*="wa.me"]:hover .ast-custom-button,
+.site-header .ast-builder-button-wrap a[href*="wa.me"]:hover { background: var(--wa-dark) !important; }
+
+/* Astra's full-width layout resets the page wrapper: `.ast-page-builder-template .site .site-content
+   #primary { padding: 0; margin: 0 }`. Our <main> carries id="primary", so restore the page's own
+   vertical rhythm with a selector that out-ranks it (values mirror single.css / archive.css). */
+.ast-page-builder-template .site .site-content #primary.walid-single { padding-top: 72px; padding-bottom: 72px; }
+.ast-page-builder-template .site .site-content #primary.walid-archive { padding-top: 56px; padding-bottom: 56px; }
+@media (max-width: 680px) {
+	.ast-page-builder-template .site .site-content #primary.walid-single { padding-top: 44px; padding-bottom: 44px; }
+	.ast-page-builder-template .site .site-content #primary.walid-archive { padding-top: 44px; padding-bottom: 44px; }
+}
+
+/* Service/branch hero: a rounded card at the content width, not an edge-to-edge strip with
+   rounded corners touching the screen edge. */
+.walid-single .service-hero { width: min(calc(100% - 24px), calc(var(--maxw) + 56px)); margin-inline: auto; }
