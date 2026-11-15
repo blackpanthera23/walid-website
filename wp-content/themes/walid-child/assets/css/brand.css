@@ -222,17 +222,16 @@ body .walid-archive .pin { color: var(--gold-800); }
 body .walid-archive .doctor-card .role { color: var(--gold-700); }
 
 /* Parent header button (Astra header builder): WhatsApp links stay WhatsApp green whatever the
-   parent palette says. */
-.site-header a.ast-custom-button-link[href*="wa.me"] .ast-custom-button,
-.site-header a[href*="wa.me"].ast-custom-button,
-.site-header .ast-builder-button-wrap a[href*="wa.me"],
-.site-header .menu-item a[href*="wa.me"] {
+   parent palette says. Matches wa.me, wasap.my (the live header uses wasap.my) and whatsapp.com links. */
+.site-header :is(a[href*="wa.me"], a[href*="wasap.my"], a[href*="whatsapp"]) .ast-custom-button,
+.site-header :is(a[href*="wa.me"], a[href*="wasap.my"], a[href*="whatsapp"]).ast-custom-button,
+.site-header .ast-builder-button-wrap :is(a[href*="wa.me"], a[href*="wasap.my"], a[href*="whatsapp"]),
+.site-header .menu-item :is(a[href*="wa.me"], a[href*="wasap.my"]) {
 	background: var(--wa) !important;
 	border-color: var(--wa) !important;
 	color: #06351b !important;
 }
-.site-header a.ast-custom-button-link[href*="wa.me"]:hover .ast-custom-button,
-.site-header .ast-builder-button-wrap a[href*="wa.me"]:hover { background: var(--wa-dark) !important; }
+.site-header :is(a[href*="wa.me"], a[href*="wasap.my"], a[href*="whatsapp"]):hover .ast-custom-button { background: var(--wa-dark) !important; border-color: var(--wa-dark) !important; }
 
 /* Astra's full-width layout resets the page wrapper: `.ast-page-builder-template .site .site-content
    #primary { padding: 0; margin: 0 }`. Our <main> carries id="primary", so restore the page's own

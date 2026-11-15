@@ -79,12 +79,14 @@ function walid_enqueue_assets() {
 		$theme->parent() ? $theme->parent()->get( 'Version' ) : $version
 	);
 
-	// Web fonts: Fraunces (headings) + Inter (body), display=swap, preconnected (see below).
+	// Web fonts: Fraunces (headings) + Inter (body), self-hosted in assets/fonts/ (variable woff2,
+	// latin + latin-ext). Not loaded from Google: on the live site the cookie banner held back
+	// Google requests until consent, so first-time visitors saw Georgia and Arial instead.
 	wp_enqueue_style(
 		'walid-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap',
+		get_stylesheet_directory_uri() . '/assets/fonts/fonts.css',
 		array(),
-		null
+		$version
 	);
 
 	// Child brand tokens (ported 1:1 from the prototype :root).
@@ -346,19 +348,16 @@ function walid_floating_whatsapp() {
 add_action( 'wp_footer', 'walid_floating_whatsapp' );
 
 /**
- * Preconnect to Google Fonts so font loading is non-render-blocking.
+ * Preload the two latin font files used above the fold so text renders in the brand fonts
+ * without a swap. (Fonts are self-hosted; no third-party preconnect is needed.)
  */
-function walid_font_preconnect( $urls, $relation_type ) {
-	if ( 'preconnect' === $relation_type ) {
-		$urls[] = array( 'href' => 'https://fonts.googleapis.com' );
-		$urls[] = array(
-			'href'        => 'https://fonts.gstatic.com',
-			'crossorigin' => 'anonymous',
-		);
+function walid_font_preload() {
+	$base = get_stylesheet_directory_uri() . '/assets/fonts/';
+	foreach ( array( 'fraunces-latin.woff2', 'inter-latin.woff2' ) as $file ) {
+		printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n", esc_url( $base . $file ) );
 	}
-	return $urls;
 }
-add_filter( 'wp_resource_hints', 'walid_font_preconnect', 10, 2 );
+add_action( 'wp_head', 'walid_font_preload', 2 );
 
 /**
  * Theme setup: text domain (translatable later, English-only now) + supports.
