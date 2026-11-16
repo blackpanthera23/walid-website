@@ -132,16 +132,22 @@ while ( have_posts() ) :
 			$maps_link  = ( $google && ! empty( $google['url'] ) )
 				? $google['url']
 				: 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( wp_strip_all_tags( $map_query ) );
+			$snapshot     = walid_branch_google( $id );
 			$rating_label = ( $google && $google['rating'] )
 				? number_format( $google['rating'], 1 ) . ' ★'
-				: '4.9 ★';
+				: ( $snapshot ? $snapshot['rating'] . ' ★' : '' );
+			if ( ! $google && $snapshot ) {
+				$maps_link = $snapshot['url'];
+			}
 			?>
 			<section class="branch-reviews">
 				<div class="group-head">
-					<span class="pin"><?php echo esc_html( $rating_label ); ?></span>
+					<?php if ( $rating_label ) : ?><span class="pin"><?php echo esc_html( $rating_label ); ?></span><?php endif; ?>
 					<h2><?php esc_html_e( 'What patients say', 'walid' ); ?></h2>
 					<?php if ( $google && $google['total'] ) : ?>
 						<span class="muted" style="font-size:.9rem;"><?php echo esc_html( sprintf( /* translators: %s: count */ __( 'from %s Google reviews', 'walid' ), number_format_i18n( $google['total'] ) ) ); ?></span>
+					<?php elseif ( $snapshot && $snapshot['count'] ) : ?>
+						<span class="muted" style="font-size:.9rem;"><?php echo esc_html( sprintf( /* translators: %s: count */ __( 'from %s Google reviews', 'walid' ), $snapshot['count'] ) ); ?></span>
 					<?php endif; ?>
 				</div>
 

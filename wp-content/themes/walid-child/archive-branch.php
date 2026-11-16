@@ -57,7 +57,7 @@ $region_order = array( 'Central (Klang Valley)', 'North (Penang / Kedah)', 'Othe
 								<?php if ( $bthumb ) : ?>
 									<?php echo wp_get_attachment_image( is_array( $bthumb ) ? $bthumb['ID'] : $bthumb, 'medium', false, array( 'alt' => esc_attr( get_the_title( $b ) ), 'loading' => 'lazy' ) ); ?>
 								<?php else : ?>
-									<img src="<?php echo walid_placeholder( 'branch' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" alt="<?php echo esc_attr( get_the_title( $b ) ); ?>" loading="lazy" />
+									<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/home/clinic.webp' ); ?>" alt="" loading="lazy" />
 								<?php endif; ?>
 							</div>
 							<h3>
@@ -65,7 +65,17 @@ $region_order = array( 'Central (Klang Valley)', 'North (Penang / Kedah)', 'Othe
 								<?php if ( $minor ) : ?><span class="surgery-badge"><?php esc_html_e( 'Minor surgery', 'walid' ); ?></span><?php endif; ?>
 							</h3>
 							<?php if ( $flagship ) : ?><div class="meta"><?php esc_html_e( 'Flagship surgical hub (HQ)', 'walid' ); ?></div><?php endif; ?>
+							<?php $bg = walid_branch_google( $b->ID ); ?>
+							<?php if ( $bg ) : ?>
+								<div class="branch-rating"><span class="stars" aria-hidden="true">&#9733;</span> <b><?php echo esc_html( $bg['rating'] ); ?></b> <?php echo esc_html( $bg['count'] ? sprintf( /* translators: %s: review count */ __( 'from %s Google reviews', 'walid' ), $bg['count'] ) : __( 'on Google', 'walid' ) ); ?></div>
+							<?php endif; ?>
 							<?php if ( $address ) : ?><p><?php echo esc_html( wp_trim_words( $address, 18 ) ); ?></p><?php endif; ?>
+							<?php
+							$bh = get_field( 'branch_hours', $b->ID );
+							if ( $bh && is_array( $bh ) && ! empty( $bh[0]['time'] ) ) :
+								?>
+								<div class="meta"><?php echo esc_html( trim( ( $bh[0]['day'] ?? '' ) . ' ' . $bh[0]['time'] ) ); ?></div>
+							<?php endif; ?>
 							<div class="card-foot">
 								<a class="btn btn-ghost" href="<?php echo esc_url( get_permalink( $b ) ); ?>"><?php esc_html_e( 'Branch details', 'walid' ); ?></a>
 							</div>

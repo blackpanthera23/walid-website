@@ -641,3 +641,23 @@ function walid_international_review_cards( $limit = 3 ) {
 	}
 	return $cards;
 }
+
+/**
+ * A branch's Google rating, from live Google data when an API key is set, else the snapshot stored on
+ * the branch (branch_google_rating / _count / _name post meta, copied from Google Maps).
+ *
+ * @param int $branch_id Branch post ID.
+ * @return array{rating:string,count:string,url:string}|null Null when no rating is known.
+ */
+function walid_branch_google( $branch_id ) {
+	$rating = (string) get_post_meta( $branch_id, 'branch_google_rating', true );
+	if ( '' === $rating ) {
+		return null;
+	}
+	$name = (string) get_post_meta( $branch_id, 'branch_google_name', true );
+	return array(
+		'rating' => $rating,
+		'count'  => (string) get_post_meta( $branch_id, 'branch_google_count', true ),
+		'url'    => 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $name ? $name : get_the_title( $branch_id ) ),
+	);
+}

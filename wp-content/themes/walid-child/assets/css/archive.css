@@ -316,3 +316,8 @@
 @media (max-width: 680px) {
   .walid-archive .pillar-section.pillar-tinted { margin-left: -6px; margin-right: -6px; padding: 20px 6px; }
 }
+
+/* Branch cards: Google rating line */
+.walid-archive .branch-rating { font-size: .88rem; color: var(--muted); margin: 2px 0 8px; }
+.walid-archive .branch-rating .stars { color: var(--gold-500); }
+.walid-archive .branch-rating b { color: var(--accent-900, var(--brand-900)); }

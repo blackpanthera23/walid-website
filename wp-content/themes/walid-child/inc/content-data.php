@@ -53,7 +53,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.9",
+    "branch_google_count": "1,130",
+    "branch_google_name": "Poliklinik Walid Ampang",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "branch",
@@ -84,7 +89,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.8",
+    "branch_google_count": "661",
+    "branch_google_name": "Poliklinik Walid Jalan Baru (HQ)",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "branch",
@@ -115,7 +125,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.9",
+    "branch_google_count": "975",
+    "branch_google_name": "Poliklinik Walid Kuala Kangsar",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "branch",
@@ -146,7 +161,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.7",
+    "branch_google_count": "992",
+    "branch_google_name": "Poliklinik Walid 22 Jam Parit Buntar",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "branch",
@@ -177,7 +197,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.9",
+    "branch_google_count": "195",
+    "branch_google_name": "Poliklinik Walid Sungai Petani",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "branch",
@@ -208,7 +233,12 @@ return json_decode(
    },
    "refs": {},
    "images": {},
-   "meta": {}
+   "meta": {
+    "branch_google_rating": "4.9",
+    "branch_google_count": "427",
+    "branch_google_name": "Poliklinik Walid Tasek Gelugor",
+    "branch_google_checked": "2026-11-16"
+   }
   },
   {
    "type": "service",
