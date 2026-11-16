@@ -1,7 +1,7 @@
 # Poliklinik Walid website: full handoff
 
-**Last updated:** 16 Nov 2026 · **Live:** https://poliklinikdrwalid.com runs theme **walid-child 0.4.6** (commit `2aa1031`)
-on **Astra 4.14.3**, deployed 16 Nov 2026 and verified. **Repo:** `github.com/blackpanthera23/walid-website`, branch `main`.
+**Last updated:** 16 Nov 2026 · **Live:** https://poliklinikdrwalid.com runs theme **walid-child 0.4.7** (commit `f3e4fce`)
+on **Astra 4.14.3**, deployed 16 Nov 2026 and verified, with content imported. **Repo:** `github.com/blackpanthera23/walid-website`, branch `main`.
 
 This is the single entry point for anyone (person or agent) taking over the site. It replaces `HANDOFF-OMP.md`
 and the `docs/DEPLOY-BATCH-*.md` manifests, which describe older states. Deeper detail lives in the files
@@ -31,17 +31,15 @@ Non-negotiables (full list in `.kiro/steering/project-context.md` and `docs/00-p
 
 | Area | State |
 |---|---|
-| Theme code | ✅ Live = repo `main` (0.4.6). Nothing pending. |
-| Live content | ❌ **Empty.** 0 branches, 0 services, 0 doctors, 0 procedures, 0 reviews. Pages exist: Home, About, International Patients, Contact. |
+| Theme code | ✅ Live = repo `main` (0.4.7). Nothing pending. |
+| Live content | ✅ Imported 16 Nov via Tools > Walid content: 6 branches (address, phone, hours, Google rating from each Google Maps listing), 16 published services + Radiology as a draft, 2 doctors, the Xanthelasma procedure page, 10 real Google reviews. Branches 7 to 10 and doctor photos are still missing. |
 | Live config | ✅ Static front page, post-name permalinks, Primary menu in Astra `primary` + `mobile_menu`, logo and "WhatsApp The Clinic" button in the header. |
 | Local site | ✅ http://localhost:8080 on Astra, with sample content (local only). |
 | Launch | ⏳ Blocked on real content and owner confirmations (section 11). |
 
-What visitors see today: the full homepage (hero, who we are, the Walid standard, service tiles, "Talk to us",
-branch map with fallback names, International section with the 32-country flag strip, closing CTA), About,
-International Patients and Contact. `/services/`, `/branches/` and `/doctors/` show only their headings plus a
-"will appear once added in the CMS" line, and `/services/minor-surgery/` is a 404, because no posts exist yet.
-Adding content in wp-admin fills these in; no code change is needed.
+What visitors see today: every page is filled. The homepage reviews row shows 10 Google reviews; `/services/` has
+the pillar panels with the 6 Minor Surgery category cards; `/branches/` lists 6 branches by region with their
+Google rating and hours; `/doctors/` lists Dr Walid and Dr Anis (placeholder avatars until real photos).
 
 ## 3. Architecture
 
@@ -89,6 +87,7 @@ WordPress (IONOS Managed WP)          Local: Docker (docker-compose.yml)
 | `inc/seo.php` | MedicalClinic schema per branch, Organization schema with rating, skip link. |
 | `inc/google-reviews.php` | Live Google reviews per branch (needs an API key, section 11). |
 | `inc/wa-tracking.php` + `assets/js/wa-track.js` | First-party WhatsApp click counter, no cookies or personal data. Report: wp-admin > Tools > WhatsApp clicks. |
+| `inc/content-import.php` + `inc/content-data.php` | Content importer (wp-admin > Tools > Walid content): creates the bundled branches, services, doctors, procedure and reviews if missing, never changes existing posts, and can undo what it created. Also `wp walid import` / `wp walid undo` locally. |
 | `inc/patterns.php` | Block patterns for the editor. |
 | `acf-json/` | The 5 field groups (branch, doctor, procedure, review, service). |
 | `assets/css/` | `brand.css` (tokens, footer, contrast, Astra fixes, video strip), `home.css`, `single.css`, `archive.css`, `procedure.css`, `enhance.css`, `motion.css` (inner-page motion). `homepage.css` is the old homepage and is no longer loaded. |
@@ -104,7 +103,7 @@ WordPress (IONOS Managed WP)          Local: Docker (docker-compose.yml)
 | **Service** | `/services/` | pillar weight, WhatsApp routing (general / minor surgery), short description, image, procedures (one per line, `Name \| one-line explainer`), lead doctor, branches. Taxonomy **Pillar**: `Minor Surgery`, `Aesthetics`, `Antenatal & Women's Health`, `General Medicine`. |
 | **Doctor** | `/doctors/` | role, leadership flag, qualifications, photo, bio, branches, lead-specialist-for (services). |
 | **Procedure** | `/procedures/` | summary, image, parent service, WhatsApp routing, what it is, note, methods (repeater), what to expect (repeater), questions, branches. |
-| **Review** | not public | quote, author, rating, source, source URL, **permission** (must be on to show), branch. |
+| **Review** | not public | quote, author, rating, source, source URL, **permission** (must be on to show), branch. Extra meta (not in the form): `review_pillar` (pillar name, for pillar-tailored testimonials), `review_international` (1 = shown first on International Patients). |
 
 Names matter in two places: the pillar and region **term names** above are matched by text, and the Minor
 Surgery service must have the slug `minor-surgery` for the homepage tile and hero photo to link to it.
@@ -115,7 +114,7 @@ Field-by-field entry guide: `docs/CONTENT-CHECKLIST.md`. Procedure page spec: `d
 | Behaviour | Rule |
 |---|---|
 | Sample content | Sample review quotes, the illustrative day-care figures (92% / 70%) and placeholder doctor copy render **only when `WP_DEBUG` is on** (`walid_show_samples()`). Live has it off, so it never publishes invented reviews or numbers. |
-| Reviews | Shown only for Review posts with **permission** on. Branch pages show only that branch's reviews. With a Google key + Place ID, branch pages show live Google reviews instead. |
+| Reviews | Shown only for Review posts with **permission** on, ordered by the Order field. Branch pages show only that branch's reviews. Branch rating badges use a Google Maps snapshot stored on each branch (`branch_google_rating`, `_count`, `_name` post meta, 16 Nov 2026); with a Google key + Place ID, live Google data replaces it. |
 | Day-care donuts | Hidden on live until real figures are set in `walid_daycare_stats()` (`inc/helpers.php`). |
 | Specialist band (home) | Appears only when the antenatal service's lead doctor has a **real photo** and role. |
 | Service hero image | Minor Surgery pillar: the surgeon photo. Others: the service's own image, else the pillar's navy/gold texture. Never the placeholder label. |
@@ -202,10 +201,11 @@ There is no SSH on IONOS, so WP-CLI cannot run on live. Deploy the theme as a zi
 ## 11. Owner to-do (blocks launch)
 
 **Content (wp-admin, no code):**
-- [ ] 10 branches with region, address, hours, phone, map, photos (`docs/CONTENT-CHECKLIST.md`). Branch 7 to 10 names are still unknown.
+- [ ] Branches 7 to 10 (names unknown) and branch photos. The 6 existing branches got their address, phone and hours from Google Maps on 16 Nov; check them.
+- [ ] **HQ question:** the site calls Ampang the flagship HQ, but Google Maps lists "Poliklinik Walid Jalan Baru (HQ)". Confirm which is right.
 - [ ] Services under the right pillars; the Minor Surgery service with slug `minor-surgery`.
-- [ ] Dr Walid and Dr Anis: exact credentials, bio, **real photos** (Dr Anis's photo turns on the homepage specialist band).
-- [ ] Reviews with written permission, marked "permission" on.
+- [ ] Dr Walid and Dr Anis: exact credentials, **real photos** (Dr Anis's photo turns on the homepage specialist band). Roles are set to "Principal doctor, minor surgery" and "Antenatal & women's health" until confirmed.
+- [ ] The 10 Google reviews were published on 16 Nov at the owner's request (first name + initial, linked to Google). They are all from the Ampang listing; add reviews from the other branches the same way (Reviews > Add New, tick permission).
 - [ ] Procedure pages (Xanthelasma is the worked example; real clips exist in `assets/proc/`, not yet used).
 
 **Confirmations:**
@@ -228,7 +228,8 @@ There is no SSH on IONOS, so WP-CLI cannot run on live. Deploy the theme as a zi
 | **LatePoint booking plugin is active on live** | Conflicts with the WhatsApp-only rule. It is not linked anywhere by the theme. Owner to decide: deactivate, or keep for internal use. Not changed. |
 | Cookie banner covers part of the hero on phones | SureCookie's position and layout are plugin settings (wp-admin > SureCookie). |
 | Homepage tiles for Aesthetics, Antenatal, General link to `/services/` | They have no dedicated pages yet. |
-| Branch count "10" is fixed text | Filter `walid_branch_count` once the real count is confirmed. |
+| Branch count "10" is fixed text | Filter `walid_branch_count` once the real count is confirmed. Only 6 branches exist on the site. |
+| Review count | The homepage says "4.9 from 1,130 Google reviews" (Ampang's listing). Across the 6 Google listings there are about 4,380 reviews averaging 4.8, an option if you want a group-wide figure. |
 | Click tracking counts only `wa.me` links | The header button uses `wasap.my`, so its clicks are not counted. Change the button link to `https://wa.me/60142521684` in Astra's header settings, or extend `wa-track.js`. |
 | Tested on Astra 4.14.3 only | After an Astra update, re-check the header, footer and full-width layout. |
 | Old docs | `HANDOFF-OMP.md`, `docs/DEPLOY-BATCH-*.md`, `docs/DEPLOY-IONOS.md` and `docs/DEPLOY.md` describe the SFTP era; `*.bak.kadence-port` files are pre-Astra copies. Kept for history; this file wins where they disagree. |
@@ -269,4 +270,5 @@ There is no SSH on IONOS, so WP-CLI cannot run on live. Deploy the theme as a zi
 | 0.3.x | 6 to 15 Nov | Stats count-up, video strip, footer credit removal, responsive fixes. |
 | 0.4.0 to 0.4.4 | 6 to 16 Nov | Concept 4 homepage, motion layer, WhatsApp click tracking, International section, photos, contrast, Astra compatibility. |
 | 0.4.5 | 16 Nov | Sample content only in development. **Deployed.** |
-| 0.4.6 | 16 Nov | Self-hosted fonts, header WhatsApp button colour. **Deployed, current.** |
+| 0.4.6 | 16 Nov | Self-hosted fonts, header WhatsApp button colour. Deployed. |
+| 0.4.7 | 16 Nov | Content importer, branch ratings and hours, 10 Google reviews, review count 1,130. **Deployed + content imported, current.** |

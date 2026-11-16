@@ -105,8 +105,9 @@ TikTok 561K · Facebook 119K · Instagram 30.8K · Google 4.9 from 1,098 reviews
 - ✅ CREDIT LEDGER: log every paid-gen spend (Higgsfield/Magnific) in `docs/CREDIT-LEDGER.csv`. Never put patient
   data (Remedi exports) in prompts, mem0, the repo or the site; only aggregate stats are public.
 
-- ✅ THEME 0.4.6 DEPLOYED LIVE (16 Nov, verified). Full handoff: `HANDOFF.md` at the repo root. Deploy = theme-zip upload
-  in wp-admin (HANDOFF.md section 9). Live content is still EMPTY (0 branches/services/doctors/reviews). Local 8080 now runs on ASTRA like live (Kadence inactive); `inc/parent-compat.php`
+- ✅ THEME 0.4.7 LIVE + CONTENT IMPORTED (16 Nov, verified). Full handoff: `HANDOFF.md`. Deploy = theme-zip upload in
+  wp-admin (HANDOFF.md section 9). Live has 6 branches, 16 services, 2 doctors, 1 procedure, 10 Google reviews
+  (Tools > Walid content imports missing posts only; Undo trashes what it created). Local 8080 now runs on ASTRA like live (Kadence inactive); `inc/parent-compat.php`
   forces the brand palette, a solid header and Astra's full-width layout over parent DB settings. Includes everything above plus
   International section on the homepage (32-country flag strip, self-hosted flags in `assets/img/flags/`), owner-supplied
   stock photos in `assets/img/photos/` (home hero, "Talk to us" banner, International section + page, Minor Surgery hero;
