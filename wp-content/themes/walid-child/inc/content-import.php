@@ -255,15 +255,9 @@ function walid_import_run( $dry_run = false ) {
 			}
 			$f = $fields[ $name ];
 			if ( 'repeater' === $f['type'] && is_array( $value ) ) {
-				$rows = array();
-				foreach ( $value as $r ) {
-					$keyed = array();
-					foreach ( (array) $r as $sub_name => $sub_value ) {
-						$keyed[ $f['sub'][ $sub_name ] ?? $sub_name ] = $sub_value;
-					}
-					$rows[] = $keyed;
-				}
-				$value = $rows;
+				// Rows keyed by sub-field NAME: ACF Pro maps names itself, and free ACF stores the array as
+				// is, which is how the templates read it ($row['day'], $row['time']).
+				$value = array_values( array_map( static fn( $r ) => (array) $r, $value ) );
 			}
 			update_field( $f['key'], $value, $id );
 		}
