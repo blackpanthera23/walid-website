@@ -76,7 +76,10 @@ $wa = walid_whatsapp_url( 'general', __( 'Hi, I am an international patient and 
 
 			<?php
 			// Short testimonials from patients, with a clear scroll-in motion.
-			$intl_quotes = walid_show_samples() ? walid_pillar_sample_reviews( 'Minor Surgery' ) : array();
+			$intl_quotes = walid_international_review_cards( 3 );
+			if ( ! $intl_quotes && walid_show_samples() ) {
+				$intl_quotes = walid_pillar_sample_reviews( 'Minor Surgery' );
+			}
 			?>
 			<?php if ( $intl_quotes ) : ?>
 			<section class="group intl-testimonials reveal">

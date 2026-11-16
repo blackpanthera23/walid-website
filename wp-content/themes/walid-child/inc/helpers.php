@@ -24,7 +24,7 @@ function walid_stats() {
 			'facebook'  => '119K',
 			'instagram' => '30.8K',
 			'rating'    => '4.9',
-			'reviews'   => '1,098',
+			'reviews'   => '1,130', // Ampang on Google Maps, 16 Nov 2026 (was 1,098).
 		)
 	);
 }
@@ -212,6 +212,7 @@ function walid_permitted_reviews( $limit = 3 ) {
 		array(
 			'post_type'      => 'review',
 			'posts_per_page' => $limit,
+			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 			'meta_key'       => 'review_permission', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 			'meta_value'     => '1', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		)
@@ -592,4 +593,51 @@ function walid_daycare_stats() {
 	}
 	$stats = walid_show_samples() ? array( 92, 70, 'confirmed' => false ) : array( 'confirmed' => false );
 	return apply_filters( 'walid_daycare_stats', $stats );
+}
+
+/**
+ * Review cards for the International Patients page: reviews tagged as international first, then other
+ * permitted reviews, up to $limit. Empty when none exist (the section is then hidden on live).
+ *
+ * @param int $limit Max cards.
+ * @return array<int,array{q:string,w:string,s:int}>
+ */
+function walid_international_review_cards( $limit = 3 ) {
+	$intl  = get_posts(
+		array(
+			'post_type'      => 'review',
+			'posts_per_page' => $limit,
+			'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				array(
+					'key'   => 'review_permission',
+					'value' => '1',
+				),
+				array(
+					'key'   => 'review_international',
+					'value' => '1',
+				),
+			),
+		)
+	);
+	$seen  = wp_list_pluck( $intl, 'ID' );
+	$posts = $intl;
+	foreach ( walid_permitted_reviews( $limit + count( $seen ) ) as $p ) {
+		if ( count( $posts ) >= $limit ) {
+			break;
+		}
+		if ( ! in_array( $p->ID, $seen, true ) ) {
+			$posts[] = $p;
+		}
+	}
+	$cards = array();
+	foreach ( $posts as $p ) {
+		$author  = (string) get_field( 'review_author', $p->ID );
+		$source  = get_field( 'review_source', $p->ID ) ? get_field( 'review_source', $p->ID ) : __( 'Google review', 'walid' );
+		$cards[] = array(
+			'q' => (string) get_field( 'review_quote', $p->ID ),
+			'w' => trim( $author . ( $author ? ' · ' : '' ) . $source ),
+			's' => (int) ( get_field( 'review_rating', $p->ID ) ? get_field( 'review_rating', $p->ID ) : 5 ),
+		);
+	}
+	return $cards;
 }

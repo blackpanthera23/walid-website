@@ -340,7 +340,7 @@ $intl_count                 = count( $intl_countries );
 	<!-- 7. PROOF: rating + permitted reviews -->
 	<?php
 	$review_cards = array();
-	foreach ( walid_permitted_reviews( 8 ) as $r ) {
+	foreach ( walid_permitted_reviews( 12 ) as $r ) {
 		$quote = (string) get_field( 'review_quote', $r->ID );
 		if ( '' === $quote ) {
 			continue;

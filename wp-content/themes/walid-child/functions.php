@@ -60,6 +60,8 @@ require_once get_stylesheet_directory() . '/inc/google-reviews.php';
 require_once get_stylesheet_directory() . '/inc/wa-tracking.php';
 // Parent (Astra) settings cannot override the brand palette or turn on a transparent header.
 require_once get_stylesheet_directory() . '/inc/parent-compat.php';
+// Tools > Walid content: creates the bundled branches, services, doctors and reviews if missing.
+require_once get_stylesheet_directory() . '/inc/content-import.php';
 
 // Editor block patterns (reusable branded sections for staff).
 require_once get_stylesheet_directory() . '/inc/patterns.php';
