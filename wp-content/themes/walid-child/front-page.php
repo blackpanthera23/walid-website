@@ -315,15 +315,63 @@ $intl_count                 = count( $intl_countries );
 	<!-- 6. CTA BANNER -->
 	<section class="wh-banner">
 		<div class="wh-container wh-banner-grid">
-			<?php $banner_photo = walid_photo( 'consult' ); ?>
-			<div class="wh-banner-visual<?php echo $banner_photo ? ' wh-banner-visual--photo' : ''; ?>" data-wipe>
-				<span class="wh-banner-art" role="img" aria-label="<?php esc_attr_e( 'A doctor checking a patient\'s wrist during a consultation (illustrative image)', 'walid' ); ?>" style="background-image:url('<?php echo esc_url( $banner_photo ? $banner_photo : $img . 'cards/aesthetics.webp' ); ?>')" data-parallax="0.06"></span>
-				<div class="wh-banner-numbers">
-					<svg class="wh-ico wh-big" viewBox="0 0 24 24" aria-hidden="true"><use href="#wh-i-wa"/></svg>
-					<p><small><?php esc_html_e( 'General enquiries', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_GENERAL ) ); ?></b></p>
-					<p><small><?php esc_html_e( 'Minor surgery team', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_MINOR_SURGERY ) ); ?></b></p>
+			<?php
+			// Doctors in the "Talk to us" card: cut-out portraits in assets/img/team/ (see bin/make-doctor-cutouts.sh).
+			// Without both files the card keeps the consultation photo.
+			$team_dir   = get_stylesheet_directory() . '/assets/img/team/';
+			$team_uri   = get_stylesheet_directory_uri() . '/assets/img/team/';
+			$team       = array();
+			$team_specs = array(
+				'dr-walid' => array( __( 'Dr Walid Utagha', 'walid' ), __( 'Minor surgery', 'walid' ) ),
+				'dr-anis'  => array( __( 'Dr Anis', 'walid' ), __( 'Antenatal & women\'s health', 'walid' ) ),
+			);
+			foreach ( $team_specs as $slug => $label ) {
+				if ( ! file_exists( $team_dir . $slug . '.webp' ) ) {
+					continue;
+				}
+				$post       = get_posts(
+					array(
+						'post_type'      => 'doctor',
+						'name'           => $slug,
+						'posts_per_page' => 1,
+					)
+				);
+				$team[ $slug ] = array(
+					'img'  => $team_uri . $slug . '.webp',
+					'name' => $post ? get_the_title( $post[0] ) : $label[0],
+					'role' => $label[1],
+					'url'  => $post ? get_permalink( $post[0] ) : '',
+				);
+			}
+			$has_team     = isset( $team['dr-walid'], $team['dr-anis'] );
+			$banner_photo = walid_photo( 'consult' );
+			?>
+			<?php if ( $has_team ) : ?>
+				<div class="wh-banner-visual wh-banner-visual--team" data-wipe>
+					<span class="wh-team-ring" aria-hidden="true"></span>
+					<div class="wh-team-stage">
+						<?php foreach ( array( 'dr-walid', 'dr-anis' ) as $slug ) : ?>
+							<?php $d = $team[ $slug ]; ?>
+							<figure class="wh-doc wh-doc--<?php echo esc_attr( $slug ); ?>">
+								<img src="<?php echo esc_url( $d['img'] ); ?>" alt="<?php echo esc_attr( $d['name'] ); ?>" width="720" height="900" loading="lazy" decoding="async" />
+								<figcaption>
+									<?php if ( $d['url'] ) : ?><a href="<?php echo esc_url( $d['url'] ); ?>"><b><?php echo esc_html( $d['name'] ); ?></b></a><?php else : ?><b><?php echo esc_html( $d['name'] ); ?></b><?php endif; ?>
+									<span><?php echo esc_html( $d['role'] ); ?></span>
+								</figcaption>
+							</figure>
+						<?php endforeach; ?>
+					</div>
 				</div>
-			</div>
+			<?php else : ?>
+				<div class="wh-banner-visual<?php echo $banner_photo ? ' wh-banner-visual--photo' : ''; ?>" data-wipe>
+					<span class="wh-banner-art" role="img" aria-label="<?php esc_attr_e( 'A doctor checking a patient\'s wrist during a consultation (illustrative image)', 'walid' ); ?>" style="background-image:url('<?php echo esc_url( $banner_photo ? $banner_photo : $img . 'cards/aesthetics.webp' ); ?>')" data-parallax="0.06"></span>
+					<div class="wh-banner-numbers">
+						<svg class="wh-ico wh-big" viewBox="0 0 24 24" aria-hidden="true"><use href="#wh-i-wa"/></svg>
+						<p><small><?php esc_html_e( 'General enquiries', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_GENERAL ) ); ?></b></p>
+						<p><small><?php esc_html_e( 'Minor surgery team', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_MINOR_SURGERY ) ); ?></b></p>
+					</div>
+				</div>
+			<?php endif; ?>
 			<div class="wh-banner-copy">
 				<p class="wh-eyebrow" data-reveal><?php esc_html_e( 'Talk to us', 'walid' ); ?></p>
 				<h2 class="wh-h-display" data-split><?php esc_html_e( 'Not sure what you need?', 'walid' ); ?></h2>
@@ -333,6 +381,12 @@ $intl_count                 = count( $intl_countries );
 						<svg class="wh-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wh-i-wa"/></svg><span><?php esc_html_e( 'WhatsApp the minor surgery team', 'walid' ); ?></span>
 					</a>
 				</div>
+				<?php if ( $has_team ) : ?>
+					<ul class="wh-banner-lines" data-reveal data-d="3">
+						<li><a href="<?php echo $wa_general; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" target="_blank" rel="noopener"><small><?php esc_html_e( 'General enquiries', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_GENERAL ) ); ?></b></a></li>
+						<li><a href="<?php echo $wa_surgery; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in helper. ?>" target="_blank" rel="noopener"><small><?php esc_html_e( 'Minor surgery team', 'walid' ); ?></small><b><?php echo esc_html( $phone_fmt( WALID_WA_MINOR_SURGERY ) ); ?></b></a></li>
+					</ul>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>

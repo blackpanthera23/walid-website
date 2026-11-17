@@ -1427,3 +1427,46 @@ html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adju
 	.wh-flags:hover .wh-flags-track, .wh-flags:focus-within .wh-flags-track { animation-play-state: paused; }
 	@keyframes wh-flags { to { transform: translateX(-50%); } }
 }
+
+/* ---- "Talk to us" card with the two doctors (cut-out portraits) ----------------------------------- */
+.wh-banner-visual--team {
+	aspect-ratio: 5 / 4;
+	background: radial-gradient(90% 80% at 50% 108%, #3a43b0 0%, var(--wh-navy) 38%, var(--wh-navy-900) 100%);
+	isolation: isolate;
+}
+.wh-banner-visual--team::after { content: none; }
+.wh-team-ring {
+	position: absolute; z-index: 0; left: 50%; bottom: -34%;
+	width: 92%; aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
+	border: 1.5px solid rgba(201, 162, 39, .55);
+	background: radial-gradient(closest-side, rgba(201, 162, 39, .20), rgba(201, 162, 39, 0) 72%);
+}
+.wh-team-stage {
+	position: absolute; inset: 0; z-index: 1;
+	display: flex; align-items: flex-end; justify-content: center;
+}
+.wh-doc { position: relative; margin: 0; height: 100%; display: flex; align-items: flex-end; }
+.wh-doc img { height: 94%; width: auto; max-width: none; display: block; filter: drop-shadow(0 18px 24px rgba(8, 10, 40, .45)); }
+.wh-doc--dr-walid { z-index: 2; margin-right: -9%; }
+.wh-doc--dr-anis  { z-index: 1; }
+.wh-doc--dr-anis img { height: 86%; }
+.wh-doc figcaption {
+	position: absolute; left: 50%; bottom: 14px; translate: -50% 0; z-index: 3;
+	display: flex; flex-direction: column; align-items: center; text-align: center;
+	padding: 7px 14px 8px; border-radius: 14px; white-space: nowrap;
+	background: rgba(255, 255, 255, .96); box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .55);
+}
+.wh-doc figcaption b { font: 600 13.5px/1.25 var(--wh-sans); color: var(--wh-navy-900); }
+.wh-doc figcaption a { color: inherit; text-decoration: none; }
+.wh-doc figcaption span { font: 400 11.5px/1.3 var(--wh-sans); color: var(--wh-muted); }
+.wh-banner-lines { display: flex; flex-wrap: wrap; gap: 14px 34px; margin: 26px 0 0; }
+.wh-banner-lines a { display: flex; flex-direction: column; text-decoration: none; color: var(--wh-ink); }
+.wh-banner-lines small { font: 500 11px/1.2 var(--wh-sans); letter-spacing: .16em; text-transform: uppercase; color: var(--wh-muted); }
+.wh-banner-lines b { font: 300 clamp(1.5rem, 2.6vw, 2rem)/1.2 var(--wh-serif); color: var(--wh-navy); letter-spacing: .01em; }
+.wh-banner-lines a:hover b { color: var(--wh-blue); }
+@media (max-width: 640px) {
+	.wh-banner-visual--team { aspect-ratio: 1 / 1; }
+	.wh-doc figcaption { bottom: 10px; padding: 6px 10px 7px; white-space: normal; max-width: 44%; }
+	.wh-doc figcaption b { font-size: 12px; }
+	.wh-doc figcaption span { font-size: 10.5px; }
+}
