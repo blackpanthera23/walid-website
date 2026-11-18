@@ -1,7 +1,7 @@
 # Poliklinik Walid website: full handoff
 
-**Last updated:** 16 Nov 2026 · **Live:** https://poliklinikdrwalid.com runs theme **walid-child 0.4.7** (commit `f3e4fce`)
-on **Astra 4.14.3**, deployed 16 Nov 2026 and verified, with content imported. **Repo:** `github.com/blackpanthera23/walid-website`, branch `main`.
+**Last updated:** 17 Nov 2026 · **Live:** https://poliklinikdrwalid.com runs theme **walid-child 0.4.7** (commit `f3e4fce`)
+on **Astra 4.14.3**, deployed 16 Nov 2026 and verified, with content imported. **Repo `main` is at 0.4.8** (doctor portraits in the homepage "Talk to us" card), built as `dist/walid-child-0.4.8.zip` but **not yet uploaded to live**. **Repo:** `github.com/blackpanthera23/walid-website`, branch `main`.
 
 This is the single entry point for anyone (person or agent) taking over the site. It replaces `HANDOFF-OMP.md`
 and the `docs/DEPLOY-BATCH-*.md` manifests, which describe older states. Deeper detail lives in the files
@@ -31,7 +31,7 @@ Non-negotiables (full list in `.kiro/steering/project-context.md` and `docs/00-p
 
 | Area | State |
 |---|---|
-| Theme code | ✅ Live = repo `main` (0.4.7). Nothing pending. |
+| Theme code | ⏳ Live = 0.4.7. Repo `main` = **0.4.8**, pending upload (section 9). The only change is the doctor portraits (section 6). |
 | Live content | ✅ Imported 16 Nov via Tools > Walid content: 6 branches (address, phone, hours, Google rating from each Google Maps listing), 16 published services + Radiology as a draft, 2 doctors, the Xanthelasma procedure page, 10 real Google reviews. Branches 7 to 10 and doctor photos are still missing. |
 | Live config | ✅ Static front page, post-name permalinks, Primary menu in Astra `primary` + `mobile_menu`, logo and "WhatsApp The Clinic" button in the header. |
 | Local site | ✅ http://localhost:8080 on Astra, with sample content (local only). |
@@ -139,6 +139,7 @@ Field-by-field entry guide: `docs/CONTENT-CHECKLIST.md`. Procedure page spec: `d
 | `img/photos/` (4) | `surgeon-bright` (home hero), `consult` ("Talk to us"), `surgeon-dark` (International), `surgeon-loupe` (Minor Surgery hero) | Owner-supplied stock, all captioned "illustrative image". **Check licences** (section 11). |
 | `img/flags/` (32) | Country flags | Public domain (flagcdn), self-hosted because emoji flags show as letters on Windows |
 | `img/videos/` (4) | YouTube thumbnails | Cropped from Dr Walid's channel |
+| `img/team/` (2) | `dr-walid.webp`, `dr-anis.webp`: background-removed portraits (720x900, transparent) for the homepage "Talk to us" card | Cut from the owner's photos (`dr walid scrub.jpg`, `dr anis scrub.jpg`) with `bin/make-doctor-cutouts.sh` (Apple Vision, macOS only). Dr Anis's source is a poster, cropped to her and with a poster-tile fragment masked out by hand; **re-running the script regenerates the uncleaned version**, so keep the committed webp or redo the mask. If either file is missing, the card falls back to the consultation photo. A sharper original of Dr Anis would be better. |
 | `img/home/clinic.webp` | Neutral waiting-room still | Branch hero fallback |
 | `img/placeholder-*.svg` | Placeholders | Still used for doctor photos and procedure images until real ones exist |
 | `assets/logo.jpg` | Real logo | The live header logo is set separately in Astra's Customizer |
@@ -199,6 +200,7 @@ There is no SSH on IONOS, so WP-CLI cannot run on live. Deploy the theme as a zi
 - Phone width: menu opens, nothing scrolls sideways.
 
 ## 11. Owner to-do (blocks launch)
+- [ ] Approve the 0.4.8 deploy login (the agent needs the wp-admin password again; it is never stored).
 
 **Content (wp-admin, no code):**
 - [ ] Branches 7 to 10 (names unknown) and branch photos. The 6 existing branches got their address, phone and hours from Google Maps on 16 Nov; check them.
@@ -271,4 +273,5 @@ There is no SSH on IONOS, so WP-CLI cannot run on live. Deploy the theme as a zi
 | 0.4.0 to 0.4.4 | 6 to 16 Nov | Concept 4 homepage, motion layer, WhatsApp click tracking, International section, photos, contrast, Astra compatibility. |
 | 0.4.5 | 16 Nov | Sample content only in development. **Deployed.** |
 | 0.4.6 | 16 Nov | Self-hosted fonts, header WhatsApp button colour. Deployed. |
-| 0.4.7 | 16 Nov | Content importer, branch ratings and hours, 10 Google reviews, review count 1,130. **Deployed + content imported, current.** |
+| 0.4.7 | 16 Nov | Content importer, branch ratings and hours, 10 Google reviews, review count 1,130. **Deployed + content imported, current live.** |
+| 0.4.8 | 17 Nov | Dr Walid and Dr Anis cut-out portraits with name pills in the homepage "Talk to us" card (phone numbers move under the WhatsApp button). In `main`, **awaiting deploy**. |
